@@ -95,7 +95,28 @@ const theme = createTheme({
       textTransform: 'uppercase',
       textDecoration: 'none',
     }
-  }
+  },
+  components: {
+    MuiContainer: {
+      styleOverrides: {
+        maxWidthXs: {
+          maxWidth: '100%', // Tailwind doesn't have an `xs` container size
+        },
+        maxWidthSm: {
+          maxWidth: '640px',
+        },
+        maxWidthMd: {
+          maxWidth: '768px',
+        },
+        maxWidthLg: {
+          maxWidth: '1024px',
+        },
+        maxWidthXl: {
+          maxWidth: '1280px',
+        }
+      },
+    },
+  },
 });
 
 export default theme;

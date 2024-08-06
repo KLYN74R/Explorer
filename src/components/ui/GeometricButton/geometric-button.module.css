@@ -1,0 +1,85 @@
+.geometricButton {
+  --background-color: black;
+  --border-color: #fff;
+  --border-width: 0.12rem;
+  --edge-size: 1rem;
+
+  background: var(--background-color);
+  border: 0;
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-content: center;
+  clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--edge-size)),
+      calc(100% - var(--edge-size)) 100%,
+      0 100%
+  );
+  transition: color 250ms;
+}
+.geometricButtonWhite {
+  --background-color: #fff;
+  --border-color: #fff;
+  color: black;
+}
+
+.geometricButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--border-color);
+  z-index: -2;
+}
+
+.geometricButton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--background-color);
+  z-index: -1;
+  clip-path: polygon(
+      var(--border-width) var(--border-width),
+      calc(100% - var(--border-width)) var(--border-width),
+      calc(100% - var(--border-width)) calc(100% - var(--edge-size)),
+      calc(100% - var(--edge-size)) calc(100% - var(--border-width)),
+      var(--border-width) calc(100% - var(--border-width))
+  );
+  transition: background 250ms;
+}
+
+.geometricButtonShadow {
+  --background-color: black;
+  --border-color: transparent;
+  --border-width: 1rem;
+  --edge-size: 1rem;
+  --offset: 0.25rem;
+
+  background: var(--background-color);
+  border: 0;
+  position: relative;
+  isolation: isolate;
+  place-content: center;
+  clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--edge-size)),
+      calc(100% - var(--edge-size)) 100%,
+      0 100%
+  );
+}
+
+.geometricButtonShadow::before {
+  content: "";
+  position: absolute;
+  inset: var(--offset) 0 0 var(--offset);
+  background: var(--border-color);
+}
+
+.geometricButtonShadow:hover {
+  --border-color: rgba(63, 241, 230, 1);
+}
+.geometricButtonShadowActive {
+  --border-color: rgba(255, 49, 49) !important;
+}

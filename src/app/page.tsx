@@ -3,8 +3,8 @@ import Container from '@mui/material/Container';
 
 export default function Home() {
   return (
-    <Container maxWidth="lg">
-      Hi bro
+    <Container maxWidth="xl">
+      Content
     </Container>
   );
 }
