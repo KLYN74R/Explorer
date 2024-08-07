@@ -24,6 +24,11 @@
   --border-color: #fff;
   color: black;
 }
+.geometricButtonCyan {
+  --background-color: rgba(63, 241, 230, 1);
+  --border-color: rgba(63, 241, 230, 1);
+  color: black;
+}
 
 .geometricButton::before {
   content: "";
@@ -79,6 +84,12 @@
 
 .geometricButtonShadow:hover {
   --border-color: rgba(63, 241, 230, 1);
+}
+.geometricButtonShadowCyan:hover {
+  --border-color: #fff;
+}
+.geometricButtonShadowDisabled:hover {
+  --border-color: transparent !important;
 }
 .geometricButtonShadowActive {
   --border-color: rgba(255, 49, 49) !important;

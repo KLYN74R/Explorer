@@ -1,8 +1,7 @@
-import Container from '@mui/material/Container';
+import { Container, Box } from '@mui/material';
+import { GeometricButton, FlexBetweenBox, FlexCenterBox, OutlinedButton } from '@/components/ui';
+import { KLY_LINKS, socialIconsWithLinks } from '@/config/social';
 import KlyntarFoundationLogo from '@public/icons/company/KlyntarFoundationLogo.svg';
-import { SocialButtons } from '@/components';
-import { GeometricButton, FlexBetweenBox, FlexCenterBox } from '@/components/ui';
-import { KLY_LINKS } from '@/config/social';
 
 export const Header = () => {
   return (
@@ -21,5 +20,20 @@ export const Header = () => {
         </FlexCenterBox>
       </FlexBetweenBox>
     </Container>
+  );
+}
+
+const SocialButtons = () => {
+  return (
+    <Box>
+      {socialIconsWithLinks.map(({ icon, url }) => (
+        <OutlinedButton
+          key={url}
+          icon={icon()}
+          url={url}
+          sx={{ mr: 1 }}
+        />
+      ))}
+    </Box>
   );
 }

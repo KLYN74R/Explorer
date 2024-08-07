@@ -1,0 +1,1 @@
+export { BlockchainInfoSearchBar } from './BlockchainInfoSearchBar';

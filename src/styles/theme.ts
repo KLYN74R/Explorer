@@ -1,6 +1,6 @@
 'use client';
 import { Inter, Major_Mono_Display } from 'next/font/google';
-import { createTheme } from '@mui/material/styles';
+import { createTheme, PaletteOptions } from '@mui/material/styles';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -13,24 +13,29 @@ export const majorMonoDisplay = Major_Mono_Display({
   weight: '400',
 });
 
-const theme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#7aeee5',
-    },
-    secondary: {
-      main: '#ff3131',
-    },
-    background: {
-      default: '#000',
-      paper: '#fff',
-    },
-    text: {
-      primary: '#fefefe',
-      secondary: 'rgba(255, 255, 255, 0.4)'
-    }
+const palette = {
+  mode: 'dark',
+  primary: {
+    main: '#7aeee5',
   },
+  secondary: {
+    main: '#ff3131',
+  },
+  border: {
+    main: 'rgba(255, 255, 255, 0.4)'
+  },
+  background: {
+    default: '#000',
+    paper: '#fff',
+  },
+  text: {
+    primary: '#fefefe',
+    secondary: 'rgba(255, 255, 255, 0.4)'
+  }
+}
+
+const theme = createTheme({
+  palette: palette as PaletteOptions,
   typography: {
     fontFamily: inter.style.fontFamily,
     h1: {
@@ -100,7 +105,7 @@ const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         maxWidthXs: {
-          maxWidth: '100%', // Tailwind doesn't have an `xs` container size
+          maxWidth: '100%',
         },
         maxWidthSm: {
           maxWidth: '640px',
@@ -116,6 +121,79 @@ const theme = createTheme({
         }
       },
     },
+    MuiSelect: {
+      defaultProps: {
+        variant: 'standard',
+        disableUnderline: true
+      },
+      styleOverrides: {
+        root: {
+          fontSize: '14px',
+          '& .MuiSelect-icon': {
+            position: 'absolute',
+            right: 'unset',
+            left: '13px',
+            top: 'calc(50% - 2px)',
+            transform: 'translateY(-50%)'
+          },
+        }
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: '14px',
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: palette.background.default,
+          '--Paper-shadow': 'none !important',
+          '--Paper-overlay': 'none !important',
+          '& .MuiButtonBase-root': {
+            borderLeft: '1px solid',
+            borderRight: '1px solid',
+            borderTop: '1px solid',
+            borderColor: palette.border.main
+          },
+          '& .MuiButtonBase-root:nth-child(2)': {
+            borderTopLeftRadius: '5px',
+            borderTopRightRadius: '5px',
+          },
+          '& .MuiButtonBase-root:last-child': {
+            borderBottom: '1px solid',
+            borderColor:  palette.border.main,
+            borderBottomLeftRadius: '5px',
+            borderBottomRightRadius: '5px',
+          },
+          '& .MuiButtonBase-root.MuiMenuItem-root.Mui-selected': {
+            backgroundColor: palette.primary.main,
+            color: 'black',
+          },
+          '& .Mui-selected:hover': {
+            cursor: 'default',
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard',
+        InputProps: {
+          disableUnderline: true,
+          style: {
+            fontSize: '14px'
+          }
+        },
+      },
+      styleOverrides: {
+        root: {
+          fontSize: '14px'
+        }
+      }
+    }
   },
 });
 

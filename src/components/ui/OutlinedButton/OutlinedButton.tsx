@@ -13,7 +13,7 @@ type OutlinedButtonProps = {
 };
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  borderColor: theme.palette.text.secondary,
+  borderColor: theme.palette.border.main,
   color: theme.palette.text.primary,
   borderWidth: '1px',
   borderRadius: 0,

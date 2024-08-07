@@ -8,9 +8,11 @@ import clsx from 'clsx';
 export type GeometricButtonProps = {
   children: React.ReactNode;
   url?: string;
-  variant?: 'white' | 'black';
+  variant?: 'white' | 'cyan' | 'black';
   isActive?: boolean;
   sx?: SxProps;
+  disableShadow?: boolean;
+  onClick?: () => void;
 };
 
 export const GeometricButton: FC<GeometricButtonProps> = ({
@@ -18,12 +20,13 @@ export const GeometricButton: FC<GeometricButtonProps> = ({
   url,
   variant = 'black',
   isActive = false,
-  sx
+  sx,
+  disableShadow = false,
+  onClick
 }) => {
   const theme = useTheme();
 
   const isLink = !!url;
-  const isLight = variant === 'white';
 
   const buttonProps = {
     sx: {
@@ -35,13 +38,15 @@ export const GeometricButton: FC<GeometricButtonProps> = ({
     },
     className: clsx(
       styles.geometricButton,
-      isLight ? styles.geometricButtonWhite : ''
+      variant === 'white' ? styles.geometricButtonWhite :
+        variant === 'cyan' ? styles.geometricButtonCyan : ''
     ),
     ...(isLink ? {
       href: url,
       component: Link
     } : {
-      component: 'button'
+      component: 'button',
+      onClick
     })
   }
 
@@ -49,7 +54,9 @@ export const GeometricButton: FC<GeometricButtonProps> = ({
     <Box
       className={clsx(
         styles.geometricButtonShadow,
-        isActive ? styles.geometricButtonShadowActive : ''
+        variant === 'cyan' ? styles.geometricButtonShadowCyan : '',
+        isActive ? styles.geometricButtonShadowActive : '',
+        disableShadow ? styles.geometricButtonShadowDisabled : ''
       )}
       sx={{
         pr: 0.5,
