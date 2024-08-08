@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { GradientBackground, DimGradientBackground } from '@/components';
-import { ExplorerSearchBar } from '@/components';
+import { ExplorerSearchBar } from './ExplorerSearchBar';
 
 export const BlockchainInfoSearchBar = () => {
   return (

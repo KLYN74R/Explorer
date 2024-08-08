@@ -1,4 +1,5 @@
 import { Container, Box } from '@mui/material';
+import Link from 'next/link';
 import { GeometricButton, FlexColumnBox, FlexCenterBox, OutlinedButton } from '@/components/ui';
 import { KLY_LINKS, socialIconsWithLinks } from '@/config/social';
 import KlyntarFoundationLogo from '@public/icons/company/KlyntarFoundationLogo.svg';
@@ -12,7 +13,9 @@ export const Header = () => {
         justifyContent: { md: 'space-between'},
         flexDirection: { md: 'row' }
       }}>
-        <KlyntarFoundationLogo />
+        <Link href='/'>
+          <KlyntarFoundationLogo />
+        </Link>
         <FlexCenterBox>
           <SocialButtons />
           <GeometricButton

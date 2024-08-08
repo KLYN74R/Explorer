@@ -21,7 +21,8 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-infinite-ticker": "^2.1.1"
+    "react-infinite-ticker": "^2.1.1",
+    "use-debounce": "^10.0.2"
   },
   "devDependencies": {
     "@types/node": "latest",
