@@ -60,11 +60,12 @@ export const ExplorerSearchBar = () => {
 
   return (
     <FlexBetweenBox
+      border={1}
+      borderColor='border.main'
       sx={{
         gap: 2,
-        border: '1px solid',
-        borderColor: theme.palette.border.main,
-        px: 0.4
+        px: 0.4,
+        background: 'rgba(17, 17, 17, 0.6)'
       }}
     >
       <FilterDropdown

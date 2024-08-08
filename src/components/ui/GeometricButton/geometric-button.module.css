@@ -88,9 +88,14 @@
 .geometricButtonShadowCyan:hover {
   --border-color: #fff;
 }
+
+.geometricButtonShadowDisabled {
+  --background-color: transparent;
+}
 .geometricButtonShadowDisabled:hover {
   --border-color: transparent !important;
 }
+
 .geometricButtonShadowActive {
   --border-color: rgba(255, 49, 49) !important;
 }

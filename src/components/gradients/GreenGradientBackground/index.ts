@@ -1,0 +1,1 @@
+export { GreenGradientBackground } from './GreenGradientBackground';

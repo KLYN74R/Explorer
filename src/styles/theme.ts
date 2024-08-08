@@ -22,7 +22,7 @@ const palette = {
     main: '#ff3131',
   },
   border: {
-    main: 'rgba(255, 255, 255, 0.4)'
+    main: 'rgba(254, 254, 254, 0.2)'
   },
   background: {
     default: '#000',
@@ -76,7 +76,7 @@ const theme = createTheme({
     body1: {
       fontFamily: inter.style.fontFamily,
       fontSize: '16px',
-      fontWeight: 300,
+      fontWeight: 400,
       letterSpacing: '0%',
       lineHeight: '24px',
       textTransform: 'none',

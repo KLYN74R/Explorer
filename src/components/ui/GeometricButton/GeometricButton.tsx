@@ -1,7 +1,6 @@
-'use client';
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Box, Button, SxProps, useTheme } from '@mui/material';
+import { Box, Button, SxProps } from '@mui/material';
 import styles from './geometric-button.module.css';
 import clsx from 'clsx';
 
@@ -24,8 +23,6 @@ export const GeometricButton: FC<GeometricButtonProps> = ({
   disableShadow = false,
   onClick
 }) => {
-  const theme = useTheme();
-
   const isLink = !!url;
 
   const buttonProps = {
@@ -33,7 +30,7 @@ export const GeometricButton: FC<GeometricButtonProps> = ({
       py: 1.5,
       px: 1.5,
       cursor: isActive ? 'cursor-default' : 'cursor-pointer',
-      color: theme.palette.text.primary,
+      color: 'text.primary',
       ...sx
     },
     className: clsx(

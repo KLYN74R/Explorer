@@ -1,0 +1,1 @@
+export { KeyWordsTicker } from './KeyWordsTicker';

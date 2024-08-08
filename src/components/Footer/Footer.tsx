@@ -1,30 +1,15 @@
 import { FC } from 'react';
-import { Container, Grid, Box, Typography, Link as MuiLink } from '@mui/material';
+import { Container, Grid, Box, Typography } from '@mui/material';
+import Link from 'next/link';
 import { FlexCenterBox } from '@/components/ui';
 import KlyntarIcon from '@public/icons/company/KlyntarIcon.svg';
 import { KLY_LINKS } from '@/config/social';
 
-const FooterLink: FC<{
-  title: string,
-  url: string
-}> = ({ title, url }) => {
-  return (
-    <MuiLink href={url} color='text.primary' sx={{
-      textDecoration: 'underline',
-      textUnderlineOffset: '3px',
-      lineHeight: '33px',
-      display: 'block'
-    }}>
-      {title}
-    </MuiLink>
-  );
-}
-
 export const Footer = () => {
   return (
     <Container sx={{ pb: 5, pt: 20 }} maxWidth='xl'>
-      <Grid container spacing={2}>
-        <Grid item lg={5.4}>
+      <Grid container spacing={{ lg: 2, xs: 5 }}>
+        <Grid item xs={12} lg={5.4}>
           <Box>
             <FlexCenterBox sx={{
               gap: 0.5,
@@ -38,7 +23,7 @@ export const Footer = () => {
             </Typography>
           </Box>
         </Grid>
-        <Grid item lg={2.2}>
+        <Grid item xs={12} sm={6} md={4} lg={2.2}>
           <Box>
             <Typography variant='h2' sx={{ mb: 2 }}>FAQ</Typography>
             <FooterLink title="How to run a validator" url={KLY_LINKS.HOW_TO_RUN_A_VALIDATOR} />
@@ -46,7 +31,7 @@ export const Footer = () => {
             <FooterLink title="Unstaking" url={KLY_LINKS.UNSTAKING} />
           </Box>
         </Grid>
-        <Grid item lg={2.2}>
+        <Grid item xs={12} sm={6} md={4} lg={2.2}>
           <Box>
             <Typography variant='h2' sx={{ mb: 2 }}>Sites</Typography>
             <FooterLink title="Main Site" url={KLY_LINKS.LANDING} />
@@ -54,7 +39,7 @@ export const Footer = () => {
             <FooterLink title="CoinMarketCap" url={KLY_LINKS.CMC} />
           </Box>
         </Grid>
-        <Grid item lg={2.2}>
+        <Grid item xs={12} sm={6} md={4} lg={2.2}>
           <Box>
             <Typography variant='h2' sx={{ mb: 2 }}>Ecosystem</Typography>
             <FooterLink title="Tokens" url={KLY_LINKS.TOKENS} />
@@ -64,5 +49,34 @@ export const Footer = () => {
         </Grid>
       </Grid>
     </Container>
+  );
+}
+
+const FooterLink: FC<{
+  title: string,
+  url: string
+}> = ({ title, url }) => {
+  return (
+    <Typography
+      color='text.primary'
+      sx={{
+        textDecoration: 'underline',
+        textUnderlineOffset: '3px',
+        textDecorationThickness: '1px',
+        lineHeight: '33px',
+        display: 'block'
+      }}
+    >
+      <Link
+        href={url}
+        passHref
+        style={{
+          color: 'inherit',
+          textDecorationThickness: 'inherit'
+        }}
+      >
+        {title}
+      </Link>
+    </Typography>
   );
 }

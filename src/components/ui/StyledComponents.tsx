@@ -14,4 +14,11 @@ const FlexBetweenBox = styled(Box)(({ theme }) => ({
   alignItems: 'center',
 }));
 
-export { FlexCenterBox, FlexBetweenBox };
+const FlexColumnBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+}));
+
+export { FlexCenterBox, FlexBetweenBox, FlexColumnBox };

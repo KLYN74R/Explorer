@@ -17,9 +17,6 @@ const StyledButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
   borderWidth: '1px',
   borderRadius: 0,
-  width: '44px',
-  height: '44px',
-  minWidth: '44px',
   padding: 0
 }));
 
@@ -33,7 +30,21 @@ export const OutlinedButton: FC<OutlinedButtonProps> = ({
   const isLink = !!url;
 
   const props = {
-    sx,
+    sx: {
+      width: {
+        xs: '38px',
+        md: '44px'
+      },
+      height: {
+        xs: '38px',
+        md: '44px'
+      },
+      minWidth: {
+        xs: '38px',
+        md: '44px'
+      },
+      ...sx
+    },
     variant: 'outlined',
     ...(isLink ? {
       component: Link,

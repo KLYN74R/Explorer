@@ -20,7 +20,8 @@
     "clsx": "^2.1.1",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-infinite-ticker": "^2.1.1"
   },
   "devDependencies": {
     "@types/node": "latest",
