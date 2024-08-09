@@ -7,9 +7,9 @@ export const FilterDropdown: FC<{
   searchType: string;
   handleSearchTypeChange: (e: SelectChangeEvent) => void;
 }> = ({
-        searchType,
-        handleSearchTypeChange
-      }) => {
+  searchType,
+  handleSearchTypeChange
+}) => {
   return (
     <FormControl variant="standard">
       <Select

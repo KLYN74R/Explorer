@@ -2,7 +2,7 @@
 import { Inter, Major_Mono_Display } from 'next/font/google';
 import { createTheme, PaletteOptions } from '@mui/material/styles';
 
-const inter = Inter({
+export const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
@@ -41,7 +41,7 @@ const theme = createTheme({
     h1: {
       fontFamily: inter.style.fontFamily,
       fontSize: '32px',
-      fontWeight: 700,
+      fontWeight: 800,
       letterSpacing: '0%',
       lineHeight: '120%',
       textTransform: 'none',
@@ -121,6 +121,28 @@ const theme = createTheme({
         }
       },
     },
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard',
+        InputProps: {
+          disableUnderline: true,
+          style: {
+            fontSize: '14px',
+          }
+        },
+      },
+      styleOverrides: {
+        root: {
+          fontSize: '14px',
+          '& .MuiInputBase-input': {
+            fontSize: '14px'
+          },
+          '& .MuiInputBase-root:before': {
+            borderBottom: 'transparent',
+          }
+        }
+      }
+    },
     MuiSelect: {
       defaultProps: {
         variant: 'standard',
@@ -169,8 +191,7 @@ const theme = createTheme({
             borderBottomRightRadius: '5px',
           },
           '& .MuiButtonBase-root.MuiMenuItem-root.Mui-selected': {
-            backgroundColor: palette.primary.main,
-            color: 'black',
+            backgroundColor: 'rgba(122, 238, 229, 0.25)'
           },
           '& .Mui-selected:hover': {
             cursor: 'default',
@@ -178,20 +199,35 @@ const theme = createTheme({
         },
       },
     },
-    MuiTextField: {
-      defaultProps: {
-        variant: 'standard',
-        InputProps: {
-          disableUnderline: true,
-          style: {
-            fontSize: '14px'
+    MuiAutocomplete: {
+      styleOverrides: {
+        paper: {
+          fontSize: '14px',
+          backgroundColor: palette.background.default,
+          '--Paper-shadow': 'none !important',
+          '--Paper-overlay': 'none !important',
+          '& .MuiAutocomplete-option': {
+            borderLeft: '1px solid',
+            borderRight: '1px solid',
+            borderTop: '1px solid',
+            borderColor: palette.border.main
+          },
+          '& .MuiAutocomplete-option:firstChild': {
+            borderTopLeftRadius: '5px',
+            borderTopRightRadius: '5px',
+          },
+          '& .MuiAutocomplete-option:last-child': {
+            borderBottom: '1px solid',
+            borderColor:  palette.border.main,
+            borderBottomLeftRadius: '5px',
+            borderBottomRightRadius: '5px',
+          },
+          '& .MuiAutocomplete-noOptions': {
+            border: '1px solid',
+            borderColor: palette.border.main,
+            borderRadius: '5px'
           }
         },
-      },
-      styleOverrides: {
-        root: {
-          fontSize: '14px'
-        }
       }
     }
   },

@@ -1,12 +1,13 @@
 import { FC } from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import { GradientBackground, DimGradientBackground } from '@/components';
+import { BlurredInfoBlock } from '@/components/ui';
 import { ExplorerSearchBar } from './ExplorerSearchBar';
 
 export const BlockchainInfoSearchBar = () => {
   return (
     <DimGradientBackground>
-      <GradientBackground blur={true} sx={{ pt: 6, pb: 14 }}>
+      <GradientBackground sx={{ pt: 6, pb: 14 }}>
         <Container maxWidth='xl'>
           <Box sx={{ px: { md: 4.5, xs: 0 } }}>
             <ExplorerSearchBar />
@@ -34,23 +35,7 @@ const InfoBlock: FC<{ title: string, value: string | number, variant?: string }>
 }) => {
   return (
     <Grid item lg={1.5} md={3} sm={4} xs={12}>
-      <Box sx={{
-        pt: 1.5,
-        pb: 2.5,
-        pl: 3,
-        background: '#11111166',
-        backdropFilter: 'blur(5px)'
-      }}>
-        <Typography variant='caption'>
-          {title.toUpperCase()}
-        </Typography>
-        <Typography
-          sx={{ fontSize: '24px', mt: 1 }}
-          color={variant === 'cyan' ? 'primary.main' : 'secondary.main'}
-        >
-          {value}
-        </Typography>
-      </Box>
+      <BlurredInfoBlock title={title} value={value} variant={variant} />
     </Grid>
   );
 }

@@ -10,6 +10,7 @@ export const useQueryParams = () => {
   return {
     searchType: getParam('type', 'choose'),
     query: getParam('query', ''),
+    shard: getParam('shard', ''),
     pathname,
     searchParams
   };

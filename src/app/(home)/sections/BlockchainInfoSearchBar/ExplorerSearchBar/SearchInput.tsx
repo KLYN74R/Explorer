@@ -8,12 +8,12 @@ export const SearchInput: FC<{
   handleQueryChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleKeyDown: (event: KeyboardEvent) => void;
 }> = ({
-        placeholder,
-        isChoose,
-        query,
-        handleQueryChange,
-        handleKeyDown,
-      }) => {
+  placeholder,
+  isChoose,
+  query,
+  handleQueryChange,
+  handleKeyDown,
+}) => {
   return (
     <TextField
       placeholder={placeholder}

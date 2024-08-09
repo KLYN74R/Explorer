@@ -5,7 +5,7 @@ import { RedGradientBackground } from '@/components';
 export const NetworkParameters = () => {
   return (
     <RedGradientBackground sx={{ p: 3 }}>
-      <Typography variant='h1' sx={{ fontWeight: 800 }}>
+      <Typography variant='h1'>
         Network Parameters
       </Typography>
       <Grid container spacing={1} sx={{ mt: 2 }}>

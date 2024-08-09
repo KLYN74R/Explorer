@@ -19,7 +19,7 @@ const linksToPages: Record<string, string> = {
 export const NetworkStatus = () => {
   return (
     <GreenGradientBackground sx={{ p: 3 }}>
-      <Typography variant='h1' sx={{ fontWeight: 800, mb: 2 }}>
+      <Typography variant='h1' sx={{ mb: 2 }}>
         Network Info
       </Typography>
       {Object.keys(linksToPages).map(title => (

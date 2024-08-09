@@ -44,7 +44,7 @@ export const ExplorerSearchBar = () => {
     } else {
       params.delete('query');
     }
-    replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   }, 300);
 
   const handleSearchTypeChange = (event: SelectChangeEvent) => {
@@ -57,7 +57,7 @@ export const ExplorerSearchBar = () => {
       params.delete('type');
       setQuery('');
     }
-    replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
