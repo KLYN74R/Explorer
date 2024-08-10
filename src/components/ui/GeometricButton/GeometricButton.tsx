@@ -10,6 +10,7 @@ export type GeometricButtonProps = {
   variant?: 'white' | 'cyan' | 'black';
   isActive?: boolean;
   sx?: SxProps;
+  wrapperSx?: SxProps;
   disableShadow?: boolean;
   onClick?: () => void;
 };
@@ -20,6 +21,7 @@ export const GeometricButton: FC<GeometricButtonProps> = ({
   variant = 'black',
   isActive = false,
   sx,
+  wrapperSx,
   disableShadow = false,
   onClick
 }) => {
@@ -58,7 +60,8 @@ export const GeometricButton: FC<GeometricButtonProps> = ({
       sx={{
         pr: 0.5,
         pb: 0.5,
-        mt: 0.5
+        mt: 0.5,
+        ...wrapperSx
       }}
     >
       <Button {...buttonProps} disableRipple>

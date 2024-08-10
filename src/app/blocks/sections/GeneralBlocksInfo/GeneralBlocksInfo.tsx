@@ -1,5 +1,5 @@
 import { Container, Grid, Box, Typography } from '@mui/material';
-import { DimGradientBackground, GradientBackground } from '@/components';
+import { DimGradientBackground, GradientBackground } from '@/components/ui';
 import { BlurredInfoBlock} from '@/components/ui';
 import { TransactionsChart } from './TransactionsChart';
 

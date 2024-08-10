@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
-import { RedGradientBackground } from '@/components';
+import { RedGradientBackground } from '@/components/ui';
 
 export const NetworkParameters = () => {
   return (

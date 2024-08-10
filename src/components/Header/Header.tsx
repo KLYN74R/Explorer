@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <Container sx={{ pt: 2.5, pb: 3.5 }} maxWidth='xl'>
       <FlexColumnBox sx={{
-        gap: 4,
+        gap: { xs: 2, md: 4 },
         alignItems: { md: 'center' },
         justifyContent: { md: 'space-between'},
         flexDirection: { md: 'row' }
@@ -22,6 +22,7 @@ export const Header = () => {
             url={KLY_LINKS.DISCORD}
             variant='white'
             sx={{ py: 0.5, px: 8, minWidth: '200px' }}
+            wrapperSx={{ display: { xs: 'none', md: 'block' } }}
           >
             Follow us
           </GeometricButton>

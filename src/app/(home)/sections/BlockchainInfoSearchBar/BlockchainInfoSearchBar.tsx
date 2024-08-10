@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Box, Container, Grid } from '@mui/material';
-import { GradientBackground, DimGradientBackground } from '@/components';
+import { GradientBackground, DimGradientBackground } from '@/components/ui';
 import { BlurredInfoBlock } from '@/components/ui';
 import { ExplorerSearchBar } from './ExplorerSearchBar';
 

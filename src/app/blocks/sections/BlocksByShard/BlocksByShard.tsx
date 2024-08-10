@@ -1,7 +1,7 @@
 import { Box, Container, Typography } from '@mui/material';
 import { ShardSearchBar } from './ShardSearchBar';
 import { LatestBlocksTable } from './LatestBlocksTable';
-import { ArrowPagination } from '@/components';
+import { ArrowPagination } from '@/components/ui';
 
 const fetchedShards = [
   { label: '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', value: 'val1' },

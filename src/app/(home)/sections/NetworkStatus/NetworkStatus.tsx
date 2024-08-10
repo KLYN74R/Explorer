@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Typography } from '@mui/material';
 import Link from 'next/link';
-import { GreenGradientBackground } from '@/components';
+import { GreenGradientBackground } from '@/components/ui';
 
 const linksToPages: Record<string, string> = {
   'Blocks data and stats': '/blocks',
