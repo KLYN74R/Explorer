@@ -29,21 +29,23 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
     const shard  = shardById ? shardById : shardsList[0];
 
     setQuery(shard);
-    setQueryParameters(shard.label);
+    setQueryParameters(shard.label, !!shardById);
   }, [initialShard]);
 
   const handleQueryChange = (_: any, newValue: ComboboxItemProps) => {
     if (newValue && newValue.label) {
-      setQueryParameters(newValue.label);
+      setQueryParameters(newValue.label, true);
     } else {
       setQuery(null);
     }
   }
 
-  const setQueryParameters = (shard: string) => {
+  const setQueryParameters = (shard: string, shardWasFound: boolean) => {
     const params = new URLSearchParams(searchParams);
     params.set('shard', shard)
-    params.set('page', String(1));
+    if (!shardWasFound) {
+      params.set('page', String(1));
+    }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 

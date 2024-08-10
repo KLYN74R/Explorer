@@ -54,7 +54,6 @@ export const LatestBlocksTable = () => {
                   href={`/blocks/${block.sid}`}
                   passHref
                   style={{ textDecoration: 'none' }}
-                  target='_blank'
                 >
                   <Typography color='primary.main' sx={{ fontSize: '18px' }}>
                     <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-5px' }} /> {block.sid}
