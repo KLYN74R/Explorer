@@ -1,0 +1,1 @@
+export { ArrowPagination } from './ArrowPagination';

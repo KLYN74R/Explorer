@@ -35,7 +35,13 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) =>
       curve: 'straight'
     },
     grid: {
-      show: false
+      show: true,
+      borderColor: 'rgba(254, 254, 254, 0.1)',
+      xaxis: {
+        lines: {
+          show: true
+        }
+      }
     },
     xaxis: {
       type: 'category',

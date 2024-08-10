@@ -1,1 +1,0 @@
-export { ShardSearchBar } from './ShardSearchBar';

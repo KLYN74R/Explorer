@@ -26,11 +26,12 @@ const palette = {
   },
   background: {
     default: '#000',
+    light: '#111111',
     paper: '#fff',
   },
   text: {
     primary: '#fefefe',
-    secondary: 'rgba(255, 255, 255, 0.4)'
+    secondary: 'rgba(255, 255, 255, 0.6)'
   }
 }
 
@@ -59,6 +60,7 @@ const theme = createTheme({
     h6: {
       fontFamily: inter.style.fontFamily,
       fontSize: '24px',
+      fontWeight: 500,
       letterSpacing: '0%',
       lineHeight: '130%',
       textTransform: 'none',
@@ -229,7 +231,49 @@ const theme = createTheme({
           }
         },
       }
-    }
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: palette.background.light,
+          backdropFilter: 'blur(5px)'
+        },
+      },
+    },
+    MuiTableBody: {
+      styleOverrides: {
+        root: {
+          backgroundColor: palette.background.default
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          '& .MuiTypography-root': {
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: palette.primary.main + 25,
+          borderRadius: 0,
+          transition: 'background-color 200ms',
+          '&:hover': {
+            backgroundColor: palette.primary.main + 40,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: palette.primary.main + 15,
+            cursor: 'default'
+          }
+        },
+      },
+    },
   },
 });
 

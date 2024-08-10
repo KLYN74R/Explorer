@@ -26,24 +26,24 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
   useEffect(() => {
     const shardById = shardsList.find(i => i.label === initialShard);
 
-    setQuery(shardById ? shardById : shardsList[0]);
+    const shard  = shardById ? shardById : shardsList[0];
 
-    if (!shardById) {
-      setShardParameter(shardsList[0].label);
-    }
+    setQuery(shard);
+    setQueryParameters(shard.label);
   }, [initialShard]);
 
   const handleQueryChange = (_: any, newValue: ComboboxItemProps) => {
     if (newValue && newValue.label) {
-      setShardParameter(newValue.label);
+      setQueryParameters(newValue.label);
     } else {
       setQuery(null);
     }
   }
 
-  const setShardParameter = (shard: string) => {
+  const setQueryParameters = (shard: string) => {
     const params = new URLSearchParams(searchParams);
-    params.set('shard', shard);
+    params.set('shard', shard)
+    params.set('page', String(1));
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 

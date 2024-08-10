@@ -8,6 +8,7 @@ export const useQueryParams = () => {
     searchParams.get(key)?.toString() || defaultValue;
 
   return {
+    page: Number(getParam('page', '1')),
     searchType: getParam('type', 'choose'),
     query: getParam('query', ''),
     shard: getParam('shard', ''),
