@@ -7,7 +7,7 @@ import {
   NetworkStatus
 } from './sections';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <BlockchainInfoSearchBar />

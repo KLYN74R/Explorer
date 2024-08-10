@@ -123,6 +123,39 @@ const theme = createTheme({
         }
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: palette.primary.main + 20,
+          color: palette.text.primary,
+          borderRadius: '3px',
+          transition: 'background-color 200ms',
+          '&:hover': {
+            backgroundColor: palette.primary.main + 30,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: palette.primary.main + 5,
+            cursor: 'default'
+          }
+        }
+      }
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: palette.primary.main + 25,
+          borderRadius: '3px',
+          transition: 'background-color 200ms',
+          '&:hover': {
+            backgroundColor: palette.primary.main + 35,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: palette.primary.main + 15,
+            cursor: 'default'
+          }
+        },
+      },
+    },
     MuiTextField: {
       defaultProps: {
         variant: 'standard',
@@ -257,23 +290,7 @@ const theme = createTheme({
           }
         },
       },
-    },
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          backgroundColor: palette.primary.main + 25,
-          borderRadius: 0,
-          transition: 'background-color 200ms',
-          '&:hover': {
-            backgroundColor: palette.primary.main + 40,
-          },
-          '&.Mui-disabled': {
-            backgroundColor: palette.primary.main + 15,
-            cursor: 'default'
-          }
-        },
-      },
-    },
+    }
   },
 });
 

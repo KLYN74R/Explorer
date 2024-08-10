@@ -1,13 +1,30 @@
+import { FC } from 'react';
 import { Button, Typography } from '@mui/material';
 import DoubleArrowDown from '@public/icons/ui/doubleArrowDown.svg';
 
-export const LoadMoreButton = () => {
+export const LoadMoreButton: FC<{
+  disabled?: boolean
+}> = ({
+  disabled
+}) => {
   return (
-    <Button sx={{ px: 2, py: 1 }}>
-      <Typography color='text.primary' sx={{ mr: 1 }}>
+    <Button
+      disabled={disabled}
+      sx={{
+        pr: 2,
+        pl: 2.5,
+        py: 1
+      }}
+    >
+      <Typography
+        color={disabled ? 'text.secondary' : 'text.primary'}
+        sx={{ mr: 1 }}
+      >
         Load More
       </Typography>
-      <DoubleArrowDown />
+      <DoubleArrowDown style={{
+        opacity: disabled ? 0.6 : 1
+      }}/>
     </Button>
   );
 }

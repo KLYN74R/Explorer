@@ -17,7 +17,11 @@ const StyledButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
   borderWidth: '1px',
   borderRadius: 0,
-  padding: 0
+  padding: 0,
+  backgroundColor: 'transparent',
+  '&:hover': {
+    backgroundColor: 'transparent'
+  }
 }));
 
 export const OutlinedButton: FC<OutlinedButtonProps> = ({

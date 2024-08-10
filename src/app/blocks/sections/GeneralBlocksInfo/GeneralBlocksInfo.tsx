@@ -29,7 +29,7 @@ const transactionsPerEpochData = [
 export const GeneralBlocksInfo = () => {
   return (
     <DimGradientBackground>
-      <GradientBackground sx={{ pt: 6, pb: 6 }}>
+      <GradientBackground sx={{ py: 6 }}>
         <Container maxWidth='xl'>
           <Grid container spacing={10} sx={{ pl: { md: 4.5, xs: 0 } }}>
             <Grid item xs={12} md={6}>

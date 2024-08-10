@@ -3,7 +3,7 @@ import {
   BlocksByShard
 } from './sections';
 
-export default function Blocks() {
+export default function BlocksPage() {
   return (
     <>
       <GeneralBlocksInfo />

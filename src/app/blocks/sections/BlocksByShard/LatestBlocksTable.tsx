@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Skeleton } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import Link from 'next/link';
 
 function createData(
@@ -48,26 +49,29 @@ export const LatestBlocksTable = () => {
         <TableBody>
           {blocks.map((block) => (
             <TableRow key={block.blockId}>
-              <TableCell sx={{ maxWidth: { xs: '200px', md: '250px', xl: '350px' } }}>
+              <TableCell sx={{ maxWidth: { xs: '225px', md: '275px', xl: '375px' } }}>
                 <Link
                   href={`/blocks/${block.sid}`}
                   passHref
                   style={{ textDecoration: 'none' }}
+                  target='_blank'
                 >
-                  <Typography color='primary.main'>{block.sid}</Typography>
+                  <Typography color='primary.main' sx={{ fontSize: '18px' }}>
+                    <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-5px' }} /> {block.sid}
+                  </Typography>
                 </Link>
               </TableCell>
-              <TableCell sx={{ maxWidth: { xs: '250px', lg: '300px', xl: 'none' } }}>
-                <Typography color='primary.main'>{block.creator}</Typography>
+              <TableCell sx={{ maxWidth: { xs: '225px', lg: '275px', xl: 'none' } }}>
+                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.creator}</Typography>
               </TableCell>
               <TableCell sx={{ minWidth: '150px' }}>
-                <Typography color='text.secondary'>{block.index}</Typography>
+                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.index}</Typography>
               </TableCell>
               <TableCell sx={{ maxWidth: '100px' }}>
-                <Typography color='text.secondary'>{block.txsNumber}</Typography>
+                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.txsNumber}</Typography>
               </TableCell>
               <TableCell>
-                <Typography color='text.secondary'>{block.createdAt}</Typography>
+                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.createdAt}</Typography>
               </TableCell>
             </TableRow>
           ))}

@@ -23,23 +23,30 @@ export const NetworkStatus = () => {
         Network Info
       </Typography>
       {Object.keys(linksToPages).map(title => (
-        <ContentLink title={title} url={linksToPages[title]} key={title} />
+        <ContentLink
+          title={title}
+          url={linksToPages[title]}
+          key={title}
+          disabled={linksToPages[title] === '#'}
+        />
       ))}
     </GreenGradientBackground>
   );
 }
 
-const ContentLink: FC<{ title: string, url: string }> = ({
+const ContentLink: FC<{ title: string, url: string, disabled?: boolean }> = ({
   title,
-  url
+  url,
+  disabled
 }) => {
   return (
     <Typography
-      color="text.primary"
+      color={disabled ? 'text.secondary' : 'text.primary'}
       sx={{
         textDecoration: 'underline',
         textUnderlineOffset: '3px',
         textDecorationThickness: '1px',
+        textDecorationColor: disabled ? '#11111166' : 'auto',
         lineHeight: '33px',
         display: 'block',
         my: 1.25
@@ -50,8 +57,10 @@ const ContentLink: FC<{ title: string, url: string }> = ({
         passHref
         style={{
           color: 'inherit',
-          textDecorationThickness: 'inherit'
+          textDecorationThickness: 'inherit',
+          cursor: disabled ? 'default' : 'pointer'
         }}
+        aria-disabled={disabled}
       >
         {title}
       </Link>
