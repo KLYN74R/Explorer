@@ -1,12 +1,11 @@
 import { Box, Container, Typography, Grid } from '@mui/material';
+import { PrettyJSON } from '@/components';
 import {
   DimGradientBackground,
   GradientBackground,
   BlurredInfoBlock,
   Label
 } from '@/components/ui';
-import JsonFormatter from 'react-json-formatter';
-import { COLORS } from '@/styles/colors';
 
 type TransactionByIdPageProps = {
   params: {
@@ -100,20 +99,7 @@ export default function TransactionByIdPage({ params }: TransactionByIdPageProps
       <Container maxWidth='xl' sx={{ pb: 7 }}>
         <Box sx={{ px: { md: 4.5, xs: 0 } }}>
           <BlurredInfoBlock title='Payload:'>
-            <JsonFormatter
-              json={JSON.stringify(tx.payload)}
-              tabWith={4}
-              jsonStyle={{
-                style: {
-                  fontFamily: 'monospace',
-                  width: '100%',
-                  overflow: 'auto'
-                },
-                numberStyle: {color: COLORS.CYAN},
-                nullStyle: {color: COLORS.RED},
-                propertyStyle: {color: 'rgba(255, 255, 255, 0.8)'}
-              }}
-            />
+            <PrettyJSON data={tx.payload} />
           </BlurredInfoBlock>
         </Box>
       </Container>
