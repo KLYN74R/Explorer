@@ -17,10 +17,11 @@ const tx = {
   creator: '9GQ46rqY2C7j5Z9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBKnBK',
   type: 'TX',
   version: 0,
-  txsNumber: 16,
-  indexInOwnSequence: 5,
-  previousBlockHash: '0123456789abcd89abcdef0123456789abcdef0123456789abcd89abcdef0123456789abcdef',
-  status: 'Approved', // or "Awaiting approval",
+  nonce: 16,
+  signature: '9GQ46rqY2C7j5Z9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBKnBK',
+  includedInBlock: '0123456789abcd89abcdef0123456789abcdef0123456789abcd89abcdef0123456789abcdef',
+  positionInBlock: 23,
+  status: 'Success', // or "Failed",
   payload: {
     "to": "0123456789abcd89abcdef0123456789abcdef0123456789abcd89abcdef0123456789abcdef",
     "amount": 2999,
@@ -31,7 +32,7 @@ const tx = {
 }
 
 export default function TransactionByIdPage({ params }: TransactionByIdPageProps) {
-  const isApproved = tx.status.toLowerCase().includes('approved');
+  const isApproved = tx.status.toLowerCase().includes('success');
 
   return (
     <>
@@ -66,29 +67,36 @@ export default function TransactionByIdPage({ params }: TransactionByIdPageProps
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <BlurredInfoBlock
-                    title='Txs number:'
-                    value={tx.txsNumber}
+                    title='Nonce: '
+                    value={tx.nonce}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <BlurredInfoBlock
+                    title='Signature:'
+                    value={tx.signature}
+                    breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <BlurredInfoBlock
-                    title='Index in own sequence:'
-                    value={tx.indexInOwnSequence}
+                    title='Included in block:'
+                    value={tx.includedInBlock}
+                    breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
+                  <BlurredInfoBlock
+                    title='Position in block:'
+                    value={tx.positionInBlock}
+                  />
+                </Grid>
+                <Grid item xs={12}>
                   <BlurredInfoBlock title='Status:'>
                     <Label variant={isApproved ? 'green' : 'red'}>
                       {tx.status}
                     </Label>
                   </BlurredInfoBlock>
-                </Grid>
-                <Grid item xs={12}>
-                  <BlurredInfoBlock
-                    title='Previous block hash:'
-                    value={tx.previousBlockHash}
-                    breakWord={true}
-                  />
                 </Grid>
               </Grid>
             </Box>
