@@ -6,7 +6,7 @@ export const BlurredInfoBlock: FC<{
   title: string,
   comment?: string,
   value?: string | number,
-  variant?: string,
+  variant?: 'cyan',
   breakWord?: boolean,
   sx?: SxProps
 }> = ({
@@ -18,8 +18,6 @@ export const BlurredInfoBlock: FC<{
   breakWord,
   sx
 }) => {
-  const isLabel = variant?.includes('label');
-
   return (
     <Box sx={{
       pt: 2,
@@ -33,6 +31,7 @@ export const BlurredInfoBlock: FC<{
     }}>
       <Typography
         variant='caption'
+        color='text.primary'
         sx={{ display: 'block' }}
       >
         {title}
@@ -44,7 +43,7 @@ export const BlurredInfoBlock: FC<{
       ) : (
         <Typography
           sx={{
-            fontSize: isLabel ? '14px' : '24px',
+            fontSize: '24px',
             lineHeight: '30px',
             fontWeight: 300,
             mt: 1,
@@ -52,16 +51,8 @@ export const BlurredInfoBlock: FC<{
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word'
             }),
-            ...(isLabel && {
-              backgroundColor: variant?.includes('green') ? 'rgba(41, 51, 41, 1)' :
-                variant?.includes('red') ? 'rgba(74, 13, 13, 1)' : 'transparent',
-              px: 1,
-              borderRadius: '3px',
-              display: 'inline-block'
-            })
           }}
-          color={variant === 'cyan' ? 'primary.main' :
-            variant?.includes('green') ? 'rgba(122, 255, 115, 1)' : 'secondary.main'}
+          color={variant === 'cyan' ? 'primary.main' : 'secondary.main'}
         >
           {value} {comment && <Comment text={comment} />}
         </Typography>

@@ -1,5 +1,10 @@
 import { Box, Container, Typography, Grid } from '@mui/material';
-import { BlurredInfoBlock, DimGradientBackground, GradientBackground } from '@/components/ui';
+import {
+  DimGradientBackground,
+  GradientBackground,
+  BlurredInfoBlock,
+  Label
+} from '@/components/ui';
 import JsonFormatter from 'react-json-formatter';
 import { COLORS } from '@/styles/colors';
 
@@ -73,11 +78,11 @@ export default function TransactionByIdPage({ params }: TransactionByIdPageProps
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
-                    title='Status:'
-                    value={tx.status}
-                    variant={`label_${isApproved ? 'green' : 'red'}`}
-                  />
+                  <BlurredInfoBlock title='Status:'>
+                    <Label variant={isApproved ? 'green' : 'red'}>
+                      {tx.status}
+                    </Label>
+                  </BlurredInfoBlock>
                 </Grid>
                 <Grid item xs={12}>
                   <BlurredInfoBlock

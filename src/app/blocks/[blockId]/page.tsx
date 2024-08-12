@@ -1,13 +1,16 @@
+import Link from 'next/link';
 import {
   BlurredInfoBlock,
   DimGradientBackground,
   FlexCenterBox,
   GradientBackground,
+  Label,
   LoadMoreButton
 } from '@/components/ui';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import { TransactionsTable } from './TransactionsTable';
 import BlockImage from '@public/block.svg';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 type BlockByIdPageProps = {
   params: {
@@ -72,11 +75,24 @@ export default function BlockByIdPage({ params }: BlockByIdPageProps) {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <BlurredInfoBlock
-                      title='Status:'
-                      value={block.status}
-                      variant={`label_${isApproved ? 'green' : 'red'}`}
-                    />
+                    <BlurredInfoBlock title='Status:'>
+                      <Label variant={isApproved ? 'green' : 'red'}>
+                        {block.status}
+                      </Label>
+                      <Box sx={{ mt: 1 }}>
+                        <Link
+                          href={`/blocks/${params.blockId}/finalization-proof`}
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <Typography variant='caption' color='primary.main'>
+                            <LaunchIcon
+                              color='primary'
+                              sx={{ fontSize: '16px', position: 'relative', bottom: '-3px' }}
+                            /> Check finalization proof
+                          </Typography>
+                        </Link>
+                      </Box>
+                    </BlurredInfoBlock>
                   </Grid>
                 </Grid>
               </Grid>
