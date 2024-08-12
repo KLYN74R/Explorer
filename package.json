@@ -22,6 +22,7 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "latest",
     "react-infinite-ticker": "^2.1.1",
+    "react-json-formatter": "^0.4.0",
     "use-debounce": "^10.0.2"
   },
   "devDependencies": {

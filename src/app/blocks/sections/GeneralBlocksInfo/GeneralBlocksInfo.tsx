@@ -31,7 +31,7 @@ export const GeneralBlocksInfo = () => {
     <DimGradientBackground>
       <GradientBackground sx={{ py: 6 }}>
         <Container maxWidth='xl'>
-          <Grid container spacing={10} sx={{ pl: { md: 4.5, xs: 0 } }}>
+          <Grid container spacing={10} sx={{ px: { md: 4.5, xs: 0 } }}>
             <Grid item xs={12} md={6}>
               <Box>
                 <Typography variant='h1'>General info about blocks</Typography>

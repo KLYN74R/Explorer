@@ -13,7 +13,7 @@ export const BlocksByShard = () => {
   return (
     <Container maxWidth='xl'>
       <Box sx={{
-        pl: { md: 4.5, xs: 0 }
+        px: { md: 4.5, xs: 0 }
       }}>
         <Box sx={{
           width: {

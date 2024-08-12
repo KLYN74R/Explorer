@@ -33,7 +33,7 @@ export default function BlockByIdPage({ params }: BlockByIdPageProps) {
       <DimGradientBackground>
         <GradientBackground sx={{ py: 7 }}>
           <Container maxWidth='xl'>
-            <Grid container sx={{ pl: { md: 4.5, xs: 0 } }} spacing={8}>
+            <Grid container sx={{ px: { md: 4.5, xs: 0 } }} spacing={8}>
               <Grid item xs={12} lg={4} xl={3.5} sx={{
                 display: 'flex',
                 justifyContent: { xs: 'center', lg: 'flex-start' }
@@ -46,7 +46,7 @@ export default function BlockByIdPage({ params }: BlockByIdPageProps) {
                     <BlurredInfoBlock title='Creator:' value={block.creator} breakWord={true} />
                   </Grid>
                   <Grid item xs={12}>
-                    <BlurredInfoBlock title='Time:' value={block.time} breakWord={true} />
+                    <BlurredInfoBlock title='Created at:' value={block.time} breakWord={true} />
                   </Grid>
                   <Grid item xs={12}>
                     <BlurredInfoBlock title='Epoch:' value={block.epoch} breakWord={true} />
@@ -86,10 +86,7 @@ export default function BlockByIdPage({ params }: BlockByIdPageProps) {
       </DimGradientBackground>
 
       <Container maxWidth='xl'>
-        <Box sx={{
-          pt: 5,
-          pl: { md: 4.5, xs: 0 },
-        }}>
+        <Box sx={{ px: { md: 4.5, xs: 0 } }}>
           <Typography variant='h1'>Transactions</Typography>
           <TransactionsTable />
           <FlexCenterBox sx={{ mt: 3 }}>

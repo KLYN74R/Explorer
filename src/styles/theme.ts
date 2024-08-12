@@ -226,7 +226,7 @@ const theme = createTheme({
             borderBottomRightRadius: '5px',
           },
           '& .MuiButtonBase-root.MuiMenuItem-root.Mui-selected': {
-            backgroundColor: 'rgba(122, 238, 229, 0.25)'
+            backgroundColor: palette.primary.main + 30
           },
           '& .Mui-selected:hover': {
             cursor: 'default',

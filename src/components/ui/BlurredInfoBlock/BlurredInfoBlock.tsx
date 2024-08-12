@@ -1,14 +1,18 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Box, SxProps, Typography } from '@mui/material';
 
 export const BlurredInfoBlock: FC<{
+  children?: ReactNode,
   title: string,
-  value: string | number,
+  comment?: string,
+  value?: string | number,
   variant?: string,
   breakWord?: boolean,
   sx?: SxProps
 }> = ({
+  children,
   title,
+  comment,
   value,
   variant,
   breakWord,
@@ -21,6 +25,7 @@ export const BlurredInfoBlock: FC<{
       pt: 2,
       pb: 2.5,
       pl: 3,
+      height: '100%',
       ...(breakWord && { pr: 3 }),
       background: '#11111166',
       backdropFilter: 'blur(5px)',
@@ -32,28 +37,47 @@ export const BlurredInfoBlock: FC<{
       >
         {title}
       </Typography>
-      <Typography
-        sx={{
-          fontSize: isLabel ? '14px' : '24px',
-          lineHeight: '30px',
-          mt: 1,
-          ...(breakWord && {
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word'
-          }),
-          ...(isLabel && {
-            backgroundColor: variant?.includes('green') ? 'rgba(41, 51, 41, 1)' :
-              variant?.includes('red') ? 'rgba(74, 13, 13, 1)' : 'transparent',
-            px: 1,
-            borderRadius: '3px',
-            display: 'inline-block'
-          })
-        }}
-        color={variant === 'cyan' ? 'primary.main' :
-          variant?.includes('green') ? 'rgba(122, 255, 115, 1)' : 'secondary.main'}
-      >
-        {value}
-      </Typography>
+      {children ? (
+        <Box sx={{ mt: 1 }}>
+          {children}
+        </Box>
+      ) : (
+        <Typography
+          sx={{
+            fontSize: isLabel ? '14px' : '24px',
+            lineHeight: '30px',
+            fontWeight: 300,
+            mt: 1,
+            ...(breakWord && {
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word'
+            }),
+            ...(isLabel && {
+              backgroundColor: variant?.includes('green') ? 'rgba(41, 51, 41, 1)' :
+                variant?.includes('red') ? 'rgba(74, 13, 13, 1)' : 'transparent',
+              px: 1,
+              borderRadius: '3px',
+              display: 'inline-block'
+            })
+          }}
+          color={variant === 'cyan' ? 'primary.main' :
+            variant?.includes('green') ? 'rgba(122, 255, 115, 1)' : 'secondary.main'}
+        >
+          {value} {comment && <Comment text={comment} />}
+        </Typography>
+      )}
     </Box>
+  );
+}
+
+const Comment: FC<{ text: string }> = ({ text }) => {
+  return (
+    <Typography
+      color='text.secondary'
+      sx={{ fontSize: '24px', lineHeight: '30px', fontWeight: 300 }}
+      component='span'
+    >
+      ({text})
+    </Typography>
   );
 }
