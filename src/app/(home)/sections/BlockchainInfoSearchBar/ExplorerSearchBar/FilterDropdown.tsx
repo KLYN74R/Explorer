@@ -28,11 +28,11 @@ export const FilterDropdown: FC<{
         }}
       >
         <MenuItem value={FILTER_OPTIONS.CHOOSE} sx={{ display: 'none' }}>Filter</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.TRANSACTIONS}>TXID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.SHARDS}>SID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.BLOCKS}>Block ID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.POOLS}>Pool ID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.CONTRACTS}>Contract ID</MenuItem>
+        <MenuItem value={FILTER_OPTIONS.TRANSACTION_BY_HASH}>TXID</MenuItem>
+        {/*<MenuItem value={FILTER_OPTIONS.BLOCK_BY_SID}>SID</MenuItem>*/}
+        <MenuItem value={FILTER_OPTIONS.BLOCK_BY_ID}>Block ID</MenuItem>
+        <MenuItem value={FILTER_OPTIONS.POOL_BY_ID}>Pool ID</MenuItem>
+        {/*<MenuItem value={FILTER_OPTIONS.CONTRACTS}>Contract ID</MenuItem>*/}
       </Select>
     </FormControl>
   );

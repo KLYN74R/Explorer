@@ -1,120 +1,93 @@
-import * as React from 'react';
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Skeleton } from '@mui/material';
+import { FC } from 'react';
+import {
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Box
+} from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 import Link from 'next/link';
+import { fetchBlocksByShard } from '@/helpers/data';
+import { BlockPreview } from '@/definitions';
+import { FlexCenterBox, LoadMoreButton } from '@/components/ui';
+import { BLOCKS_PER_PAGE } from '@/helpers/constants';
 
-function createData(
-  blockId: number,
-  sid: string,
-  creator: string,
-  index: number,
-  txsNumber: number,
-  createdAt: string,
-) {
-  return { blockId, sid, creator, index, txsNumber, createdAt };
+type LatestBlocksTableProps = {
+  shard: string;
+  currentPage: number;
 }
 
-const blocks = [
-  createData(1, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(2, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_2', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(3, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_3', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(4, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_4', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(5, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_5', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(6, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_6', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(7, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_7', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(8, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_8', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(9, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_9', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024'),
-  createData(10, '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_10', '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', 123, 10, '15:39 Jun 22, 2024')
-];
+export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
+  shard,
+  currentPage
+}) => {
+  const blocks = await fetchBlocksByShard(shard, currentPage);
+  const blocksExist = !!blocks.length;
 
-export const LatestBlocksTable = () => {
-  const isLoading = false;
+  const rows = blocks.map((block: BlockPreview) => (
+    <TableRow key={block.sid}>
+      <TableCell sx={{ maxWidth: { xs: '225px', md: '275px', xl: '375px' } }}>
+        <Link
+          href={`/blocks/${block.id}`}
+          passHref
+          style={{ textDecoration: 'none' }}
+        >
+          <Typography color='primary.main' sx={{ fontSize: '18px' }}>
+            <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-5px' }} /> {block.sid}
+          </Typography>
+        </Link>
+      </TableCell>
+      <TableCell sx={{ maxWidth: { xs: '225px', lg: '275px', xl: 'none' } }}>
+        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.creator}</Typography>
+      </TableCell>
+      <TableCell sx={{ minWidth: '150px' }}>
+        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.index}</Typography>
+      </TableCell>
+      <TableCell sx={{ maxWidth: '100px' }}>
+        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.txsNumber}</Typography>
+      </TableCell>
+      <TableCell>
+        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.createdAt}</Typography>
+      </TableCell>
+    </TableRow>
+  ));
 
-  if (isLoading) {
-    return <LatestBlocksTableSkeleton />
+  if (!blocksExist) {
+    return (
+      <Box sx={{ py: 6, textAlign: 'center' }}>
+        <Typography color='primary.main'>No blocks found.</Typography>
+      </Box>
+    );
   }
 
   return (
-    <TableContainer sx={{ mt: 5 }}>
-      <Table sx={{ minWidth: 650 }} aria-label='Latest blocks table'>
-        <TableHead>
-          <TableRow>
-            <TableCell><Typography variant='h6'>SID</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Creator</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Index</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Txs Number</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Created at</Typography></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {blocks.map((block) => (
-            <TableRow key={block.blockId}>
-              <TableCell sx={{ maxWidth: { xs: '225px', md: '275px', xl: '375px' } }}>
-                <Link
-                  href={`/blocks/${block.sid}`}
-                  passHref
-                  style={{ textDecoration: 'none' }}
-                >
-                  <Typography color='primary.main' sx={{ fontSize: '18px' }}>
-                    <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-5px' }} /> {block.sid}
-                  </Typography>
-                </Link>
-              </TableCell>
-              <TableCell sx={{ maxWidth: { xs: '225px', lg: '275px', xl: 'none' } }}>
-                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.creator}</Typography>
-              </TableCell>
-              <TableCell sx={{ minWidth: '150px' }}>
-                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.index}</Typography>
-              </TableCell>
-              <TableCell sx={{ maxWidth: '100px' }}>
-                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.txsNumber}</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.createdAt}</Typography>
-              </TableCell>
+    <>
+      <TableContainer sx={{ mt: 5 }}>
+        <Table sx={{ minWidth: 650 }} aria-label='Latest blocks table'>
+          <TableHead>
+            <TableRow>
+              <TableCell><Typography variant='h6'>SID</Typography></TableCell>
+              <TableCell><Typography variant='h6'>Creator</Typography></TableCell>
+              <TableCell><Typography variant='h6'>Index</Typography></TableCell>
+              <TableCell><Typography variant='h6'>Txs Number</Typography></TableCell>
+              <TableCell><Typography variant='h6'>Created at</Typography></TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-}
+          </TableHead>
+          <TableBody>
+            {rows}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-const LatestBlocksTableSkeleton = () => {
-  return (
-    <TableContainer sx={{ mt: 5 }}>
-      <Table sx={{ minWidth: 650 }} aria-label='Latest blocks table'>
-        <TableHead>
-          <TableRow>
-            <TableCell><Typography variant='h6'>SID</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Creator</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Index</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Txs Number</Typography></TableCell>
-            <TableCell><Typography variant='h6'>Created at</Typography></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {[...Array(10)].map((_, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                <Skeleton variant='text' width='100%' />
-              </TableCell>
-              <TableCell>
-                <Skeleton variant='text' width='100%' />
-              </TableCell>
-              <TableCell>
-                <Skeleton variant='text' width='100%' />
-              </TableCell>
-              <TableCell>
-                <Skeleton variant='text' width='100%' />
-              </TableCell>
-              <TableCell>
-                <Skeleton variant='text' width='100%' />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <FlexCenterBox sx={{ my: 3 }}>
+        <LoadMoreButton
+          disabled={blocks.length < BLOCKS_PER_PAGE}
+        />
+      </FlexCenterBox>
+    </>
   );
 }

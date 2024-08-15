@@ -1,8 +1,6 @@
 'use client';
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDebouncedCallback } from 'use-debounce';
-import { useQueryParams } from '@/hooks';
 import { SelectChangeEvent, } from '@mui/material';
 import { FlexBetweenBox, GeometricButton } from '@/components/ui';
 import { FilterDropdown } from './FilterDropdown';
@@ -11,53 +9,18 @@ import { FILTER_OPTIONS, PLACEHOLDER_TEXT } from './constants';
 import SearchIcon from '@public/icons/ui/search.svg';
 
 export const ExplorerSearchBar = () => {
-  const { replace, push } = useRouter();
-  const {
-    searchType: initialSearchType,
-    query: initialQuery,
-    searchParams,
-    pathname
-  } = useQueryParams();
-
-  const [searchType, setSearchType] = useState(initialSearchType);
-  const [query, setQuery] = useState(initialQuery);
-
-  useEffect(() => {
-    setSearchType(initialSearchType);
-    setQuery(initialQuery);
-  }, [initialSearchType, initialQuery]);
+  const { push } = useRouter();
+  const [searchType, setSearchType] = useState('choose');
+  const [query, setQuery] = useState('');
 
   const isChoose = searchType === FILTER_OPTIONS.CHOOSE;
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newQuery = event.target.value;
-    setQuery(newQuery);
-    handleSearch(newQuery);
+    setQuery(event.target.value);
   };
 
-  const handleSearch = useDebouncedCallback((term: string) => {
-    setQuery(term);
-    const params = new URLSearchParams(searchParams);
-    if (!isChoose && term) {
-      params.set('type', searchType);
-      params.set('query', term);
-    } else {
-      params.delete('query');
-    }
-    replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, 300);
-
   const handleSearchTypeChange = (event: SelectChangeEvent) => {
-    const newSearchType = event.target.value;
-    setSearchType(newSearchType);
-    const params = new URLSearchParams(searchParams);
-    if (newSearchType !== FILTER_OPTIONS.CHOOSE) {
-      params.set('type', newSearchType);
-    } else {
-      params.delete('type');
-      setQuery('');
-    }
-    replace(`${pathname}?${params.toString()}`, { scroll: false });
+    setSearchType(event.target.value);
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {

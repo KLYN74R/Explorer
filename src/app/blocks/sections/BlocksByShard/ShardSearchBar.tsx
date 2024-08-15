@@ -21,7 +21,7 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
     pathname
   } = useQueryParams();
 
-  const [query, setQuery] = useState<ComboboxItemProps|null>(shardsList[0]);
+  const [query, setQuery] = useState<ComboboxItemProps|undefined>(shardsList[0]);
 
   useEffect(() => {
     const shardById = shardsList.find(i => i.label === initialShard);
@@ -36,7 +36,7 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
     if (newValue && newValue.label) {
       setQueryParameters(newValue.label, true);
     } else {
-      setQuery(null);
+      setQuery(undefined);
     }
   }
 
@@ -68,6 +68,7 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
         disablePortal
         options={shardsList}
         value={query}
+        disableClearable={true}
         onChange={handleQueryChange as AutocompleteValue<any, any, any, any>}
         isOptionEqualToValue={isOptionEqualToValue}
         sx={{ flex: 1 }}
