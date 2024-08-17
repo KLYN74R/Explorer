@@ -121,7 +121,7 @@ export async function fetchBlocksByShard(shard: string, currentPage: number): Pr
     const { sid, creator, epoch, index, transactions, time } = block;
 
     const epochIndex = Number(epoch.split('#')[1]);
-    const id = epochIndex + ':' + sid;
+    const id = epochIndex + ':' + creator + ':' + index;
 
     const txsNumber = transactions.length;
     const createdAt = getPrettyDate(time);

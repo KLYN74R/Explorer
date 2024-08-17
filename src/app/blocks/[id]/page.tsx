@@ -38,9 +38,6 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
               <Grid item xs={12} lg={8} xl={8.5}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
-                    <BlurredInfoBlock title='Block ID:' value={id} breakWord={true} />
-                  </Grid>
-                  <Grid item xs={12}>
                     <BlurredInfoBlock title='Creator:' value={block.creator} breakWord={true} />
                   </Grid>
                   <Grid item xs={12}>
