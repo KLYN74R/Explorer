@@ -20,7 +20,7 @@ export const NetworkParameters = async () => {
   } = await fetchChainData();
 
   return (
-    <RedGradientBackground sx={{ p: 3 }}>
+    <RedGradientBackground sx={{ p: 3, pb: 5 }}>
       <Typography variant='h1'>
         Network Parameters
       </Typography>

@@ -183,7 +183,8 @@ export async function getTransactionByBlake3Hash(hash: string): Promise<Transact
   return {
     ...receipt,
     ...transaction,
-    typeDescription: describeTransactionType(transaction.type)
+    typeDescription: describeTransactionType(transaction.type),
+    creatorFormat: describeTransactionCreatorFormat(transaction.creator)
   }
 }
 
@@ -201,6 +202,23 @@ function describeTransactionType(type: string) {
       return '';
   }
 }
+
+function describeTransactionCreatorFormat(creator: string) {
+  const length = creator.length;
+
+  if (length === 44) {
+    return 'ED25519';
+  } else if (length === 98) {
+    return 'BLS, multisig';
+  } else if (length === 96) {
+    return 'TBLS, tsig';
+  } else if (length === 64) {
+    return 'PQC, post-quantum';
+  } else {
+    return 'Unknown format';
+  }
+}
+
 
 export async function getPoolById(id: string): Promise<Pool> {
   return await api.get<Pool>(`pool_stats/${id}`);

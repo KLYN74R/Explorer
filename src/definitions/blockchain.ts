@@ -118,7 +118,7 @@ export interface BlockExtendedData {
 
 export interface Transaction {
   v: number;
-  creator?: string;
+  creator: string;
   type: string;
   nonce: number;
   fee: number;
@@ -144,6 +144,7 @@ export interface TransactionReceipt {
 
 export interface TransactionExtendedData extends TransactionReceipt, TransactionWithBlake3Hash {
   typeDescription: string;
+  creatorFormat: string;
 }
 
 export interface Pool {

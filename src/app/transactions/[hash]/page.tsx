@@ -49,7 +49,7 @@ export default async function TransactionByIdPage({ params }: TransactionByIdPag
                   <BlurredInfoBlock
                     title='Creator:'
                     value={tx.creator}
-                    comment='Ed25519'
+                    comment={tx.creatorFormat}
                     breakWord={true}
                   />
                 </Grid>
