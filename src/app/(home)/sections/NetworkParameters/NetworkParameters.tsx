@@ -32,12 +32,6 @@ export const NetworkParameters = async () => {
           <ContentItem title='Validator stake size' value={validatorStakeSize} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Block creator reward' value={blockCreatorReward} />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <ContentItem title='AFK Maxtime' value={afkMaxtime} />
-        </Grid>
-        <Grid item xs={12} md={6}>
           <ContentItem title='Workflow major version' value={workflowMajorVersion} />
         </Grid>
         <Grid item xs={12} md={6}>
