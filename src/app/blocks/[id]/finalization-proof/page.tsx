@@ -10,8 +10,8 @@ type FinalizationProofPageProps = {
 }
 
 export default async function FinalizationProofPage({ params }: FinalizationProofPageProps) {
-  const blockId = decodeURIComponent(params.id);
-  const finalizationProof = await getFinalizationProof(blockId);
+  const id = decodeURIComponent(params.id);
+  const finalizationProof = await getFinalizationProof(id);
 
   return (
     <>
@@ -24,7 +24,7 @@ export default async function FinalizationProofPage({ params }: FinalizationProo
                 <Grid item xs={12}>
                   <BlurredInfoBlock
                     title='Block Id:'
-                    value={blockId}
+                    value={finalizationProof.blockID}
                     variant='cyan'
                     breakWord={true}
                   />

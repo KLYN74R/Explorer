@@ -5,15 +5,15 @@ import { SelectChangeEvent, } from '@mui/material';
 import { FlexBetweenBox, GeometricButton } from '@/components/ui';
 import { FilterDropdown } from './FilterDropdown';
 import { SearchInput } from './SearchInput';
-import { FILTER_OPTIONS, PLACEHOLDER_TEXT } from './constants';
+import { OPTIONS, OPTIONS_URL, OPTIONS_PLACEHOLDER } from './constants';
 import SearchIcon from '@public/icons/ui/search.svg';
 
 export const ExplorerSearchBar = () => {
   const { push } = useRouter();
-  const [searchType, setSearchType] = useState('choose');
+  const [searchType, setSearchType] = useState(OPTIONS.CHOOSE);
   const [query, setQuery] = useState('');
 
-  const isChoose = searchType === FILTER_OPTIONS.CHOOSE;
+  const isChoose = searchType === OPTIONS.CHOOSE;
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -33,7 +33,7 @@ export const ExplorerSearchBar = () => {
     if (isChoose || !query) {
       return false;
     }
-    push(`/${searchType}/${query}`);
+    push(`${OPTIONS_URL[searchType]}/${query.trim()}`);
   };
 
   return (
@@ -51,7 +51,7 @@ export const ExplorerSearchBar = () => {
         handleSearchTypeChange={handleSearchTypeChange}
       />
       <SearchInput
-        placeholder={PLACEHOLDER_TEXT[searchType]}
+        placeholder={OPTIONS_PLACEHOLDER[searchType]}
         isChoose={isChoose}
         query={query}
         handleQueryChange={handleQueryChange}

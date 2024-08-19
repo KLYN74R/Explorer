@@ -1,21 +1,21 @@
 import api from './api';
 import {
+  Block,
+  BlockExtendedData,
+  BlockPreview,
   BlockStats,
   ChainInfo,
   EpochData,
+  FinalizationProof,
+  Pool,
   ShardsData,
   SyncStats,
-  Block,
-  BlockPreview,
-  FinalizationProof,
-  BlockExtendedData,
   TransactionExtendedData,
   TransactionReceipt,
-  TransactionWithBlake3Hash,
-  Pool
+  TransactionWithBlake3Hash
 } from '@/definitions';
-import { getPrettyDate, getFullDate } from './time';
-import { BLOCKS_PER_PAGE } from './constants';
+import { getFullDate, getPrettyDate } from './time';
+import { BLOCK_TYPE, BLOCKS_PER_PAGE } from './constants';
 import { hashData } from '@/helpers/blake3';
 
 export async function fetchGeneralBlockchainData(): Promise<{
@@ -138,8 +138,21 @@ export async function fetchBlocksByShard(shard: string, currentPage: number): Pr
   });
 }
 
+function identifyIdType(id: string): BLOCK_TYPE {
+  const isSID = id.split(':').length === 2;
+
+  return isSID ? BLOCK_TYPE.SID : BLOCK_TYPE.BLOCK_ID;
+}
+
 export async function getBlockById(id: string): Promise<BlockExtendedData> {
-  const block = await api.get<Block>(`block/${id}`);
+  let block;
+
+  if (identifyIdType(id) === BLOCK_TYPE.SID) {
+    const [shard, indexInShard] = id.split(':');
+    block = await api.get<Block>(`block_by_sid/${shard}/${indexInShard}`);
+  } else {
+    block = await api.get<Block>(`block/${id}`);
+  }
 
   const {  creator, index, transactions: blockTxs, time, epoch, prevHash } = block;
   const txsNumber = blockTxs.length;
@@ -147,7 +160,9 @@ export async function getBlockById(id: string): Promise<BlockExtendedData> {
 
   const epochIndex = Number(epoch.split('#')[1]);
 
-  const finalizationProof = await getFinalizationProof(id);
+  const blockId = epochIndex + ':' + creator + ':' + index;
+
+  const finalizationProof = await getFinalizationProof(blockId);
 
   const transactions = await Promise.all(
     blockTxs.map(async (tx) => ({
@@ -169,8 +184,19 @@ export async function getBlockById(id: string): Promise<BlockExtendedData> {
   };
 }
 
-export async function getFinalizationProof(blockId: string): Promise<FinalizationProof> {
-  return await api.get<FinalizationProof>(`aggregated_finalization_proof/${blockId}`);
+export async function getFinalizationProof(id: string): Promise<FinalizationProof> {
+  let blockId = id;
+
+  if (identifyIdType(id) === BLOCK_TYPE.SID) {
+    const [shard, indexInShard] = id.split(':');
+    const { epoch, creator, index } = await api.get<Block>(`block_by_sid/${shard}/${indexInShard}`);
+
+    const epochIndex = Number(epoch.split('#')[1]);
+
+    blockId = epochIndex + ':' + creator + ':' + index;
+  }
+
+  return await api.get(`aggregated_finalization_proof/${blockId}`);
 }
 
 export async function getTransactionByBlake3Hash(hash: string): Promise<TransactionExtendedData> {

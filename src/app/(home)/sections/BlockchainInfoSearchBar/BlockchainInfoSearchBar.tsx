@@ -25,7 +25,7 @@ export const BlockchainInfoSearchBar = async () => {
           <Grid container spacing={1} sx={{ mt: 4, px: { md: 4.5, xs: 0 } }}>
             <InfoBlock title='Total TXS' value={totalTxsNumber} />
             <InfoBlock title='Epoch ID' value={epochId} />
-            <InfoBlock title='TXS Success' value={txsSuccess} />
+            <InfoBlock title='TXS Success' value={txsSuccess} variant='cyan' />
             <InfoBlock title='Shards' value={shardsNumber} />
             <InfoBlock title='Validators' value={validatorsNumber} />
             <InfoBlock title='Total Staked' value={totalStaked} />
