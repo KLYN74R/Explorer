@@ -5,7 +5,7 @@ import DoubleArrowDown from '@public/icons/ui/doubleArrowDown.svg';
 import { useQueryParams } from '@/hooks';
 import Link from 'next/link';
 
-export const LoadMoreButton: FC<{
+export const ButtonPagination: FC<{
   disabled?: boolean;
 }> = ({
   disabled

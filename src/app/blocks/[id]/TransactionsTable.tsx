@@ -1,8 +1,20 @@
-import { FC } from 'react';
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box } from '@mui/material';
+'use client';
+import { FC, useState } from 'react';
+import {
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Box
+} from '@mui/material';
 import Link from 'next/link';
-import LaunchIcon from '@mui/icons-material/Launch';
 import { TransactionWithBlake3Hash } from '@/definitions';
+import { TRANSACTIONS_PER_PAGE } from '@/helpers/constants';
+import LaunchIcon from '@mui/icons-material/Launch';
+import { FlexCenterBox, LoadMoreButton } from '@/components/ui';
 
 type TransactionsTableProps = {
   transactions: TransactionWithBlake3Hash[]
@@ -11,10 +23,19 @@ type TransactionsTableProps = {
 export const TransactionsTable: FC<TransactionsTableProps> = ({
   transactions
 }) => {
-  const isEVM = (tx: TransactionWithBlake3Hash) => !tx.creator;
-  const transactionsExist = !!transactions.length;
+  const [txs, setTxs] = useState(transactions.slice(0, TRANSACTIONS_PER_PAGE));
+  const nextPage = Math.floor(txs.length / TRANSACTIONS_PER_PAGE) + 1;
+  const nextPageAvailable = txs.length < transactions.length;
 
-  if (!transactionsExist) {
+  const handleLoadMore = () => {
+    if (nextPageAvailable) {
+      setTxs(transactions.slice(0, TRANSACTIONS_PER_PAGE * nextPage));
+    }
+  }
+
+  const isEVM = (tx: TransactionWithBlake3Hash) => !tx.creator;
+
+  if (!transactions.length) {
     return (
       <Box sx={{ py: 6, textAlign: 'center' }}>
         <Typography color='primary.main'>Block contains no transactions.</Typography>
@@ -35,7 +56,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactions.map((tx) => (
+            {txs.map((tx) => (
               <TableRow key={tx.sig}>
                 <TableCell sx={{ maxWidth: '200px', pr: { xs: 1, sm: 3, lg: 8, xl: 16 } }}>
                   <Link
@@ -71,7 +92,11 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
         </Table>
       </TableContainer>
 
-      {/* <Load More /> (Block can contain about 200 transactions) */}
+      <FlexCenterBox sx={{ my: 3 }}>
+        {nextPageAvailable && (
+          <LoadMoreButton onClick={handleLoadMore}/>
+        )}
+      </FlexCenterBox>
     </>
   );
 }

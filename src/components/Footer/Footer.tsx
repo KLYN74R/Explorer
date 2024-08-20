@@ -19,7 +19,7 @@ export const Footer = () => {
               <Typography variant='h2'>Built with 🤍</Typography>
             </FlexCenterBox>
             <Typography color="text.secondary" sx={{ mt: 2 }}>
-              We stand for decentralization, open-source development and community interests
+              We stand for decentralization, open-source development and community interests.
             </Typography>
           </Box>
         </Grid>

@@ -1,2 +1,2 @@
-export { LoadMoreButton } from './LoadMoreButton';
+export { ButtonPagination } from './ButtonPagination';
 export { ArrowPagination } from './ArrowPagination';
