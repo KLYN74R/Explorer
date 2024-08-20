@@ -59,9 +59,8 @@ export async function fetchGeneralBlockchainData(): Promise<{
       totalStaked: formatNumber(totalStaked),
       slotTime: slotTimeInSeconds
     };
-  } catch (error) {
-    console.error('API Error:', error);
-    throw new Error('Failed to fetch blockchain data.');
+  } catch (e: any) {
+    throw new Error(`Failed to fetch general blockchain data - ${e.message}`);
   }
 }
 
@@ -96,46 +95,53 @@ export async function fetchChainData(): Promise<{
       maxBlockSize: (chainData.approvementThread.options.MAX_BLOCK_SIZE_IN_BYTES / 1000000).toFixed(2) + 'Mb',
       limitForOperations: chainData.approvementThread.options.EPOCH_EDGE_OPERATIONS_LIMIT_PER_BLOCK
     };
-  } catch (error) {
-    console.error('API Error:', error);
-    throw new Error('Failed to fetch chain data.');
+  } catch (e: any) {
+    throw new Error(`Failed to fetch chain info - ${e.message}`);
   }
 }
 
 export async function fetchCurrentShards(): Promise<string[]> {
-  const currentShardsData = await api.get<ShardsData>('current_shards_leaders');
+  try {
+    const currentShardsData = await api.get<ShardsData>('current_shards_leaders');
 
-  return Object.keys(currentShardsData);
+    return Object.keys(currentShardsData);
+  } catch (e: any) {
+    throw new Error(`Failed to fetch current shards - ${e.message}`);
+  }
 }
 
 export async function fetchBlocksByShard(shard: string, currentPage: number): Promise<BlockPreview[]> {
-  const syncStats = await api.get<SyncStats>('synchronization_stats');
-  const latestBlockIndex = syncStats.heightPerShard[shard];
+  try {
+    const syncStats = await api.get<SyncStats>('synchronization_stats');
+    const latestBlockIndex = syncStats.heightPerShard[shard];
 
-  const startIndex = latestBlockIndex - 1;
-  const blocks = await api.get<Array<Block & {sid: string}>>(
-    `latest_n_blocks/${shard}/${startIndex}/${BLOCKS_PER_PAGE * currentPage}`
-  );
+    const startIndex = latestBlockIndex - 1;
+    const blocks = await api.get<Array<Block & { sid: string }>>(
+      `latest_n_blocks/${shard}/${startIndex}/${BLOCKS_PER_PAGE * currentPage}`
+    );
 
-  return blocks.map(block => {
-    const { sid, creator, epoch, index, transactions, time } = block;
+    return blocks.map(block => {
+      const {sid, creator, epoch, index, transactions, time} = block;
 
-    const epochIndex = Number(epoch.split('#')[1]);
-    const id = epochIndex + ':' + creator + ':' + index;
+      const epochIndex = Number(epoch.split('#')[1]);
+      const id = epochIndex + ':' + creator + ':' + index;
 
-    const txsNumber = transactions.length;
-    const createdAt = new FormattedDate(time).preview;
+      const txsNumber = transactions.length;
+      const createdAt = new FormattedDate(time).preview;
 
-    return {
-      id,
-      sid,
-      creator,
-      epochIndex,
-      index,
-      txsNumber,
-      createdAt
-    }
-  });
+      return {
+        id,
+        sid,
+        creator,
+        epochIndex,
+        index,
+        txsNumber,
+        createdAt
+      }
+    });
+  } catch (e: any) {
+    throw new Error(`Failed to fetch blocks by shard "${shard}" - ${e.message}`);
+  }
 }
 
 function identifyIdType(id: string): BLOCK_TYPE {
@@ -147,70 +153,82 @@ function identifyIdType(id: string): BLOCK_TYPE {
 export async function getBlockById(id: string): Promise<BlockExtendedData> {
   let block;
 
-  if (identifyIdType(id) === BLOCK_TYPE.SID) {
-    const [shard, indexInShard] = id.split(':');
-    block = await api.get<Block>(`block_by_sid/${shard}/${indexInShard}`);
-  } else {
-    block = await api.get<Block>(`block/${id}`);
+  try {
+    if (identifyIdType(id) === BLOCK_TYPE.SID) {
+      const [shard, indexInShard] = id.split(':');
+      block = await api.get<Block>(`block_by_sid/${shard}/${indexInShard}`);
+    } else {
+      block = await api.get<Block>(`block/${id}`);
+    }
+
+    const {  creator, index, transactions: blockTxs, time, epoch, prevHash } = block;
+    const txsNumber = blockTxs.length;
+    const createdAt = new FormattedDate(time).full;
+
+    const epochIndex = Number(epoch.split('#')[1]);
+
+    const blockId = epochIndex + ':' + creator + ':' + index;
+
+    const finalizationProof = await getFinalizationProof(blockId);
+
+    const transactions = await Promise.all(
+      blockTxs.map(async (tx) => ({
+        ...tx,
+        blake3Hash: await hashData(tx.sig)
+      }))
+    );
+
+    return {
+      id,
+      creator,
+      epochIndex,
+      index,
+      transactions,
+      txsNumber,
+      createdAt,
+      prevHash,
+      finalizationProof
+    };
+  } catch (e: any) {
+    throw new Error(`Failed to fetch block by ID "${id}" - ${e.message}`);
   }
-
-  const {  creator, index, transactions: blockTxs, time, epoch, prevHash } = block;
-  const txsNumber = blockTxs.length;
-  const createdAt = new FormattedDate(time).full;
-
-  const epochIndex = Number(epoch.split('#')[1]);
-
-  const blockId = epochIndex + ':' + creator + ':' + index;
-
-  const finalizationProof = await getFinalizationProof(blockId);
-
-  const transactions = await Promise.all(
-    blockTxs.map(async (tx) => ({
-      ...tx,
-      blake3Hash: await hashData(tx.sig)
-    }))
-  );
-
-  return {
-    id,
-    creator,
-    epochIndex,
-    index,
-    transactions,
-    txsNumber,
-    createdAt,
-    prevHash,
-    finalizationProof
-  };
 }
 
 export async function getFinalizationProof(id: string): Promise<FinalizationProof> {
   let blockId = id;
 
-  if (identifyIdType(id) === BLOCK_TYPE.SID) {
-    const [shard, indexInShard] = id.split(':');
-    const { epoch, creator, index } = await api.get<Block>(`block_by_sid/${shard}/${indexInShard}`);
+  try {
+    if (identifyIdType(id) === BLOCK_TYPE.SID) {
+      const [shard, indexInShard] = id.split(':');
+      const {epoch, creator, index} = await api.get<Block>(`block_by_sid/${shard}/${indexInShard}`);
 
-    const epochIndex = Number(epoch.split('#')[1]);
+      const epochIndex = Number(epoch.split('#')[1]);
 
-    blockId = epochIndex + ':' + creator + ':' + index;
+      blockId = epochIndex + ':' + creator + ':' + index;
+    }
+
+    return await api.get(`aggregated_finalization_proof/${blockId}`);
+  } catch (e: any) {
+    throw new Error(`Failed to fetch finalization proof by block ID "${blockId}" - ${e.message}`);
   }
-
-  return await api.get(`aggregated_finalization_proof/${blockId}`);
 }
 
 export async function getTransactionByBlake3Hash(hash: string): Promise<TransactionExtendedData> {
-  const receipt = await api.get<TransactionReceipt>(`tx_receipt/${hash}`);
-  const block = await getBlockById(receipt.blockID);
+  try {
+    const receipt = await api.get<TransactionReceipt>(`tx_receipt/${hash}`);
+    const block = await getBlockById(receipt.blockID);
 
-  const transaction = block.transactions
-    .find(tx => tx.blake3Hash === hash) as TransactionWithBlake3Hash;
+    const transaction = block.transactions
+      .find(tx => tx.blake3Hash === hash) as TransactionWithBlake3Hash;
 
-  return {
-    ...receipt,
-    ...transaction,
-    typeDescription: describeTransactionType(transaction.type),
-    creatorFormat: describeTransactionCreatorFormat(transaction.creator)
+    return {
+      ...receipt,
+      ...transaction,
+      typeDescription: describeTransactionType(transaction.type),
+      creatorFormat: describeTransactionCreatorFormat(transaction.creator)
+    }
+  } catch (e: any) {
+    throw new Error(`Failed to fetch transaction by hash "${hash}" - ${e.message}`);
   }
 }
 
@@ -247,5 +265,9 @@ function describeTransactionCreatorFormat(creator: string) {
 
 
 export async function getPoolById(id: string): Promise<Pool> {
-  return await api.get<Pool>(`pool_stats/${id}`);
+  try {
+    return await api.get<Pool>(`pool_stats/${id}`);
+  } catch (e: any) {
+    throw new Error(`Failed to fetch pool by ID "${id}" - ${e.message}`);
+  }
 }
