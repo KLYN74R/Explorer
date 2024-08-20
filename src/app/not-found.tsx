@@ -1,14 +1,13 @@
 'use client';
-import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, Typography, Button } from '@mui/material';
 import { majorMonoDisplay } from '@/styles/theme';
 
-const NotFoundPage: FC = () => {
+const NotFoundPage = () => {
   const router = useRouter();
 
-  const handleGoHome = () => {
-    router.push('/');
+  const handleGoBack = () => {
+    router.back();
   };
 
   return (
@@ -32,8 +31,8 @@ const NotFoundPage: FC = () => {
       <Typography variant="h6" sx={{ mb: 4 }}>
         Page Not Found
       </Typography>
-      <Button variant="contained" onClick={handleGoHome}>
-        Go to Home
+      <Button variant="contained" onClick={handleGoBack}>
+        Go Back
       </Button>
     </Box>
   );

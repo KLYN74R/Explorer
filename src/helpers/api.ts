@@ -6,7 +6,10 @@ class Fetcher {
   }
 
   async get<T>(url: string): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${url}`, {
+    const fullUrl = `${this.baseUrl}${url}`;
+
+    const response = await fetch(fullUrl, {
+      method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -19,7 +22,9 @@ class Fetcher {
     const responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error(`API error: ${responseData.message || 'Unknown error'}`);
+      throw new Error(
+        `API error: ${response.status} ${response.statusText} at ${fullUrl} - ${responseData.message || 'Unknown error'}`
+      );
     }
 
     return responseData;
