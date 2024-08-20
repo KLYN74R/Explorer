@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { Box, Container, Typography, Grid } from '@mui/material';
 import { PrettyJSON } from '@/components';
 import {
@@ -14,23 +15,9 @@ type TransactionByIdPageProps = {
   }
 }
 
-// const tx = {
-//   creator: '9GQ46rqY2C7j5Z9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBKnBK',
-//   type: 'TX',
-//   version: 0,
-//   nonce: 16,
-//   signature: '9GQ46rqY2C7j5Z9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBKnBK',
-//   includedInBlock: '0123456789abcd89abcdef0123456789abcdef0123456789abcd89abcdef0123456789abcdef',
-//   positionInBlock: 23,
-//   status: 'Success', // or "Failed",
-//   payload: {
-//     "to": "0123456789abcd89abcdef0123456789abcdef0123456789abcd89abcdef0123456789abcdef",
-//     "amount": 2999,
-//     "other": {
-//       "misc": null
-//     }
-//   }
-// }
+export const metadata: Metadata = {
+  title: 'Transaction info',
+};
 
 export default async function TransactionByIdPage({ params }: TransactionByIdPageProps) {
   const blake3Hash = decodeURIComponent(params.hash);

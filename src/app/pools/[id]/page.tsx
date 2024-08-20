@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { BlurredInfoBlock, DimGradientBackground, GradientBackground } from '@/components/ui';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { PrettyJSON } from '@/components';
@@ -8,6 +9,10 @@ type PoolByIdPageProps = {
     id: string;
   }
 }
+
+export const metadata: Metadata = {
+  title: 'Pool info',
+};
 
 export default async function PoolByIdPage({ params }: PoolByIdPageProps) {
   const poolId = decodeURIComponent(params.id);

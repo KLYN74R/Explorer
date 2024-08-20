@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import {
   BlurredInfoBlock,
@@ -16,6 +17,10 @@ type BlockByIdPageProps = {
     id: string
   }
 }
+
+export const metadata: Metadata = {
+  title: 'Block info',
+};
 
 export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
   const id = decodeURIComponent(params.id);
