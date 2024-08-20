@@ -19,6 +19,7 @@
     "clsx": "^2.1.1",
     "hash-wasm": "^4.11.0",
     "next": "latest",
+    "numeral": "^2.0.6",
     "react": "latest",
     "react-apexcharts": "^1.4.1",
     "react-dom": "latest",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "latest",
+    "@types/numeral": "^2.0.5",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",

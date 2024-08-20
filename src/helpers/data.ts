@@ -14,7 +14,7 @@ import {
   TransactionReceipt,
   TransactionWithBlake3Hash
 } from '@/definitions';
-import { getFullDate, getPrettyDate } from './time';
+import { formatNumber, FormattedDate } from './format';
 import { BLOCK_TYPE, BLOCKS_PER_PAGE } from './constants';
 import { hashData } from '@/helpers/blake3';
 
@@ -22,11 +22,11 @@ export async function fetchGeneralBlockchainData(): Promise<{
   epochId: number;
   shardsNumber: number;
   validatorsNumber: number;
-  totalTxsNumber: number;
+  totalTxsNumber: string;
   txsSuccess: string;
-  totalBlocksNumber: number;
-  totalBlocksNumberInCurrentEpoch: number;
-  totalStaked: number;
+  totalBlocksNumber: string;
+  totalBlocksNumberInCurrentEpoch: string;
+  totalStaked: string;
   slotTime: number;
 }> {
   try {
@@ -35,11 +35,11 @@ export async function fetchGeneralBlockchainData(): Promise<{
     const blocksAndTxsDataByEpoch = await api.get<BlockStats>(`total_blocks_and_txs_stats_per_epoch/${epochData.id}`);
     const chainData = await api.get<ChainInfo>('chain_info');
 
-    const slotTime = chainData.approvementThread.options.BLOCK_TIME / 1000;
+    const slotTimeInSeconds = chainData.approvementThread.options.BLOCK_TIME / 1000;
     const shardsNumber = Object.keys(epochData.leadersSequence).length;
 
     const { totalTxsNumber, successfulTxsNumber } = blocksAndTxsData;
-    const txsSuccess = (successfulTxsNumber / totalTxsNumber) * 100 + '%';
+    const txsSuccess = (successfulTxsNumber / totalTxsNumber * 100).toFixed(2) + '%';
 
     let validatorsNumber = 0;
     for (const reservePools of Object.values(epochData.leadersSequence)) {
@@ -52,12 +52,12 @@ export async function fetchGeneralBlockchainData(): Promise<{
       epochId: epochData.id,
       shardsNumber,
       validatorsNumber,
-      totalBlocksNumber: blocksAndTxsData.totalBlocksNumber,
+      totalBlocksNumber: formatNumber(blocksAndTxsData.totalBlocksNumber),
       txsSuccess,
-      totalTxsNumber,
-      totalBlocksNumberInCurrentEpoch: blocksAndTxsDataByEpoch.totalBlocksNumber,
-      totalStaked,
-      slotTime
+      totalTxsNumber: formatNumber(totalTxsNumber),
+      totalBlocksNumberInCurrentEpoch: formatNumber(blocksAndTxsDataByEpoch.totalBlocksNumber),
+      totalStaked: formatNumber(totalStaked),
+      slotTime: slotTimeInSeconds
     };
   } catch (error) {
     console.error('API Error:', error);
@@ -84,7 +84,7 @@ export async function fetchChainData(): Promise<{
 
     return {
       symbioticChainId: chainData.genesis.symbioteID,
-      validatorStakeSize: chainData.approvementThread.options.VALIDATOR_STAKE / 1000 + 'K',
+      validatorStakeSize: formatNumber(chainData.approvementThread.options.VALIDATOR_STAKE),
       blockCreatorReward: chainData.approvementThread.options.REWARD_PERCENTAGE_FOR_BLOCK_CREATOR * 100 + '%',
       afkMaxtime: chainData.approvementThread.options.POOL_AFK_MAX_TIME + ' epoches',
       workflowMajorVersion: chainData.approvementThread.version,
@@ -93,7 +93,7 @@ export async function fetchChainData(): Promise<{
       epochDuration: chainData.approvementThread.options.EPOCH_TIME / 3600000 + ' hours',
       leaderTimeframe: chainData.approvementThread.options.LEADERSHIP_TIMEFRAME / 1000 + ' seconds',
       slotTime: chainData.approvementThread.options.BLOCK_TIME / 1000 + ' second',
-      maxBlockSize: chainData.approvementThread.options.MAX_BLOCK_SIZE_IN_BYTES / 1000000 + 'Mb',
+      maxBlockSize: (chainData.approvementThread.options.MAX_BLOCK_SIZE_IN_BYTES / 1000000).toFixed(2) + 'Mb',
       limitForOperations: chainData.approvementThread.options.EPOCH_EDGE_OPERATIONS_LIMIT_PER_BLOCK
     };
   } catch (error) {
@@ -124,7 +124,7 @@ export async function fetchBlocksByShard(shard: string, currentPage: number): Pr
     const id = epochIndex + ':' + creator + ':' + index;
 
     const txsNumber = transactions.length;
-    const createdAt = getPrettyDate(time);
+    const createdAt = new FormattedDate(time).preview;
 
     return {
       id,
@@ -156,7 +156,7 @@ export async function getBlockById(id: string): Promise<BlockExtendedData> {
 
   const {  creator, index, transactions: blockTxs, time, epoch, prevHash } = block;
   const txsNumber = blockTxs.length;
-  const createdAt = getFullDate(time);
+  const createdAt = new FormattedDate(time).full;
 
   const epochIndex = Number(epoch.split('#')[1]);
 
