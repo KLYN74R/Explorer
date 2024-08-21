@@ -1,15 +1,26 @@
+import { FC, Suspense } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { ShardSearchBar } from './ShardSearchBar';
 import { LatestBlocksTable } from './LatestBlocksTable';
-import { ArrowPagination } from '@/components/ui';
+import { LatestBlocksTableSkeleton } from './LatestBlocksTableSkeleton';
+import { fetchCurrentShards } from '@/data';
 
-const fetchedShards = [
-  { label: '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1', value: 'val1' },
-  { label: '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_2', value: 'val2' },
-  { label: '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_3', value: 'val3' },
-];
+type BlocksByShardProps = {
+  shard: string;
+  currentPage: number
+}
 
-export const BlocksByShard = () => {
+export const BlocksByShard: FC<BlocksByShardProps> = async ({
+  shard,
+  currentPage
+}: BlocksByShardProps) => {
+  const shards = await fetchCurrentShards();
+
+  const shardOptions = shards.map(shard => ({
+    label: shard,
+    value: shard
+  }));
+
   return (
     <Container maxWidth='xl'>
       <Box sx={{
@@ -24,13 +35,11 @@ export const BlocksByShard = () => {
         }}>
           <Typography variant='h1'>Shard selector</Typography>
           <Typography sx={{ mt: 1, mb: 3 }}>Choose a shard ID to visualize blocks and stats per shard in linear way</Typography>
-          <ShardSearchBar shardsList={fetchedShards} />
+          <ShardSearchBar shardsList={shardOptions} />
         </Box>
-        <LatestBlocksTable />
-        <ArrowPagination
-          pageIsEmpty={false}
-          sx={{ mt: 3 }}
-        />
+        <Suspense key={shard + currentPage} fallback={<LatestBlocksTableSkeleton />}>
+          <LatestBlocksTable shard={shard} currentPage={currentPage} />
+        </Suspense>
       </Box>
     </Container>
   );

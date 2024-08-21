@@ -1,49 +1,46 @@
 import { FC } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { RedGradientBackground } from '@/components/ui';
+import { fetchChainInfo } from '@/data';
 
-export const NetworkParameters = () => {
+export const NetworkParameters = async () => {
+  const data = await fetchChainInfo();
+
   return (
-    <RedGradientBackground sx={{ p: 3 }}>
+    <RedGradientBackground sx={{ p: 3, pb: 5 }}>
       <Typography variant='h1'>
         Network Parameters
       </Typography>
       <Grid container spacing={1} sx={{ mt: 2 }}>
         <Grid item xs={12} md={12}>
-          <ContentItem title='Symbiotic chain ID' value={5000} />
+          <ContentItem title='Symbiotic chain ID' value={data.symbioticChainId} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Validator stake size' value='50K' />
+          <ContentItem title='Validator stake size' value={data.validatorStakeSize} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Block creator reward' value='50%' />
+          <ContentItem title='Workflow major version' value={data.workflowMajorVersion} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='AFK Maxtime' value='10 epoches' />
+          <ContentItem title='Quorum size' value={data.quorumSize} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Workflow major version' value={0} />
+          <ContentItem title='Unstaking period' value={data.unstakingPeriod} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Quorum size' value='127 validators' />
+          <ContentItem title='Epoch duration' value={data.epochDuration} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Unstaking period' value='4 epoches' />
+          <ContentItem title='Leader timeframe' value={data.leaderTimeframe} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Epoch duration' value='24 hours' />
+          <ContentItem title='Slot time(block time)' value={data.slotTime} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Leader timeframe' value='120 seconds' />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <ContentItem title='Slot time(block time)' value='1 second' />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <ContentItem title='Max block size' value='1.28Mb' />
+          <ContentItem title='Max block size' value={data.maxBlockSize} />
         </Grid>
         <Grid item xs={12} md={12}>
-          <ContentItem title='Limit For Operations On The Epoch Edge' value={5000} />
+          <ContentItem title='Limit For Operations On The Epoch Edge' value={data.limitForOperations} />
         </Grid>
       </Grid>
     </RedGradientBackground>
@@ -57,7 +54,7 @@ const ContentItem: FC<{ title: string, value: string | number }> = ({
   return (
     <Box sx={{ px: 1, pb: 0.5 }} border={1} borderColor='border.main'>
       <Typography variant='caption' color='text.secondary'>{title}</Typography>
-      <Typography sx={{ fontWeight: 700 }}>{value}</Typography>
+      <Typography sx={{ fontWeight: 700, wordBreak: 'break-word' }}>{value}</Typography>
     </Box>
   );
 }

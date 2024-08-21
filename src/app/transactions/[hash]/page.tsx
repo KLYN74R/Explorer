@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { Box, Container, Typography, Grid } from '@mui/material';
 import { PrettyJSON } from '@/components';
 import {
@@ -6,33 +7,21 @@ import {
   BlurredInfoBlock,
   Label
 } from '@/components/ui';
+import { fetchTransactionByBlake3Hash } from '@/data';
 
 type TransactionByIdPageProps = {
   params: {
-    transactionId: string
+    hash: string
   }
 }
 
-const tx = {
-  creator: '9GQ46rqY2C7j5Z9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBKnBK',
-  type: 'TX',
-  version: 0,
-  nonce: 16,
-  signature: '9GQ46rqY2C7j5Z9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBK9GQ46rqY2C7j5ZnBKnBK',
-  includedInBlock: '0123456789abcd89abcdef0123456789abcdef0123456789abcd89abcdef0123456789abcdef',
-  positionInBlock: 23,
-  status: 'Success', // or "Failed",
-  payload: {
-    "to": "0123456789abcd89abcdef0123456789abcdef0123456789abcd89abcdef0123456789abcdef",
-    "amount": 2999,
-    "other": {
-      "misc": null
-    }
-  }
-}
+export const metadata: Metadata = {
+  title: 'Transaction info',
+};
 
-export default function TransactionByIdPage({ params }: TransactionByIdPageProps) {
-  const isApproved = tx.status.toLowerCase().includes('success');
+export default async function TransactionByIdPage({ params }: TransactionByIdPageProps) {
+  const blake3Hash = decodeURIComponent(params.hash);
+  const tx = await fetchTransactionByBlake3Hash(blake3Hash);
 
   return (
     <>
@@ -47,21 +36,21 @@ export default function TransactionByIdPage({ params }: TransactionByIdPageProps
                   <BlurredInfoBlock
                     title='Creator:'
                     value={tx.creator}
-                    comment='Ed25519'
+                    comment={tx.creatorFormatDescription}
                     breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <BlurredInfoBlock
                     title='Version:'
-                    value={tx.version}
+                    value={tx.v}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <BlurredInfoBlock
                     title='Type:'
                     value={tx.type}
-                    comment='Simple address to address tx'
+                    comment={tx.typeDescription}
                     breakWord={true}
                   />
                 </Grid>
@@ -74,27 +63,34 @@ export default function TransactionByIdPage({ params }: TransactionByIdPageProps
                 <Grid item xs={12}>
                   <BlurredInfoBlock
                     title='Signature:'
-                    value={tx.signature}
+                    value={tx.sig}
+                    breakWord={true}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <BlurredInfoBlock
+                    title='256 bit Blake3 hash:'
+                    value={blake3Hash}
                     breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <BlurredInfoBlock
                     title='Included in block:'
-                    value={tx.includedInBlock}
+                    value={tx.blockID}
                     breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <BlurredInfoBlock
                     title='Position in block:'
-                    value={tx.positionInBlock}
+                    value={tx.order}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <BlurredInfoBlock title='Status:'>
-                    <Label variant={isApproved ? 'green' : 'red'}>
-                      {tx.status}
+                    <Label variant={tx.isOk ? 'green' : 'red'}>
+                      {tx.isOk ? 'Success' : 'Failed'}
                     </Label>
                   </BlurredInfoBlock>
                 </Grid>

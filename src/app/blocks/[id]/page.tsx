@@ -1,35 +1,32 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import {
   BlurredInfoBlock,
   DimGradientBackground,
-  FlexCenterBox,
   GradientBackground,
   Label,
-  LoadMoreButton
 } from '@/components/ui';
 import { Container, Grid, Box, Typography } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import { TransactionsTable } from './TransactionsTable';
 import BlockImage from '@public/block.svg';
-import LaunchIcon from '@mui/icons-material/Launch';
+import { fetchBlockById } from '@/data';
 
 type BlockByIdPageProps = {
   params: {
-    blockId: string
+    id: string
   }
 }
 
-const block = {
-  creator: '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_1',
-  time: '15:36:24 Jun 24, 2024 GMT+3:00',
-  epoch: '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK_Ep0cH',
-  txsNumber: 10,
-  indexInOwnSequence: 15,
-  previousBlockHash: '9GQ46rqY238sadasdasdasdsafdadsadadsadsasadd1213213H',
-  status: 'Approved' // or "Awaiting approval"
-}
+export const metadata: Metadata = {
+  title: 'Block info',
+};
 
-export default function BlockByIdPage({ params }: BlockByIdPageProps) {
-  const isApproved = block.status.toLowerCase().includes('approved');
+export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
+  const id = decodeURIComponent(params.id);
+  const block = await fetchBlockById(id);
+
+  const status = !!block.finalizationProof.proofs ? 'Approved' : 'Awaiting approval';
 
   return (
     <>
@@ -49,10 +46,10 @@ export default function BlockByIdPage({ params }: BlockByIdPageProps) {
                     <BlurredInfoBlock title='Creator:' value={block.creator} breakWord={true} />
                   </Grid>
                   <Grid item xs={12}>
-                    <BlurredInfoBlock title='Created at:' value={block.time} breakWord={true} />
+                    <BlurredInfoBlock title='Created at:' value={block.createdAt} breakWord={true} />
                   </Grid>
                   <Grid item xs={12}>
-                    <BlurredInfoBlock title='Epoch:' value={block.epoch} breakWord={true} />
+                    <BlurredInfoBlock title='Epoch:' value={block.epochIndex} breakWord={true} />
                   </Grid>
                   <Grid item xs={12} sx={{ display: 'flex', gap: 1 }}>
                     <BlurredInfoBlock
@@ -64,24 +61,24 @@ export default function BlockByIdPage({ params }: BlockByIdPageProps) {
                     />
                     <BlurredInfoBlock
                       title='Index in own sequence:'
-                      value={block.indexInOwnSequence}
+                      value={block.index}
                       variant='cyan'
                       sx={{ width: '50%' }}
                       breakWord={true}
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <BlurredInfoBlock title='Previous block hash:' value={block.previousBlockHash} breakWord={true}/>
+                    <BlurredInfoBlock title='Previous block hash:' value={block.prevHash} breakWord={true}/>
                   </Grid>
 
                   <Grid item xs={12}>
                     <BlurredInfoBlock title='Status:'>
-                      <Label variant={isApproved ? 'green' : 'red'}>
-                        {block.status}
+                      <Label variant={status === 'Approved' ? 'green' : 'red'}>
+                        {status}
                       </Label>
                       <Box sx={{ mt: 1 }}>
                         <Link
-                          href={`/blocks/${params.blockId}/finalization-proof`}
+                          href={`/blocks/${id}/finalization-proof`}
                           style={{ textDecoration: 'none' }}
                         >
                           <Typography variant='caption' color='primary.main'>
@@ -104,10 +101,7 @@ export default function BlockByIdPage({ params }: BlockByIdPageProps) {
       <Container maxWidth='xl'>
         <Box sx={{ px: { md: 4.5, xs: 0 } }}>
           <Typography variant='h1'>Transactions</Typography>
-          <TransactionsTable />
-          <FlexCenterBox sx={{ mt: 3 }}>
-            <LoadMoreButton disabled={false} />
-          </FlexCenterBox>
+          <TransactionsTable transactions={block.transactions} />
         </Box>
       </Container>
     </>

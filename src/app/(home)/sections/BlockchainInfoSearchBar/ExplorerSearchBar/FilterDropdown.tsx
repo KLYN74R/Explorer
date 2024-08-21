@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Box, BoxProps, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { FILTER_OPTIONS } from './constants';
+import { OPTIONS } from './constants';
 import ArrowDownIcon from '@public/icons/ui/arrowDown.svg';
 
 export const FilterDropdown: FC<{
@@ -27,12 +27,12 @@ export const FilterDropdown: FC<{
           }
         }}
       >
-        <MenuItem value={FILTER_OPTIONS.CHOOSE} sx={{ display: 'none' }}>Filter</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.TRANSACTIONS}>TXID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.SHARDS}>SID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.BLOCKS}>Block ID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.POOLS}>Pool ID</MenuItem>
-        <MenuItem value={FILTER_OPTIONS.CONTRACTS}>Contract ID</MenuItem>
+        <MenuItem value={OPTIONS.CHOOSE} sx={{ display: 'none' }}>Filter</MenuItem>
+        <MenuItem value={OPTIONS.TRANSACTION_BY_HASH}>TXID</MenuItem>
+        <MenuItem value={OPTIONS.BLOCK_BY_SID}>SID</MenuItem>
+        <MenuItem value={OPTIONS.BLOCK_BY_ID}>Block ID</MenuItem>
+        <MenuItem value={OPTIONS.POOL_BY_ID}>Pool ID</MenuItem>
+        {/*<MenuItem value={OPTIONS.CONTRACTS}>Contract ID</MenuItem>*/}
       </Select>
     </FormControl>
   );

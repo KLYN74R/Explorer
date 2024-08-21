@@ -6,7 +6,6 @@ import { GreenGradientBackground } from '@/components/ui';
 const linksToPages: Record<string, string> = {
   'Blocks data and stats': '/blocks',
   'Epoches data': '#',
-  'KLY-EVM data': '#',
   'Hostchains checkpoints': '#',
   'Symbiotic chains': '#',
   'RWX smart contracts': '#',

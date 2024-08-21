@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import * as React from 'react';
 import { Container, Grid } from '@mui/material';
 import {
@@ -6,6 +7,10 @@ import {
   NetworkParameters,
   NetworkStatus
 } from './sections';
+
+export const metadata: Metadata = {
+  title: 'Home',
+};
 
 export default function HomePage() {
   return (

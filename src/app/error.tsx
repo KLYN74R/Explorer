@@ -1,14 +1,10 @@
-'use client'
-import { FC } from 'react';
-import { useRouter } from 'next/navigation';
+'use client';
 import { Box, Typography, Button } from '@mui/material';
 import { majorMonoDisplay } from '@/styles/theme';
 
-const ErrorPage: FC = () => {
-  const router = useRouter();
-
-  const handleGoHome = () => {
-    router.push('/');
+export default function Error() {
+  const handleReload = () => {
+    window.location.reload();
   };
 
   return (
@@ -30,13 +26,14 @@ const ErrorPage: FC = () => {
         500
       </Typography>
       <Typography variant="h6" sx={{ mb: 4 }}>
-        Internal Server Error
+        Something went wrong
       </Typography>
-      <Button variant="contained" onClick={handleGoHome}>
-        Go to Home
+      <Button
+        variant="contained"
+        onClick={handleReload}
+      >
+        Try again
       </Button>
     </Box>
   );
 };
-
-export default ErrorPage;

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { inter } from '@/styles/theme';
+import { formatNumber } from '@/helpers';
 
 // bypass SSR in order to get rid of "window is not defined" error
 const ApexCharts = dynamic(() => import('react-apexcharts'), {
@@ -94,10 +95,10 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) =>
     tooltip: {
       theme: 'dark',
       x: {
-        show: true,
-        formatter: (value: string) => {
-          return `Epoch ${value}`;
-        }
+        formatter: (value: string) => `Epoch ${value}`
+      },
+      y: {
+        formatter: (value: string) => `Epoch ${formatNumber(value)}`
       }
     },
     legend: {

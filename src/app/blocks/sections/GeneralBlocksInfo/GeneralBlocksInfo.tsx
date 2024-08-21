@@ -2,6 +2,7 @@ import { Container, Grid, Box, Typography } from '@mui/material';
 import { DimGradientBackground, GradientBackground } from '@/components/ui';
 import { BlurredInfoBlock} from '@/components/ui';
 import { TransactionsChart } from './TransactionsChart';
+import { fetchBlockchainData } from '@/data';
 
 const transactionsPerEpochData = [
   { epochIndex: 20, transactionsNum: 200 },
@@ -26,7 +27,9 @@ const transactionsPerEpochData = [
   { epochIndex: 1, transactionsNum: 322 }
 ].reverse();
 
-export const GeneralBlocksInfo = () => {
+export const GeneralBlocksInfo = async () => {
+  const data = await fetchBlockchainData();
+
   return (
     <DimGradientBackground>
       <GradientBackground sx={{ py: 6 }}>
@@ -39,17 +42,33 @@ export const GeneralBlocksInfo = () => {
 
                 <Grid container spacing={1} sx={{ mt: 3 }}>
                   <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <BlurredInfoBlock title='Total blocks' value={123456} variant='cyan' sx={{ flex: 1 }} />
+                    <BlurredInfoBlock
+                      title='Total blocks'
+                      value={data.totalBlocksNumber}
+                      variant='cyan'
+                      sx={{ flex: 1 }}
+                    />
                   </Grid>
                   <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    <BlurredInfoBlock title='Blocks in this epoch' value={228} />
-                    <BlurredInfoBlock title='Slot time(block time)' value='1s' />
+                    <BlurredInfoBlock
+                      title='Blocks in this epoch'
+                      value={data.totalBlocksNumberInCurrentEpoch}
+                    />
+                    <BlurredInfoBlock
+                      title='Slot time(block time)'
+                      value={`${data.slotTime}s`}
+                    />
                   </Grid>
                 </Grid>
               </Box>
             </Grid>
             <Grid item xs={12} md={6} sx={{ minHeight: '500px' }}>
-              <Typography variant='caption' sx={{ display: 'block', textAlign: 'center', fontSize: '18px', mb: 1 }}>Transaction Volume per Epoch</Typography>
+              <Typography
+                variant='caption'
+                sx={{ display: 'block', textAlign: 'center', fontSize: '18px', mb: 1 }}
+              >
+                Transaction Volume per Epoch <span style={{ color: 'red' }}>(MOCK DATA)</span>
+              </Typography>
               <TransactionsChart data={transactionsPerEpochData} />
             </Grid>
           </Grid>

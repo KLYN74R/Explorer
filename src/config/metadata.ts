@@ -6,9 +6,6 @@ export const metadataConfig: Metadata = {
     template: '%s | KLY Explorer',
     default: 'KLY Explorer',
   },
-  icons: {
-    icon: 'favicon.svg',
-  },
   description:
     'Discover real-time insights into our blockchain with our comprehensive explorer. Track and analyze blocks, transactions, and network status effortlessly. Our explorer provides detailed data and powerful tools to monitor blockchain activity, ensuring transparency and informed decision-making.',
   openGraph: {
