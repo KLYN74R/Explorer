@@ -85,7 +85,7 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
                             <LaunchIcon
                               color='primary'
                               sx={{ fontSize: '16px', position: 'relative', bottom: '-3px' }}
-                            /> Check finalization proof
+                            /> Check aggregated finalization proof
                           </Typography>
                         </Link>
                       </Box>

@@ -11,7 +11,7 @@ type FinalizationProofPageProps = {
 }
 
 export const metadata: Metadata = {
-  title: 'Finalization Proof',
+  title: 'Aggregated Finalization Proof',
 };
 
 export default async function FinalizationProofPage({ params }: FinalizationProofPageProps) {
@@ -24,7 +24,7 @@ export default async function FinalizationProofPage({ params }: FinalizationProo
         <GradientBackground sx={{ pt: 7, pb: 1 }}>
           <Container maxWidth='xl'>
             <Box sx={{ px: { md: 4.5, xs: 0 } }}>
-              <Typography variant='h1'>Block Finalization Proof</Typography>
+              <Typography variant='h1'>AFP for block</Typography>
               <Grid container spacing={1} sx={{ mt: 5 }}>
                 <Grid item xs={12}>
                   <BlurredInfoBlock
@@ -42,7 +42,7 @@ export default async function FinalizationProofPage({ params }: FinalizationProo
 
       <Container maxWidth='xl' sx={{ pb: 7 }}>
         <Box sx={{ px: { md: 4.5, xs: 0 } }}>
-          <BlurredInfoBlock title='Finalization proof:'>
+          <BlurredInfoBlock title='Aggregated finalization proof:'>
             <PrettyJSON data={finalizationProof} />
           </BlurredInfoBlock>
         </Box>

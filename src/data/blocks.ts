@@ -97,7 +97,7 @@ export async function fetchFinalizationProof(id: string): Promise<FinalizationPr
 
     return await api.get(API_ROUTES.BLOCKS.AGGREGATED_FINALIZATION_PROOF(blockId));
   } catch (e: any) {
-    throw new Error(`Failed to fetch finalization proof by block ID "${blockId}" - ${e.message}`);
+    throw new Error(`Failed to fetch aggregated finalization proof by block ID "${blockId}" - ${e.message}`);
   }
 }
 
