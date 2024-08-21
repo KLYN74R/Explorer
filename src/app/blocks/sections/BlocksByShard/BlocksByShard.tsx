@@ -3,7 +3,7 @@ import { Box, Container, Typography } from '@mui/material';
 import { ShardSearchBar } from './ShardSearchBar';
 import { LatestBlocksTable } from './LatestBlocksTable';
 import { LatestBlocksTableSkeleton } from './LatestBlocksTableSkeleton';
-import { fetchCurrentShards } from '@/helpers/data';
+import { fetchCurrentShards } from '@/data';
 
 type BlocksByShardProps = {
   shard: string;

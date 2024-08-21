@@ -7,7 +7,7 @@ import {
   BlurredInfoBlock,
   Label
 } from '@/components/ui';
-import { getTransactionByBlake3Hash } from '@/helpers/data';
+import { fetchTransactionByBlake3Hash } from '@/data';
 
 type TransactionByIdPageProps = {
   params: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default async function TransactionByIdPage({ params }: TransactionByIdPageProps) {
   const blake3Hash = decodeURIComponent(params.hash);
-  const tx = await getTransactionByBlake3Hash(blake3Hash);
+  const tx = await fetchTransactionByBlake3Hash(blake3Hash);
 
   return (
     <>
@@ -36,7 +36,7 @@ export default async function TransactionByIdPage({ params }: TransactionByIdPag
                   <BlurredInfoBlock
                     title='Creator:'
                     value={tx.creator}
-                    comment={tx.creatorFormat}
+                    comment={tx.creatorFormatDescription}
                     breakWord={true}
                   />
                 </Grid>

@@ -30,7 +30,7 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
 
     setQuery(shard);
     setQueryParameters(shard.label, !!shardById);
-  }, [initialShard]);
+  }, [initialShard, shardsList]);
 
   const handleQueryChange = (_: any, newValue: ComboboxItemProps) => {
     if (newValue && newValue.label) {

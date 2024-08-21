@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { BlurredInfoBlock, DimGradientBackground, GradientBackground } from '@/components/ui';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { PrettyJSON } from '@/components';
-import { getFinalizationProof } from '@/helpers/data';
+import { fetchFinalizationProof } from '@/data';
 
 type FinalizationProofPageProps = {
   params: {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default async function FinalizationProofPage({ params }: FinalizationProofPageProps) {
   const id = decodeURIComponent(params.id);
-  const finalizationProof = await getFinalizationProof(id);
+  const finalizationProof = await fetchFinalizationProof(id);
 
   return (
     <>

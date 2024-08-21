@@ -3,17 +3,10 @@ import { Box, Container, Grid } from '@mui/material';
 import { GradientBackground, DimGradientBackground } from '@/components/ui';
 import { BlurredInfoBlock } from '@/components/ui';
 import { ExplorerSearchBar } from './ExplorerSearchBar';
-import { fetchGeneralBlockchainData } from '@/helpers/data';
+import { fetchBlockchainData } from '@/data';
 
 export const BlockchainInfoSearchBar = async () => {
-  const {
-    totalTxsNumber,
-    epochId,
-    txsSuccess,
-    shardsNumber,
-    validatorsNumber,
-    totalStaked
-  } = await fetchGeneralBlockchainData();
+  const data = await fetchBlockchainData();
 
   return (
     <DimGradientBackground>
@@ -23,12 +16,12 @@ export const BlockchainInfoSearchBar = async () => {
             <ExplorerSearchBar />
           </Box>
           <Grid container spacing={1} sx={{ mt: 4, px: { md: 4.5, xs: 0 } }}>
-            <InfoBlock title='Total TXS' value={totalTxsNumber} />
-            <InfoBlock title='Epoch ID' value={epochId} />
-            <InfoBlock title='TXS Success' value={txsSuccess} variant='cyan' />
-            <InfoBlock title='Shards' value={shardsNumber} />
-            <InfoBlock title='Validators' value={validatorsNumber} />
-            <InfoBlock title='Total Staked' value={totalStaked} />
+            <InfoBlock title='Total TXS' value={data.totalTxsNumber} />
+            <InfoBlock title='Epoch ID' value={data.epochId} />
+            <InfoBlock title='TXS Success' value={data.txsSuccessRate} variant='cyan' />
+            <InfoBlock title='Shards' value={data.shardsNumber} />
+            <InfoBlock title='Validators' value={data.validatorsNumber} />
+            <InfoBlock title='Total Staked' value={data.totalStaked} />
             <InfoBlock title='Market Cap' value='WIP' variant='cyan'/>
             <InfoBlock title='Coin Price' value='WIP' variant='cyan'/>
           </Grid>

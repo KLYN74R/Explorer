@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { inter } from '@/styles/theme';
-import { formatNumber } from '@/helpers/format';
+import { formatNumber } from '@/helpers';
 
 // bypass SSR in order to get rid of "window is not defined" error
 const ApexCharts = dynamic(() => import('react-apexcharts'), {

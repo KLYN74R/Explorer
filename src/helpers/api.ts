@@ -1,3 +1,5 @@
+import * as process from 'process';
+
 class Fetcher {
   baseUrl: string;
 

@@ -9,8 +9,8 @@ import {
 import { Container, Grid, Box, Typography } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { TransactionsTable } from './TransactionsTable';
-import { getBlockById } from '@/helpers/data';
 import BlockImage from '@public/block.svg';
+import { fetchBlockById } from '@/data';
 
 type BlockByIdPageProps = {
   params: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
   const id = decodeURIComponent(params.id);
-  const block = await getBlockById(id);
+  const block = await fetchBlockById(id);
 
   const status = !!block.finalizationProof.proofs ? 'Approved' : 'Awaiting approval';
 

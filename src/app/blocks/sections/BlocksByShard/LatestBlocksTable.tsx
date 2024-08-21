@@ -11,10 +11,10 @@ import {
 } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 import Link from 'next/link';
-import { fetchBlocksByShard } from '@/helpers/data';
 import { BlockPreview } from '@/definitions';
 import { FlexCenterBox, ButtonPagination } from '@/components/ui';
-import { BLOCKS_PER_PAGE } from '@/helpers/constants';
+import { fetchBlocksByShard } from '@/data';
+import { BLOCKS_PER_PAGE } from '@/constants';
 
 type LatestBlocksTableProps = {
   shard: string;

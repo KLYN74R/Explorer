@@ -3,7 +3,7 @@ import { Container, Grid, Box, Typography } from '@mui/material';
 import Link from 'next/link';
 import { FlexCenterBox } from '@/components/ui';
 import KlyntarIcon from '@public/icons/company/KlyntarIcon.svg';
-import { KLY_LINKS } from '@/config/social';
+import { KLY_LINKS } from '@/config';
 
 export const Footer = () => {
   return (

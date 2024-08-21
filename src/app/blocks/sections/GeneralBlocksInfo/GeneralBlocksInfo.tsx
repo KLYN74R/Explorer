@@ -2,7 +2,7 @@ import { Container, Grid, Box, Typography } from '@mui/material';
 import { DimGradientBackground, GradientBackground } from '@/components/ui';
 import { BlurredInfoBlock} from '@/components/ui';
 import { TransactionsChart } from './TransactionsChart';
-import { fetchGeneralBlockchainData } from '@/helpers/data';
+import { fetchBlockchainData } from '@/data';
 
 const transactionsPerEpochData = [
   { epochIndex: 20, transactionsNum: 200 },
@@ -28,11 +28,7 @@ const transactionsPerEpochData = [
 ].reverse();
 
 export const GeneralBlocksInfo = async () => {
-  const {
-    totalBlocksNumber,
-    totalBlocksNumberInCurrentEpoch,
-    slotTime
-  } = await fetchGeneralBlockchainData();
+  const data = await fetchBlockchainData();
 
   return (
     <DimGradientBackground>
@@ -46,11 +42,22 @@ export const GeneralBlocksInfo = async () => {
 
                 <Grid container spacing={1} sx={{ mt: 3 }}>
                   <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <BlurredInfoBlock title='Total blocks' value={totalBlocksNumber} variant='cyan' sx={{ flex: 1 }} />
+                    <BlurredInfoBlock
+                      title='Total blocks'
+                      value={data.totalBlocksNumber}
+                      variant='cyan'
+                      sx={{ flex: 1 }}
+                    />
                   </Grid>
                   <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    <BlurredInfoBlock title='Blocks in this epoch' value={totalBlocksNumberInCurrentEpoch} />
-                    <BlurredInfoBlock title='Slot time(block time)' value={`${slotTime}s`} />
+                    <BlurredInfoBlock
+                      title='Blocks in this epoch'
+                      value={data.totalBlocksNumberInCurrentEpoch}
+                    />
+                    <BlurredInfoBlock
+                      title='Slot time(block time)'
+                      value={`${data.slotTime}s`}
+                    />
                   </Grid>
                 </Grid>
               </Box>
