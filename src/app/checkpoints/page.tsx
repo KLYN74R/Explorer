@@ -101,7 +101,7 @@ const EpochCheckpoints: FC<CheckpointsPerEpochProps> = ({
 
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography variant='h2'>Epoch {epochId}</Typography>
+      <Typography variant='h2'>Epoch {epochId} <Typography variant='caption' color='secondary.main'>(Mock data)</Typography></Typography>
       <Typography sx={{ fontWeight: 300, mt: 2}}>Checkpoints:</Typography>
 
       <Typography
