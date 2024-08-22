@@ -3,7 +3,7 @@ import { GoBackButton, InfoBlock } from '@/components/ui';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { fetchEpochById } from '@/data';
 import { FormattedDate } from '@/helpers';
-import { ValidatorsPerShardSection } from './ValidatorsPerShardSection';
+import { ShardValidatorsSection } from './ShardValidatorsSection';
 import React from 'react';
 
 type EpochByIdPageProps = {
@@ -90,7 +90,7 @@ export default async function PoolByIdPage({ params }: EpochByIdPageProps) {
           </Grid>
         </Grid>
 
-        <ValidatorsPerShardSection epoch={epoch} />
+        <ShardValidatorsSection epoch={epoch} />
       </Box>
     </Container>
   );

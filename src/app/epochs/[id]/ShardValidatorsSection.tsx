@@ -10,7 +10,7 @@ type ComboboxItemProps = {
   value: string
 }
 
-export const ValidatorsPerShardSection: FC<{ epoch: Epoch }> = ({
+export const ShardValidatorsSection: FC<{ epoch: Epoch }> = ({
   epoch
 }) => {
   const shardOptions: ComboboxItemProps[] = useMemo(() =>
