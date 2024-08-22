@@ -69,3 +69,6 @@ public/static
 
 # Turbo repo
 turbo
+
+# MacOS
+.DS_Store
