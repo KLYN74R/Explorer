@@ -3,11 +3,13 @@ import { Box, Container, Grid } from '@mui/material';
 import { GradientBackground, DimGradientBackground } from '@/components/ui';
 import { BlurredInfoBlock } from '@/components/ui';
 import { ExplorerSearchBar } from './ExplorerSearchBar';
-import { fetchBlockchainData } from '@/data';
+import { BlockchainData } from '@/definitions';
 
-export const BlockchainInfoSearchBar = async () => {
-  const data = await fetchBlockchainData();
+type Props = {
+  data: BlockchainData
+}
 
+export const BlockchainInfoSearchBar: FC<Props> = async ({ data }) => {
   return (
     <DimGradientBackground>
       <GradientBackground sx={{ pt: 6, pb: 14 }}>
