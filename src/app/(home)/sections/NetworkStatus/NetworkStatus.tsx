@@ -2,20 +2,25 @@ import { FC } from 'react';
 import { Typography } from '@mui/material';
 import Link from 'next/link';
 import { GreenGradientBackground } from '@/components/ui';
+import { BlockchainData } from '@/definitions';
 
-const linksToPages: Record<string, string> = {
-  'Blocks data and stats': '/blocks',
-  'Epoches data': '#',
-  'Hostchains checkpoints': '#',
-  'Symbiotic chains': '#',
-  'RWX smart contracts': '#',
-  'Multistaking stats': '#',
-  'Voting & DAO': '#',
-  'Mutations': '#',
-  'Abstractions': '#'
+type Props = {
+  data: BlockchainData
 }
 
-export const NetworkStatus = () => {
+export const NetworkStatus:FC<Props> = ({ data }) => {
+  const linksToPages: Record<string, string> = {
+    'Blocks data and stats': '/blocks',
+    'Epoches data': '/epochs/' + data.epochId,
+    'Hostchains checkpoints': '#',
+    'Symbiotic chains': '#',
+    'RWX smart contracts': '#',
+    'Multistaking stats': '#',
+    'Voting & DAO': '#',
+    'Mutations': '#',
+    'Abstractions': '#'
+  }
+
   return (
     <GreenGradientBackground sx={{ p: 3 }}>
       <Typography variant='h1' sx={{ mb: 2 }}>

@@ -4,18 +4,6 @@ export interface BlockStats {
   successfulTxsNumber: number;
 }
 
-export interface Epoch {
-  id: number;
-  hash: string;
-  poolsRegistry: {
-    primePools: string[];
-    reservePools: any[];
-  };
-  startTimestamp: number;
-  quorum: string[];
-  leadersSequence: { [key: string]: any[] };
-}
-
 export interface ChainInfo {
   genesis: {
     symbioteID: string;
@@ -68,4 +56,28 @@ export interface SyncStats {
     hash: string;
     startTimestamp: number;
   };
+}
+
+export interface BlockchainData {
+  epochId: number;
+  shardsNumber: number;
+  validatorsNumber: number;
+  totalTxsNumber: string;
+  txsSuccessRate: string;
+  totalBlocksNumber: string;
+  totalBlocksNumberInCurrentEpoch: string;
+  totalStaked: string;
+  slotTime: number;
+  chainInfo: {
+    symbioticChainId: string;
+    validatorStakeSize: string;
+    workflowMajorVersion: number;
+    quorumSize: string;
+    unstakingPeriod: string;
+    epochDuration: string;
+    leaderTimeframe: string;
+    slotTime: string;
+    maxBlockSize: string;
+    limitForOperations: number;
+  }
 }

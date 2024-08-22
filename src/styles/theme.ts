@@ -150,8 +150,9 @@ const theme = createTheme({
             backgroundColor: palette.primary.main + 35,
           },
           '&.Mui-disabled': {
-            backgroundColor: palette.primary.main + 15,
-            cursor: 'default'
+            backgroundColor: palette.primary.main + 35,
+            cursor: 'default',
+            opacity: 0.35
           }
         },
       },
