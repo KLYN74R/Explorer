@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import Link from 'next/link';
 import { ButtonPagination, FlexCenterBox, Label } from '@/components/ui';
 import { Box, Container, Grid, Typography } from '@mui/material';
@@ -71,7 +71,9 @@ export default function CheckpointsPage() {
       </Box>
 
       <FlexCenterBox sx={{ mt: 8 }}>
-        <ButtonPagination />
+        <Suspense>
+          <ButtonPagination />
+        </Suspense>
       </FlexCenterBox>
     </Container>
   );
