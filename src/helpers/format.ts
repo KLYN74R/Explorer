@@ -51,3 +51,7 @@ export function formatNumber(num: string | number, precision = 1000) {
     }
   }
 }
+
+export function roundToNearest(num: number, unit: number) {
+  return Math.ceil(num / unit) * unit;
+}

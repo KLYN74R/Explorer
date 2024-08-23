@@ -26,7 +26,7 @@ const palette = {
   },
   background: {
     default: '#000',
-    light: '#111111',
+    light: 'rgba(17, 17, 17, 0.6)',
     paper: '#fff',
   },
   text: {
@@ -277,13 +277,15 @@ const theme = createTheme({
     MuiTableBody: {
       styleOverrides: {
         root: {
-          backgroundColor: palette.background.default
+          backgroundColor: palette.background.default,
+          borderBottom: `1px solid ${palette.border.main}`
         },
       },
     },
     MuiTableCell: {
       styleOverrides: {
         root: {
+          borderBottom: 'none',
           '& .MuiTypography-root': {
             whiteSpace: 'nowrap',
             overflow: 'hidden',

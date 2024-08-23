@@ -25,7 +25,7 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
       validatorsNumber,
       txsSuccessRate,
       epochId: epochData.id,
-      slotTime: slotTimeInSeconds,
+      slotTimeInSeconds,
       totalBlocksNumber: formatNumber(blocksAndTxsData.totalBlocksNumber),
       totalTxsNumber: formatNumber(blocksAndTxsData.totalTxsNumber),
       totalBlocksNumberInCurrentEpoch: formatNumber(blocksAndTxsDataByEpoch.totalBlocksNumber),

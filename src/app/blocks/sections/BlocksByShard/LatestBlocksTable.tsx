@@ -36,22 +36,22 @@ export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
           passHref
           style={{ textDecoration: 'none' }}
         >
-          <Typography color='primary.main' sx={{ fontSize: '18px' }}>
-            <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-5px' }} /> {block.sid}
+          <Typography color='primary.main' sx={{ fontSize: '16px' }}>
+            <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} /> {block.sid}
           </Typography>
         </Link>
       </TableCell>
       <TableCell sx={{ maxWidth: { xs: '225px', lg: '275px', xl: 'none' } }}>
-        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.creator}</Typography>
+        <Typography color='primary.main' sx={{ fontSize: '16px' }}>{block.creator}</Typography>
       </TableCell>
       <TableCell sx={{ minWidth: '150px' }}>
-        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.index}</Typography>
+        <Typography sx={{ fontSize: '16px' }}>{block.index}</Typography>
       </TableCell>
       <TableCell sx={{ maxWidth: '100px' }}>
-        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.txsNumber}</Typography>
+        <Typography sx={{ fontSize: '16px' }}>{block.txsNumber}</Typography>
       </TableCell>
       <TableCell>
-        <Typography color='text.secondary' sx={{ fontSize: '18px' }}>{block.createdAt}</Typography>
+        <Typography sx={{ fontSize: '16px' }}>{block.createdAt}</Typography>
       </TableCell>
     </TableRow>
   ));
@@ -83,7 +83,7 @@ export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
         </Table>
       </TableContainer>
 
-      <FlexCenterBox sx={{ my: 3 }}>
+      <FlexCenterBox sx={{ my: 5 }}>
         <ButtonPagination
           disabled={blocks.length < BLOCKS_PER_PAGE}
         />

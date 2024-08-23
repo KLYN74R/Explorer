@@ -1,80 +1,61 @@
 import { Container, Grid, Box, Typography } from '@mui/material';
-import { DimGradientBackground, GradientBackground } from '@/components/ui';
-import { BlurredInfoBlock} from '@/components/ui';
+import { InfoBlock } from '@/components/ui';
 import { TransactionsChart } from './TransactionsChart';
 import { fetchBlockchainData } from '@/data';
 
+// Last 14 epoches
 const transactionsPerEpochData = [
-  { epochIndex: 20, transactionsNum: 200 },
-  { epochIndex: 19, transactionsNum: 431 },
-  { epochIndex: 18, transactionsNum: 300 },
-  { epochIndex: 17, transactionsNum: 340 },
-  { epochIndex: 16, transactionsNum: 562 },
-  { epochIndex: 15, transactionsNum: 315 },
-  { epochIndex: 14, transactionsNum: 298 },
-  { epochIndex: 13, transactionsNum: 300 },
-  { epochIndex: 12, transactionsNum: 487 },
-  { epochIndex: 11, transactionsNum: 524 },
-  { epochIndex: 10, transactionsNum: 599 },
-  { epochIndex: 9, transactionsNum: 321 },
-  { epochIndex: 8, transactionsNum: 403 },
-  { epochIndex: 7, transactionsNum: 500 },
-  { epochIndex: 6, transactionsNum: 423 },
-  { epochIndex: 5, transactionsNum: 350 },
-  { epochIndex: 4, transactionsNum: 450 },
-  { epochIndex: 3, transactionsNum: 375 },
-  { epochIndex: 2, transactionsNum: 490 },
-  { epochIndex: 1, transactionsNum: 322 }
+  { epochIndex: 14, transactionsNum: 33008 },
+  { epochIndex: 13, transactionsNum: 35000 },
+  { epochIndex: 12, transactionsNum: 39487 },
+  { epochIndex: 11, transactionsNum: 32234 },
+  { epochIndex: 10, transactionsNum: 35559 },
+  { epochIndex: 9, transactionsNum: 33421 },
+  { epochIndex: 8, transactionsNum: 40443 },
+  { epochIndex: 7, transactionsNum: 39330 },
+  { epochIndex: 6, transactionsNum: 42223 },
+  { epochIndex: 5, transactionsNum: 35110 },
+  { epochIndex: 4, transactionsNum: 36440 },
+  { epochIndex: 3, transactionsNum: 37135 },
+  { epochIndex: 2, transactionsNum: 35110 },
+  { epochIndex: 1, transactionsNum: 32442 }
 ].reverse();
 
 export const GeneralBlocksInfo = async () => {
   const data = await fetchBlockchainData();
 
   return (
-    <DimGradientBackground>
-      <GradientBackground sx={{ py: 6 }}>
-        <Container maxWidth='xl'>
-          <Grid container spacing={10} sx={{ px: { md: 4.5, xs: 0 } }}>
-            <Grid item xs={12} md={6}>
-              <Box>
-                <Typography variant='h1'>General info about blocks</Typography>
-                <Typography sx={{ mt: 1 }}>For this epoch and during the whole time</Typography>
+    <Container maxWidth='xl' sx={{ py: 6 }}>
+      <Box sx={{ px: { md: 4.5, xs: 0 } }}>
+        <Typography variant='h1'>General info about blocks</Typography>
+        <Typography sx={{ mt: 1 }}>For this epoch and during the whole time</Typography>
 
-                <Grid container spacing={1} sx={{ mt: 3 }}>
-                  <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <BlurredInfoBlock
-                      title='Total blocks'
-                      value={data.totalBlocksNumber}
-                      variant='cyan'
-                      sx={{ flex: 1 }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    <BlurredInfoBlock
-                      title='Blocks in this epoch'
-                      value={data.totalBlocksNumberInCurrentEpoch}
-                    />
-                    <BlurredInfoBlock
-                      title='Slot time(block time)'
-                      value={`${data.slotTime}s`}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={6} sx={{ minHeight: '500px' }}>
-              <Typography
-                variant='caption'
-                sx={{ display: 'block', textAlign: 'center', fontSize: '18px', mb: 1 }}
-              >
-                Transaction Volume per Epoch <span style={{ color: 'red' }}>(MOCK DATA)</span>
-              </Typography>
-              <TransactionsChart data={transactionsPerEpochData} />
-            </Grid>
+        <Box sx={{ mt: 5, minHeight: '300px' }}>
+          <TransactionsChart data={transactionsPerEpochData} />
+        </Box>
+
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={12} md={4}>
+            <InfoBlock
+              title='Total blocks'
+              value={data.totalBlocksNumber}
+            />
           </Grid>
-        </Container>
-      </GradientBackground>
-    </DimGradientBackground>
+          <Grid item xs={12} md={4}>
+            <InfoBlock
+              title='Blocks in this epoch'
+              value={data.totalBlocksNumberInCurrentEpoch}
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <InfoBlock
+              title='Slot time(block time)'
+              value={`${data.slotTimeInSeconds}s`}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 
 }
