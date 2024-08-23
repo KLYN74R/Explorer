@@ -40,7 +40,12 @@ const HomeInfoBlock: FC<{ title: string, value: string | number, variant?: 'red'
 }) => {
   return (
     <Grid item xl={1.5} md={3} sm={4} xs={12}>
-      <ContentBlock title={title} value={value} variant={variant} />
+      <ContentBlock
+        title={title}
+        value={value}
+        variant={variant}
+        blurred={true}
+      />
     </Grid>
   );
 }

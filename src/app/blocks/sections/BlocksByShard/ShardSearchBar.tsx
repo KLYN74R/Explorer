@@ -5,6 +5,7 @@ import { Autocomplete, AutocompleteValue, TextField } from '@mui/material';
 import { useQueryParams } from '@/hooks';
 import { FlexBetweenBox, GeometricButton } from '@/components/ui';
 import SearchIcon from '@public/icons/ui/search.svg';
+import { COLORS } from '@/styles';
 
 type ComboboxItemProps = {
   label: string,
@@ -61,7 +62,7 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
         gap: 2,
         pl: 1.5,
         pr: 0.4,
-        background: 'rgba(17, 17, 17, 0.6)'
+        background: COLORS.BG_LIGHT
       }}
     >
       <Autocomplete

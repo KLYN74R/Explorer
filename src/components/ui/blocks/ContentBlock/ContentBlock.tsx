@@ -1,12 +1,14 @@
 import { FC, ReactNode } from 'react';
 import { Box, SxProps, Typography } from '@mui/material';
+import { COLORS } from '@/styles';
 
 export const ContentBlock: FC<{
   children?: ReactNode,
-  title: string,
+  title?: string,
   comment?: string,
   value?: string | number,
   variant?: 'red',
+  blurred?: boolean,
   sx?: SxProps
 }> = ({
   children,
@@ -14,6 +16,7 @@ export const ContentBlock: FC<{
   comment,
   value,
   variant,
+  blurred = false,
   sx
 }) => {
   return (
@@ -23,16 +26,19 @@ export const ContentBlock: FC<{
       pl: 3,
       height: '100%',
       pr: 3,
-      background: 'rgba(17, 17, 17, 0.6)',
+      background: blurred ? 'rgba(17, 17, 17, 0.4)' : COLORS.BG_LIGHT,
+      ...(blurred && { backdropFilter: 'blur(5px)' }),
       ...sx
     }}>
-      <Typography
-        variant='caption'
-        color='text.primary'
-        sx={{ display: 'block' }}
-      >
-        {title}
-      </Typography>
+      {title && (
+        <Typography
+          variant='caption'
+          color='text.primary'
+          sx={{ display: 'block' }}
+        >
+          {title}
+        </Typography>
+      )}
       {children ? (
         <Box sx={{ mt: 1 }}>
           {children}

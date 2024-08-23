@@ -26,7 +26,7 @@ const palette = {
   },
   background: {
     default: '#000',
-    light: 'rgba(17, 17, 17, 0.6)',
+    light: 'rgba(17, 17, 17, 0.75)',
     paper: '#fff',
   },
   text: {

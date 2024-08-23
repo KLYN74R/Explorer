@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Box, SxProps, Typography } from '@mui/material';
+import { COLORS } from '@/styles';
 
 export const InfoBlock: FC<{
   title: string,
@@ -51,7 +52,7 @@ export const InfoBlock: FC<{
       pl: 3,
       height: '100%',
       pr: 3,
-      background: 'rgba(17, 17, 17, 0.6)',
+      background: COLORS.BG_LIGHT,
       ...sx
     }}>
       {content}

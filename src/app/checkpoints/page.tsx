@@ -6,6 +6,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import BTCIcon from '@public/icons/currencies/BTC.svg';
 import ETHIcon from '@public/icons/currencies/ETH.svg';
 import SOLIcon from '@public/icons/currencies/SOL.svg';
+import { COLORS } from '@/styles';
 
 type Checkpoint = {
   hostchain: string;
@@ -120,7 +121,7 @@ const EpochCheckpoints: FC<CheckpointsPerEpochProps> = ({
             sx={{
               mt: 1,
               pr: 3,
-              background: 'rgba(17, 17, 17, 0.6)',
+              background: COLORS.BG_LIGHT,
               minHeight: '85px'
             }}
           >

@@ -93,7 +93,7 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
         <Grid item order={{ xs: 1, lg: 2 }} xs={12} lg={4} xl={5} sx={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: { xs: 'center', lg: 'flex-end' }
+          justifyContent: 'center'
         }}>
           <BlockImage width={421} height={426} viewBox='0 0 421 426' />
         </Grid>

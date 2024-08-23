@@ -6,6 +6,7 @@ import { FlexBetweenBox, GeometricButton } from '@/components/ui';
 import { FilterDropdown } from './FilterDropdown';
 import { SearchInput } from './SearchInput';
 import { OPTIONS, OPTIONS_URL, OPTIONS_PLACEHOLDER } from './constants';
+import { COLORS } from '@/styles';
 import SearchIcon from '@public/icons/ui/search.svg';
 
 export const ExplorerSearchBar = () => {
@@ -43,7 +44,7 @@ export const ExplorerSearchBar = () => {
       sx={{
         gap: 2,
         px: 0.4,
-        background: 'rgba(17, 17, 17, 0.8)'
+        background: COLORS.BG_LIGHT
       }}
     >
       <FilterDropdown
