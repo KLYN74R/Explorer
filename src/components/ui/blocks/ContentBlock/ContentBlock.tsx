@@ -1,10 +1,13 @@
 import { FC, ReactNode } from 'react';
+import Link from 'next/link';
 import { Box, SxProps, Typography } from '@mui/material';
 import { COLORS } from '@/styles';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 export const ContentBlock: FC<{
   children?: ReactNode,
   title?: string,
+  url?: string;
   comment?: string,
   value?: string | number,
   variant?: 'red',
@@ -13,12 +16,29 @@ export const ContentBlock: FC<{
 }> = ({
   children,
   title,
+  url,
   comment,
   value,
   variant,
   blurred = false,
   sx
 }) => {
+  const heroText = (
+    <Typography
+      sx={{
+        fontSize: '24px',
+        lineHeight: '30px',
+        fontWeight: 300,
+        whiteSpace: 'pre-wrap',
+        wordBreak: 'break-all',
+        display: 'inline'
+      }}
+      color={variant === 'red' ? 'secondary.main' : 'primary.main'}
+    >
+      {value} {comment && <Comment text={comment} />}
+    </Typography>
+  );
+
   return (
     <Box sx={{
       pt: 2,
@@ -34,7 +54,7 @@ export const ContentBlock: FC<{
         <Typography
           variant='caption'
           color='text.primary'
-          sx={{ display: 'block' }}
+          sx={{ display: 'block', mb: 1 }}
         >
           {title}
         </Typography>
@@ -44,21 +64,35 @@ export const ContentBlock: FC<{
           {children}
         </Box>
       ) : (
-        <Typography
-          sx={{
-            fontSize: '24px',
-            lineHeight: '30px',
-            fontWeight: 300,
-            mt: 1,
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-          }}
-          color={variant === 'red' ? 'secondary.main' : 'primary.main'}
-        >
-          {value} {comment && <Comment text={comment} />}
-        </Typography>
+        <>
+          {url ? (
+            <LinkWrapper url={url}>{heroText}</LinkWrapper>
+          ) : heroText}
+        </>
       )}
     </Box>
+  );
+}
+
+const LinkWrapper = ({
+  children,
+  url
+}: {
+  children: ReactNode,
+  url: string
+}) => {
+  return (
+    <Link
+      href={url}
+      passHref
+      style={{
+        textDecoration: 'none',
+        cursor: 'pointer'
+      }}
+    >
+      <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', display: 'inline' }} />{' '}
+      {children}
+    </Link>
   );
 }
 

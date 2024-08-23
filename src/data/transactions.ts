@@ -12,6 +12,7 @@ export async function fetchTransactionByBlake3Hash(hash: string): Promise<Transa
       .find(tx => tx.blake3Hash === hash) as TransactionWithBlake3Hash;
 
     return {
+      block,
       ...receipt,
       ...transaction,
       typeDescription: describeTransactionType(transaction.type),

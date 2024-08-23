@@ -32,6 +32,7 @@ export interface BlockPreview {
 
 export interface BlockExtendedView {
   id: string;
+  truncatedId: string;
   creator: string;
   epoch: string;
   epochIndex: number;

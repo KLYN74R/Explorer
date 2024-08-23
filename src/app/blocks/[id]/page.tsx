@@ -6,7 +6,6 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import { TransactionsTable } from './TransactionsTable';
 import BlockImage from '@public/block.svg';
 import { fetchBlockById } from '@/data';
-import { truncateMiddle } from '@/helpers';
 
 type BlockByIdPageProps = {
   params: {
@@ -24,17 +23,14 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
 
   const status = !!block.finalizationProof.proofs ? 'Approved' : 'Awaiting approval';
 
-  const truncatedBlockId = `${block.epochIndex}:${truncateMiddle(block.creator)}:${block.index}`;
-
   return (
     <Container maxWidth='xl' sx={{ py: 6 }}>
       <Grid container sx={{ px: { md: 4.5, xs: 0 } }} spacing={8}>
         <Grid item order={{ xs: 2, lg: 1 }} xs={12} lg={8} xl={7}>
           <Grid container spacing={1}>
-
             <Grid item xs={12}>
               <Typography variant='caption'>Block info</Typography>
-              <Typography variant='h1' sx={{ my: 0.25, wordBreak: 'break-all' }}>{truncatedBlockId}</Typography>
+              <Typography variant='h1' sx={{ my: 0.25, wordBreak: 'break-all' }}>{block.truncatedId}</Typography>
               <Label variant={status === 'Approved' ? 'green' : 'red'}>{status}</Label>
               <Link
                 href={`/blocks/${id}/finalization-proof`}

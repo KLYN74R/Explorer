@@ -27,6 +27,7 @@ export default async function FinalizationProofPage({ params }: FinalizationProo
             <ContentBlock
               title='Block Id:'
               value={finalizationProof.blockID}
+              url={`/blocks/${finalizationProof.blockID}`}
             />
           </Grid>
           <Grid item xs={12}>
