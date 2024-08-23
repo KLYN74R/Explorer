@@ -43,7 +43,7 @@ export const ExplorerSearchBar = () => {
       sx={{
         gap: 2,
         px: 0.4,
-        background: 'rgba(17, 17, 17, 0.6)'
+        background: 'rgba(17, 17, 17, 0.8)'
       }}
     >
       <FilterDropdown

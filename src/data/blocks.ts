@@ -67,8 +67,9 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
     );
 
     return {
-      id,
+      id: blockId,
       creator,
+      epoch,
       epochIndex,
       index,
       transactions,

@@ -1,13 +1,12 @@
 import { FC, ReactNode } from 'react';
 import { Box, SxProps, Typography } from '@mui/material';
 
-export const BlurredInfoBlock: FC<{
+export const ContentBlock: FC<{
   children?: ReactNode,
   title: string,
   comment?: string,
   value?: string | number,
-  variant?: 'cyan',
-  breakWord?: boolean,
+  variant?: 'red',
   sx?: SxProps
 }> = ({
   children,
@@ -15,7 +14,6 @@ export const BlurredInfoBlock: FC<{
   comment,
   value,
   variant,
-  breakWord,
   sx
 }) => {
   return (
@@ -24,9 +22,8 @@ export const BlurredInfoBlock: FC<{
       pb: 2.5,
       pl: 3,
       height: '100%',
-      ...(breakWord && { pr: 3 }),
-      background: '#11111166',
-      backdropFilter: 'blur(5px)',
+      pr: 3,
+      background: 'rgba(17, 17, 17, 0.6)',
       ...sx
     }}>
       <Typography
@@ -47,12 +44,10 @@ export const BlurredInfoBlock: FC<{
             lineHeight: '30px',
             fontWeight: 300,
             mt: 1,
-            ...(breakWord && {
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word'
-            }),
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
           }}
-          color={variant === 'cyan' ? 'primary.main' : 'secondary.main'}
+          color={variant === 'red' ? 'secondary.main' : 'primary.main'}
         >
           {value} {comment && <Comment text={comment} />}
         </Typography>

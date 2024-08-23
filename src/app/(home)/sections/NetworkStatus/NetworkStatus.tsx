@@ -3,6 +3,7 @@ import { Typography } from '@mui/material';
 import Link from 'next/link';
 import { GreenGradientBackground } from '@/components/ui';
 import { BlockchainData } from '@/definitions';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 type Props = {
   data: BlockchainData
@@ -51,11 +52,13 @@ const ContentLink: FC<{ title: string, url: string, disabled?: boolean }> = ({
         textUnderlineOffset: '3px',
         textDecorationThickness: '1px',
         textDecorationColor: disabled ? '#11111166' : 'auto',
+        fontSize: '18px',
         lineHeight: '33px',
         display: 'block',
         my: 1.25
       }}
     >
+      <LaunchIcon sx={{ position: 'relative', bottom: '-4px', height: '20px', mr: '5px' }} />
       <Link
         href={url}
         passHref

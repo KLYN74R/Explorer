@@ -23,10 +23,11 @@ export const SearchInput: FC<{
       spellCheck={false}
       autoComplete="off"
       sx={{ flex: 1 }}
-      InputProps={{
+      inputProps={{
+        maxLength: 200,
+        style: {fontSize: '14px'},
         readOnly: isChoose,
-        disableUnderline: true,
-        style: {fontSize: '14px'}
+        disableUnderline: true
       }}
     />
   );

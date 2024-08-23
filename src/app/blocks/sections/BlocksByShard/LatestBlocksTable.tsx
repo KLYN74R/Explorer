@@ -15,6 +15,7 @@ import { BlockPreview } from '@/definitions';
 import { FlexCenterBox, ButtonPagination } from '@/components/ui';
 import { fetchBlocksByShard } from '@/data';
 import { BLOCKS_PER_PAGE } from '@/constants';
+import { truncateMiddle } from '@/helpers';
 
 type LatestBlocksTableProps = {
   shard: string;
@@ -30,27 +31,27 @@ export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
 
   const rows = blocks.map((block: BlockPreview) => (
     <TableRow key={block.sid}>
-      <TableCell sx={{ maxWidth: { xs: '225px', md: '275px', xl: '375px' } }}>
+      <TableCell sx={{ width: '23%' }}>
         <Link
           href={`/blocks/${block.id}`}
           passHref
           style={{ textDecoration: 'none' }}
         >
           <Typography color='primary.main' sx={{ fontSize: '16px' }}>
-            <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} /> {block.sid}
+            <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} /> {truncateMiddle(block.sid)}
           </Typography>
         </Link>
       </TableCell>
-      <TableCell sx={{ maxWidth: { xs: '225px', lg: '275px', xl: 'none' } }}>
-        <Typography color='primary.main' sx={{ fontSize: '16px' }}>{block.creator}</Typography>
+      <TableCell sx={{ width: '23%' }}>
+        <Typography color='primary.main' sx={{ fontSize: '16px' }}>{truncateMiddle(block.creator)}</Typography>
       </TableCell>
-      <TableCell sx={{ minWidth: '150px' }}>
+      <TableCell sx={{ width: '18%' }}>
         <Typography sx={{ fontSize: '16px' }}>{block.index}</Typography>
       </TableCell>
-      <TableCell sx={{ maxWidth: '100px' }}>
+      <TableCell sx={{ width: '18%' }}>
         <Typography sx={{ fontSize: '16px' }}>{block.txsNumber}</Typography>
       </TableCell>
-      <TableCell>
+      <TableCell sx={{ width: '18%' }}>
         <Typography sx={{ fontSize: '16px' }}>{block.createdAt}</Typography>
       </TableCell>
     </TableRow>

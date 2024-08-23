@@ -1,9 +1,10 @@
 'use client';
-import { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import Link from 'next/link';
 import { TransactionWithBlake3Hash } from '@/definitions';
 import { TRANSACTIONS_PER_PAGE } from '@/constants';
-import { FlexCenterBox, LoadMoreButton } from '@/components/ui';
+import { truncateMiddle } from '@/helpers';
+import { FlexBetweenBox, FlexCenterBox, GeometricButton, LoadMoreButton } from '@/components/ui';
 import {
   Typography,
   Table,
@@ -12,9 +13,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Box
+  Box,
+  TextField
 } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
+import SearchIcon from '@public/icons/ui/search.svg';
 
 type TransactionsTableProps = {
   transactions: TransactionWithBlake3Hash[]
@@ -24,8 +27,11 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
   transactions
 }) => {
   const [txs, setTxs] = useState(transactions.slice(0, TRANSACTIONS_PER_PAGE));
+  const [query, setQuery] = useState('');
   const nextPage = Math.floor(txs.length / TRANSACTIONS_PER_PAGE) + 1;
   const nextPageAvailable = txs.length < transactions.length;
+
+  const filteredTxs = query ? txs.filter(tx => tx.blake3Hash.includes(query)) : txs;
 
   const handleLoadMore = () => {
     if (nextPageAvailable) {
@@ -34,6 +40,8 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
   }
 
   const isEVM = (tx: TransactionWithBlake3Hash) => !tx.creator;
+
+  const handleSetQuery = (e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
 
   if (!transactions.length) {
     return (
@@ -45,7 +53,22 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
 
   return (
     <>
-      <TableContainer sx={{ mt: 5 }}>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        mt: 3
+      }}>
+        <Box sx={{
+          width: {
+            lg: 'calc(50% - 24px)',
+            xs: '100%'
+          }
+        }}>
+          <TransactionSearchBar handleSetQuery={handleSetQuery} />
+        </Box>
+      </Box>
+
+      <TableContainer sx={{ mt: 2 }}>
         <Table sx={{ minWidth: 650 }} aria-label='Transactions table'>
           <TableHead>
             <TableRow>
@@ -56,35 +79,28 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {txs.map((tx) => (
+            {filteredTxs.map((tx) => (
               <TableRow key={tx.sig}>
-                <TableCell sx={{ maxWidth: '200px', pr: { xs: 1, sm: 3, lg: 8, xl: 16 } }}>
+                <TableCell sx={{ width: '31%' }}>
                   <Link
                     href={`/transactions/${tx.blake3Hash}`}
                     passHref
                     style={{ textDecoration: 'none' }}
                   >
-                    <Typography color='primary.main' sx={{ fontSize: '18px' }}>
-                      <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-5px' }} />
-                      {' '}
-                      {isEVM(tx) ? tx.payload.from : tx.creator}
+                    <Typography color='primary.main' sx={{ fontSize: '16px' }}>
+                      <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} />{' '}
+                      {isEVM(tx) ? tx.payload.from : truncateMiddle(tx.creator)}
                     </Typography>
                   </Link>
                 </TableCell>
-                <TableCell>
-                  <Typography color='text.secondary' sx={{ fontSize: '18px' }}>
-                    {isEVM(tx) ? 'ECDSA' : tx.type}
-                  </Typography>
+                <TableCell sx={{ width: '23%' }}>
+                  <Typography sx={{ fontSize: '16px' }}>{isEVM(tx) ? 'ECDSA' : tx.type}</Typography>
                 </TableCell>
-                <TableCell>
-                  <Typography color='text.secondary' sx={{ fontSize: '18px' }}>
-                    {tx.payload.sigType}
-                  </Typography>
+                <TableCell sx={{ width: '23%' }}>
+                  <Typography sx={{ fontSize: '16px' }}>{tx.payload.sigType}</Typography>
                 </TableCell>
-                <TableCell>
-                  <Typography color='text.secondary' sx={{ fontSize: '18px' }}>
-                    {tx.fee}
-                  </Typography>
+                <TableCell sx={{ width: '23%' }}>
+                  <Typography sx={{ fontSize: '16px' }}>{tx.fee}</Typography>
                 </TableCell>
               </TableRow>
             ))}
@@ -93,10 +109,45 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
       </TableContainer>
 
       <FlexCenterBox sx={{ my: 3 }}>
-        {nextPageAvailable && (
+        {nextPageAvailable && !query && (
           <LoadMoreButton onClick={handleLoadMore}/>
         )}
       </FlexCenterBox>
     </>
+  );
+}
+
+const TransactionSearchBar = ({
+  handleSetQuery
+}: {
+  handleSetQuery: (e: ChangeEvent<HTMLInputElement>) => void;
+}) => {
+  return (
+    <FlexBetweenBox
+      border={1}
+      borderColor='border.main'
+      sx={{
+        gap: 2,
+        pl: 1.5,
+        pr: 0.4,
+        background: 'rgba(17, 17, 17, 0.6)'
+      }}
+    >
+      <TextField
+        onChange={handleSetQuery}
+        sx={{ width: '100%' }}
+        autoComplete='off'
+        spellCheck={false}
+        inputProps={{ maxLength: 200 }}
+        placeholder='Enter the 256 bit BLAKE3 hash of transaction'
+      />
+      <GeometricButton
+        variant='cyan'
+        disableShadow={true}
+        sx={{ py: 0.75, cursor: 'default' }}
+      >
+        <SearchIcon />
+      </GeometricButton>
+    </FlexBetweenBox>
   );
 }

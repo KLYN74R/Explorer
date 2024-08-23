@@ -163,15 +163,19 @@ const theme = createTheme({
         InputProps: {
           disableUnderline: true,
           style: {
-            fontSize: '14px',
+            height: '48px',
           }
         },
       },
       styleOverrides: {
         root: {
-          fontSize: '14px',
+          fontSize: '16px',
+          height: '48px',
+          '& .MuiInputBase-root': {
+            height: '48px'
+          },
           '& .MuiInputBase-input': {
-            fontSize: '14px'
+            fontSize: '16px'
           },
           '& .MuiInputBase-root:before': {
             borderBottom: 'transparent',
@@ -201,13 +205,17 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: '14px',
+          background: palette.background.default,
+          '&:hover': {
+            background: '#001c1c',
+          }
         },
       },
     },
     MuiMenu: {
       styleOverrides: {
         paper: {
-          backgroundColor: palette.background.default,
+          backgroundColor: 'transparent',
           '--Paper-shadow': 'none !important',
           '--Paper-overlay': 'none !important',
           '& .MuiButtonBase-root': {
@@ -227,7 +235,7 @@ const theme = createTheme({
             borderBottomRightRadius: '5px',
           },
           '& .MuiButtonBase-root.MuiMenuItem-root.Mui-selected': {
-            backgroundColor: palette.primary.main + 30
+            backgroundColor: '#002a2a'
           },
           '& .Mui-selected:hover': {
             cursor: 'default',
@@ -237,8 +245,14 @@ const theme = createTheme({
     },
     MuiAutocomplete: {
       styleOverrides: {
+        root: {
+          '& .MuiFormControl-root': {
+            display: 'flex',
+            justifyContent: 'center'
+          }
+        },
         paper: {
-          fontSize: '14px',
+          fontSize: '16px',
           backgroundColor: palette.background.default,
           '--Paper-shadow': 'none !important',
           '--Paper-overlay': 'none !important',

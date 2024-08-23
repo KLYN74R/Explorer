@@ -4,7 +4,7 @@ import { PrettyJSON } from '@/components';
 import {
   DimGradientBackground,
   GradientBackground,
-  BlurredInfoBlock,
+  ContentBlock,
   Label
 } from '@/components/ui';
 import { fetchTransactionByBlake3Hash } from '@/data';
@@ -33,66 +33,61 @@ export default async function TransactionByIdPage({ params }: TransactionByIdPag
 
               <Grid container spacing={1} sx={{ mt: 5 }}>
                 <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='Creator:'
                     value={tx.creator}
                     comment={tx.creatorFormatDescription}
-                    breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='Version:'
                     value={tx.v}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='Type:'
                     value={tx.type}
                     comment={tx.typeDescription}
-                    breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='Nonce: '
                     value={tx.nonce}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='Signature:'
                     value={tx.sig}
-                    breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='256 bit Blake3 hash:'
                     value={blake3Hash}
-                    breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='Included in block:'
                     value={tx.blockID}
-                    breakWord={true}
                   />
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
+                  <ContentBlock
                     title='Position in block:'
                     value={tx.order}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <BlurredInfoBlock title='Status:'>
+                  <ContentBlock title='Status:'>
                     <Label variant={tx.isOk ? 'green' : 'red'}>
                       {tx.isOk ? 'Success' : 'Failed'}
                     </Label>
-                  </BlurredInfoBlock>
+                  </ContentBlock>
                 </Grid>
               </Grid>
             </Box>
@@ -102,9 +97,9 @@ export default async function TransactionByIdPage({ params }: TransactionByIdPag
 
       <Container maxWidth='xl' sx={{ pb: 7 }}>
         <Box sx={{ px: { md: 4.5, xs: 0 } }}>
-          <BlurredInfoBlock title='Payload:'>
+          <ContentBlock title='Payload:'>
             <PrettyJSON data={tx.payload} />
-          </BlurredInfoBlock>
+          </ContentBlock>
         </Box>
       </Container>
     </>

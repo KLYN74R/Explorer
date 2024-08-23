@@ -1,16 +1,12 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  BlurredInfoBlock,
-  DimGradientBackground,
-  GradientBackground,
-  Label,
-} from '@/components/ui';
+import { ContentBlock, Label, } from '@/components/ui';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { TransactionsTable } from './TransactionsTable';
 import BlockImage from '@public/block.svg';
 import { fetchBlockById } from '@/data';
+import { truncateMiddle } from '@/helpers';
 
 type BlockByIdPageProps = {
   params: {
@@ -28,82 +24,88 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
 
   const status = !!block.finalizationProof.proofs ? 'Approved' : 'Awaiting approval';
 
-  return (
-    <>
-      <DimGradientBackground>
-        <GradientBackground sx={{ py: 7 }}>
-          <Container maxWidth='xl'>
-            <Grid container sx={{ px: { md: 4.5, xs: 0 } }} spacing={8}>
-              <Grid item xs={12} lg={4} xl={3.5} sx={{
-                display: 'flex',
-                justifyContent: { xs: 'center', lg: 'flex-start' }
-              }}>
-                <BlockImage width={366} height={366} viewBox='0 0 366 366' />
-              </Grid>
-              <Grid item xs={12} lg={8} xl={8.5}>
-                <Grid container spacing={1}>
-                  <Grid item xs={12}>
-                    <BlurredInfoBlock title='Creator:' value={block.creator} breakWord={true} />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <BlurredInfoBlock title='Created at:' value={block.createdAt} breakWord={true} />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <BlurredInfoBlock title='Epoch:' value={block.epochIndex} breakWord={true} />
-                  </Grid>
-                  <Grid item xs={12} sx={{ display: 'flex', gap: 1 }}>
-                    <BlurredInfoBlock
-                      title='Txs Number:'
-                      value={block.txsNumber}
-                      variant='cyan'
-                      sx={{ width: '50%' }}
-                      breakWord={true}
-                    />
-                    <BlurredInfoBlock
-                      title='Index in own sequence:'
-                      value={block.index}
-                      variant='cyan'
-                      sx={{ width: '50%' }}
-                      breakWord={true}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <BlurredInfoBlock title='Previous block hash:' value={block.prevHash} breakWord={true}/>
-                  </Grid>
+  const truncatedBlockId = `${block.epochIndex}:${truncateMiddle(block.creator)}:${block.index}`;
 
-                  <Grid item xs={12}>
-                    <BlurredInfoBlock title='Status:'>
-                      <Label variant={status === 'Approved' ? 'green' : 'red'}>
-                        {status}
-                      </Label>
-                      <Box sx={{ mt: 1 }}>
-                        <Link
-                          href={`/blocks/${id}/finalization-proof`}
-                          style={{ textDecoration: 'none' }}
-                        >
-                          <Typography variant='caption' color='primary.main'>
-                            <LaunchIcon
-                              color='primary'
-                              sx={{ fontSize: '16px', position: 'relative', bottom: '-3px' }}
-                            /> Check aggregated finalization proof
-                          </Typography>
-                        </Link>
-                      </Box>
-                    </BlurredInfoBlock>
-                  </Grid>
-                </Grid>
+  return (
+    <Container maxWidth='xl' sx={{ py: 6 }}>
+      <Grid container sx={{ px: { md: 4.5, xs: 0 } }} spacing={8}>
+        <Grid item order={{ xs: 2, lg: 1 }} xs={12} lg={8} xl={7}>
+          <Grid container spacing={1}>
+
+            <Grid item xs={12}>
+              <Typography variant='caption'>Block info</Typography>
+              <Typography variant='h1' sx={{ my: 0.25, wordBreak: 'break-all' }}>{truncatedBlockId}</Typography>
+              <Label variant={status === 'Approved' ? 'green' : 'red'}>{status}</Label>
+              <Link
+                href={`/blocks/${id}/finalization-proof`}
+                style={{ textDecoration: 'none', marginLeft: '1rem' }}
+              >
+                <Typography variant='caption' color='primary.main'>
+                  <LaunchIcon
+                    color='primary'
+                    sx={{ fontSize: '16px', position: 'relative', bottom: '-3px' }}
+                  /> Check AFP
+                </Typography>
+              </Link>
+            </Grid>
+
+            <Grid item xs={12} sx={{ mt: 1.5 }}>
+              <ContentBlock
+                title='Creator:'
+                value={block.creator}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <ContentBlock
+                title='Created at:'
+                value={block.createdAt}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <ContentBlock
+                title='Epoch:'
+                value={block.epoch}
+              />
+            </Grid>
+            <Grid item xs={12} sx={{ display: 'flex', gap: 1, flexDirection: { xs: 'column', sm: 'row' } }}>
+              <Grid item xs={12} sm={6}>
+                <ContentBlock
+                  title='Txs Number:'
+                  value={block.txsNumber}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <ContentBlock
+                  title='Index in own sequence:'
+                  value={block.index}
+                />
               </Grid>
             </Grid>
-          </Container>
-        </GradientBackground>
-      </DimGradientBackground>
+            <Grid item xs={12}>
+              <ContentBlock
+                title='Previous block hash:'
+                value={block.prevHash}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
 
-      <Container maxWidth='xl'>
-        <Box sx={{ px: { md: 4.5, xs: 0 } }}>
-          <Typography variant='h1'>Transactions</Typography>
-          <TransactionsTable transactions={block.transactions} />
-        </Box>
-      </Container>
-    </>
+        <Grid item order={{ xs: 1, lg: 2 }} xs={12} lg={4} xl={5} sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: { xs: 'center', lg: 'flex-end' }
+        }}>
+          <BlockImage width={421} height={426} viewBox='0 0 421 426' />
+        </Grid>
+      </Grid>
+
+      <Box sx={{
+        mt: 16,
+        px: { md: 4.5, xs: 0 }
+      }}>
+        <Typography variant='h1'>Transactions</Typography>
+        <TransactionsTable transactions={block.transactions} />
+      </Box>
+    </Container>
   );
 }
