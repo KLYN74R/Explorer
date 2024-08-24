@@ -1,13 +1,9 @@
 import { Metadata } from 'next';
-import { Box, Container, Typography, Grid } from '@mui/material';
+import { Container, Typography, Grid } from '@mui/material';
 import { PrettyJSON } from '@/components';
-import {
-  DimGradientBackground,
-  GradientBackground,
-  BlurredInfoBlock,
-  Label
-} from '@/components/ui';
+import { ContentBlock, Label } from '@/components/ui';
 import { fetchTransactionByBlake3Hash } from '@/data';
+import { truncateMiddle } from '@/helpers';
 
 type TransactionByIdPageProps = {
   params: {
@@ -24,89 +20,70 @@ export default async function TransactionByIdPage({ params }: TransactionByIdPag
   const tx = await fetchTransactionByBlake3Hash(blake3Hash);
 
   return (
-    <>
-      <DimGradientBackground>
-        <GradientBackground sx={{ pt: 7, pb: 1 }}>
-          <Container maxWidth='xl'>
-            <Box sx={{ px: { md: 4.5, xs: 0 } }}>
-              <Typography variant='h1'>Transaction info</Typography>
-
-              <Grid container spacing={1} sx={{ mt: 5 }}>
-                <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
-                    title='Creator:'
-                    value={tx.creator}
-                    comment={tx.creatorFormatDescription}
-                    breakWord={true}
-                  />
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
-                    title='Version:'
-                    value={tx.v}
-                  />
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
-                    title='Type:'
-                    value={tx.type}
-                    comment={tx.typeDescription}
-                    breakWord={true}
-                  />
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
-                    title='Nonce: '
-                    value={tx.nonce}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <BlurredInfoBlock
-                    title='Signature:'
-                    value={tx.sig}
-                    breakWord={true}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <BlurredInfoBlock
-                    title='256 bit Blake3 hash:'
-                    value={blake3Hash}
-                    breakWord={true}
-                  />
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
-                    title='Included in block:'
-                    value={tx.blockID}
-                    breakWord={true}
-                  />
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                  <BlurredInfoBlock
-                    title='Position in block:'
-                    value={tx.order}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <BlurredInfoBlock title='Status:'>
-                    <Label variant={tx.isOk ? 'green' : 'red'}>
-                      {tx.isOk ? 'Success' : 'Failed'}
-                    </Label>
-                  </BlurredInfoBlock>
-                </Grid>
-              </Grid>
-            </Box>
-          </Container>
-        </GradientBackground>
-      </DimGradientBackground>
-
-      <Container maxWidth='xl' sx={{ pb: 7 }}>
-        <Box sx={{ px: { md: 4.5, xs: 0 } }}>
-          <BlurredInfoBlock title='Payload:'>
+    <Container maxWidth='xl' sx={{ py: 6 }}>
+      <Grid container spacing={1} sx={{ px: { md: 4.5, xs: 0 } }}>
+        <Grid item xs={12} sx={{ mb: 1.5 }}>
+          <Typography variant='caption'>Transaction info</Typography>
+          <Typography variant='h1' sx={{ my: 0.25, wordBreak: 'break-all' }}>{truncateMiddle(tx.blake3Hash)}</Typography>
+          <Label variant={tx.isOk ? 'green' : 'red'}>{tx.isOk ? 'Success' : 'Failed'}</Label>
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <ContentBlock
+            title='Creator:'
+            value={tx.creator}
+            comment={tx.creatorFormatDescription}
+          />
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <ContentBlock
+            title='Version:'
+            value={tx.v}
+          />
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <ContentBlock
+            title='Type:'
+            value={tx.type}
+            comment={tx.typeDescription}
+          />
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <ContentBlock
+            title='Nonce: '
+            value={tx.nonce}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <ContentBlock
+            title='Signature:'
+            value={tx.sig}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <ContentBlock
+            title='256 bit Blake3 hash:'
+            value={tx.blake3Hash}
+          />
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <ContentBlock
+            title='Included in block:'
+            value={tx.block.truncatedId}
+            url={`/blocks/${tx.block.id}`}
+          />
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <ContentBlock
+            title='Position in block:'
+            value={tx.order}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <ContentBlock title='Payload:'>
             <PrettyJSON data={tx.payload} />
-          </BlurredInfoBlock>
-        </Box>
-      </Container>
-    </>
+          </ContentBlock>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }

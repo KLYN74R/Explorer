@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import JsonFormatter from 'react-json-formatter';
-import { COLORS } from '@/styles/colors';
+import { COLORS } from '@/styles';
 
 export const PrettyJSON: FC<{ data: object }> = ({
   data

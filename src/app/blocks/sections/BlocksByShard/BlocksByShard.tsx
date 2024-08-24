@@ -22,20 +22,25 @@ export const BlocksByShard: FC<BlocksByShardProps> = async ({
   }));
 
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='xl' sx={{ mt: 3 }}>
       <Box sx={{
         px: { md: 4.5, xs: 0 }
       }}>
+        <Typography variant='h1'>Shard selector</Typography>
+        <Typography sx={{ mt: 1, mb: 3 }}>Choose a shard ID to visualize blocks and stats per shard in linear way</Typography>
         <Box sx={{
-          width: {
-            xl: 'calc(50% - 24px)',
-            md: '75%',
-            xs: '100%'
-          }
+          display: 'flex',
+          justifyContent: 'flex-end'
         }}>
-          <Typography variant='h1'>Shard selector</Typography>
-          <Typography sx={{ mt: 1, mb: 3 }}>Choose a shard ID to visualize blocks and stats per shard in linear way</Typography>
-          <ShardSearchBar shardsList={shardOptions} />
+          <Box sx={{
+            width: {
+              xl: 'calc(50% - 24px)',
+              md: '75%',
+              xs: '100%'
+            }
+          }}>
+            <ShardSearchBar shardsList={shardOptions} />
+          </Box>
         </Box>
         <Suspense key={shard + currentPage} fallback={<LatestBlocksTableSkeleton />}>
           <LatestBlocksTable shard={shard} currentPage={currentPage} />

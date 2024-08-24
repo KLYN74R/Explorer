@@ -1,1 +1,0 @@
-export { BlurredInfoBlock } from './BlurredInfoBlock';

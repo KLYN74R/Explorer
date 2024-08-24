@@ -67,7 +67,7 @@ export interface BlockchainData {
   totalBlocksNumber: string;
   totalBlocksNumberInCurrentEpoch: string;
   totalStaked: string;
-  slotTime: number;
+  slotTimeInSeconds: number;
   chainInfo: {
     symbioticChainId: string;
     validatorStakeSize: string;

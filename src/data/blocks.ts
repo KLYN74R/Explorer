@@ -1,5 +1,5 @@
 import api from '@/helpers/api';
-import { FormattedDate, hashData } from '@/helpers';
+import { FormattedDate, hashData, truncateMiddle } from '@/helpers';
 import { Block, BLOCK_ID_TYPE, BlockExtendedView, BlockPreview, FinalizationProof, SyncStats } from '@/definitions';
 import { BLOCKS_PER_PAGE } from '@/constants';
 import { API_ROUTES } from '@/constants/api';
@@ -56,6 +56,7 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
     const epochIndex = getEpochIndex(epoch);
 
     const blockId = epochIndex + ':' + creator + ':' + index;
+    const truncatedBlockId = `${epochIndex}:${truncateMiddle(creator)}:${index}`;
 
     const finalizationProof = await fetchFinalizationProof(blockId);
 
@@ -67,8 +68,10 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
     );
 
     return {
-      id,
+      id: blockId,
+      truncatedId: truncatedBlockId,
       creator,
+      epoch,
       epochIndex,
       index,
       transactions,

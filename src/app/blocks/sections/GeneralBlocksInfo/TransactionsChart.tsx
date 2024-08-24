@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { inter } from '@/styles/theme';
-import { formatNumber } from '@/helpers';
+import { formatNumber, roundToNearest } from '@/helpers';
 
 // bypass SSR in order to get rid of "window is not defined" error
 const ApexCharts = dynamic(() => import('react-apexcharts'), {
@@ -19,21 +19,50 @@ interface TransactionsChartProps {
 }
 
 export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) => {
+
+  const YMaxValue = Math.max(...data.map(val => val.transactionsNum)) * 1.025;
+  const YMaxAxiosValue = roundToNearest(YMaxValue, YMaxValue > 1000 ? 1000 : 100);
+
   const [options, setOptions] = useState({
     chart: {
       type: 'area',
+      height: 275,
       zoom: {
         enabled: false
       },
       toolbar: {
         show: false
-      }
+      },
+      offsetY: -20,
     },
     dataLabels: {
       enabled: false
     },
     stroke: {
-      curve: 'straight'
+      curve: 'straight',
+      width: 1.5,
+      colors: ['white']
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0,
+        opacityFrom: 1,
+        opacityTo: 0,
+        stops: [0, 100],
+        colorStops: [
+          {
+            offset: 0,
+            color: '#7AEEE5',
+            opacity: 1
+          },
+          {
+            offset: 100,
+            color: '#7AEEE5',
+            opacity: 0
+          }
+        ]
+      }
     },
     grid: {
       show: true,
@@ -49,62 +78,65 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) =>
       categories: data.map(item => item.epochIndex),
       labels: {
         style: {
-          colors: 'white'
-        },
-      },
-      title: {
-        text: 'Epoch Index',
-        style: {
-          color: 'white',
+          colors: 'rgba(254, 254, 254, 0.2)',
           fontFamily: inter.style.fontFamily,
-          fontWeight: 400
+          fontWeight: 300,
+          fontSize: '14px',
         }
       },
       axisBorder: {
         show: true,
-        color: 'rgba(255, 255, 255, 0.75)'
+        color: 'rgba(254, 254, 254, 0.2)'
       },
       axisTicks: {
         show: true,
-        color: 'rgba(255, 255, 255, 0.75)'
+        color: 'rgba(254, 254, 254, 0.2)'
       }
     },
     yaxis: {
+      tickAmount: 5,
+      max: YMaxAxiosValue,
       labels: {
         style: {
-          colors: 'white'
-        }
-      },
-      title: {
-        text: 'Number of Transactions',
-        style: {
-          color: 'white',
+          colors: 'white',
           fontFamily: inter.style.fontFamily,
-          fontWeight: 400
-        }
+          fontWeight: 300,
+          fontSize: '14px',
+        },
+        formatter: (value: number) => formatNumber(value)
       },
       axisBorder: {
         show: true,
-        color: 'rgba(255, 255, 255, 0.75)'
+        color: 'rgba(254, 254, 254, 0.2)'
       },
       axisTicks: {
         show: true,
-        color: 'rgba(255, 255, 255, 0.75)'
+        color: 'rgba(254, 254, 254, 0.2)'
       }
     },
     tooltip: {
       theme: 'dark',
+      style: {
+        color: 'white',
+        fontSize: '14px',
+        fontFamily: inter.style.fontFamily,
+        fontWeight: 300
+      },
       x: {
-        formatter: (value: string) => `Epoch ${value}`
+        formatter: (value: string) => `Epoch ${value} - MOCK DATA` // todo Remove "Mock Data" once endpoint is added
       },
       y: {
-        formatter: (value: string) => `Epoch ${formatNumber(value)}`
+        formatter: (value: string) => formatNumber(value)
       }
     },
-    legend: {
-      horizontalAlign: 'left',
-      labels: {
-        colors: 'rgba(255, 255, 255, 0.75)'
+    markers: {
+      size: 0,
+      colors: ['rgba(92, 208, 199, 1)'],
+      strokeColors: '#fff',
+      strokeWidth: 2,
+      hover: {
+        size: 7,
+        sizeOffset: 3
       }
     }
   });
@@ -114,9 +146,10 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) =>
     data: data.map(item => ({
       x: item.epochIndex,
       y: item.transactionsNum
-    }))
+    })),
+    color: 'rgba(92, 208, 199, 1)'
   }]);
 
   // @ts-ignore
-  return <ApexCharts options={options} series={series} type="area" height={350} />;
+  return <ApexCharts options={options} series={series} type="area" height={275} />;
 }

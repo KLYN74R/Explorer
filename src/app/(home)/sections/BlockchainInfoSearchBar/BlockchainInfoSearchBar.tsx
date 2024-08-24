@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import { GradientBackground, DimGradientBackground } from '@/components/ui';
-import { BlurredInfoBlock } from '@/components/ui';
+import { ContentBlock } from '@/components/ui';
 import { ExplorerSearchBar } from './ExplorerSearchBar';
 import { BlockchainData } from '@/definitions';
 
@@ -18,14 +18,14 @@ export const BlockchainInfoSearchBar: FC<Props> = async ({ data }) => {
             <ExplorerSearchBar />
           </Box>
           <Grid container spacing={1} sx={{ mt: 4, px: { md: 4.5, xs: 0 } }}>
-            <InfoBlock title='Total TXS' value={data.totalTxsNumber} />
-            <InfoBlock title='Epoch ID' value={data.epochId} />
-            <InfoBlock title='TXS Success' value={data.txsSuccessRate} variant='cyan' />
-            <InfoBlock title='Shards' value={data.shardsNumber} />
-            <InfoBlock title='Validators' value={data.validatorsNumber} />
-            <InfoBlock title='Total Staked' value={data.totalStaked} />
-            <InfoBlock title='Market Cap' value='WIP' variant='cyan'/>
-            <InfoBlock title='Coin Price' value='WIP' variant='cyan'/>
+            <HomeInfoBlock title='Total TXS' value={data.totalTxsNumber} variant='red'/>
+            <HomeInfoBlock title='Epoch ID' value={data.epochId} variant='red'/>
+            <HomeInfoBlock title='TXS Success' value={data.txsSuccessRate} />
+            <HomeInfoBlock title='Shards' value={data.shardsNumber} variant='red'/>
+            <HomeInfoBlock title='Validators' value={data.validatorsNumber} variant='red'/>
+            <HomeInfoBlock title='Total Staked' value={data.totalStaked} variant='red'/>
+            <HomeInfoBlock title='Market Cap' value='SOON' />
+            <HomeInfoBlock title='Coin Price' value='SOON' />
           </Grid>
         </Container>
       </GradientBackground>
@@ -33,14 +33,19 @@ export const BlockchainInfoSearchBar: FC<Props> = async ({ data }) => {
   );
 }
 
-const InfoBlock: FC<{ title: string, value: string | number, variant?: 'cyan' }> = ({
+const HomeInfoBlock: FC<{ title: string, value: string | number, variant?: 'red' }> = ({
   title,
   value,
   variant
 }) => {
   return (
-    <Grid item lg={1.5} md={3} sm={4} xs={12}>
-      <BlurredInfoBlock title={title} value={value} variant={variant} />
+    <Grid item xl={1.5} md={3} sm={4} xs={12}>
+      <ContentBlock
+        title={title}
+        value={value}
+        variant={variant}
+        blurred={true}
+      />
     </Grid>
   );
 }

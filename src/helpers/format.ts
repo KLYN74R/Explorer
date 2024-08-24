@@ -51,3 +51,16 @@ export function formatNumber(num: string | number, precision = 1000) {
     }
   }
 }
+
+export function roundToNearest(num: number, unit: number) {
+  return Math.ceil(num / unit) * unit;
+}
+
+export function truncateMiddle(str: string) {
+  if (str.length <= 20) {
+    return str;
+  }
+  let start = str.substring(0, 10);
+  let end = str.substring(str.length - 10);
+  return start + '...' + end;
+}

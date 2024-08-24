@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import Link from 'next/link';
 import { ButtonPagination, FlexCenterBox, Label } from '@/components/ui';
 import { Box, Container, Grid, Typography } from '@mui/material';
@@ -6,6 +6,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import BTCIcon from '@public/icons/currencies/BTC.svg';
 import ETHIcon from '@public/icons/currencies/ETH.svg';
 import SOLIcon from '@public/icons/currencies/SOL.svg';
+import { COLORS } from '@/styles';
 
 type Checkpoint = {
   hostchain: string;
@@ -71,7 +72,9 @@ export default function CheckpointsPage() {
       </Box>
 
       <FlexCenterBox sx={{ mt: 8 }}>
-        <ButtonPagination />
+        <Suspense>
+          <ButtonPagination />
+        </Suspense>
       </FlexCenterBox>
     </Container>
   );
@@ -118,7 +121,7 @@ const EpochCheckpoints: FC<CheckpointsPerEpochProps> = ({
             sx={{
               mt: 1,
               pr: 3,
-              background: 'rgba(17, 17, 17, 0.6)',
+              background: COLORS.BG_LIGHT,
               minHeight: '85px'
             }}
           >

@@ -1,3 +1,5 @@
+import { BlockExtendedView } from './blocks';
+
 export interface Transaction {
   v: number;
   creator: string;
@@ -25,6 +27,7 @@ export interface TransactionReceipt {
 }
 
 export interface TransactionExtendedView extends TransactionReceipt, TransactionWithBlake3Hash {
+  block: BlockExtendedView;
   typeDescription: string;
   creatorFormatDescription: string;
 }
