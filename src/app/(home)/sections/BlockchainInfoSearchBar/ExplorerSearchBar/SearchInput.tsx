@@ -26,8 +26,7 @@ export const SearchInput: FC<{
       inputProps={{
         maxLength: 200,
         style: {fontSize: '14px'},
-        readOnly: isChoose,
-        disableUnderline: true
+        readOnly: isChoose
       }}
     />
   );
