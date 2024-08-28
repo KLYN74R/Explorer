@@ -6,7 +6,7 @@ export interface BlockStats {
 
 export interface ChainInfo {
   genesis: {
-    symbioteID: string;
+    networkID: string;
     startOfFirstEpoch: number;
     workflowID: string;
     hivemind: string[];
@@ -18,28 +18,24 @@ export interface ChainInfo {
   };
   verificationThread: {
     version: number;
-    options: ChainOptions;
+    params: NetworkParams;
   };
   approvementThread: {
     version: number;
-    options: ChainOptions;
+    params: NetworkParams;
   };
 }
 
-export interface ChainOptions {
+export interface NetworkParams {
   VALIDATOR_STAKE: number;
-  REWARD_PERCENTAGE_FOR_BLOCK_CREATOR: number;
   MINIMAL_STAKE_PER_ENTITY: number;
-  POOL_AFK_MAX_TIME: number;
   UNSTAKING_PERIOD: number;
   QUORUM_SIZE: number;
   EPOCH_TIME: number;
   LEADERSHIP_TIMEFRAME: number;
   BLOCK_TIME: number;
   MAX_BLOCK_SIZE_IN_BYTES: number;
-  TXS_LIMIT_PER_BLOCK: number;
-  EPOCH_EDGE_OPERATIONS_LIMIT_PER_BLOCK: number;
-  DEFAULT_PAYMENT_IF_WRONG_TYPE: number;
+  EPOCH_EDGE_TRANSACTIONS_LIMIT_PER_BLOCK: number;
   MAX_NUM_OF_BLOCKS_PER_SHARD_FOR_SYNC_OPS: number;
 }
 
@@ -69,9 +65,9 @@ export interface BlockchainData {
   totalStaked: string;
   slotTimeInSeconds: number;
   chainInfo: {
-    symbioticChainId: string;
+    networkId: string;
     validatorStakeSize: string;
-    workflowMajorVersion: number;
+    coreMajorVersion: number;
     quorumSize: string;
     unstakingPeriod: string;
     epochDuration: string;

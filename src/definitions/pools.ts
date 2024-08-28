@@ -1,35 +1,24 @@
 export interface Pool {
-  poolMetadataFromState: {
+  poolOriginShard: string;
+  poolMetadata: {
     type: string;
     lang: string;
     balance: number;
     uno: number;
+    gas: number;
     storages: string[];
     bytecode: string;
   };
-  poolStorageFromState: {
+  poolStorage: {
     percentage: number;
     overStake: number;
-    whiteList: string[];
     totalPower: number;
-    lackOfTotalPower: boolean;
-    stopCheckpointID: number;
-    isReserve: boolean;
     stakers: {
       [key: string]: {
         kly: number;
         uno: number;
       };
     };
-    waitingRoom: Record<string, unknown>;
-    poolURL: string;
-    wssPoolURL: string;
-  };
-  poolStorageFromApprovementThread: {
-    totalPower: number;
-    lackOfTotalPower: boolean;
-    stopEpochID: number;
-    isReserve: boolean;
     poolURL: string;
     wssPoolURL: string;
   };

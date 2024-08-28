@@ -1,13 +1,11 @@
 export interface Epoch {
   id: number;
   hash: string;
-  poolsRegistry: {
-    primePools: string[];
-    reservePools: any[];
-  };
+  poolsRegistry: string[];
+  shardsRegistry: string[];
   startTimestamp: number;
   quorum: string[];
-  leadersSequence: { [key: string]: any[] };
+  leadersSequence: { [key: string]: string[] };
 }
 
 export type EpochExtendedData = Epoch & {
