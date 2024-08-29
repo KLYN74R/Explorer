@@ -31,7 +31,7 @@ export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
 
   const rows = blocks.map((block: BlockPreview) => (
     <TableRow key={block.sid}>
-      <TableCell sx={{ width: '23%' }}>
+      <TableCell sx={{ width: '20%' }}>
         <Link
           href={`/blocks/${block.id}`}
           passHref
@@ -42,16 +42,16 @@ export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
           </Typography>
         </Link>
       </TableCell>
-      <TableCell sx={{ width: '23%' }}>
+      <TableCell sx={{ width: '20%' }}>
         <Typography color='primary.main' sx={{ fontSize: '16px' }}>{truncateMiddle(block.creator)}</Typography>
       </TableCell>
-      <TableCell sx={{ width: '18%' }}>
+      <TableCell sx={{ width: '20%' }}>
         <Typography sx={{ fontSize: '16px' }}>{block.index}</Typography>
       </TableCell>
-      <TableCell sx={{ width: '18%' }}>
+      <TableCell sx={{ width: '20%' }}>
         <Typography sx={{ fontSize: '16px' }}>{block.txsNumber}</Typography>
       </TableCell>
-      <TableCell sx={{ width: '18%' }}>
+      <TableCell sx={{ width: '20%' }}>
         <Typography sx={{ fontSize: '16px' }}>{block.createdAt}</Typography>
       </TableCell>
     </TableRow>

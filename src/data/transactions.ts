@@ -51,8 +51,7 @@ function describeTransactionCreatorFormat(creator: string) {
     return 'PQC, post-quantum';
   } else if (length === 42) {
     return 'ECDSA, EVM-compatible';
-  }
-   else {
+  } else {
     return 'Unknown format';
   }
 }

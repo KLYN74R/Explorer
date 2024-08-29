@@ -40,7 +40,6 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
     }
   }
 
-
   const handleSetQuery = (e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
 
   if (!transactions.length) {
@@ -82,7 +81,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
           <TableBody>
             {filteredTxs.map((tx) => (
               <TableRow key={tx.sig}>
-                <TableCell sx={{ width: '31%' }}>
+                <TableCell sx={{ width: '20%' }}>
                   <Link
                     href={`/transactions/${tx.txHash}`}
                     passHref
@@ -94,16 +93,16 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
                     </Typography>
                   </Link>
                 </TableCell>
-                <TableCell sx={{ width: '23%' }}>
-                  <Typography sx={{ fontSize: '16px' }}>{truncateMiddle(tx.creator)}</Typography>
+                <TableCell sx={{ width: '20%' }}>
+                  <Typography color='primary.main' sx={{ fontSize: '16px' }}>{truncateMiddle(tx.creator)}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '23%' }}>
+                <TableCell sx={{ width: '20%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{tx.type}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '23%' }}>
+                <TableCell sx={{ width: '20%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{tx.payload.sigType}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '23%' }}>
+                <TableCell sx={{ width: '20%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{tx.fee}</Typography>
                 </TableCell>
               </TableRow>

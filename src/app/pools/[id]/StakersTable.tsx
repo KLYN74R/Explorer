@@ -69,16 +69,16 @@ export const StakersTable: FC<StakersTableProps> = ({
           <TableBody>
             {stakers.map((st) => (
               <TableRow key={st.id}>
-                <TableCell sx={{ width: '31%' }}>
+                <TableCell sx={{ width: '25%' }}>
                   <Typography color='primary.main' sx={{ fontSize: '16px' }}>{truncateMiddle(st.id)}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '23%' }}>
+                <TableCell sx={{ width: '25%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{st.kly}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '23%' }}>
+                <TableCell sx={{ width: '25%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{st.uno}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '23%' }}>
+                <TableCell sx={{ width: '25%' }}>
                   <Typography color='primary.main' sx={{ fontSize: '16px' }}>{st.total}</Typography>
                 </TableCell>
               </TableRow>
