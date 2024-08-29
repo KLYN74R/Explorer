@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Container, Typography, Grid } from '@mui/material';
 import { PrettyJSON } from '@/components';
 import { ContentBlock, Label } from '@/components/ui';
-import { fetchTransactionByBlake3Hash } from '@/data';
+import { fetchTransactionByTxHash } from '@/data';
 import { truncateMiddle } from '@/helpers';
 
 type TransactionByIdPageProps = {
@@ -16,15 +16,15 @@ export const metadata: Metadata = {
 };
 
 export default async function TransactionByIdPage({ params }: TransactionByIdPageProps) {
-  const blake3Hash = decodeURIComponent(params.hash);
-  const tx = await fetchTransactionByBlake3Hash(blake3Hash);
+  const txHash = decodeURIComponent(params.hash);
+  const tx = await fetchTransactionByTxHash(txHash);
 
   return (
     <Container maxWidth='xl' sx={{ py: 6 }}>
       <Grid container spacing={1} sx={{ px: { md: 4.5, xs: 0 } }}>
         <Grid item xs={12} sx={{ mb: 1.5 }}>
           <Typography variant='caption'>Transaction info</Typography>
-          <Typography variant='h1' sx={{ my: 0.25, wordBreak: 'break-all' }}>{truncateMiddle(tx.blake3Hash)}</Typography>
+          <Typography variant='h1' sx={{ my: 0.25, wordBreak: 'break-all' }}>{truncateMiddle(tx.txHash)}</Typography>
           <Label variant={tx.isOk ? 'green' : 'red'}>{tx.isOk ? 'Success' : 'Failed'}</Label>
         </Grid>
         <Grid item xs={12} lg={6}>
@@ -61,8 +61,8 @@ export default async function TransactionByIdPage({ params }: TransactionByIdPag
         </Grid>
         <Grid item xs={12}>
           <ContentBlock
-            title='256 bit Blake3 hash:'
-            value={tx.blake3Hash}
+            title='256 bit tx hash:'
+            value={tx.txHash}
           />
         </Grid>
         <Grid item xs={12} lg={6}>

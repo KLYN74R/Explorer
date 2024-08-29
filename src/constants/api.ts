@@ -23,6 +23,6 @@ export const API_ROUTES = {
     POOL_STATS: (poolId: string) => `pool_stats/${poolId}`,
   },
   TRANSACTION: {
-    TX_RECEIPT: (txBlake3Hash: string) => `tx_receipt/${txBlake3Hash}`,
+    TX_RECEIPT: (txHash: string) => `tx_receipt/${txHash}`,
   },
 };

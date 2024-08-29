@@ -1,7 +1,7 @@
 'use client';
 import React, { ChangeEvent, FC, useState } from 'react';
 import Link from 'next/link';
-import { TransactionWithBlake3Hash } from '@/definitions';
+import { TransactionWithTxHash } from '@/definitions';
 import { TRANSACTIONS_PER_PAGE } from '@/constants';
 import { truncateMiddle } from '@/helpers';
 import { FlexBetweenBox, FlexCenterBox, GeometricButton, LoadMoreButton } from '@/components/ui';
@@ -21,7 +21,7 @@ import SearchIcon from '@public/icons/ui/search.svg';
 import { COLORS } from '@/styles';
 
 type TransactionsTableProps = {
-  transactions: TransactionWithBlake3Hash[]
+  transactions: TransactionWithTxHash[]
 }
 
 export const TransactionsTable: FC<TransactionsTableProps> = ({
@@ -32,7 +32,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
   const nextPage = Math.floor(txs.length / TRANSACTIONS_PER_PAGE) + 1;
   const nextPageAvailable = txs.length < transactions.length;
 
-  const filteredTxs = query ? txs.filter(tx => tx.blake3Hash.includes(query)) : txs;
+  const filteredTxs = query ? txs.filter(tx => tx.txHash.includes(query)) : txs;
 
   const handleLoadMore = () => {
     if (nextPageAvailable) {
@@ -40,7 +40,6 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
     }
   }
 
-  const isEVM = (tx: TransactionWithBlake3Hash) => !tx.creator;
 
   const handleSetQuery = (e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
 
@@ -73,6 +72,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
         <Table sx={{ minWidth: 650 }} aria-label='Transactions table'>
           <TableHead>
             <TableRow>
+              <TableCell><Typography variant='h6'>TxHash</Typography></TableCell>
               <TableCell><Typography variant='h6'>Creator</Typography></TableCell>
               <TableCell><Typography variant='h6'>TxType</Typography></TableCell>
               <TableCell><Typography variant='h6'>SigType</Typography></TableCell>
@@ -84,18 +84,21 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
               <TableRow key={tx.sig}>
                 <TableCell sx={{ width: '31%' }}>
                   <Link
-                    href={`/transactions/${tx.blake3Hash}`}
+                    href={`/transactions/${tx.txHash}`}
                     passHref
                     style={{ textDecoration: 'none' }}
                   >
                     <Typography color='primary.main' sx={{ fontSize: '16px' }}>
                       <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} />{' '}
-                      {isEVM(tx) ? tx.payload.from : truncateMiddle(tx.creator)}
+                      {truncateMiddle(tx.txHash)}
                     </Typography>
                   </Link>
                 </TableCell>
                 <TableCell sx={{ width: '23%' }}>
-                  <Typography sx={{ fontSize: '16px' }}>{isEVM(tx) ? 'ECDSA' : tx.type}</Typography>
+                  <Typography sx={{ fontSize: '16px' }}>{truncateMiddle(tx.creator)}</Typography>
+                </TableCell>
+                <TableCell sx={{ width: '23%' }}>
+                  <Typography sx={{ fontSize: '16px' }}>{tx.type}</Typography>
                 </TableCell>
                 <TableCell sx={{ width: '23%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{tx.payload.sigType}</Typography>
@@ -140,7 +143,7 @@ const TransactionSearchBar = ({
         autoComplete='off'
         spellCheck={false}
         inputProps={{ maxLength: 200 }}
-        placeholder='Enter the 256 bit BLAKE3 hash of transaction'
+        placeholder='Enter the txID - BLAKE3(KLY) or SHA3(EVM) hash of transaction'
       />
       <GeometricButton
         variant='cyan'

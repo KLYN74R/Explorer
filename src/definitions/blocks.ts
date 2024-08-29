@@ -1,4 +1,4 @@
-import { Transaction, TransactionWithBlake3Hash } from './transactions';
+import { Transaction, TransactionWithTxHash } from './transactions';
 
 export enum BLOCK_ID_TYPE {
   SID = 'sid',
@@ -38,7 +38,7 @@ export interface BlockExtendedView {
   epochIndex: number;
   index: number;
   txsNumber: number;
-  transactions: TransactionWithBlake3Hash[];
+  transactions: TransactionWithTxHash[];
   createdAt: string;
   finalizationProof: FinalizationProof;
   prevHash: string;

@@ -1,8 +1,15 @@
 import api from '@/helpers/api';
 import { FormattedDate, hashData, truncateMiddle } from '@/helpers';
-import { Block, BLOCK_ID_TYPE, BlockExtendedView, BlockPreview, FinalizationProof, SyncStats } from '@/definitions';
+import { Block, BLOCK_ID_TYPE, BlockExtendedView, BlockPreview, FinalizationProof, SyncStats, TransactionWithTxHash } from '@/definitions';
 import { BLOCKS_PER_PAGE } from '@/constants';
 import { API_ROUTES } from '@/constants/api';
+
+import {Transaction as EvmTransaction} from '@ethereumjs/tx';
+
+import Web3 from 'web3'
+
+
+
 
 export async function fetchBlocksByShard(shard: string, currentPage: number): Promise<BlockPreview[]> {
   try {
@@ -61,11 +68,43 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
     const finalizationProof = await fetchFinalizationProof(blockId);
 
     const transactions = await Promise.all(
-      blockTxs.map(async (tx) => ({
-        ...tx,
-        blake3Hash: await hashData(tx.sig)
-      }))
-    );
+      blockTxs.map(async (tx) => {
+
+        if(tx.type === 'EVM_CALL'){
+
+          let serializedEVMTxWithout0x = tx.payload.slice(2); // delete 0x
+        
+          let evmTx = EvmTransaction.fromSerializedTx(Buffer.from(serializedEVMTxWithout0x,'hex'));
+
+          // Now build compatible version
+
+          let txCompatibleWithFormat: TransactionWithTxHash = {
+            txHash: '0x'+evmTx.hash().toString('hex'),
+            v:0,
+            creator: evmTx.getSenderAddress().toString(),
+            type:'EVM_CALL',
+            nonce: Number(evmTx.nonce),
+            fee: Number(evmTx.gasLimit * evmTx.gasPrice),
+            payload:{
+              sigType:'ECDSA',
+              to:evmTx.to?.toString(),
+              value: Web3.utils.fromWei(evmTx.value.toString(),'ether'),
+              evmBytecode:evmTx.data.toString('hex')
+            },
+            sig: 'ECDSA'
+          };
+
+          return txCompatibleWithFormat
+
+        } else {
+
+          return {...tx, txHash:await hashData(tx.sig)}
+
+        }
+
+      }
+    )
+  );
 
     return {
       id: blockId,
