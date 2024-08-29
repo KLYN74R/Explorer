@@ -1,15 +1,15 @@
 import api from '@/helpers/api';
-import { TransactionExtendedView, TransactionReceipt, TransactionWithBlake3Hash } from '@/definitions';
+import { TransactionExtendedView, TransactionReceipt, TransactionWithTxHash } from '@/definitions';
 import { fetchBlockById } from './blocks';
 import { API_ROUTES } from '@/constants/api';
 
-export async function fetchTransactionByBlake3Hash(hash: string): Promise<TransactionExtendedView> {
+export async function fetchTransactionByTxHash(hash: string): Promise<TransactionExtendedView> {
   try {
     const receipt = await api.get<TransactionReceipt>(API_ROUTES.TRANSACTION.TX_RECEIPT(hash));
     const block = await fetchBlockById(receipt.blockID);
 
     const transaction = block.transactions
-      .find(tx => tx.blake3Hash === hash) as TransactionWithBlake3Hash;
+      .find(tx => tx.txHash === hash) as TransactionWithTxHash;
 
     return {
       block,
@@ -32,7 +32,7 @@ function describeTransactionType(type: string) {
     case 'WVM_CALL':
       return 'call smart-contract function in WASM vm';
     case 'EVM_CALL':
-      return 'call smart-contract function in EVM';
+      return 'interaction with EVM';
     default:
       return '';
   }
@@ -49,7 +49,10 @@ function describeTransactionCreatorFormat(creator: string) {
     return 'TBLS, tsig';
   } else if (length === 64) {
     return 'PQC, post-quantum';
-  } else {
+  } else if (length === 42) {
+    return 'ECDSA, EVM-compatible';
+  }
+   else {
     return 'Unknown format';
   }
 }
