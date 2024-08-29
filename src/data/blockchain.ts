@@ -1,6 +1,6 @@
 import api from '@/helpers/api';
 import { formatNumber } from '@/helpers';
-import { BlockStats, ChainInfo, ShardsData, BlockchainData } from '@/definitions';
+import { BlockStats, ChainInfo, ShardsData, BlockchainData, RecentBlockStats } from '@/definitions';
 import { API_ROUTES } from '@/constants/api';
 import { fetchCurrentEpoch } from '@/data/epochs';
 import { getInfoFromEpoch, getTxSuccessRate } from './utils';
@@ -53,6 +53,14 @@ export async function fetchTotalBlocksAndTxsByEpoch(id: number | string): Promis
     return await api.get<BlockStats>(API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS_PER_EPOCH(Number(id)));
   } catch (e: any) {
     throw new Error(`Failed to fetch total blocks and txs by epoch ID "${id}" - ${e.message}`);
+  }
+}
+
+export async function fetchRecentTotalBlocksAndTxs(limit: number): Promise<RecentBlockStats> {
+  try {
+    return await api.get<RecentBlockStats>(API_ROUTES.STATS.RECENT_TOTAL_BLOCKS_AND_TXS_PER_EPOCH(limit));
+  } catch (e: any) {
+    throw new Error(`Failed to fetch recent total blocks and txs - ${e.message}`);
   }
 }
 
