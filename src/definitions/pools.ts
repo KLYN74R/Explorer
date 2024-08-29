@@ -13,13 +13,15 @@ export interface Pool {
     percentage: number;
     overStake: number;
     totalPower: number;
-    stakers: {
-      [key: string]: {
-        kly: number;
-        uno: number;
-      };
-    };
+    stakers: Stakers;
     poolURL: string;
     wssPoolURL: string;
   };
+}
+
+export interface Stakers {
+  [key: string]: {
+    kly: number;
+    uno: number;
+  }
 }
