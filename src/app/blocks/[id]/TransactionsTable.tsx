@@ -72,6 +72,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
         <Table sx={{ minWidth: 650 }} aria-label='Transactions table'>
           <TableHead>
             <TableRow>
+              <TableCell><Typography variant='h6'>TxHash</Typography></TableCell>
               <TableCell><Typography variant='h6'>Creator</Typography></TableCell>
               <TableCell><Typography variant='h6'>TxType</Typography></TableCell>
               <TableCell><Typography variant='h6'>SigType</Typography></TableCell>
@@ -89,9 +90,12 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
                   >
                     <Typography color='primary.main' sx={{ fontSize: '16px' }}>
                       <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} />{' '}
-                      {truncateMiddle(tx.creator)}
+                      {truncateMiddle(tx.txHash)}
                     </Typography>
                   </Link>
+                </TableCell>
+                <TableCell sx={{ width: '23%' }}>
+                  <Typography sx={{ fontSize: '16px' }}>{truncateMiddle(tx.creator)}</Typography>
                 </TableCell>
                 <TableCell sx={{ width: '23%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{tx.type}</Typography>

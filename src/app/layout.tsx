@@ -9,12 +9,12 @@ import * as process from 'process';
 
 export const metadata = metadataConfig;
 
-const isProd = process.env.NODE_ENV === 'production';
+// const isProd = process.env.NODE_ENV === 'production';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} style={{ ...(isProd && { zoom: 0.8 }) }}>
+      <body suppressHydrationWarning={true} style={{ ...({ zoom: 0.8 }) }}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
