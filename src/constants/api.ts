@@ -2,6 +2,7 @@ export const API_ROUTES = {
   STATS: {
     TOTAL_BLOCKS_AND_TXS: 'total_blocks_and_txs_stats',
     TOTAL_BLOCKS_AND_TXS_PER_EPOCH: (epochId: number) => `total_blocks_and_txs_stats_per_epoch/${epochId}`,
+    RECENT_TOTAL_BLOCKS_AND_TXS_PER_EPOCH: (limit: number) => `historical_stats_per_epoch/latest/${limit}`
   },
   EPOCH: {
     CURRENT_EPOCH_AT: 'current_epoch/at',  // Approvement thread

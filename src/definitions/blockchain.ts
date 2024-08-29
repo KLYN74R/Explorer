@@ -4,6 +4,10 @@ export interface BlockStats {
   successfulTxsNumber: number;
 }
 
+export interface RecentBlockStats {
+  [epochIndex: string]: BlockStats
+}
+
 export interface ChainInfo {
   genesis: {
     networkID: string;
