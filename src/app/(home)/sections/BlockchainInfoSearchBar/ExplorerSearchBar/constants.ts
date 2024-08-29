@@ -9,7 +9,7 @@ export const OPTIONS = {
 
 export const OPTIONS_PLACEHOLDER = {
   [OPTIONS.CHOOSE]: '<-- Apply a filter to look up for a TXID, SID, Block ID, Pool ID or Contract ID',
-  [OPTIONS.TRANSACTION_BY_HASH]: 'Enter the 256 bit BLAKE3 hash of transaction',
+  [OPTIONS.TRANSACTION_BY_HASH]: 'Enter the txID - BLAKE3(KLY) or SHA3(EVM) hash of transaction',
   [OPTIONS.BLOCK_BY_SID]: 'Enter the SID in format <shard>:<index>',
   [OPTIONS.BLOCK_BY_ID]: 'Enter Block ID in format <epoch>:<creator>:<index>',
   [OPTIONS.POOL_BY_ID]: 'Enter Pool ID',

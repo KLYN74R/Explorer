@@ -40,7 +40,6 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
     }
   }
 
-  const isEVM = (tx: TransactionWithTxHash) => !tx.creator;
 
   const handleSetQuery = (e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
 
@@ -140,7 +139,7 @@ const TransactionSearchBar = ({
         autoComplete='off'
         spellCheck={false}
         inputProps={{ maxLength: 200 }}
-        placeholder='Enter the 256 bit BLAKE3 hash of transaction'
+        placeholder='Enter the txID - BLAKE3(KLY) or SHA3(EVM) hash of transaction'
       />
       <GeometricButton
         variant='cyan'

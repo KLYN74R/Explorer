@@ -6,6 +6,10 @@ import { API_ROUTES } from '@/constants/api';
 
 import {Transaction as EvmTransaction} from '@ethereumjs/tx';
 
+import Web3 from 'web3'
+
+
+
 
 export async function fetchBlocksByShard(shard: string, currentPage: number): Promise<BlockPreview[]> {
   try {
@@ -83,6 +87,8 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
             fee: Number(evmTx.gasLimit * evmTx.gasPrice),
             payload:{
               sigType:'ECDSA',
+              to:evmTx.to?.toString(),
+              value: Web3.utils.fromWei(evmTx.value.toString(),'ether'),
               evmBytecode:evmTx.data.toString('hex')
             },
             sig: 'ECDSA'

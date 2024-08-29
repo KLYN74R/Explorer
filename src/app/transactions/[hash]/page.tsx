@@ -61,7 +61,7 @@ export default async function TransactionByIdPage({ params }: TransactionByIdPag
         </Grid>
         <Grid item xs={12}>
           <ContentBlock
-            title='256 bit Blake3 hash:'
+            title='256 bit tx hash:'
             value={tx.txHash}
           />
         </Grid>
