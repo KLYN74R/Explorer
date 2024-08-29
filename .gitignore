@@ -39,6 +39,7 @@ node_modules/
 
 # IDE specific files
 .idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
