@@ -4,6 +4,7 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import { truncateMiddle } from '@/helpers';
 import { ContentBlock, Label } from '@/components/ui';
 import { TransactionsTable } from './TransactionsTable';
+import { Account } from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
 
 export const metadata: Metadata = {
@@ -16,9 +17,9 @@ type Props = {
   }
 }
 
-export default async function ContractByIdPage({ params }: Props) {
+export default async function AccountByIdPage({ params }: Props) {
   const [shard, accountId] = decodeURIComponent(params.id).split(':');
-  const account = await fetchShardAccountById(shard, accountId);
+  const account = await fetchShardAccountById(shard, accountId) as Account;
   const transactions  = await fetchUserTransactions(shard, accountId);
 
   return (
