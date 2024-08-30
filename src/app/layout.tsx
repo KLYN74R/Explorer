@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import * as React from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer/>
           </ThemeProvider>
         </AppRouterCacheProvider>
+        <Analytics />
       </body>
     </html>
   );
