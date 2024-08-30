@@ -1,6 +1,6 @@
 import api from '@/helpers/api';
-import { FormattedDate, hashData, truncateMiddle } from '@/helpers';
-import { Block, BLOCK_ID_TYPE, BlockExtendedView, BlockPreview, FinalizationProof, SyncStats } from '@/definitions';
+import { FormattedDate, hashData, parseEvmTransaction, truncateMiddle } from '@/helpers';
+import { Block, BLOCK_ID_TYPE, BlockExtendedView, BlockPreview, FinalizationProof, SyncStats, TransactionWithTxHash } from '@/definitions';
 import { BLOCKS_PER_PAGE } from '@/constants';
 import { API_ROUTES } from '@/constants/api';
 
@@ -61,10 +61,11 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
     const finalizationProof = await fetchFinalizationProof(blockId);
 
     const transactions = await Promise.all(
-      blockTxs.map(async (tx) => ({
-        ...tx,
-        blake3Hash: await hashData(tx.sig)
-      }))
+      blockTxs.map(async (tx) =>
+        tx.type === 'EVM_CALL'
+          ? parseEvmTransaction(tx)
+          : { ...tx, txHash: await hashData(tx.sig) }
+      )
     );
 
     return {

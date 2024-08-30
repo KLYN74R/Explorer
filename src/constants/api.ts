@@ -2,6 +2,7 @@ export const API_ROUTES = {
   STATS: {
     TOTAL_BLOCKS_AND_TXS: 'total_blocks_and_txs_stats',
     TOTAL_BLOCKS_AND_TXS_PER_EPOCH: (epochId: number) => `total_blocks_and_txs_stats_per_epoch/${epochId}`,
+    RECENT_TOTAL_BLOCKS_AND_TXS_PER_EPOCH: (limit: number) => `historical_stats_per_epoch/latest/${limit}`
   },
   EPOCH: {
     CURRENT_EPOCH_AT: 'current_epoch/at',  // Approvement thread
@@ -21,7 +22,11 @@ export const API_ROUTES = {
   POOL: {
     POOL_STATS: (poolId: string) => `pool_stats/${poolId}`,
   },
-  TRANSACTION: {
-    TX_RECEIPT: (txBlake3Hash: string) => `tx_receipt/${txBlake3Hash}`,
+  TRANSACTIONS: {
+    TX_RECEIPT: (txHash: string) => `tx_receipt/${txHash}`,
+    USER_TRANSACTIONS: (shard: string, accountId: string) => `txs_list/${shard}/${accountId}`
   },
+  ACCOUNTS: {
+    ACCOUNT_BY_ID: (shard: string, accountId: string) => `account/${shard}/${accountId}`
+  }
 };

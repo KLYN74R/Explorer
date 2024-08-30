@@ -3,7 +3,7 @@ import { SxProps, Typography } from '@mui/material';
 
 export const Label: FC<{
   children: ReactNode,
-  variant: 'green' | 'red',
+  variant: 'green' | 'red' | 'blue',
   sx?: SxProps
 }> = ({
   children,
@@ -13,9 +13,9 @@ export const Label: FC<{
   return (
     <Typography
       variant='body2'
-      color={variant === 'green' ? 'rgba(122, 255, 115, 1)' : 'secondary.main'}
+      color={variant === 'green' ? 'rgb(122, 255, 115)' : variant === 'red' ? 'secondary.main' : 'primary.main'}
       sx={{
-        backgroundColor: variant == 'green' ? 'rgba(41, 51, 41, 1)' : 'rgba(36, 30, 30, 1)',
+        backgroundColor: variant == 'green' ? 'rgb(41, 51, 41)' : variant === 'red' ? 'rgb(36, 30, 30)' : '#2F3F45',
         px: 1,
         lineHeight: '30px',
         borderRadius: '3px',

@@ -3,24 +3,37 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { inter } from '@/styles/theme';
 import { formatNumber, roundToNearest } from '@/helpers';
+import { RecentBlockStats } from '@/definitions';
 
 // bypass SSR in order to get rid of "window is not defined" error
 const ApexCharts = dynamic(() => import('react-apexcharts'), {
   ssr: false
 });
 
-type TransactionData = {
+type TxPerEpoch = {
   epochIndex: number;
-  transactionsNum: number;
-};
-
-interface TransactionsChartProps {
-  data: TransactionData[];
+  txNumber: number;
 }
 
-export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) => {
+const getChartData = (stats: RecentBlockStats): TxPerEpoch[] => {
+  return Object.entries(stats).reduce((acc: TxPerEpoch[], curr) => {
+    const txPerEpoch: TxPerEpoch = {
+      epochIndex: Number(curr[0]),
+      txNumber: Number(curr[1].totalTxsNumber)
+    }
+    acc.push(txPerEpoch);
+    return acc;
+  }, []);
+}
 
-  const YMaxValue = Math.max(...data.map(val => val.transactionsNum)) * 1.025;
+interface TransactionsChartProps {
+  recentBlockStats: RecentBlockStats;
+}
+
+export const TransactionsChart: React.FC<TransactionsChartProps> = ({ recentBlockStats }) => {
+  const data = getChartData(recentBlockStats);
+
+  const YMaxValue = Math.max(...data.map(val => val.txNumber)) * 1.025;
   const YMaxAxiosValue = roundToNearest(YMaxValue, YMaxValue > 1000 ? 1000 : 100);
 
   const [options, setOptions] = useState({
@@ -123,7 +136,7 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) =>
         fontWeight: 300
       },
       x: {
-        formatter: (value: string) => `Epoch ${value} - MOCK DATA` // todo Remove "Mock Data" once endpoint is added
+        formatter: (value: string) => `Epoch ${value}`
       },
       y: {
         formatter: (value: string) => formatNumber(value)
@@ -145,7 +158,7 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ data }) =>
     name: 'Transaction Volume',
     data: data.map(item => ({
       x: item.epochIndex,
-      y: item.transactionsNum
+      y: item.txNumber
     })),
     color: 'rgba(92, 208, 199, 1)'
   }]);

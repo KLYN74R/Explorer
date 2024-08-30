@@ -14,14 +14,14 @@ export const NetworkParameters:FC<Props> = async ({ data }) => {
         Network Parameters
       </Typography>
       <Grid container spacing={1} sx={{ mt: 2 }}>
-        <Grid item xs={12} md={12}>
-          <ContentItem title='Symbiotic chain ID' value={data.chainInfo.symbioticChainId} />
+        <Grid item xs={12}>
+          <ContentItem title='Network ID' value={data.chainInfo.networkId} />
         </Grid>
         <Grid item xs={12} md={6}>
           <ContentItem title='Validator stake size' value={data.chainInfo.validatorStakeSize} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Workflow major version' value={data.chainInfo.workflowMajorVersion} />
+          <ContentItem title='Core major version' value={data.chainInfo.coreMajorVersion} />
         </Grid>
         <Grid item xs={12} md={6}>
           <ContentItem title='Quorum size' value={data.chainInfo.quorumSize} />
@@ -41,7 +41,7 @@ export const NetworkParameters:FC<Props> = async ({ data }) => {
         <Grid item xs={12} md={6}>
           <ContentItem title='Max block size' value={data.chainInfo.maxBlockSize} />
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12}>
           <ContentItem title='Limit For Operations On The Epoch Edge' value={data.chainInfo.limitForOperations} />
         </Grid>
       </Grid>

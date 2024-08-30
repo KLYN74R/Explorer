@@ -56,6 +56,21 @@ export function roundToNearest(num: number, unit: number) {
   return Math.ceil(num / unit) * unit;
 }
 
+export function formatOrdinal(number: number): string {
+  const n = number;
+
+  if (n === 0) return '0';
+
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+
+  if (v >= 11 && v <= 13) {
+    return n + s[0];
+  }
+
+  return n + (s[(n % 10)] || s[0]);
+}
+
 export function truncateMiddle(str: string) {
   if (str.length <= 20) {
     return str;

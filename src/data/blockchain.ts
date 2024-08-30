@@ -1,6 +1,6 @@
 import api from '@/helpers/api';
 import { formatNumber } from '@/helpers';
-import { BlockStats, ChainInfo, ShardsData, BlockchainData } from '@/definitions';
+import { BlockStats, ChainInfo, ShardsData, BlockchainData, RecentBlockStats } from '@/definitions';
 import { API_ROUTES } from '@/constants/api';
 import { fetchCurrentEpoch } from '@/data/epochs';
 import { getInfoFromEpoch, getTxSuccessRate } from './utils';
@@ -16,9 +16,9 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
 
     const txsSuccessRate = getTxSuccessRate(blocksAndTxsData);
 
-    const slotTimeInSeconds = chainData.approvementThread.options.BLOCK_TIME / 1000;
+    const slotTimeInSeconds = chainData.approvementThread.params.BLOCK_TIME / 1000;
 
-    const totalStaked = validatorsNumber * chainData.approvementThread.options.VALIDATOR_STAKE;
+    const totalStaked = validatorsNumber * chainData.approvementThread.params.VALIDATOR_STAKE;
 
     return {
       shardsNumber,
@@ -31,16 +31,16 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
       totalBlocksNumberInCurrentEpoch: formatNumber(blocksAndTxsDataByEpoch.totalBlocksNumber),
       totalStaked: formatNumber(totalStaked),
       chainInfo: {
-        symbioticChainId: chainData.genesis.symbioteID,
-        validatorStakeSize: formatNumber(chainData.approvementThread.options.VALIDATOR_STAKE),
-        workflowMajorVersion: chainData.approvementThread.version,
-        quorumSize: chainData.approvementThread.options.QUORUM_SIZE + ' validators',
-        unstakingPeriod: chainData.approvementThread.options.UNSTAKING_PERIOD + ' epoches',
-        epochDuration: chainData.approvementThread.options.EPOCH_TIME / 3600000 + ' hours',
-        leaderTimeframe: chainData.approvementThread.options.LEADERSHIP_TIMEFRAME / 1000 + ' seconds',
-        slotTime: chainData.approvementThread.options.BLOCK_TIME / 1000 + ' second',
-        maxBlockSize: (chainData.approvementThread.options.MAX_BLOCK_SIZE_IN_BYTES / 1000000).toFixed(2) + 'Mb',
-        limitForOperations: chainData.approvementThread.options.EPOCH_EDGE_OPERATIONS_LIMIT_PER_BLOCK
+        networkId: chainData.genesis.networkID,
+        validatorStakeSize: formatNumber(chainData.approvementThread.params.VALIDATOR_STAKE),
+        coreMajorVersion: chainData.approvementThread.version,
+        quorumSize: chainData.approvementThread.params.QUORUM_SIZE + ' validators',
+        unstakingPeriod: chainData.approvementThread.params.UNSTAKING_PERIOD + ' epoches',
+        epochDuration: chainData.approvementThread.params.EPOCH_TIME / 3600000 + ' hours',
+        leaderTimeframe: chainData.approvementThread.params.LEADERSHIP_TIMEFRAME / 1000 + ' seconds',
+        slotTime: chainData.approvementThread.params.BLOCK_TIME / 1000 + ' second',
+        maxBlockSize: (chainData.approvementThread.params.MAX_BLOCK_SIZE_IN_BYTES / 1000000).toFixed(2) + 'Mb',
+        limitForOperations: chainData.approvementThread.params.EPOCH_EDGE_TRANSACTIONS_LIMIT_PER_BLOCK
       }
     };
   } catch (e: any) {
@@ -53,6 +53,14 @@ export async function fetchTotalBlocksAndTxsByEpoch(id: number | string): Promis
     return await api.get<BlockStats>(API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS_PER_EPOCH(Number(id)));
   } catch (e: any) {
     throw new Error(`Failed to fetch total blocks and txs by epoch ID "${id}" - ${e.message}`);
+  }
+}
+
+export async function fetchRecentTotalBlocksAndTxs(limit: number): Promise<RecentBlockStats> {
+  try {
+    return await api.get<RecentBlockStats>(API_ROUTES.STATS.RECENT_TOTAL_BLOCKS_AND_TXS_PER_EPOCH(limit));
+  } catch (e: any) {
+    throw new Error(`Failed to fetch recent total blocks and txs - ${e.message}`);
   }
 }
 

@@ -13,9 +13,9 @@ export const NetworkStatus:FC<Props> = ({ data }) => {
   const linksToPages: Record<string, string> = {
     'Blocks data and stats': '/blocks',
     'Epoches data': '/epochs/' + data.epochId,
-    'Hostchain Checkpoints': '/checkpoints',
-    'Symbiotic Chains': '#',
-    'RWX Smart Contracts': '#',
+    'Hostchain checkpoints': '/checkpoints',
+    'Symbiotic chains': '#',
+    'RWX smart contracts': '#',
     'Multistaking stats': '#',
     'Voting & DAO': '#',
     'Mutations': '#',

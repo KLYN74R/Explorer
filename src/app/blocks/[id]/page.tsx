@@ -4,7 +4,7 @@ import { ContentBlock, Label, } from '@/components/ui';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { TransactionsTable } from './TransactionsTable';
-import BlockImage from '@public/block.svg';
+import BlockImage from '@public/icons/pages/block.svg';
 import { fetchBlockById } from '@/data';
 
 type BlockByIdPageProps = {

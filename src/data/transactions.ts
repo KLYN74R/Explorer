@@ -1,15 +1,15 @@
 import api from '@/helpers/api';
-import { TransactionExtendedView, TransactionReceipt, TransactionWithBlake3Hash } from '@/definitions';
-import { fetchBlockById } from './blocks';
 import { API_ROUTES } from '@/constants/api';
+import { TransactionExtendedView, TransactionReceipt, TransactionWithTxHash, TransactionPreview } from '@/definitions';
+import { fetchBlockById } from './blocks';
 
-export async function fetchTransactionByBlake3Hash(hash: string): Promise<TransactionExtendedView> {
+export async function fetchTransactionByTxHash(hash: string): Promise<TransactionExtendedView> {
   try {
-    const receipt = await api.get<TransactionReceipt>(API_ROUTES.TRANSACTION.TX_RECEIPT(hash));
+    const receipt = await api.get<TransactionReceipt>(API_ROUTES.TRANSACTIONS.TX_RECEIPT(hash));
     const block = await fetchBlockById(receipt.blockID);
 
     const transaction = block.transactions
-      .find(tx => tx.blake3Hash === hash) as TransactionWithBlake3Hash;
+      .find(tx => tx.txHash === hash) as TransactionWithTxHash;
 
     return {
       block,
@@ -23,6 +23,14 @@ export async function fetchTransactionByBlake3Hash(hash: string): Promise<Transa
   }
 }
 
+export async function fetchUserTransactions(shard: string, accountId: string): Promise<TransactionPreview[]> {
+  try {
+    return await api.get<TransactionPreview[]>(API_ROUTES.TRANSACTIONS.USER_TRANSACTIONS(shard, accountId));
+  } catch (e: any) {
+    throw new Error(`Failed to fetch transactions by account id "${accountId}" in shard "${shard}" - ${e.message}`);
+  }
+}
+
 function describeTransactionType(type: string) {
   switch (type) {
     case 'TX':
@@ -32,7 +40,7 @@ function describeTransactionType(type: string) {
     case 'WVM_CALL':
       return 'call smart-contract function in WASM vm';
     case 'EVM_CALL':
-      return 'call smart-contract function in EVM';
+      return 'interaction with EVM';
     default:
       return '';
   }
@@ -49,6 +57,8 @@ function describeTransactionCreatorFormat(creator: string) {
     return 'TBLS, tsig';
   } else if (length === 64) {
     return 'PQC, post-quantum';
+  } else if (length === 42) {
+    return 'ECDSA, EVM-compatible';
   } else {
     return 'Unknown format';
   }

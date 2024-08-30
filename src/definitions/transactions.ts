@@ -6,17 +6,12 @@ export interface Transaction {
   type: string;
   nonce: number;
   fee: number;
-  payload: {
-    sigType: string;
-    to: string;
-    from?: string;
-    amount: number;
-  };
+  payload: any;
   sig: string;
 }
 
-export interface TransactionWithBlake3Hash extends Transaction {
-  blake3Hash: string;
+export interface TransactionWithTxHash extends Transaction {
+  txHash: string;
 }
 
 export interface TransactionReceipt {
@@ -26,8 +21,15 @@ export interface TransactionReceipt {
   reason: string;
 }
 
-export interface TransactionExtendedView extends TransactionReceipt, TransactionWithBlake3Hash {
+export interface TransactionExtendedView extends TransactionReceipt, TransactionWithTxHash {
   block: BlockExtendedView;
   typeDescription: string;
   creatorFormatDescription: string;
+}
+
+export interface TransactionPreview {
+  txid: string;
+  txType: string;
+  sigType: string;
+  fee: number;
 }

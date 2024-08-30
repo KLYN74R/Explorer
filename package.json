@@ -3,19 +3,21 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_NO_WARNINGS=1 next dev -H 0.0.0.0",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_NO_WARNINGS=1 next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@ethereumjs/tx": "^4.1.2",
     "@mui/icons-material": "next",
     "@mui/material": "next",
     "@mui/material-nextjs": "next",
     "@svgr/webpack": "^8.1.0",
+    "@vercel/analytics": "^1.3.1",
     "clsx": "^2.1.1",
     "hash-wasm": "^4.11.0",
     "next": "latest",
@@ -24,7 +26,8 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "latest",
     "react-infinite-ticker": "^2.1.1",
-    "react-json-formatter": "^0.4.0"
+    "react-json-formatter": "^0.4.0",
+    "web3": "^1.10.4"
   },
   "devDependencies": {
     "@types/node": "latest",
@@ -33,6 +36,7 @@
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "webpack": "^5.94.0"
   }
 }
