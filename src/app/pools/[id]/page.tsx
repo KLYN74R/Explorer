@@ -4,7 +4,7 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import { fetchPoolById } from '@/data';
 import { formatNumber, truncateMiddle } from '@/helpers';
 import { StakersTable } from './StakersTable';
-import PoolImage from '@public/pool.svg';
+import PoolImage from '@public/icons/pages/pool.svg';
 
 type PoolByIdPageProps = {
   params: {

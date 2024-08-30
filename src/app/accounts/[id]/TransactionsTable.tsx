@@ -1,7 +1,6 @@
 'use client';
 import React, { ChangeEvent, FC, useState } from 'react';
-import Link from 'next/link';
-import { TransactionWithTxHash } from '@/definitions';
+import { TransactionPreview } from '@/definitions';
 import { TRANSACTIONS_PER_PAGE } from '@/constants';
 import { truncateMiddle } from '@/helpers';
 import { FlexBetweenBox, FlexCenterBox, GeometricButton, LoadMoreButton } from '@/components/ui';
@@ -13,18 +12,18 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Box,
-  TextField
+  Box, TextField,
 } from '@mui/material';
+import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
-import SearchIcon from '@public/icons/ui/search.svg';
 import { COLORS } from '@/styles';
+import SearchIcon from '@public/icons/ui/search.svg';
 
-type TransactionsTableProps = {
-  transactions: TransactionWithTxHash[]
+type Props = {
+  transactions: TransactionPreview[]
 }
 
-export const TransactionsTable: FC<TransactionsTableProps> = ({
+export const TransactionsTable: FC<Props> = ({
   transactions
 }) => {
   const [txs, setTxs] = useState(transactions.slice(0, TRANSACTIONS_PER_PAGE));
@@ -32,7 +31,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
   const nextPage = Math.floor(txs.length / TRANSACTIONS_PER_PAGE) + 1;
   const nextPageAvailable = txs.length < transactions.length;
 
-  const filteredTxs = query ? txs.filter(tx => tx.txHash.includes(query)) : txs;
+  const filteredTxs = query ? txs.filter(tx => tx.txid.includes(query)) : txs;
 
   const handleLoadMore = () => {
     if (nextPageAvailable) {
@@ -45,7 +44,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
   if (!transactions.length) {
     return (
       <Box sx={{ py: 6, textAlign: 'center' }}>
-        <Typography color='primary.main'>Block contains no transactions.</Typography>
+        <Typography color='primary.main'>No transactions found.</Typography>
       </Box>
     );
   }
@@ -71,8 +70,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
         <Table sx={{ minWidth: 650 }} aria-label='Transactions table'>
           <TableHead>
             <TableRow>
-              <TableCell><Typography variant='h6'>TxHash</Typography></TableCell>
-              <TableCell><Typography variant='h6'>Creator</Typography></TableCell>
+              <TableCell><Typography variant='h6'>TxID</Typography></TableCell>
               <TableCell><Typography variant='h6'>TxType</Typography></TableCell>
               <TableCell><Typography variant='h6'>SigType</Typography></TableCell>
               <TableCell><Typography variant='h6'>Fee</Typography></TableCell>
@@ -80,29 +78,26 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
           </TableHead>
           <TableBody>
             {filteredTxs.map((tx) => (
-              <TableRow key={tx.txHash}>
-                <TableCell sx={{ width: '20%' }}>
+              <TableRow key={tx.txid}>
+                <TableCell sx={{ width: '25%' }}>
                   <Link
-                    href={`/transactions/${tx.txHash}`}
+                    href={`/transactions/${tx.txid}`}
                     passHref
                     style={{ textDecoration: 'none' }}
                   >
                     <Typography color='primary.main' sx={{ fontSize: '16px' }}>
                       <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} />{' '}
-                      {truncateMiddle(tx.txHash)}
+                      {truncateMiddle(tx.txid)}
                     </Typography>
                   </Link>
                 </TableCell>
-                <TableCell sx={{ width: '20%' }}>
-                  <Typography color='primary.main' sx={{ fontSize: '16px' }}>{truncateMiddle(tx.creator)}</Typography>
+                <TableCell sx={{ width: '25%' }}>
+                  <Typography sx={{ fontSize: '16px' }}>{tx.txType}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '20%' }}>
-                  <Typography sx={{ fontSize: '16px' }}>{tx.type}</Typography>
+                <TableCell sx={{ width: '25%' }}>
+                  <Typography sx={{ fontSize: '16px' }}>{tx.sigType}</Typography>
                 </TableCell>
-                <TableCell sx={{ width: '20%' }}>
-                  <Typography sx={{ fontSize: '16px' }}>{tx.payload.sigType}</Typography>
-                </TableCell>
-                <TableCell sx={{ width: '20%' }}>
+                <TableCell sx={{ width: '25%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{tx.fee}</Typography>
                 </TableCell>
               </TableRow>

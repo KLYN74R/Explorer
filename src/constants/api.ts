@@ -22,7 +22,11 @@ export const API_ROUTES = {
   POOL: {
     POOL_STATS: (poolId: string) => `pool_stats/${poolId}`,
   },
-  TRANSACTION: {
+  TRANSACTIONS: {
     TX_RECEIPT: (txHash: string) => `tx_receipt/${txHash}`,
+    USER_TRANSACTIONS: (shard: string, accountId: string) => `txs_list/${shard}/${accountId}`
   },
+  ACCOUNTS: {
+    ACCOUNT_BY_ID: (shard: string, accountId: string) => `account/${shard}/${accountId}`
+  }
 };

@@ -26,3 +26,10 @@ export interface TransactionExtendedView extends TransactionReceipt, Transaction
   typeDescription: string;
   creatorFormatDescription: string;
 }
+
+export interface TransactionPreview {
+  txid: string;
+  txType: string;
+  sigType: string;
+  fee: number;
+}
