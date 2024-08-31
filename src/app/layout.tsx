@@ -1,21 +1,19 @@
+import { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import * as React from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import theme from '@/styles/theme';
-import { metadataConfig } from '@/config';
 import { Footer, Header } from '@/components';
-import * as process from 'process';
+import { metadataConfig } from '@/config';
+import theme from '@/styles/theme';
+import '@/styles/global.css';
 
 export const metadata = metadataConfig;
 
-const isProd = process.env.NODE_ENV === 'production';
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} style={{ ...(isProd && { zoom: 0.8 }) }}>
+      <body suppressHydrationWarning={true}>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />

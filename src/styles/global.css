@@ -1,0 +1,10 @@
+body {
+  zoom: 0.8;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi) and (min-width: 1700px) and (min-height: 1100px) {
+  body {
+    zoom: 1;
+  }
+}
