@@ -21,7 +21,7 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
   const id = decodeURIComponent(params.id);
   const block = await fetchBlockById(id);
 
-  const status = !!block.finalizationProof.proofs ? 'Approved' : 'Awaiting approval';
+  const status = !!block.aggregatedFinalizationProof.proofs ? 'Approved' : 'Awaiting approval';
 
   return (
     <Container maxWidth='xl' sx={{ py: 6 }}>
@@ -33,7 +33,7 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
               <Typography variant='h1' sx={{ my: 0.25, wordBreak: 'break-all' }}>{block.truncatedId}</Typography>
               <Label variant={status === 'Approved' ? 'green' : 'red'}>{status}</Label>
               <Link
-                href={`/blocks/${id}/finalization-proof`}
+                href={`/blocks/${id}/aggregated-finalization-proof`}
                 style={{ textDecoration: 'none', marginLeft: '1rem' }}
               >
                 <Typography variant='caption' color='primary.main'>

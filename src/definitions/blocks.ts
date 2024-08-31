@@ -40,11 +40,11 @@ export interface BlockExtendedView {
   txsNumber: number;
   transactions: TransactionWithTxHash[];
   createdAt: string;
-  finalizationProof: FinalizationProof;
+  aggregatedFinalizationProof: AggregatedFinalizationProof;
   prevHash: string;
 }
 
-export interface FinalizationProof {
+export interface AggregatedFinalizationProof {
   prevBlockHash: string;
   blockID: string;
   blockHash: string;

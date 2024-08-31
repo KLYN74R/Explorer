@@ -1,6 +1,6 @@
 import api from '@/helpers/api';
 import { FormattedDate, hashData, parseEvmTransaction, truncateMiddle } from '@/helpers';
-import { Block, BLOCK_ID_TYPE, BlockExtendedView, BlockPreview, FinalizationProof, SyncStats, TransactionWithTxHash } from '@/definitions';
+import { Block, BLOCK_ID_TYPE, BlockExtendedView, BlockPreview, AggregatedFinalizationProof, SyncStats} from '@/definitions';
 import { BLOCKS_PER_PAGE } from '@/constants';
 import { API_ROUTES } from '@/constants/api';
 
@@ -58,7 +58,7 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
     const blockId = epochIndex + ':' + creator + ':' + index;
     const truncatedBlockId = `${epochIndex}:${truncateMiddle(creator)}:${index}`;
 
-    const finalizationProof = await fetchFinalizationProof(blockId);
+    const aggregatedFinalizationProof = await fetchAggregatedFinalizationProof(blockId);
 
     const transactions = await Promise.all(
       blockTxs.map(async (tx) =>
@@ -79,14 +79,14 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
       txsNumber,
       createdAt,
       prevHash,
-      finalizationProof
+      aggregatedFinalizationProof
     };
   } catch (e: any) {
     throw new Error(`Failed to fetch block by ID "${id}" - ${e.message}`);
   }
 }
 
-export async function fetchFinalizationProof(id: string): Promise<FinalizationProof> {
+export async function fetchAggregatedFinalizationProof(id: string): Promise<AggregatedFinalizationProof> {
   let blockId = id;
 
   try {
