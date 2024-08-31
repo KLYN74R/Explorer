@@ -82,7 +82,7 @@ export default async function PoolByIdPage({ params }: PoolByIdPageProps) {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-          <PoolImage width={489} height={489} viewBox='0 0 489 489' />
+          <PoolImage width={421} height={426} viewBox='0 0 421 426'  />
         </Grid>
       </Grid>
 

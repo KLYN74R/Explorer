@@ -89,7 +89,7 @@ export default async function ContractByIdPage({ params }: Props) {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-          <ContractImage width={489} height={489} viewBox='0 0 489 489' />
+          <ContractImage width={421} height={426} viewBox='0 0 421 426' />
         </Grid>
       </Grid>
     </Container>
