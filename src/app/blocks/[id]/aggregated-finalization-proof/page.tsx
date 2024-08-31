@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import { ContentBlock } from '@/components/ui';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { PrettyJSON } from '@/components';
-import { fetchFinalizationProof } from '@/data';
+import { fetchAggregatedFinalizationProof } from '@/data';
 
-type FinalizationProofPageProps = {
+type AggregatedFinalizationProofPageProps = {
   params: {
     id: string;
   }
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
   title: 'Aggregated Finalization Proof',
 };
 
-export default async function FinalizationProofPage({ params }: FinalizationProofPageProps) {
+export default async function AggregatedFinalizationProofPage({ params }: AggregatedFinalizationProofPageProps) {
   const id = decodeURIComponent(params.id);
-  const finalizationProof = await fetchFinalizationProof(id);
+  const aggregatedFinalizationProof = await fetchAggregatedFinalizationProof(id);
 
   return (
     <Container maxWidth='xl' sx={{ py: 6 }}>
@@ -26,13 +26,13 @@ export default async function FinalizationProofPage({ params }: FinalizationProo
           <Grid item xs={12}>
             <ContentBlock
               title='Block Id:'
-              value={finalizationProof.blockID}
-              url={`/blocks/${finalizationProof.blockID}`}
+              value={aggregatedFinalizationProof.blockID}
+              url={`/blocks/${aggregatedFinalizationProof.blockID}`}
             />
           </Grid>
           <Grid item xs={12}>
             <ContentBlock>
-              <PrettyJSON data={finalizationProof} />
+              <PrettyJSON data={aggregatedFinalizationProof} />
             </ContentBlock>
           </Grid>
         </Grid>
