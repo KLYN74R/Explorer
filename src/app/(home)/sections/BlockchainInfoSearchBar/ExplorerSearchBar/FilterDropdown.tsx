@@ -28,7 +28,7 @@ export const FilterDropdown: FC<{
         }}
       >
         <MenuItem value={OPTIONS.CHOOSE} sx={{ display: 'none' }}>Filter</MenuItem>
-        <MenuItem value={OPTIONS.TRANSACTION_BY_HASH}>TXID</MenuItem>
+        <MenuItem value={OPTIONS.TRANSACTION_BY_HASH}>Tx ID</MenuItem>
         <MenuItem value={OPTIONS.BLOCK_BY_SID}>SID</MenuItem>
         <MenuItem value={OPTIONS.BLOCK_BY_ID}>Block ID</MenuItem>
         <MenuItem value={OPTIONS.POOL_BY_ID}>Pool ID</MenuItem>
