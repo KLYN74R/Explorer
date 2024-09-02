@@ -8,3 +8,14 @@ only screen and (min-resolution: 192dpi) and (min-width: 1700px) and (min-height
     zoom: 1;
   }
 }
+
+div::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: rgba(254, 254, 254, 0.2);
+}
+
+div::-webkit-scrollbar-thumb {
+  background: #7aeee5;
+  border-radius: 5px;
+}

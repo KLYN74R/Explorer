@@ -13,7 +13,8 @@ export const PrettyJSON: FC<{ data: object }> = ({
         style: {
           fontFamily: 'monospace',
           width: '100%',
-          overflow: 'auto'
+          overflow: 'auto',
+          paddingBottom: '10px'
         },
         numberStyle: {color: COLORS.CYAN},
         nullStyle: {color: COLORS.RED},
