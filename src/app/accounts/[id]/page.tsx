@@ -42,7 +42,7 @@ export default async function AccountByIdPage({ params }: Props) {
             <Grid item xs={12}>
               <ContentBlock
                 title='Shard:'
-                value={account.shard}
+                value={shard}
               />
             </Grid>
             <Grid item xs={12} md={6}>
