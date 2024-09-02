@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, BoxProps, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Box, BoxProps, FormControl, Menu, MenuItem, MenuProps, Select, SelectChangeEvent } from '@mui/material';
 import { OPTIONS } from './constants';
 import ArrowDownIcon from '@public/icons/ui/arrowDown.svg';
 
@@ -10,6 +10,10 @@ export const FilterDropdown: FC<{
   searchType,
   handleSearchTypeChange
 }) => {
+  const CustomMenu = (props: MenuProps) => {
+    return <Menu {...props} disablePortal />;
+  };
+
   return (
     <FormControl variant="standard">
       <Select
@@ -25,6 +29,10 @@ export const FilterDropdown: FC<{
             pr: 2,
             py: 0.8
           }
+        }}
+        MenuProps={{
+          // @ts-ignore
+          PopperComponent: CustomMenu,
         }}
       >
         <MenuItem value={OPTIONS.CHOOSE} sx={{ display: 'none' }}>Filter</MenuItem>
