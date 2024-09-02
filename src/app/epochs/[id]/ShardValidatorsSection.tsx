@@ -1,6 +1,6 @@
 'use client';
 import React, { FC, useMemo, useState } from 'react';
-import { Autocomplete, AutocompleteValue, Box, TextField, Typography } from '@mui/material';
+import { Autocomplete, AutocompleteValue, Box, Popper, TextField, Typography } from '@mui/material';
 import { FlexBetweenBox, GeometricButton, InfoBlock } from '@/components/ui';
 import SearchIcon from '@public/icons/ui/search.svg';
 import { Epoch } from '@/definitions';
@@ -57,6 +57,9 @@ export const ShardValidatorsSection: FC<{ epoch: Epoch }> = ({
           sx={{ flex: 1 }}
           renderInput={(params) => (
             <TextField {...params} />
+          )}
+          PopperComponent={(props) => (
+            <Popper {...props} modifiers={[{ name: 'offset', options: { offset: [0, 0] } }]} />
           )}
         />
         <GeometricButton

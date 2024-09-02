@@ -1,7 +1,7 @@
 'use client';
 import React, { FC } from 'react';
 import { useQueryShard } from '@/hooks';
-import { Autocomplete, AutocompleteValue, TextField } from '@mui/material';
+import { Autocomplete, AutocompleteValue, TextField, Popper } from '@mui/material';
 import { FlexBetweenBox, GeometricButton } from '@/components/ui';
 import SearchIcon from '@public/icons/ui/search.svg';
 import { COLORS } from '@/styles';
@@ -44,6 +44,9 @@ export const ShardSearchBar: FC<{ shardsList: ComboboxItemProps[]}> = ({
         sx={{ flex: 1 }}
         renderInput={(params) => (
           <TextField {...params} />
+        )}
+        PopperComponent={(props) => (
+          <Popper {...props} modifiers={[{ name: 'offset', options: { offset: [0, 0] } }]} />
         )}
       />
       <GeometricButton
