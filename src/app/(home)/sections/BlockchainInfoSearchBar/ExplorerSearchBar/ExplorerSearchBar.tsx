@@ -44,7 +44,8 @@ export const ExplorerSearchBar = () => {
       sx={{
         gap: 2,
         px: 0.4,
-        background: COLORS.BG_LIGHT
+        background: COLORS.BG_LIGHT,
+        position: 'relative'
       }}
     >
       <FilterDropdown
