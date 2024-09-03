@@ -45,14 +45,14 @@ export default async function BlockByIdPage({ params }: PageProps) {
           }
         }}
         items={[
-          <ContentBlock title='Creator:' value={block.creator}/>,
-          <ContentBlock title='Created at:' value={block.createdAt}/>,
-          <ContentBlock title='Epoch:' value={block.epoch}/>,
+          <ContentBlock key='creator' title='Creator:' value={block.creator}/>,
+          <ContentBlock key='created_at' title='Created at:' value={block.createdAt}/>,
+          <ContentBlock key='epoch' title='Epoch:' value={block.epoch}/>,
           [
-            <ContentBlock title='Txs Number:' value={block.txsNumber}/>,
-            <ContentBlock title='Index in own sequence:' value={block.index}/>,
+            <ContentBlock key='txs_number' title='Txs Number:' value={block.txsNumber}/>,
+            <ContentBlock key='index_in_own_sequence' title='Index in own sequence:' value={block.index}/>,
           ],
-          <ContentBlock title='Previous block hash:' value={block.prevHash}/>
+          <ContentBlock key='previous_block_hash' title='Previous block hash:' value={block.prevHash}/>
         ]}
       >
         <BlockImage width={421} height={426} viewBox='0 0 421 426' />

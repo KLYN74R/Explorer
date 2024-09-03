@@ -34,28 +34,30 @@ export default async function ContractByIdPage({ params }: PageProps) {
           }
         }}
         items={[
-          <ContentBlock title='Contract Id:' value={contractId}/>,
-          <ContentBlock title='Shard:' value={shard}/>,
+          <ContentBlock key='contract_id' title='Contract Id:' value={contractId}/>,
+          <ContentBlock key='shard' title='Shard:' value={shard}/>,
           [
-            <ContentBlock title='Balance:' value={contract.balance + ' KLY'}/>,
-            <ContentBlock title='UNO:' value={contract.uno}/>
+            <ContentBlock key='balance' title='Balance:' value={contract.balance + ' KLY'}/>,
+            <ContentBlock key='uno' title='UNO:' value={contract.uno}/>
           ],
           [
             <ContentBlock
+              key='last_payment_for_storage_usage'
               title='Last payment for storage usage:'
               value={formatOrdinal(contract.storageAbstractionLastPayment) + ' epoch'}
             />,
             <ContentBlock
+              key='abstract_gas'
               title='Abstract gas:'
               value={contract.gas}
             />
           ],
-          <ContentBlock title='List of storage cells:'>
+          <ContentBlock key='list_of_storage_cells' title='List of storage cells:'>
             {contract.storages.map(storage =>
               <Typography key={storage} color='primary.main'>• {storage}</Typography>
             )}
           </ContentBlock>,
-          <ContentBlock title='Language:'>
+          <ContentBlock key='language' title='Language:'>
             <Label variant={lang === 'AssemblyScript' ? 'blue' : 'red'}>{lang}</Label>
           </ContentBlock>
         ]}

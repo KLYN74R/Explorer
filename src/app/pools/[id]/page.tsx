@@ -35,24 +35,28 @@ export default async function PoolByIdPage({ params }: PageProps) {
           }
         }}
         items={[
-          <ContentBlock title='Pool Id:' value={poolId}/>,
-          <ContentBlock title='Contract:' value='system/staking'/>,
-          <ContentBlock title='Shard:' value={pool.poolOriginShard}/>,
+          <ContentBlock key='pool_id' title='Pool Id:' value={poolId}/>,
+          <ContentBlock key='contract' title='Contract:' value='system/staking'/>,
+          <ContentBlock key='shard' title='Shard:' value={pool.poolOriginShard}/>,
           [
             <ContentBlock
+              key='percentage'
               title='Percentage:'
               value={pool.poolStorage.percentage + '% (takes the pool)'}
             />,
             <ContentBlock
+              key='overstake'
               title='Overstake:'
               value={formatNumber(pool.poolStorage.overStake)}
             />
           ],
           <ContentBlock
+            key='https_url'
             title='HTTP(S) URL:'
             value={pool.poolStorage.poolURL}
           />,
           <ContentBlock
+            key='wss_url'
             title='WS(S) URL:'
             value={pool.poolStorage.wssPoolURL}
           />

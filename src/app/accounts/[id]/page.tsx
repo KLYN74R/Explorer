@@ -33,15 +33,15 @@ export default async function AccountByIdPage({ params }: PageProps) {
           }
         }}
         items={[
-          <ContentBlock title='Account Id:' value={accountId}/>,
-          <ContentBlock title='Shard:' value={shard}/>,
+          <ContentBlock key='account_id' title='Account Id:' value={accountId}/>,
+          <ContentBlock key='shard' title='Shard:' value={shard}/>,
           [
-            <ContentBlock title='Balance:' value={account.balance + ' KLY'}/>,
-            <ContentBlock title='UNO:' value={account.uno}/>
+            <ContentBlock key='balance' title='Balance:' value={account.balance + ' KLY'}/>,
+            <ContentBlock key='uno' title='UNO:' value={account.uno}/>
           ],
           [
-            <ContentBlock title='Nonce:' value={account.nonce}/>,
-            <ContentBlock title='Abstract gas:' value={account.gas}/>
+            <ContentBlock key='nonce' title='Nonce:' value={account.nonce}/>,
+            <ContentBlock key='abstract_gas' title='Abstract gas:' value={account.gas}/>
           ]
         ]}
       >

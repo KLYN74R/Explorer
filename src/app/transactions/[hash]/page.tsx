@@ -32,46 +32,54 @@ export default async function TransactionByIdPage({ params }: PageProps) {
         items={[
           [
             <ContentBlock
+              key='creator'
               title='Creator:'
               value={tx.creator}
               comment={tx.creatorFormatDescription}
             />,
             <ContentBlock
+              key='version'
               title='Version:'
               value={tx.v}
             />
           ],
           [
             <ContentBlock
+              key='type'
               title='Type:'
               value={tx.type}
               comment={tx.typeDescription}
             />,
             <ContentBlock
+              key='nonce'
               title='Nonce: '
               value={tx.nonce}
             />
           ],
           <ContentBlock
+            key='signature'
             title='Signature:'
             value={tx.sig}
           />,
           <ContentBlock
+            key='256_bit_tx_hash'
             title='256 bit tx hash:'
             value={tx.txHash}
           />,
           [
             <ContentBlock
+              key='included_in_block'
               title='Included in block:'
               value={tx.block.truncatedId}
               url={`/blocks/${tx.block.id}`}
             />,
             <ContentBlock
+              key='position_in_block'
               title='Position in block:'
               value={tx.order}
             />
           ],
-          <ContentBlock title='Payload:'>
+          <ContentBlock key='payload' title='Payload:'>
             <PrettyJSON data={tx.payload} />
           </ContentBlock>
         ]}
