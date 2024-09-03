@@ -3,10 +3,11 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0",
-    "build": "next build",
-    "start": "next start -H 0.0.0.0",
-    "lint": "next lint"
+    "dev": "TZ=UTC next dev -H 0.0.0.0",
+    "build": "TZ=UTC next build",
+    "start": "TZ=UTC next start -H 0.0.0.0",
+    "lint": "next lint",
+    "test": "TZ=UTC jest"
   },
   "dependencies": {
     "@emotion/cache": "latest",
@@ -30,12 +31,17 @@
     "web3": "^1.10.4"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/node": "latest",
     "@types/numeral": "^2.0.5",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "jest": "^29.7.0",
+    "jest-module-name-mapper": "^0.1.5",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "latest",
     "webpack": "^5.94.0"
   }

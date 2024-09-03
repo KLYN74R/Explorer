@@ -14,6 +14,10 @@ export interface TransactionWithTxHash extends Transaction {
   txHash: string;
 }
 
+export interface EVMTransaction {
+  payload: string;
+}
+
 export interface TransactionReceipt {
   blockID: string;
   order: number;
