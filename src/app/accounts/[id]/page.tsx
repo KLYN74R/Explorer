@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import { fetchShardAccountById, fetchUserTransactions } from '@/data';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { truncateMiddle } from '@/helpers';
-import { ContentBlock, Label } from '@/components/ui';
-import { TransactionsTable } from './TransactionsTable';
+import { ContentBlock, Label, TransactionsTable } from '@/components/ui';
 import { Account } from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
 

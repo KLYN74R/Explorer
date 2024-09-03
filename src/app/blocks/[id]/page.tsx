@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ContentBlock, Label, } from '@/components/ui';
+import { ContentBlock, Label, TransactionsTable } from '@/components/ui';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { TransactionsTable } from './TransactionsTable';
 import BlockImage from '@public/icons/pages/block.svg';
 import { fetchBlockById } from '@/data';
+import { TransactionPreview } from '@/definitions';
 
 type BlockByIdPageProps = {
   params: {
@@ -22,6 +22,14 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
   const block = await fetchBlockById(id);
 
   const status = !!block.aggregatedFinalizationProof.proofs ? 'Approved' : 'Awaiting approval';
+
+  const txPreviews: TransactionPreview[] = block.transactions.map(tx => ({
+    txid: tx.txHash,
+    txType: tx.type,
+    sigType: tx.payload.sigType,
+    fee: tx.fee,
+    creator: tx.creator
+  }));
 
   return (
     <Container maxWidth='xl' sx={{ py: 6 }}>
@@ -100,7 +108,7 @@ export default async function BlockByIdPage({ params }: BlockByIdPageProps) {
         px: { md: 4.5, xs: 0 }
       }}>
         <Typography variant='h1'>Transactions</Typography>
-        <TransactionsTable transactions={block.transactions} />
+        <TransactionsTable transactions={txPreviews} />
       </Box>
     </Container>
   );

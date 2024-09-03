@@ -23,9 +23,7 @@ export const BlocksByShard: FC<BlocksByShardProps> = async ({
 
   return (
     <Container maxWidth='xl' sx={{ mt: 3 }}>
-      <Box sx={{
-        px: { md: 4.5, xs: 0 }
-      }}>
+      <Box sx={{ px: { md: 4.5, xs: 0 } }}>
         <Typography variant='h1'>Shard selector</Typography>
         <Typography sx={{ mt: 1, mb: 3 }}>Choose a shard ID to visualize blocks and stats per shard in linear way</Typography>
         <Box sx={{

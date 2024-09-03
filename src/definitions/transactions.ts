@@ -32,4 +32,5 @@ export interface TransactionPreview {
   txType: string;
   sigType: string;
   fee: number;
+  creator?: string;
 }
