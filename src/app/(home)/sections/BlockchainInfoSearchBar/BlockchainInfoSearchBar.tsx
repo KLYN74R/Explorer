@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Box, Container, Grid } from '@mui/material';
-import { GradientBackground, DimGradientBackground } from '@/components/ui';
+import { Grid } from '@mui/material';
+import { GradientBackground, DimGradientBackground, PageContainer } from '@/components/ui';
 import { ContentBlock } from '@/components/ui';
 import { ExplorerSearchBar } from './ExplorerSearchBar';
 import { BlockchainData } from '@/definitions';
@@ -13,11 +13,9 @@ export const BlockchainInfoSearchBar: FC<Props> = async ({ data }) => {
   return (
     <DimGradientBackground>
       <GradientBackground sx={{ pt: 6, pb: 14 }}>
-        <Container maxWidth='xl'>
-          <Box sx={{ px: { md: 4.5, xs: 0 } }}>
-            <ExplorerSearchBar />
-          </Box>
-          <Grid container spacing={1} sx={{ mt: 4, px: { md: 4.5, xs: 0 } }}>
+        <PageContainer>
+          <ExplorerSearchBar />
+          <Grid container spacing={1} sx={{ mt: 4 }}>
             <HomeInfoBlock title='Total TXS' value={data.totalTxsNumber} variant='red'/>
             <HomeInfoBlock title='Epoch ID' value={data.epochId} variant='red'/>
             <HomeInfoBlock title='TXS Success' value={data.txsSuccessRate} />
@@ -27,7 +25,7 @@ export const BlockchainInfoSearchBar: FC<Props> = async ({ data }) => {
             <HomeInfoBlock title='Market Cap' value='SOON' />
             <HomeInfoBlock title='Coin Price' value='SOON' />
           </Grid>
-        </Container>
+        </PageContainer>
       </GradientBackground>
     </DimGradientBackground>
   );

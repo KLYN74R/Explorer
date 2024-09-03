@@ -39,7 +39,6 @@ export const StakersTable: FC<StakersTableProps> = ({
   const nextPage = Math.floor(stakers.length / STAKERS_PER_PAGE) + 1;
   const nextPageAvailable = stakers.length < tableStakers.length;
 
-
   const handleLoadMore = () => {
     if (nextPageAvailable) {
       setStakers(tableStakers.slice(0, STAKERS_PER_PAGE * nextPage));

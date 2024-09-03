@@ -4,7 +4,7 @@ import {
   BlocksByShard
 } from './sections';
 
-type BlocksPageProps = {
+type PageProps = {
   searchParams: {
     shard?: string;
     page?: string;
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'Blocks',
 };
 
-export default function BlocksPage({ searchParams }: BlocksPageProps) {
+export default function BlocksPage({ searchParams }: PageProps) {
   const shard = searchParams?.shard || '';
   const currentPage = Number(searchParams?.page) || 1;
 

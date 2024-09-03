@@ -1,12 +1,12 @@
 import { FC, Suspense } from 'react';
 import Link from 'next/link';
-import { ButtonPagination, FlexCenterBox, Label } from '@/components/ui';
-import { Box, Container, Grid, Typography } from '@mui/material';
-import LaunchIcon from '@mui/icons-material/Launch';
+import { ButtonPagination, FlexCenterBox, Label, PageContainer } from '@/components/ui';
+import { Box, Grid, Typography } from '@mui/material';
+import { COLORS } from '@/styles';
 import BTCIcon from '@public/icons/currencies/BTC.svg';
 import ETHIcon from '@public/icons/currencies/ETH.svg';
 import SOLIcon from '@public/icons/currencies/SOL.svg';
-import { COLORS } from '@/styles';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 type Checkpoint = {
   hostchain: string;
@@ -44,8 +44,8 @@ const icons: {[hostchain: string]: any} = {
 
 export default function CheckpointsPage() {
   return (
-    <Container maxWidth='xl' sx={{ py: 6 }}>
-      <Box sx={{ px: { md: 4.5, xs: 0 } }}>
+    <>
+      <PageContainer sx={{ py: 6 }}>
         <Typography variant='h1'>Checkpoints to hostchains</Typography>
         <Box sx={{ mt: 3 }}>
           <Typography sx={{ display: 'inline' }}>
@@ -69,14 +69,14 @@ export default function CheckpointsPage() {
           epochId={68}
           checkpoints={checkpointsData.map((c, i) => i === 1 || i === 2 ? {...c, isSuccessful: false} : c)}
         />
-      </Box>
+      </PageContainer>
 
-      <FlexCenterBox sx={{ mt: 8 }}>
+      <FlexCenterBox sx={{ mt: 2 }}>
         <Suspense>
           <ButtonPagination />
         </Suspense>
       </FlexCenterBox>
-    </Container>
+    </>
   );
 }
 

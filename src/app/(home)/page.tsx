@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import * as React from 'react';
-import { Container, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import {
   BlockchainInfoSearchBar,
   KeyWordsTicker,
@@ -8,6 +7,7 @@ import {
   NetworkStatus
 } from './sections';
 import { fetchBlockchainData } from '@/data';
+import { PageContainer } from '@/components/ui';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -20,8 +20,8 @@ export default async function HomePage() {
     <>
       <BlockchainInfoSearchBar data={blockchainData} />
       <KeyWordsTicker />
-      <Container maxWidth='xl' sx={{ pt: 14, pb: 20 }}>
-        <Grid container spacing={5} sx={{ px: { md: 4.5, xs: 0 } }}>
+      <PageContainer sx={{ pt: 14, pb: 20 }}>
+        <Grid container spacing={5}>
           <Grid item xs={12} lg={6}>
             <NetworkParameters data={blockchainData} />
           </Grid>
@@ -29,7 +29,7 @@ export default async function HomePage() {
             <NetworkStatus data={blockchainData} />
           </Grid>
         </Grid>
-      </Container>
+      </PageContainer>
     </>
   );
 }
