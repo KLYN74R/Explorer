@@ -5,7 +5,7 @@ export interface Epoch {
   shardsRegistry: string[];
   startTimestamp: number;
   quorum: string[];
-  leadersSequence: { [key: string]: string[] };
+  leadersSequence: { [shard: string]: string[] };
 }
 
 export type EpochExtendedData = Epoch & {

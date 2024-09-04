@@ -1,5 +1,14 @@
 import webpack from 'webpack';
 
+const originalConsoleError = console.error;
+
+console.error = (message, ...optionalParams) => {
+    if (typeof message === 'string' && message.includes('[DEP0005] DeprecationWarning: Buffer() is deprecated')) {
+        return;
+    }
+    originalConsoleError(message, ...optionalParams);
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     webpack(config) {

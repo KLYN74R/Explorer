@@ -41,7 +41,7 @@ export class FormattedDate {
 export function formatNumber(num: string | number, precision = 1000) {
   const val = Number(num);
 
-  if (val >= 0 && val <= precision) {
+  if (val >= 0 && val < precision) {
     return num.toString();
   } else {
     if (val % 1000 === 0) {

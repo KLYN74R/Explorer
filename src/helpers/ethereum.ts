@@ -1,8 +1,8 @@
 import { Transaction as EvmTransaction } from '@ethereumjs/tx';
 import Web3 from 'web3'
-import { Transaction, TransactionWithTxHash } from '@/definitions';
+import { EVMTransaction, TransactionWithTxHash } from '@/definitions';
 
-export function parseEvmTransaction(tx: Transaction): TransactionWithTxHash {
+export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
   const serializedEVMTxWithout0x = tx.payload.slice(2); // delete 0x
   const evmTx = EvmTransaction.fromSerializedTx(Buffer.from(serializedEVMTxWithout0x, 'hex'));
 

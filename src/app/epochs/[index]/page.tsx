@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 import { GoBackButton, InfoBlock, PageContainer } from '@/components/ui';
 import { Grid, Typography } from '@mui/material';
-import { fetchEpochById } from '@/data';
+import { fetchEpochByIndex } from '@/data';
 import { FormattedDate } from '@/helpers';
 import { ShardValidatorsSection } from './ShardValidatorsSection';
 
 type PageProps = {
   params: {
-    id: string;
+    index: string;
   }
 }
 
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PoolByIdPage({ params }: PageProps) {
-  const id = decodeURIComponent(params.id);
-  const epoch = await fetchEpochById(Number(id));
+  const id = decodeURIComponent(params.index);
+  const epoch = await fetchEpochByIndex(Number(id));
 
   const previousEpochRoute = `/epochs/${epoch.id - 1 >= 0 ? epoch.id - 1 : 0}`;
   const startedAt = new FormattedDate(epoch.startTimestamp).UTCHoursMinutesSeconds;
