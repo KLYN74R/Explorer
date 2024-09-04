@@ -43,7 +43,7 @@ export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
         </Link>
       </TableCell>
       <TableCell sx={{ width: '20%' }}>
-        <Typography color='primary.main' sx={{ fontSize: '16px' }}>{truncateMiddle(block.creator)}</Typography>
+        <Typography sx={{ fontSize: '16px' }}>{truncateMiddle(block.creator)}</Typography>
       </TableCell>
       <TableCell sx={{ width: '20%' }}>
         <Typography sx={{ fontSize: '16px' }}>{block.index}</Typography>
