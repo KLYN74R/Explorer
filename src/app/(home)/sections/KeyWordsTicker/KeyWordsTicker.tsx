@@ -1,5 +1,5 @@
 'use client';
-import { HorizontalTicker } from 'react-infinite-ticker';
+import Marquee from 'react-fast-marquee';
 import { Typography } from '@mui/material';
 
 const KEY_WORDS = [
@@ -21,7 +21,7 @@ const KEY_WORDS = [
 
 export const KeyWordsTicker = () => {
   return (
-    <HorizontalTicker duration={30000}>
+    <Marquee speed={60}>
       {KEY_WORDS.map((tag) => (
         <Typography
           key={tag}
@@ -39,6 +39,6 @@ export const KeyWordsTicker = () => {
           {tag}
         </Typography>
       ))}
-    </HorizontalTicker>
+    </Marquee>
   );
 }
