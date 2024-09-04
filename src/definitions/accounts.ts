@@ -4,7 +4,6 @@ export interface Account {
   uno: number;
   nonce: number;
   gas: number;
-  shard: string;
   pqcPub?: string;
   rev_t?: number;
 }

@@ -44,7 +44,7 @@ export interface NetworkParams {
 }
 
 export interface ShardsData {
-  [shard: string]: any
+  [shard: string]: string
 }
 
 export interface SyncStats {

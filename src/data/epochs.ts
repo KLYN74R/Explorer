@@ -4,7 +4,7 @@ import { Epoch, EpochExtendedData } from '@/definitions';
 import { fetchTotalBlocksAndTxsByEpoch } from './blockchain';
 import { getInfoFromEpoch, getTxSuccessRate } from './utils';
 
-export async function fetchEpochById(id: number): Promise<EpochExtendedData> {
+export async function fetchEpochByIndex(id: number): Promise<EpochExtendedData> {
   try {
     const currentEpoch = await fetchCurrentEpoch();
 
