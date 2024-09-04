@@ -19,7 +19,7 @@ export const GeneralBlocksInfo = async () => {
       <Grid container xs={12} spacing={1}>
         <Grid item xs={12} md={4}>
           <InfoBlock
-            title='Total blocks'
+            title='Blocks during the whole time'
             value={data.totalBlocksNumber}
           />
         </Grid>
@@ -31,7 +31,7 @@ export const GeneralBlocksInfo = async () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <InfoBlock
-            title='Slot time(block time)'
+            title='Slot time (block time)'
             value={`${data.slotTimeInSeconds}s`}
           />
         </Grid>
