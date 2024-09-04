@@ -31,7 +31,10 @@ export const ShardValidatorsSection: FC<{ epoch: Epoch }> = ({
     return value ? option.value === value.value : false;
   };
 
-  const validators = epoch.leadersSequence[shard.value];
+  const validators = epoch.leadersSequence[shard.value].map(validator => ({
+    text: validator,
+    url: `/pools/${validator}(POOL)`
+  }));
 
   return (
     <>

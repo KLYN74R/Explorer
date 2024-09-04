@@ -1,44 +1,61 @@
 import { FC } from 'react';
 import { Box, SxProps, Typography } from '@mui/material';
 import { COLORS } from '@/styles';
+import Link from 'next/link';
+import LaunchIcon from '@mui/icons-material/Launch';
 
-export const InfoBlock: FC<{
+type InfoBlockProps = {
   title: string,
-  value?: string | number | Array<any>,
+  value?: string | number | Array<string|{text: string; url: string;}>,
   sx?: SxProps
-}> = ({
+}
+
+export const InfoBlock: FC<InfoBlockProps> = ({
   title,
   value,
   sx
 }) => {
-  const content = Array.isArray(value) ? (
-    <>
-      {value.map(item => (
+  const isArray = Array.isArray(value);
+
+  const paragraphSx = {
+    fontSize: isArray ? '24px' : '32px',
+    fontWeight: isArray ? 500 : 800,
+    lineHeight: '40px',
+    whiteSpace: 'pre-wrap',
+    wordBreak: 'break-word',
+    ...(!isArray && { mt: 1 })
+  }
+
+  const content = isArray ?
+    value.map(item => {
+      return typeof item === 'object' ? (
+        <Link
+          href={item.url}
+          passHref
+          style={{textDecoration: 'none'}}
+        >
+          <Typography
+            key={item.text}
+            sx={paragraphSx}
+            color='primary.main'
+          >
+            •︎ {item.text}
+            <LaunchIcon sx={{position: 'relative', bottom: '-4px', height: '24px', ml: '5px'}}/>
+          </Typography>
+        </Link>
+      ) : (
         <Typography
           key={item}
-          sx={{
-            fontSize: '24px',
-            fontWeight: 500,
-            lineHeight: '40px',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-all'
-          }}
+          sx={paragraphSx}
           color='primary.main'
         >
           •︎ {item}
         </Typography>
-      ))}
-    </>
-  ) : (
+      )
+    })
+  : (
     <Typography
-      sx={{
-        fontSize: '32px',
-        fontWeight: 800,
-        lineHeight: '40px',
-        mt: 1,
-        whiteSpace: 'pre-wrap',
-        wordBreak: 'break-word'
-      }}
+      sx={paragraphSx}
       color='primary.main'
     >
       {value}
