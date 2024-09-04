@@ -21,7 +21,7 @@ const KEY_WORDS = [
 
 export const KeyWordsTicker = () => {
   return (
-    <Marquee speed={60}>
+    <Marquee>
       {KEY_WORDS.map((tag) => (
         <Typography
           key={tag}
