@@ -1,6 +1,5 @@
-'use client';
 import Marquee from 'react-fast-marquee';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const KEY_WORDS = [
   'Web2, Web3 & Real World = 1B users',
@@ -21,24 +20,26 @@ const KEY_WORDS = [
 
 export const KeyWordsTicker = () => {
   return (
-    <Marquee>
-      {KEY_WORDS.map((tag) => (
-        <Typography
-          key={tag}
-          variant='body2'
-          border={1}
-          borderColor='border.main'
-          sx={{
-            mx: 0.5,
-            px: 1.5,
-            py: 0.3,
-            height: 'fit-content',
-            width: 'max-content'
-          }}
-        >
-          {tag}
-        </Typography>
-      ))}
-    </Marquee>
+    <Box sx={{ minHeight: '40px' }}>
+      <Marquee>
+        {KEY_WORDS.map((tag) => (
+          <Typography
+            key={tag}
+            variant='body2'
+            border={1}
+            borderColor='border.main'
+            sx={{
+              mx: 0.5,
+              px: 1.5,
+              py: 0.3,
+              height: 'fit-content',
+              width: 'max-content'
+            }}
+          >
+            {tag}
+          </Typography>
+        ))}
+      </Marquee>
+    </Box>
   );
 }
