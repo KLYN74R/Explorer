@@ -5,6 +5,7 @@ import { truncateMiddle } from '@/helpers';
 import { ContentBlock, EntityPageLayout, PageContainer, TransactionsTable } from '@/components/ui';
 import { Account } from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Account info',
@@ -50,6 +51,7 @@ export default async function AccountByIdPage({ params }: PageProps) {
 
       <Box sx={{ mt: 16 }}>
         <Typography variant='h1'>Transactions</Typography>
+        <Typography sx={{ mt: 1, mb: 3 }}>Browse through the latest 200 transactions below</Typography>
         <TransactionsTable transactions={transactions} />
       </Box>
     </PageContainer>
