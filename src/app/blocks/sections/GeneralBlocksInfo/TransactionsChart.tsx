@@ -108,6 +108,7 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ recentBloc
     },
     yaxis: {
       tickAmount: 5,
+      min: 0,
       max: YMaxAxiosValue,
       labels: {
         style: {
