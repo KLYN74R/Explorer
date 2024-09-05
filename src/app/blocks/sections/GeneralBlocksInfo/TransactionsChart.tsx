@@ -156,7 +156,7 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ recentBloc
   });
 
   const [series, setSeries] = useState([{
-    name: 'Transaction Volume',
+    name: 'Transactions amount',
     data: data.map(item => ({
       x: item.epochIndex,
       y: item.txNumber
