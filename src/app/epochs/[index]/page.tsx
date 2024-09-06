@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { GoBackButton, InfoBlock, PageContainer } from '@/components/ui';
+import { NavButton, InfoBlock, PageContainer, FlexBetweenBox } from '@/components/ui';
 import { Grid, Typography } from '@mui/material';
 import { fetchEpochByIndex } from '@/data';
 import { FormattedDate } from '@/helpers';
@@ -19,17 +19,29 @@ export default async function PoolByIdPage({ params }: PageProps) {
   const id = decodeURIComponent(params.index);
   const epoch = await fetchEpochByIndex(Number(id));
 
-  const previousEpochRoute = `/epochs/${epoch.id - 1 >= 0 ? epoch.id - 1 : 0}`;
   const startedAt = new FormattedDate(epoch.startTimestamp).UTCHoursMinutesSeconds;
+
+  const previousEpochRoute = `/epochs/${epoch.isFirst ? epoch.id : epoch.id - 1}`;
+  const nextEpochRoute = `/epochs/${epoch.isCurrent ? epoch.id : epoch.id + 1}`;
 
   return (
     <PageContainer sx={{ py: 6 }}>
-      <GoBackButton
-        url={previousEpochRoute}
-        label='Previous Epoch'
-        sx={{ mb: 2 }}
-        disabled={epoch.isFirst}
-      />
+      <FlexBetweenBox>
+        <NavButton
+          url={previousEpochRoute}
+          variant='back'
+          label='Previous Epoch'
+          sx={{ mb: 2 }}
+          disabled={epoch.isFirst}
+        />
+        <NavButton
+          url={nextEpochRoute}
+          variant='forward'
+          label='Next Epoch'
+          sx={{ mb: 2 }}
+          disabled={epoch.isCurrent}
+        />
+      </FlexBetweenBox>
       <Typography variant='h1'>{epoch.isCurrent ? `Current ` : ''}Epoch Data</Typography>
       <Grid container spacing={1} sx={{ mt: 2 }}>
         <Grid item xs={12}>

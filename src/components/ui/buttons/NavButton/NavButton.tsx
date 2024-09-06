@@ -1,16 +1,20 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import ArrowLeft from '@public/icons/ui/arrowLeft.svg';
 import { Box, IconButton, SxProps, Typography } from '@mui/material';
+import ArrowLeft from '@public/icons/ui/arrowLeft.svg';
+import ArrowRight from '@public/icons/ui/arrowRight.svg';
 
 type Props = {
   url: string;
+  variant: 'back' | 'forward',
   label?: string;
   sx?: SxProps
   disabled?: boolean;
 }
 
-export const GoBackButton: FC<Props> = ({ url, label, sx, disabled }) => {
+export const NavButton: FC<Props> = ({ url, variant, label, sx, disabled }) => {
+  const isPrev = variant === 'back';
+
   const button = (
     <Link
       href={url}
@@ -20,12 +24,12 @@ export const GoBackButton: FC<Props> = ({ url, label, sx, disabled }) => {
       style={{ cursor: disabled ? 'default' : 'pointer' }}
     >
       <IconButton
-        aria-label='Previous Page'
+        aria-label={label}
         color='primary'
         sx={{ px: 1.5, py: 1 }}
         disabled={disabled}
       >
-        <ArrowLeft />
+        {isPrev ? <ArrowLeft/> : <ArrowRight/>}
       </IconButton>
     </Link>
   );
@@ -36,9 +40,19 @@ export const GoBackButton: FC<Props> = ({ url, label, sx, disabled }) => {
         display: 'flex', alignItems: 'center', gap: 1,
         ...sx
       }}>
-        {button}
-        <Typography variant='body2'>{label}</Typography>
+        {isPrev ? (
+          <>
+            {button}
+            <Typography variant='body2'>{label}</Typography>
+          </>
+        ) : (
+          <>
+            <Typography variant='body2'>{label}</Typography>
+            {button}
+          </>
+        )}
       </Box>
+
     );
   }
 
