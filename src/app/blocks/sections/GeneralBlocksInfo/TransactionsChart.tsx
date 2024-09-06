@@ -95,7 +95,8 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ recentBloc
           fontFamily: inter.style.fontFamily,
           fontWeight: 300,
           fontSize: '14px',
-        }
+        },
+        formatter: (value: number) => value + 1
       },
       axisBorder: {
         show: true,
