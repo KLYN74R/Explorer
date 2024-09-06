@@ -1,5 +1,5 @@
 import api from '@/helpers/api';
-import { API_ROUTES } from '@/constants/api';
+import { API_ROUTES } from '@/constants';
 import { Account, Contract } from '@/definitions';
 
 export async function fetchShardAccountById(shard: string, id: string): Promise<Account|Contract> {

@@ -1,5 +1,5 @@
 import api from '@/helpers/api';
-import { API_ROUTES } from '@/constants/api';
+import { API_ROUTES } from '@/constants';
 import { TransactionExtendedView, TransactionReceipt, TransactionWithTxHash, TransactionPreview } from '@/definitions';
 import { fetchBlockById } from './blocks';
 

@@ -1,6 +1,6 @@
 import api from '@/helpers/api';
 import { Pool } from '@/definitions';
-import { API_ROUTES } from '@/constants/api';
+import { API_ROUTES } from '@/constants';
 
 export async function fetchPoolById(poolId: string): Promise<Pool> {
   try {

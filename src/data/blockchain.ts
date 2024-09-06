@@ -1,18 +1,27 @@
 import api from '@/helpers/api';
 import { formatNumber } from '@/helpers';
 import { BlockStats, ChainInfo, ShardsData, BlockchainData, RecentBlockStats } from '@/definitions';
-import { API_ROUTES } from '@/constants/api';
 import { fetchCurrentEpoch } from '@/data/epochs';
 import { getInfoFromEpoch, getTxSuccessRate } from './utils';
+import { API_ROUTES, KV, TX_CHART_RECORD_LIMIT } from '@/constants';
 
 export async function fetchBlockchainData(): Promise<BlockchainData> {
   try {
-    const blocksAndTxsData = await api.get<BlockStats>(API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS);
-    const epochData = await fetchCurrentEpoch();
-    const blocksAndTxsDataByEpoch = await fetchTotalBlocksAndTxsByEpoch(epochData.id);
-    const chainData = await api.get<ChainInfo>(API_ROUTES.CHAIN.INFO);
+    const currentEpochData = await fetchCurrentEpoch();
+    const blocksAndTxsData = await api.get<BlockStats>(
+      API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS,
+      KV.SHORT_LIVED_KEYS.TOTAL_BLOCKS_AND_TXS
+    );
+    const blocksAndTxsDataByEpoch = await fetchTotalBlocksAndTxsByEpoch(
+      currentEpochData.id,
+      KV.SHORT_LIVED_KEYS.CURRENT_EPOCH_BLOCKS_AND_TXS
+    );
+    const chainData = await api.get<ChainInfo>(
+      API_ROUTES.CHAIN.INFO,
+      KV.EPOCH_LIVED_KEYS.CHAIN_INFO
+    );
 
-    const { shardsNumber, validatorsNumber } = getInfoFromEpoch(epochData);
+    const { shardsNumber, validatorsNumber } = getInfoFromEpoch(currentEpochData);
 
     const txsSuccessRate = getTxSuccessRate(blocksAndTxsData);
 
@@ -24,7 +33,7 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
       shardsNumber,
       validatorsNumber,
       txsSuccessRate,
-      epochId: epochData.id,
+      epochId: currentEpochData.id,
       slotTimeInSeconds,
       totalBlocksNumber: formatNumber(blocksAndTxsData.totalBlocksNumber),
       totalTxsNumber: formatNumber(blocksAndTxsData.totalTxsNumber),
@@ -48,17 +57,20 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
   }
 }
 
-export async function fetchTotalBlocksAndTxsByEpoch(id: number | string): Promise<BlockStats> {
+export async function fetchTotalBlocksAndTxsByEpoch(id: number | string, key?: string): Promise<BlockStats> {
   try {
-    return await api.get<BlockStats>(API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS_PER_EPOCH(Number(id)));
+    return await api.get<BlockStats>(API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS_PER_EPOCH(Number(id)), key);
   } catch (e: any) {
     throw new Error(`Failed to fetch total blocks and txs by epoch ID "${id}" - ${e.message}`);
   }
 }
 
-export async function fetchRecentTotalBlocksAndTxs(limit: number): Promise<RecentBlockStats> {
+export async function fetchRecentTotalBlocksAndTxs(): Promise<RecentBlockStats> {
   try {
-    return await api.get<RecentBlockStats>(API_ROUTES.STATS.RECENT_TOTAL_BLOCKS_AND_TXS_PER_EPOCH(limit));
+    return await api.get<RecentBlockStats>(
+      API_ROUTES.STATS.RECENT_TOTAL_BLOCKS_AND_TXS_PER_EPOCH(TX_CHART_RECORD_LIMIT),
+      KV.SHORT_LIVED_KEYS.TXS_CHART_DATA
+    );
   } catch (e: any) {
     throw new Error(`Failed to fetch recent total blocks and txs - ${e.message}`);
   }

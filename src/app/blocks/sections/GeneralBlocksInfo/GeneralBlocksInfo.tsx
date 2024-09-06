@@ -5,7 +5,7 @@ import { fetchBlockchainData, fetchRecentTotalBlocksAndTxs } from '@/data';
 
 export const GeneralBlocksInfo = async () => {
   const data = await fetchBlockchainData();
-  const recentBlockStats = await fetchRecentTotalBlocksAndTxs(14);
+  const recentBlockStats = await fetchRecentTotalBlocksAndTxs();
 
   return (
     <PageContainer sx={{ py: 6 }}>

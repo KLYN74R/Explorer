@@ -1,5 +1,5 @@
 import api from '@/helpers/api';
-import { API_ROUTES } from '@/constants/api';
+import { API_ROUTES } from '@/constants';
 import { Epoch, EpochExtendedData } from '@/definitions';
 import { fetchTotalBlocksAndTxsByEpoch } from './blockchain';
 import { getInfoFromEpoch, getTxSuccessRate } from './utils';

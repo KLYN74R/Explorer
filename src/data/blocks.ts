@@ -9,8 +9,7 @@ import {
   SyncStats,
   EVMTransaction
 } from '@/definitions';
-import { BLOCKS_PER_PAGE } from '@/constants';
-import { API_ROUTES } from '@/constants/api';
+import { API_ROUTES, BLOCKS_PER_PAGE } from '@/constants';
 
 export async function fetchBlocksByShard(shard: string, currentPage: number): Promise<BlockPreview[]> {
   try {

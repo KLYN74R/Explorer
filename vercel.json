@@ -1,6 +1,12 @@
 {
-  "crons": [{
-    "path": "/api/cron",
-    "schedule": "*/10 * * * *"
-  }]
+  "crons": [
+    {
+      "path": "/api/cron/short-lived",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/epoch-lived",
+      "schedule": "54 20 * * *"
+    }
+  ]
 }

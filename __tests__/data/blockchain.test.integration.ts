@@ -49,7 +49,7 @@ describe('fetchTotalBlocksAndTxsByEpoch Integration Test', () => {
 
 describe('fetchRecentTotalBlocksAndTxs Integration Test', () => {
   it('should fetch and return an array of block and transaction stats by epochs correctly', async () => {
-    const result = await fetchRecentTotalBlocksAndTxs(1);
+    const result = await fetchRecentTotalBlocksAndTxs();
 
     expect(typeof result).toBe('object');
 
