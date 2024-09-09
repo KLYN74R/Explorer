@@ -5,7 +5,7 @@ export interface BlockStats {
 }
 
 export interface RecentBlockStats {
-  [epochIndex: string]: BlockStats
+  [epochId: string]: BlockStats
 }
 
 export interface ChainInfo {

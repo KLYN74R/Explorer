@@ -14,7 +14,7 @@ describe('fetchBlocksByShard Integration Test', () => {
     expect(typeof block.id).toBe('string');
     expect(typeof block.sid).toBe('string');
     expect(typeof block.creator).toBe('string');
-    expect(typeof block.epochIndex).toBe('number');
+    expect(typeof block.epochId).toBe('number');
     expect(typeof block.index).toBe('number');
     expect(typeof block.txsNumber).toBe('number');
     expect(typeof block.createdAt).toBe('string');
@@ -26,7 +26,7 @@ describe('fetchBlockById Integration Test', () => {
     expect(typeof result.id).toBe('string');
     expect(typeof result.truncatedId).toBe('string');
     expect(typeof result.creator).toBe('string');
-    expect(typeof result.epochIndex).toBe('number');
+    expect(typeof result.epochId).toBe('number');
     expect(typeof result.index).toBe('number');
     expect(typeof result.createdAt).toBe('string');
     expect(typeof result.txsNumber).toBe('number');
@@ -49,9 +49,9 @@ describe('fetchBlockById Integration Test', () => {
 
   it('should fetch and return extended block data by BlockID correctly', async () => {
     const pubkey = '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK';
-    const epochIndex = 0;
+    const epochId = 0;
     const indexInEpoch = 0;
-    const BlockID = epochIndex + ':' + pubkey + ':' + indexInEpoch;
+    const BlockID = epochId + ':' + pubkey + ':' + indexInEpoch;
 
     const result = await fetchBlockById(BlockID);
 
@@ -87,9 +87,9 @@ describe('fetchAggregatedFinalizationProof Integration Test', () => {
 
   it('should fetch and return aggregated finalization proof by BlockID correctly', async () => {
     const pubkey = '9GQ46rqY238rk2neSwgidap9ww5zbAN4dyqyC7j5ZnBK';
-    const epochIndex = 0;
+    const epochId = 0;
     const indexInEpoch = 0;
-    const BlockID = epochIndex + ':' + pubkey + ':' + indexInEpoch;
+    const BlockID = epochId + ':' + pubkey + ':' + indexInEpoch;
 
     const result = await fetchAggregatedFinalizationProof(BlockID);
 

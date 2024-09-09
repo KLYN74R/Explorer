@@ -25,8 +25,8 @@ export async function fetchBlocksByShard(shard: string, currentPage: number): Pr
     return blocks.map(block => {
       const {sid, creator, epoch, index, transactions, time} = block;
 
-      const epochIndex = getEpochIndex(epoch);
-      const id = epochIndex + ':' + creator + ':' + index;
+      const epochId = getEpochId(epoch);
+      const id = epochId + ':' + creator + ':' + index;
 
       const txsNumber = transactions.length;
       const createdAt = new FormattedDate(time).preview;
@@ -35,7 +35,7 @@ export async function fetchBlocksByShard(shard: string, currentPage: number): Pr
         id,
         sid,
         creator,
-        epochIndex,
+        epochId,
         index,
         txsNumber,
         createdAt
@@ -61,10 +61,10 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
     const txsNumber = blockTxs.length;
     const createdAt = new FormattedDate(time).full;
 
-    const epochIndex = getEpochIndex(epoch);
+    const epochId = getEpochId(epoch);
 
-    const blockId = epochIndex + ':' + creator + ':' + index;
-    const truncatedBlockId = `${epochIndex}:${truncateMiddle(creator)}:${index}`;
+    const blockId = epochId + ':' + creator + ':' + index;
+    const truncatedBlockId = `${epochId}:${truncateMiddle(creator)}:${index}`;
 
     const aggregatedFinalizationProof = await fetchAggregatedFinalizationProof(blockId);
 
@@ -81,7 +81,7 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
       truncatedId: truncatedBlockId,
       creator,
       epoch,
-      epochIndex,
+      epochId,
       index,
       transactions,
       txsNumber,
@@ -102,9 +102,9 @@ export async function fetchAggregatedFinalizationProof(id: string): Promise<Aggr
       const [shard, indexInShard] = id.split(':');
       const {epoch, creator, index} = await api.get<Block>(API_ROUTES.BLOCKS.BLOCK_BY_SID(shard, indexInShard));
 
-      const epochIndex = getEpochIndex(epoch);
+      const epochId = getEpochId(epoch);
 
-      blockId = epochIndex + ':' + creator + ':' + index;
+      blockId = epochId + ':' + creator + ':' + index;
     }
 
     return await api.get(API_ROUTES.BLOCKS.AGGREGATED_FINALIZATION_PROOF(blockId));
@@ -119,6 +119,6 @@ function identifyIdType(id: string): BLOCK_ID_TYPE {
   return isSID ? BLOCK_ID_TYPE.SID : BLOCK_ID_TYPE.BLOCK_ID;
 }
 
-function getEpochIndex(fullEpoch: string): number {
+function getEpochId(fullEpoch: string): number {
   return Number(fullEpoch.split('#')[1]);
 }

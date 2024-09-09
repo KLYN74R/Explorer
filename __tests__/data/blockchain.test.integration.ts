@@ -53,10 +53,10 @@ describe('fetchRecentTotalBlocksAndTxs Integration Test', () => {
 
     expect(typeof result).toBe('object');
 
-    Object.keys(result).forEach(epochIndex => {
-      expect(typeof result[epochIndex].totalBlocksNumber).toBe('number');
-      expect(typeof result[epochIndex].totalTxsNumber).toBe('number');
-      expect(typeof result[epochIndex].successfulTxsNumber).toBe('number');
+    Object.keys(result).forEach(epochId => {
+      expect(typeof result[epochId].totalBlocksNumber).toBe('number');
+      expect(typeof result[epochId].totalTxsNumber).toBe('number');
+      expect(typeof result[epochId].successfulTxsNumber).toBe('number');
     })
   });
 });

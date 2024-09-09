@@ -4,7 +4,7 @@ import { Epoch, EpochExtendedData } from '@/definitions';
 import { fetchTotalBlocksAndTxsByEpoch } from './blockchain';
 import { getInfoFromEpoch, getTxSuccessRate } from './utils';
 
-export async function fetchEpochByIndex(id: number): Promise<EpochExtendedData> {
+export async function fetchEpochById(id: number): Promise<EpochExtendedData> {
   try {
     const currentEpoch = await fetchCurrentEpoch();
 
@@ -13,7 +13,7 @@ export async function fetchEpochByIndex(id: number): Promise<EpochExtendedData> 
 
     const epoch = isCurrent
       ? currentEpoch
-      : await api.get<Epoch>(API_ROUTES.EPOCH.EPOCH_BY_INDEX(id));
+      : await api.get<Epoch>(API_ROUTES.EPOCH.EPOCH_BY_ID(id));
 
     const { shardsNumber, validatorsNumber, quorumSize } = getInfoFromEpoch(epoch);
 
@@ -33,7 +33,7 @@ export async function fetchEpochByIndex(id: number): Promise<EpochExtendedData> 
       txsSuccessRate
     }
   } catch (e: any) {
-    throw new Error(`Failed to fetch epoch by index "${id}" - ${e.message}`);
+    throw new Error(`Failed to fetch epoch by id "${id}" - ${e.message}`);
   }
 }
 

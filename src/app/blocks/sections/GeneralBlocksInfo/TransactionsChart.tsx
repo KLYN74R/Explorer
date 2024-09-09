@@ -11,14 +11,14 @@ const ApexCharts = dynamic(() => import('react-apexcharts'), {
 });
 
 type TxPerEpoch = {
-  epochIndex: number;
+  epochId: number;
   txNumber: number;
 }
 
 const getChartData = (stats: RecentBlockStats): TxPerEpoch[] => {
   return Object.entries(stats).reduce((acc: TxPerEpoch[], curr) => {
     const txPerEpoch: TxPerEpoch = {
-      epochIndex: Number(curr[0]),
+      epochId: Number(curr[0]),
       txNumber: Number(curr[1].totalTxsNumber)
     }
     acc.push(txPerEpoch);
@@ -88,7 +88,7 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ recentBloc
     },
     xaxis: {
       type: 'category',
-      categories: data.map(item => item.epochIndex),
+      categories: data.map(item => item.epochId),
       labels: {
         style: {
           colors: 'rgba(254, 254, 254, 0.2)',
@@ -159,7 +159,7 @@ export const TransactionsChart: React.FC<TransactionsChartProps> = ({ recentBloc
   const [series, setSeries] = useState([{
     name: 'Transactions amount',
     data: data.map(item => ({
-      x: item.epochIndex,
+      x: item.epochId,
       y: item.txNumber
     })),
     color: 'rgba(92, 208, 199, 1)'

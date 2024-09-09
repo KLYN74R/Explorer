@@ -33,6 +33,7 @@ export const InfoBlock: FC<InfoBlockProps> = ({
           href={item.url}
           passHref
           style={{textDecoration: 'none'}}
+          key={item.url}
         >
           <Typography
             key={item.text}

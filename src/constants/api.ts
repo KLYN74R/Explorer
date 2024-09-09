@@ -6,7 +6,7 @@ export const API_ROUTES = {
   },
   EPOCH: {
     CURRENT_EPOCH_AT: 'current_epoch/at',  // Approvement thread
-    EPOCH_BY_INDEX: (epochIndex: number) => `epoch_by_index/${epochIndex}`,
+    EPOCH_BY_ID: (epochId: number) => `epoch_by_index/${epochId}`,
   },
   CHAIN: {
     INFO: 'chain_info',

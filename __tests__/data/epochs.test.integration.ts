@@ -1,4 +1,4 @@
-import { fetchEpochByIndex, fetchCurrentEpoch } from '@/data';
+import { fetchEpochById, fetchCurrentEpoch } from '@/data';
 import { Epoch } from '@/definitions';
 
 const commonEpochAssertions = (result: Epoch) => {
@@ -22,9 +22,9 @@ const commonEpochAssertions = (result: Epoch) => {
 }
 
 describe('fetchEpochById Integration Test', () => {
-  it('should fetch and return extended epoch data by index correctly', async () => {
-    const index = 0;
-    const result = await fetchEpochByIndex(index);
+  it('should fetch and return extended epoch data by ID correctly', async () => {
+    const id = 0;
+    const result = await fetchEpochById(id);
 
     expect(typeof result).toBe('object');
 

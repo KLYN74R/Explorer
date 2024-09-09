@@ -24,7 +24,7 @@ export interface BlockPreview {
   id: string;
   sid: string;
   creator: string;
-  epochIndex: number;
+  epochId: number;
   index: number;
   txsNumber: number;
   createdAt: string;
@@ -35,7 +35,7 @@ export interface BlockExtendedView {
   truncatedId: string;
   creator: string;
   epoch: string;
-  epochIndex: number;
+  epochId: number;
   index: number;
   txsNumber: number;
   transactions: TransactionWithTxHash[];
