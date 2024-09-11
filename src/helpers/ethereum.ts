@@ -14,11 +14,11 @@ export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
     nonce: Number(evmTx.nonce),
     fee: Number(evmTx.gasLimit * evmTx.gasPrice),
     payload: {
-      sigType: 'ECDSA',
       to: evmTx.to?.toString(),
       value: Web3.utils.fromWei(evmTx.value.toString(), 'ether'),
       evmBytecode: evmTx.data.toString('hex')
     },
+    sigType: 'ECDSA',
     sig: 'ECDSA'
   };
 }
