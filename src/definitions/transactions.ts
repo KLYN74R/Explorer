@@ -7,6 +7,7 @@ export interface Transaction {
   nonce: number;
   fee: number;
   payload: any;
+  sigType: string;
   sig: string;
 }
 

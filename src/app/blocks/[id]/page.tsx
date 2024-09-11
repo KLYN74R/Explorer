@@ -24,7 +24,7 @@ export default async function BlockByIdPage({ params }: PageProps) {
   const txPreviews: TransactionPreview[] = block.transactions.map(tx => ({
     txid: tx.txHash,
     txType: tx.type,
-    sigType: tx.payload.sigType,
+    sigType: tx.sigType,
     fee: tx.fee,
     creator: tx.creator
   }));
