@@ -17,11 +17,11 @@ describe('parseEvmTransaction', () => {
       nonce: 0,
       fee: 230000000000000,
       payload: {
-        sigType: 'ECDSA',
         to: '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
         value: '1.337',
         evmBytecode: 'f09f92a1204b4c594e544152202d3e2034653334643261306232316335346131306134306338643939313837663864636563656266663530316639613135653039323330663138666632616334383038'
       },
+      sigType: 'ECDSA',
       sig: 'ECDSA'
     } as TransactionWithTxHash);
   })
