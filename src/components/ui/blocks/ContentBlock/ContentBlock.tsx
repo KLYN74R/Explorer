@@ -35,7 +35,8 @@ export const ContentBlock: FC<{
       }}
       color={variant === 'red' ? 'secondary.main' : 'primary.main'}
     >
-      {value} {comment && <Comment text={comment} />}
+      {value}<br/>
+      {comment && <Comment text={comment} />}
     </Typography>
   );
 
