@@ -1,4 +1,8 @@
 export interface Pool {
+  
+  isActiveValidator: boolean;
+  isCurrentQuorumMember: boolean;
+  
   poolOriginShard: string;
   poolMetadata: {
     type: string;

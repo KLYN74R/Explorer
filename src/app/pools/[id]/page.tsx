@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { ContentBlock, EntityPageLayout, PageContainer } from '@/components/ui';
+import { ContentBlock, EntityPageLayout, Label, PageContainer } from '@/components/ui';
 import { Box, Typography } from '@mui/material';
 import { fetchPoolById } from '@/data';
 import { formatNumber, truncateMiddle } from '@/helpers';
@@ -27,17 +27,18 @@ export default async function PoolByIdPage({ params }: PageProps) {
           title: 'Pool info',
           value: truncateMiddle(poolId),
           label: {
-            variant: 'green',
-            value: pool.poolStorage.totalPower
+            variant: pool.isActiveValidator ? 'green' : 'red',
+            value: `${pool.poolStorage.totalPower} (${pool.isActiveValidator ? 'sufficient to be validator' : 'insufficient to be validator'})`
           },
           actionText: {
-            value: 'Total power'
+            value: 'Total staking power'
           }
         }}
         items={[
           <ContentBlock key='pool_id' title='Pool Id:' value={poolId}/>,
+          <ContentBlock key='quorum_member_status' title='In current quorum:' value={`${pool.isCurrentQuorumMember}`}/>,
           <ContentBlock key='contract' title='Contract:' value='system/staking'/>,
-          <ContentBlock key='shard' title='Shard:' value={pool.poolOriginShard}/>,
+          <ContentBlock key='shard' title='Creation shard:' value={pool.poolOriginShard}/>,
           [
             <ContentBlock
               key='percentage'

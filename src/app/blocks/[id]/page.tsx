@@ -45,7 +45,7 @@ export default async function BlockByIdPage({ params }: PageProps) {
           }
         }}
         items={[
-          <ContentBlock key='creator' title='Creator:' value={block.creator}/>,
+          <ContentBlock key='creator' title='Creator:' url={`/pools/${block.creator}(POOL)`} value={block.creator}/>,
           <ContentBlock key='created_at' title='Created at:' value={block.createdAt}/>,
           <ContentBlock key='epoch' title='Epoch:' value={block.epoch}/>,
           [
