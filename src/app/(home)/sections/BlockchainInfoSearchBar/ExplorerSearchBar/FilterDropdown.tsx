@@ -32,6 +32,7 @@ export const FilterDropdown: FC<{
         <MenuItem value={OPTIONS.BLOCK_BY_SID}>SID</MenuItem>
         <MenuItem value={OPTIONS.BLOCK_BY_ID}>Block ID</MenuItem>
         <MenuItem value={OPTIONS.POOL_BY_ID}>Pool ID</MenuItem>
+        <MenuItem value={OPTIONS.EPOCH_BY_ID}>Epoch ID</MenuItem>
         <MenuItem value={OPTIONS.ACCOUNT_BY_ID}>Account ID</MenuItem>
         <MenuItem value={OPTIONS.CONTRACT_BY_ID}>Contract ID</MenuItem>
       </Select>

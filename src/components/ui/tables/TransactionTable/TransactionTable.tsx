@@ -45,7 +45,7 @@ export const TransactionsTable: FC<Props> = ({
   if (!transactions.length) {
     return (
       <Box sx={{ py: 6, textAlign: 'center' }}>
-        <Typography color='primary.main'>No transactions found.</Typography>
+        <Typography color='primary.main'>No transactions found</Typography>
       </Box>
     );
   }
