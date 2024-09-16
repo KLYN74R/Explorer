@@ -14,6 +14,8 @@ import {
   TableRow,
   Box,
 } from '@mui/material';
+import Link from 'next/link';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 const getTableData = (poolStakers: Stakers) => {
   return Object.entries(poolStakers).map(
@@ -27,11 +29,12 @@ const getTableData = (poolStakers: Stakers) => {
 }
 
 type StakersTableProps = {
-  poolStakers: Stakers
+  poolStakers: Stakers,
+  poolOriginShard: string,
 }
 
 export const StakersTable: FC<StakersTableProps> = ({
-  poolStakers
+  poolStakers, poolOriginShard
 }) => {
   const tableStakers = getTableData(poolStakers);
 
@@ -68,9 +71,18 @@ export const StakersTable: FC<StakersTableProps> = ({
           <TableBody>
             {stakers.map((st) => (
               <TableRow key={st.id}>
-                <TableCell sx={{ width: '25%' }}>
-                  <Typography color='primary.main' sx={{ fontSize: '16px' }}>{truncateMiddle(st.id)}</Typography>
-                </TableCell>
+
+<TableCell sx={{ width: '25%' }}>
+        <Link
+          href={`/accounts/${poolOriginShard}:${st.id}`}
+          passHref
+          style={{ textDecoration: 'none' }}
+        >
+          <Typography color='primary.main' sx={{ fontSize: '16px' }}>
+            <LaunchIcon color='primary' sx={{ position: 'relative', bottom: '-4px', height: '20px' }} /> {truncateMiddle(st.id)}
+          </Typography>
+        </Link>
+      </TableCell>
                 <TableCell sx={{ width: '25%' }}>
                   <Typography sx={{ fontSize: '16px' }}>{st.kly}</Typography>
                 </TableCell>

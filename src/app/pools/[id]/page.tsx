@@ -36,7 +36,7 @@ export default async function PoolByIdPage({ params }: PageProps) {
         }}
         items={[
           <ContentBlock key='pool_id' title='Pool Id:' value={poolId}/>,
-          <ContentBlock key='quorum_member_status' title='In current quorum:' value={`${pool.isCurrentQuorumMember}`}/>,
+          <ContentBlock key='quorum_member_status' title='In current quorum:' value={pool.isCurrentQuorumMember ? 'Yes' : 'No' }/>,
           <ContentBlock key='contract' title='Contract:' value='system/staking'/>,
           <ContentBlock key='shard' title='Creation shard:' value={pool.poolOriginShard}/>,
           [
@@ -68,7 +68,7 @@ export default async function PoolByIdPage({ params }: PageProps) {
 
       <Box sx={{ mt: 16 }}>
         <Typography variant='h1'>Stakers</Typography>
-        <StakersTable poolStakers={pool.poolStorage.stakers} />
+        <StakersTable poolStakers={pool.poolStorage.stakers} poolOriginShard={pool.poolOriginShard} />
       </Box>
     </PageContainer>
   );
