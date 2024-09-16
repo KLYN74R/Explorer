@@ -34,8 +34,10 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             <ContentBlock
               key='creator'
               title='Creator:'
-              value={tx.creator}
+              value={truncateMiddle(tx.creator)}
               comment={tx.creatorFormatDescription}
+              url={`/accounts/${tx.shard}:${tx.creator}`}
+              
             />,
             <ContentBlock
               key='version'

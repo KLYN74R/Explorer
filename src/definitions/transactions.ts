@@ -20,6 +20,7 @@ export interface EVMTransaction {
 }
 
 export interface TransactionReceipt {
+  shard: string;
   blockID: string;
   order: number;
   isOk: boolean;
