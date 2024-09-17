@@ -36,7 +36,10 @@ export default async function PoolByIdPage({ params }: PageProps) {
         }}
         items={[
           <ContentBlock key='pool_id' title='Pool Id:' value={poolId}/>,
-          <ContentBlock key='quorum_member_status' title='In current quorum:' value={pool.isCurrentQuorumMember ? 'Yes' : 'No' }/>,
+          
+          <ContentBlock key='quorum_member_status' title='In current quorum:'>
+            <Label variant={pool.isCurrentQuorumMember? 'green' : 'red'}>{pool.isCurrentQuorumMember ? 'Yes' : 'No'}</Label>
+          </ContentBlock>,
           <ContentBlock key='contract' title='Contract:' value='system/staking'/>,
           <ContentBlock key='shard' title='Creation shard:' value={pool.poolOriginShard}/>,
           [
