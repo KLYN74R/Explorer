@@ -14,7 +14,6 @@ export enum KLY_LINKS {
   DISCORD = 'https://discord.com/invite/f7e7fCp97r',
   REDDIT = 'https://www.reddit.com/r/KLYN74R',
   FACEBOOK = 'https://www.facebook.com/KLYN74R/',
-  // todo Update links before production
   DOCS = 'https://docs.klyntar.org',
   HOW_TO_RUN_A_VALIDATOR = 'https://docs.klyntar.org/build-core-and-join-network/networks/your-own-private-testnet/run-your-private-testnet-with-single-validator',
   MULTISTAKING = 'https://docs.klyntar.org/build-core-and-join-network/become-kly-validator/multistaking',
