@@ -93,7 +93,7 @@ export const TransactionsTable: FC<Props> = ({
               <TableRow key={tx.txid}>
                 <TxTableCell>
                   <Link
-                    href={`/transactions/${tx.txid}`}
+                    href={`/tx/${tx.txid}`}
                     passHref
                     style={{ textDecoration: 'none' }}
                   >

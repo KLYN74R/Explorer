@@ -22,7 +22,7 @@ export const OPTIONS_PLACEHOLDER = {
 
 export const OPTIONS_URL = {
   [OPTIONS.CHOOSE]: '#',
-  [OPTIONS.TRANSACTION_BY_HASH]: '/transactions',
+  [OPTIONS.TRANSACTION_BY_HASH]: '/tx',
   [OPTIONS.BLOCK_BY_SID]: '/blocks',
   [OPTIONS.BLOCK_BY_ID]: '/blocks',
   [OPTIONS.POOL_BY_ID]: '/pools',
