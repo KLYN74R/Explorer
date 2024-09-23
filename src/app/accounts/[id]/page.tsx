@@ -3,7 +3,7 @@ import { fetchShardAccountById, fetchUserTransactions } from '@/data';
 import { Box, Typography } from '@mui/material';
 import { truncateMiddle } from '@/helpers';
 import { ContentBlock, EntityPageLayout, PageContainer, TransactionsTable } from '@/components/ui';
-import { Account } from '@/definitions';
+import { Account, TransactionPreview } from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
 import React from 'react';
 
@@ -16,6 +16,7 @@ type PageProps = {
     id: string
   }
 }
+
 
 export default async function AccountByIdPage({ params }: PageProps) {
   const [shard, accountId] = decodeURIComponent(params.id).split(':');

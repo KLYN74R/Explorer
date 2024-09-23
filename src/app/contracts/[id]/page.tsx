@@ -20,8 +20,6 @@ export default async function ContractByIdPage({ params }: PageProps) {
   const [shard, contractId] = decodeURIComponent(params.id).split(':');
   const contract = await fetchShardAccountById(shard, contractId) as Contract;
 
-  const lang = contract.lang === 'ASC' ? 'AssemblyScript' : 'Rust';
-
   return (
     <PageContainer sx={{ py: 6 }}>
       <EntityPageLayout
@@ -58,7 +56,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
             )}
           </ContentBlock>,
           <ContentBlock key='language' title='Language:'>
-            <Label variant={lang === 'AssemblyScript' ? 'blue' : 'red'}>{lang}</Label>
+            <Label variant={contract.lang === 'AssemblyScript' ? 'blue' : (contract.lang === 'Rust' ? 'red' : 'green' )}>{contract.lang}</Label>
           </ContentBlock>
         ]}
       >
