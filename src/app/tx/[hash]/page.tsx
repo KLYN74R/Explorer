@@ -27,7 +27,13 @@ export default async function TransactionByIdPage({ params }: PageProps) {
           label: {
             variant: tx.isOk ? 'green' : 'red',
             value: tx.isOk ? 'Success' : 'Failed'
-          }
+          },
+          ...(!tx.isOk ? {
+              actionText: {
+                url: `/tx/${tx.txHash}/fail-reason`,
+                value: 'Check reason'
+              }} : {}
+            )
         }}
         items={[
           [
