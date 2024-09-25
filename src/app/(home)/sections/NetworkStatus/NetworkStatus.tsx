@@ -19,7 +19,7 @@ export const NetworkStatus:FC<Props> = ({ data }) => {
     'Multistaking stats': '#',
     'Voting & DAO': '#',
     'Mutations': '#',
-    'Abstractions': '#'
+    'Charts': '#'
   }
 
   return (

@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import { fetchShardAccountById } from '@/data';
-import { Typography } from '@mui/material';
+import { fetchShardAccountById, fetchUserTransactions } from '@/data';
+import { Box, Typography } from '@mui/material';
 import { formatOrdinal, truncateMiddle } from '@/helpers';
-import { ContentBlock, EntityPageLayout, Label, PageContainer } from '@/components/ui';
+import { ContentBlock, EntityPageLayout, Label, PageContainer, TransactionsTable } from '@/components/ui';
 import { Contract } from '@/definitions';
 import ContractImage from '@public/icons/pages/contract.svg';
 
@@ -19,6 +19,7 @@ type PageProps = {
 export default async function ContractByIdPage({ params }: PageProps) {
   const [shard, contractId] = decodeURIComponent(params.id).split(':');
   const contract = await fetchShardAccountById(shard, contractId) as Contract;
+  const transactions  = await fetchUserTransactions(shard, contractId);
 
   return (
     <PageContainer sx={{ py: 6 }}>
@@ -62,6 +63,13 @@ export default async function ContractByIdPage({ params }: PageProps) {
       >
         <ContractImage width={421} height={426} viewBox='0 0 421 426' />
       </EntityPageLayout>
+
+      <Box sx={{ mt: 16 }}>
+        <Typography variant='h1'>Transactions</Typography>
+        <Typography sx={{ mt: 1, mb: 3 }}>Browse through the latest 200 transactions below</Typography>
+        <TransactionsTable transactions={transactions} />
+      </Box>
+
     </PageContainer>
   );
 }

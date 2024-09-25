@@ -74,6 +74,11 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             title='256 bit tx hash:'
             value={tx.txHash}
           />,
+          (
+   
+            tx.createdContractAddress ? <ContentBlock key='created_contract_address' title='Created contract:' url={`/contracts/${tx.shard}:${tx.createdContractAddress}`} value={tx.createdContractAddress} /> : <></>
+          
+          ),
           [
             <ContentBlock
               key='included_in_block'
