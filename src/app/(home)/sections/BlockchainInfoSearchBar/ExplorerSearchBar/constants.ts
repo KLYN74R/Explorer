@@ -27,6 +27,6 @@ export const OPTIONS_URL = {
   [OPTIONS.BLOCK_BY_ID]: '/blocks',
   [OPTIONS.POOL_BY_ID]: '/pools',
   [OPTIONS.EPOCH_BY_ID]: '/epochs',
-  [OPTIONS.ACCOUNT_BY_ID]: '/accounts',
+  [OPTIONS.ACCOUNT_BY_ID]: '/users',
   [OPTIONS.CONTRACT_BY_ID]: '/contracts',
 };

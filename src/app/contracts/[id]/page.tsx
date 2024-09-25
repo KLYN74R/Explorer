@@ -5,6 +5,7 @@ import { formatOrdinal, truncateMiddle } from '@/helpers';
 import { ContentBlock, EntityPageLayout, Label, PageContainer, TransactionsTable } from '@/components/ui';
 import { Contract } from '@/definitions';
 import ContractImage from '@public/icons/pages/contract.svg';
+import NotFoundPage from '@/app/not-found';
 
 export const metadata: Metadata = {
   title: 'Contract info',
@@ -20,6 +21,8 @@ export default async function ContractByIdPage({ params }: PageProps) {
   const [shard, contractId] = decodeURIComponent(params.id).split(':');
   const contract = await fetchShardAccountById(shard, contractId) as Contract;
   const transactions  = await fetchUserTransactions(shard, contractId);
+
+  if(contract.type !== 'contract') return <NotFoundPage/>
 
   return (
     <PageContainer sx={{ py: 6 }}>

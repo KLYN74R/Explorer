@@ -74,7 +74,7 @@ export const StakersTable: FC<StakersTableProps> = ({
 
 <TableCell sx={{ width: '25%' }}>
         <Link
-          href={`/accounts/${poolOriginShard}:${st.id}`}
+          href={`/users/${poolOriginShard}:${st.id}`}
           passHref
           style={{ textDecoration: 'none' }}
         >

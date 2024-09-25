@@ -42,7 +42,7 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               title='Creator:'
               value={truncateMiddle(tx.creator)}
               comment={tx.creatorFormatDescription}
-              url={`/accounts/${tx.shard}:${tx.creator}`}
+              url={`/users/${tx.shard}:${tx.creator}`}
               
             />,
             <ContentBlock

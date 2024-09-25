@@ -6,6 +6,7 @@ import { ContentBlock, EntityPageLayout, PageContainer, TransactionsTable } from
 import { Account, TransactionPreview } from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
 import React from 'react';
+import NotFoundPage from '@/app/not-found';
 
 export const metadata: Metadata = {
   title: 'Account info',
@@ -22,6 +23,8 @@ export default async function AccountByIdPage({ params }: PageProps) {
   const [shard, accountId] = decodeURIComponent(params.id).split(':');
   const account = await fetchShardAccountById(shard, accountId) as Account;
   const transactions  = await fetchUserTransactions(shard, accountId);
+
+  if(account.type !== 'eoa') return <NotFoundPage/>
 
   return (
     <PageContainer sx={{ py: 6 }}>
