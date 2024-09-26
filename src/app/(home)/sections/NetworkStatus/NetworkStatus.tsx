@@ -14,10 +14,10 @@ export const NetworkStatus:FC<Props> = ({ data }) => {
     'Blocks data and stats': '/blocks',
     'Epoches data': '/epochs/' + data.epochId,
     'Hostchain checkpoints': '/checkpoints',
+    'Voting & DAO': '/contracts/dao_voting',
+    'RWX smart contracts': '/contracts/rwx_contract',
+    'Multistaking stats': '/contracts/multistaking',
     'Symbiotic chains': '#',
-    'RWX smart contracts': '#',
-    'Multistaking stats': '#',
-    'Voting & DAO': '#',
     'Mutations': '#',
     'Charts': '#'
   }
