@@ -18,9 +18,29 @@ type PageProps = {
 }
 
 export default async function ContractByIdPage({ params }: PageProps) {
-  const [shard, contractId] = decodeURIComponent(params.id).split(':');
-  const contract = await fetchShardAccountById(shard, contractId) as Contract;
-  const transactions  = await fetchUserTransactions(shard, contractId);
+
+  const decodedComponent = decodeURIComponent(params.id)
+
+  let shardId, contractId;
+
+  if(!decodedComponent.includes(':')){
+
+    shardId = 'x'
+
+    contractId = decodedComponent
+
+  } else {
+
+    let [shardID, contractID] = decodedComponent.split(':');
+
+    shardId = shardID;
+
+    contractId = contractID;
+
+  }
+
+  const contract = await fetchShardAccountById(shardId, contractId) as Contract;
+  const transactions  = await fetchUserTransactions(shardId, contractId);
 
   if(contract.type !== 'contract') return <NotFoundPage/>
 
@@ -37,7 +57,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
         }}
         items={[
           <ContentBlock key='contract_id' title='Contract Id:' value={contractId}/>,
-          <ContentBlock key='shard' title='Shard:' value={shard}/>,
+          <ContentBlock key='shard' title='Shard:' value={shardId}/>,
           [
             <ContentBlock key='balance' title='Balance:' value={contract.balance + ' KLY'}/>,
             <ContentBlock key='uno' title='UNO:' value={contract.uno}/>
