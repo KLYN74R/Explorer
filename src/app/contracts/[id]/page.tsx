@@ -25,9 +25,9 @@ export default async function ContractByIdPage({ params }: PageProps) {
 
   if(!decodedComponent.includes(':')){
 
-    shardId = 'x'
+    shardId = 'x';
 
-    contractId = decodedComponent
+    contractId = decodedComponent;
 
   } else {
 
