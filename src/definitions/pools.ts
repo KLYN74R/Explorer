@@ -11,7 +11,7 @@ export interface Pool {
     uno: number;
     gas: number;
     storages: string[];
-    bytecode: string;
+    storageAbstractionLastPayment: number;
   };
   poolStorage: {
     percentage: number;

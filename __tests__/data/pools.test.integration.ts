@@ -18,7 +18,7 @@ describe('fetchPoolById Integration Test', () => {
     expect(Array.isArray(result.poolMetadata.storages)).toBeTruthy();
     result.poolMetadata.storages.forEach(s => expect(typeof s).toBe('string'));
 
-    expect(typeof result.poolMetadata.bytecode).toBe('string');
+    expect(typeof result.poolMetadata.storageAbstractionLastPayment).toBe('number');
 
     expect(typeof result.poolStorage.percentage).toBe('number');
     expect(typeof result.poolStorage.overStake).toBe('number');

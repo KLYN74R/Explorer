@@ -16,6 +16,5 @@ export interface Contract {
   gas: number;
   storages: string[];
   storageAbstractionLastPayment: number;
-  bytecode: string;
 }
 

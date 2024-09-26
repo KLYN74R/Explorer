@@ -62,6 +62,6 @@ describe('fetchShardAccountById Integration Tests', () => {
       expect(typeof storage).toBe('string');
     });
 
-    expect(typeof result.bytecode).toBe('string')
+    expect(typeof result.storageAbstractionLastPayment).toBe('number')
   });
 });
