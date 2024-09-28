@@ -59,7 +59,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
         }}
         items={[
           <ContentBlock key='contract_id' title='Contract Id:' value={contractId}/>,
-          <ContentBlock key='shard' title='Shard:' value={shardId}/>,
+          <ContentBlock key='shard' title='Shard:' value={shardId} comment={shardId === 'x' ? 'system contracts are not tied to any shard' : ''}/>,
           [
             <ContentBlock key='balance' title='Balance:' value={contract.balance + ' KLY'}/>,
             <ContentBlock key='uno' title='UNO:' value={contract.uno}/>
