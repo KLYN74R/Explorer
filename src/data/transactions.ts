@@ -38,7 +38,7 @@ function describeTransactionType(type: string) {
     case 'WVM_CONTRACT_DEPLOY':
       return 'contract deployment to WASM vm';
     case 'WVM_CALL':
-      return 'call smart-contract function in WASM vm';
+      return 'call smart-contract in WASM vm';
     case 'EVM_CALL':
       return 'interaction with EVM';
     default:

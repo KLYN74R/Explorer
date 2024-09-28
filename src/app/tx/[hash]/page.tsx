@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { PrettyJSON } from '@/components';
-import { ContentBlock, EntityPageLayout, PageContainer } from '@/components/ui';
+import { ContentBlock, EntityPageLayout, Label, PageContainer } from '@/components/ui';
 import { fetchTransactionByTxHash } from '@/data';
 import { truncateMiddle } from '@/helpers';
 
@@ -45,11 +45,34 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               url={`/users/${tx.shard}:${tx.creator}`}
               
             />,
-            <ContentBlock
-              key='version'
-              title='Version:'
-              value={tx.v}
-            />
+
+            (
+
+              tx.payload.to && <ContentBlock
+                key='recipient'
+                title='Recipient:'
+                value={truncateMiddle(tx.payload.to)}
+                url={`/users/${tx.shard}:${tx.payload.to}`}
+            
+              /> || tx.payload.contractID && <ContentBlock
+                
+                key='called_contract'
+                title='Called contract:'
+                value={truncateMiddle(tx.payload.contractID)}
+                url={`/contracts/${tx.shard}:${tx.payload.contractID}`}
+          
+              /> || tx.createdContractAddress && <ContentBlock 
+              
+                key='created_contract_address'
+                title='Created contract:'
+                value={tx.createdContractAddress} 
+                url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
+
+
+              />
+
+            )
+          
           ],
           [
             <ContentBlock
@@ -58,6 +81,12 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               value={tx.type}
               comment={tx.typeDescription}
             />,
+            <ContentBlock
+              key='version'
+              title='Version:'
+              value={tx.v}
+            />,
+
             <ContentBlock
               key='nonce'
               title='Nonce: '
@@ -74,11 +103,10 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             title='256 bit tx hash:'
             value={tx.txHash}
           />,
-          (
-   
-            tx.createdContractAddress ? <ContentBlock key='created_contract_address' title='Created contract:' url={`/contracts/${tx.shard}:${tx.createdContractAddress}`} value={tx.createdContractAddress} /> : <></>
-          
-          ),
+          <ContentBlock key='parallelization_type' title='Execution type:'>
+            <Label variant={ Array.isArray(tx.payload.touchedAccounts) ? 'green' : 'red' }>{Array.isArray(tx.payload.touchedAccounts) ? 'Parallel execution⚡' : 'Non-parallel execution 🦥'}</Label>
+          </ContentBlock>
+          ,
           [
             <ContentBlock
               key='included_in_block'

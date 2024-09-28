@@ -24,7 +24,7 @@ export interface TransactionReceipt {
   blockID: string;
   order: number;
   isOk: boolean;
-  reason: string;
+  reason?: string;
   createdContractAddress?: string;
 }
 
