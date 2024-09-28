@@ -56,7 +56,7 @@ export default async function AccountByIdPage({ params }: PageProps) {
       <Box sx={{ mt: 16 }}>
         <Typography variant='h1'>Transactions</Typography>
         <Typography sx={{ mt: 1, mb: 3 }}>Browse through the latest 200 transactions below</Typography>
-        <TransactionsTable transactions={transactions} />
+        <TransactionsTable transactions={transactions.reverse()} />
       </Box>
     </PageContainer>
   );
