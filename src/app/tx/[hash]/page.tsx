@@ -28,12 +28,11 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             variant: tx.isOk ? 'green' : 'red',
             value: tx.isOk ? 'Success' : 'Failed'
           },
-          ...(!tx.isOk ? {
-              actionText: {
-                url: `/tx/${tx.txHash}/fail-reason`,
-                value: 'Check reason'
-              }} : {}
-            )
+          actionText: {
+            url: `/tx/${tx.txHash}/details`,
+            value: 'View raw details'
+          }
+          
         }}
         items={[
           [
