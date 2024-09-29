@@ -1,4 +1,4 @@
-import { fetchTransactionByTxHash, fetchUserTransactions } from '@/data';
+import { fetchTransactionByTxHash, fetchAccountTransactions } from '@/data';
 
 describe('fetchTransactionByTxHash Integration Test', () => {
   it('should fetch and return extended transaction data by Hash correctly', async () => {
@@ -30,11 +30,11 @@ describe('fetchTransactionByTxHash Integration Test', () => {
   });
 });
 
-describe('fetchUserTransactions Integration Test', () => {
+describe('fetchAccountTransactions Integration Test', () => {
   it('should fetch and return user transactions by shard and account ID correctly', async () => {
     const shard = 'shard_0';
     const accountId = '3JAeBnsMedzxjCMNWQYcAXtwGVE9A5DBQyXgWBujtL9R';
-    const result = await fetchUserTransactions(shard, accountId);
+    const result = await fetchAccountTransactions(shard, accountId);
 
     expect(Array.isArray(result)).toBeTruthy();
 

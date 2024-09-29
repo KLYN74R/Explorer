@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { fetchShardAccountById, fetchUserTransactions } from '@/data';
+import { fetchShardAccountById, fetchAccountTransactions } from '@/data';
 import { Box, Typography } from '@mui/material';
 import { formatOrdinal, truncateMiddle } from '@/helpers';
 import { ContentBlock, EntityPageLayout, Label, PageContainer, TransactionsTable } from '@/components/ui';
@@ -40,7 +40,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
   }
 
   const contract = await fetchShardAccountById(shardId, contractId) as Contract;
-  const transactions  = await fetchUserTransactions(shardId, contractId);
+  const transactions  = await fetchAccountTransactions(shardId, contractId);
 
   if(contract.type !== 'contract') return <NotFoundPage/>
 

@@ -23,9 +23,9 @@ export async function fetchTransactionByTxHash(hash: string): Promise<Transactio
   }
 }
 
-export async function fetchUserTransactions(shard: string, accountId: string): Promise<TransactionPreview[]> {
+export async function fetchAccountTransactions(shard: string, accountId: string): Promise<TransactionPreview[]> {
   try {
-    return await api.get<TransactionPreview[]>(API_ROUTES.TRANSACTIONS.USER_TRANSACTIONS(shard, accountId));
+    return await api.get<TransactionPreview[]>(API_ROUTES.TRANSACTIONS.ACCOUNT_TRANSACTIONS(shard, accountId));
   } catch (e: any) {
     throw new Error(`Failed to fetch transactions by account id "${accountId}" in shard "${shard}" - ${e.message}`);
   }

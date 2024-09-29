@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { fetchShardAccountById, fetchUserTransactions } from '@/data';
+import { fetchShardAccountById, fetchAccountTransactions } from '@/data';
 import { Box, Typography } from '@mui/material';
 import { truncateMiddle } from '@/helpers';
 import { ContentBlock, EntityPageLayout, PageContainer, TransactionsTable } from '@/components/ui';
@@ -22,7 +22,7 @@ type PageProps = {
 export default async function AccountByIdPage({ params }: PageProps) {
   const [shard, accountId] = decodeURIComponent(params.id).split(':');
   const account = await fetchShardAccountById(shard, accountId) as Account;
-  const transactions  = await fetchUserTransactions(shard, accountId);
+  const transactions  = await fetchAccountTransactions(shard, accountId);
 
   if(account.type !== 'eoa') return <NotFoundPage/>
 
