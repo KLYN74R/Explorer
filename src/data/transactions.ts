@@ -46,7 +46,7 @@ function describeTransactionType(type: string) {
   }
 }
 
-function describeTransactionCreatorFormat(creator: string) {
+export function describeTransactionCreatorFormat(creator: string) {
   const length = creator.length;
 
   if (length === 44) {

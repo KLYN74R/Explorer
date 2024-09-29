@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { PrettyJSON } from '@/components';
 import { ContentBlock, EntityPageLayout, Label, PageContainer } from '@/components/ui';
-import { fetchTransactionByTxHash } from '@/data';
+import { describeTransactionCreatorFormat, fetchTransactionByTxHash } from '@/data';
 import { truncateMiddle } from '@/helpers';
 
 type PageProps = {
@@ -51,6 +51,7 @@ export default async function TransactionByIdPage({ params }: PageProps) {
                 key='recipient'
                 title='Recipient:'
                 value={truncateMiddle(tx.payload.to)}
+                comment={describeTransactionCreatorFormat(tx.payload.to)}
                 url={`/users/${tx.shard}:${tx.payload.to}`}
             
               /> || tx.payload.contractID && <ContentBlock

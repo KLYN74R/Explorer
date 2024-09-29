@@ -12,7 +12,7 @@ export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
     creator: evmTx.getSenderAddress().toString(),
     type: 'EVM_CALL',
     nonce: Number(evmTx.nonce),
-    fee: Number(evmTx.gasLimit * evmTx.gasPrice),
+    fee: Number(Web3.utils.fromWei((evmTx.gasLimit * evmTx.gasPrice).toString(),'ether')),
     payload: {
       to: evmTx.to?.toString(),
       value: Web3.utils.fromWei(evmTx.value.toString(), 'ether'),
