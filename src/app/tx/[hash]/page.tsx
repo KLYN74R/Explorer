@@ -85,7 +85,7 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             <ContentBlock
               key='version'
               title='Coins transferred:'
-              value={(tx.payload.amount || 0) + ' KLY'}
+              value={(tx.payload.amount || tx.payload.value || 0) + ' KLY'}
             />,
 
             <ContentBlock
