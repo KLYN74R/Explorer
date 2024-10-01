@@ -20,7 +20,7 @@ export default async function RawTransactionWithDetailsPage({ params }: RawTrans
 
   const detailsToVisualize = {
 
-    executionStatus: { isOk: tx.isOk, reason: tx.reason, blockID: tx.blockID, order: tx.order, createdContractAddress: tx.createdContractAddress },
+    executionStatus: { isOk: tx.isOk, reason: tx.reason, blockID: tx.blockID, order: tx.order, createdContractAddress: tx.createdContractAddress, extraDataToReceipt: tx.extraDataToReceipt },
 
     txData:{
 

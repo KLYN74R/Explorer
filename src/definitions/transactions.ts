@@ -26,6 +26,7 @@ export interface TransactionReceipt {
   isOk: boolean;
   reason?: string;
   createdContractAddress?: string;
+  extraDataToReceipt?: string;
 }
 
 export interface TransactionExtendedView extends TransactionReceipt, TransactionWithTxHash {
