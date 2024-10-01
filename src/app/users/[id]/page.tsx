@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { fetchShardAccountById, fetchAccountTransactions } from '@/data';
 import { Box, Typography } from '@mui/material';
 import { truncateMiddle } from '@/helpers';
-import { ContentBlock, EntityPageLayout, PageContainer, TransactionsTable } from '@/components/ui';
-import { Account, TransactionPreview } from '@/definitions';
+import { ContentBlock, EntityPageLayout, Label, PageContainer, TransactionsTable } from '@/components/ui';
+import { Account} from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
 import React from 'react';
 import NotFoundPage from '@/app/not-found';
@@ -39,6 +39,9 @@ export default async function AccountByIdPage({ params }: PageProps) {
         }}
         items={[
           <ContentBlock key='account_id' title='Account Id:' value={accountId}/>,
+          <ContentBlock key='aliases' title='Also known as:'>
+            <Label variant='blue'>N/A</Label>
+          </ContentBlock>,
           <ContentBlock key='shard' title='Shard:' value={shard}/>,
           [
             <ContentBlock key='balance' title='Balance:' value={account.balance + ' KLY'}/>,

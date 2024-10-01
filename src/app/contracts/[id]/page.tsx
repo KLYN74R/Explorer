@@ -8,7 +8,7 @@ import ContractImage from '@public/icons/pages/contract.svg';
 import NotFoundPage from '@/app/not-found';
 
 export const metadata: Metadata = {
-  title: 'Contract info',
+  title: 'Account info',
 };
 
 type PageProps = {
@@ -50,7 +50,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
       
       <EntityPageLayout
         header={{
-          title: 'Contract info',
+          title: 'Account info',
           value: truncateMiddle(contractId),
           label: {
             variant: 'green',
@@ -59,6 +59,9 @@ export default async function ContractByIdPage({ params }: PageProps) {
         }}
         items={[
           <ContentBlock key='contract_id' title='Contract Id:' value={contractId}/>,
+          <ContentBlock key='aliases' title='Also known as:'>
+            <Label variant='blue'>N/A</Label>
+          </ContentBlock>,
           <ContentBlock key='shard' title='Shard:' value={shardId} comment={shardId === 'x' ? 'system contracts are not tied to any shard' : ''}/>,
           [
             <ContentBlock key='balance' title='Balance:' value={contract.balance + ' KLY'}/>,
