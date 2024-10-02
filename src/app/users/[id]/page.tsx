@@ -20,7 +20,10 @@ type PageProps = {
 
 
 export default async function AccountByIdPage({ params }: PageProps) {
-  const [shard, accountId] = decodeURIComponent(params.id).split(':');
+  let [shard, accountId] = decodeURIComponent(params.id).split(':');
+
+  accountId = accountId.toLowerCase();
+
   const account = await fetchShardAccountById(shard, accountId) as Account;
   const transactions  = await fetchAccountTransactions(shard, accountId);
 
