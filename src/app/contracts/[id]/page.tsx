@@ -18,25 +18,17 @@ type PageProps = {
 }
 
 export default async function ContractByIdPage({ params }: PageProps) {
-
   const decodedComponent = decodeURIComponent(params.id)
 
   let shardId, contractId;
 
   if(!decodedComponent.includes(':')){
-
     shardId = 'x';
-
     contractId = decodedComponent;
-
   } else {
-
     let [shardID, contractID] = decodedComponent.split(':');
-
     shardId = shardID;
-
     contractId = contractID;
-
   }
 
   const contract = await fetchShardAccountById(shardId, contractId) as Contract;
@@ -45,9 +37,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
   if(contract.type !== 'contract') return <NotFoundPage/>
 
   return (
-    
     <PageContainer sx={{ py: 6 }}>
-      
       <EntityPageLayout
         header={{
           title: 'Account info',
@@ -62,7 +52,12 @@ export default async function ContractByIdPage({ params }: PageProps) {
           <ContentBlock key='aliases' title='Also known as:'>
             <Label variant='blue'>N/A</Label>
           </ContentBlock>,
-          <ContentBlock key='shard' title='Shard:' value={shardId} comment={shardId === 'x' ? 'system contracts are not tied to any shard' : ''}/>,
+          <ContentBlock
+            key='shard'
+            title='Shard:'
+            value={shardId}
+            comment={shardId === 'x' ? 'system contracts are not tied to any shard' : ''}
+          />,
           [
             <ContentBlock key='balance' title='Balance:' value={contract.balance + ' KLY'}/>,
             <ContentBlock key='uno' title='UNO:' value={contract.uno}/>
@@ -97,7 +92,6 @@ export default async function ContractByIdPage({ params }: PageProps) {
         <Typography sx={{ mt: 1, mb: 3 }}>Browse through the latest 200 transactions below</Typography>
         <TransactionsTable transactions={transactions.reverse()} />
       </Box>
-
     </PageContainer>
   );
 }

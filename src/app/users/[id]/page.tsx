@@ -1,12 +1,12 @@
+import React from 'react';
 import { Metadata } from 'next';
-import { fetchShardAccountById, fetchAccountTransactions } from '@/data';
+import NotFoundPage from '@/app/not-found';
 import { Box, Typography } from '@mui/material';
-import { truncateMiddle } from '@/helpers';
 import { ContentBlock, EntityPageLayout, Label, PageContainer, TransactionsTable } from '@/components/ui';
+import { fetchShardAccountById, fetchAccountTransactions } from '@/data';
+import { truncateMiddle } from '@/helpers';
 import { Account} from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
-import React from 'react';
-import NotFoundPage from '@/app/not-found';
 
 export const metadata: Metadata = {
   title: 'Account info',
@@ -18,10 +18,8 @@ type PageProps = {
   }
 }
 
-
 export default async function AccountByIdPage({ params }: PageProps) {
   let [shard, accountId] = decodeURIComponent(params.id).split(':');
-
   accountId = accountId.startsWith('0x') ? accountId.toLowerCase() : accountId;
 
   const account = await fetchShardAccountById(shard, accountId) as Account;

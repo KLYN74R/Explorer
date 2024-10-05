@@ -32,7 +32,6 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             url: `/tx/${tx.txHash}/details`,
             value: 'View raw details'
           }
-          
         }}
         items={[
           [
@@ -44,35 +43,31 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               url={`/users/${tx.shard}:${tx.creator}`}
               
             />,
-
             (
-
-              tx.payload.to && <ContentBlock
-                key='recipient'
-                title='Recipient:'
-                value={truncateMiddle(tx.payload.to)}
-                comment={describeTransactionCreatorFormat(tx.payload.to)}
-                url={`/users/${tx.shard}:${tx.payload.to}`}
-            
-              /> || tx.payload.contractID && <ContentBlock
-                
-                key='called_contract'
-                title='Called contract:'
-                value={truncateMiddle(tx.payload.contractID)}
-                url={`/contracts/${tx.shard}:${tx.payload.contractID}`}
-          
-              /> || tx.createdContractAddress && <ContentBlock 
-              
-                key='created_contract_address'
-                title='Created contract:'
-                value={tx.createdContractAddress} 
-                url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
-
-
-              />
-
+              tx.payload.to ? (
+                <ContentBlock
+                  key='recipient'
+                  title='Recipient:'
+                  value={truncateMiddle(tx.payload.to)}
+                  comment={describeTransactionCreatorFormat(tx.payload.to)}
+                  url={`/users/${tx.shard}:${tx.payload.to}`}
+                />
+              ) : tx.payload.contractID ? (
+                <ContentBlock
+                  key='called_contract'
+                  title='Called contract:'
+                  value={truncateMiddle(tx.payload.contractID)}
+                  url={`/contracts/${tx.shard}:${tx.payload.contractID}`}
+                />
+              ) : tx.createdContractAddress ? (
+                <ContentBlock
+                  key='created_contract_address'
+                  title='Created contract:'
+                  value={tx.createdContractAddress}
+                  url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
+                />
+              ) : null
             )
-          
           ],
           [
             <ContentBlock
@@ -81,13 +76,11 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               value={tx.type}
               comment={tx.typeDescription}
             />,
-            
             <ContentBlock
               key='version'
               title='Coins transferred:'
               value={(tx.payload.amount || tx.payload.value || 0) + ' KLY'}
             />,
-
             <ContentBlock
               key='nonce'
               title='Nonce: '
@@ -105,13 +98,12 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             value={tx.txHash}
           />,
           [
-<ContentBlock key='parallelization_type' title='Execution type:'>
-            <Label variant={ Array.isArray(tx.payload.touchedAccounts) ? 'green' : 'red' }>{Array.isArray(tx.payload.touchedAccounts) ? 'Parallel execution⚡' : 'Non-parallel execution 🦥'}</Label>
-          </ContentBlock>,
-          <ContentBlock key='fee_details' title='Fee details:'>
-            <Label variant='blue'>{tx.payload.gasAbstraction ? 'Account Abstraction 2.0 🪄' : 'Fee paid in native coin 💸'}</Label>
-          </ContentBlock>
-          
+            <ContentBlock key='parallelization_type' title='Execution type:'>
+              <Label variant={ Array.isArray(tx.payload.touchedAccounts) ? 'green' : 'red' }>{Array.isArray(tx.payload.touchedAccounts) ? 'Parallel execution⚡' : 'Non-parallel execution 🦥'}</Label>
+            </ContentBlock>,
+            <ContentBlock key='fee_details' title='Fee details:'>
+              <Label variant='blue'>{tx.payload.gasAbstraction ? 'Account Abstraction 2.0 🪄' : 'Fee paid in native coin 💸'}</Label>
+            </ContentBlock>
           ],
           [
             <ContentBlock
