@@ -8,6 +8,7 @@ import AccountImage from '@public/icons/pages/account.svg';
 import React from 'react';
 import NotFoundPage from '@/app/not-found';
 
+
 export const metadata: Metadata = {
   title: 'Account info',
 };

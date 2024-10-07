@@ -85,7 +85,7 @@ export const TransactionsTable: FC<Props> = ({
               )}
               <TableCell><Typography variant='h6'>TxType</Typography></TableCell>
               <TableCell><Typography variant='h6'>SigType</Typography></TableCell>
-              <TableCell><Typography variant='h6'>Fee</Typography></TableCell>
+              <TableCell><Typography variant='h6'>Proposed fee</Typography></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
