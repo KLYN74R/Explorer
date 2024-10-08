@@ -80,7 +80,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
             )}
           </ContentBlock>,
           <ContentBlock key='language' title='Language:'>
-            <Label variant={contract.lang === 'AssemblyScript' ? 'blue' : (contract.lang === 'Rust' ? 'red' : 'green' )}>{contract.lang}</Label>
+            <Label variant={getColorForLanguage(contract.lang)}>{contract.lang}</Label>
           </ContentBlock>
         ]}
       >
@@ -94,4 +94,13 @@ export default async function ContractByIdPage({ params }: PageProps) {
       </Box>
     </PageContainer>
   );
+}
+
+function getColorForLanguage(lang: string): 'blue' | 'red' | 'orange' | 'silver' | 'green' {
+  const langLower = lang.toLowerCase();
+  return langLower === 'assemblyscript' ? 'blue' :
+    langLower === 'rust' ? 'red' :
+      langLower === 'solidity' ? 'orange' :
+        langLower.includes('system') ? 'silver' :
+          'green';
 }

@@ -2,7 +2,7 @@ import { FC, Suspense } from 'react';
 import Link from 'next/link';
 import { ButtonPagination, FlexCenterBox, Label, PageContainer } from '@/components/ui';
 import { Box, Grid, Typography } from '@mui/material';
-import { COLORS } from '@/styles';
+import { BG_COLORS } from '@/styles';
 import BTCIcon from '@public/icons/currencies/BTC.svg';
 import ETHIcon from '@public/icons/currencies/ETH.svg';
 import SOLIcon from '@public/icons/currencies/SOL.svg';
@@ -121,7 +121,7 @@ const EpochCheckpoints: FC<CheckpointsPerEpochProps> = ({
             sx={{
               mt: 1,
               pr: 3,
-              background: COLORS.BG_LIGHT,
+              background: BG_COLORS.GRAY_LIGHT,
               minHeight: '85px'
             }}
           >

@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import Link from 'next/link';
 import { Box, SxProps, Typography } from '@mui/material';
-import { COLORS } from '@/styles';
+import { BG_COLORS } from '@/styles';
 import LaunchIcon from '@mui/icons-material/Launch';
 
 export const ContentBlock: FC<{
@@ -47,7 +47,7 @@ export const ContentBlock: FC<{
       pl: 3,
       height: '100%',
       pr: 3,
-      background: blurred ? 'rgba(17, 17, 17, 0.4)' : COLORS.BG_LIGHT,
+      background: blurred ? 'rgba(17, 17, 17, 0.4)' : BG_COLORS.GRAY_LIGHT,
       ...(blurred && { backdropFilter: 'blur(5px)' }),
       ...sx
     }}>

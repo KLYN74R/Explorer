@@ -4,7 +4,7 @@ import { Autocomplete, AutocompleteValue, Box, TextField, Typography } from '@mu
 import { FlexBetweenBox, GeometricButton, InfoBlock } from '@/components/ui';
 import SearchIcon from '@public/icons/ui/search.svg';
 import { Epoch } from '@/definitions';
-import { COLORS } from '@/styles';
+import { BG_COLORS } from '@/styles';
 
 type ComboboxItemProps = {
   label: string,
@@ -47,7 +47,7 @@ export const ShardValidatorsSection: FC<{ epoch: Epoch }> = ({
           gap: 2,
           pl: 1.5,
           pr: 0.4,
-          background: COLORS.BG_LIGHT,
+          background: BG_COLORS.GRAY_LIGHT,
           position: 'relative'
         }}
       >
