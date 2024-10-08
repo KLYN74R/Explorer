@@ -32,7 +32,6 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             url: `/tx/${tx.txHash}/details`,
             value: 'View raw details'
           }
-          
         }}
         items={[
           <ContentBlock
@@ -50,7 +49,6 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               url={`/users/${tx.shard}:${tx.creator}`}
               
             />,
-
             (
               
               tx.createdContractAddress && <ContentBlock 
@@ -87,7 +85,6 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               />
 
             )
-          
           ],
           [
             <ContentBlock
@@ -96,13 +93,11 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               value={tx.type}
               comment={tx.typeDescription}
             />,
-            
             <ContentBlock
               key='version'
               title='Coins transferred:'
               value={(tx.payload.amount || tx.payload.value || 0) + ' KLY'}
             />,
-
             <ContentBlock
               key='nonce'
               title='Nonce: '
@@ -120,13 +115,12 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             value={tx.txHash}
           />,
           [
-<ContentBlock key='parallelization_type' title='Execution type:'>
-            <Label variant={ Array.isArray(tx.payload.touchedAccounts) ? 'green' : 'red' }>{Array.isArray(tx.payload.touchedAccounts) ? 'Parallel execution⚡' : 'Non-parallel execution 🦥'}</Label>
-          </ContentBlock>,
-          <ContentBlock key='fee_details' title='Fee details:'>
-            <Label variant='blue'>{tx.payload.gasAbstraction ? 'Account Abstraction 2.0 🪄' : 'Fee paid in native coin 💸'}</Label>
-          </ContentBlock>
-          
+            <ContentBlock key='parallelization_type' title='Execution type:'>
+              <Label variant={ Array.isArray(tx.payload.touchedAccounts) ? 'green' : 'red' }>{Array.isArray(tx.payload.touchedAccounts) ? 'Parallel execution⚡' : 'Non-parallel execution 🦥'}</Label>
+            </ContentBlock>,
+            <ContentBlock key='fee_details' title='Fee details:'>
+              <Label variant='blue'>{tx.payload.gasAbstraction ? 'Account Abstraction 2.0 🪄' : 'Fee paid in native coin 💸'}</Label>
+            </ContentBlock>
           ],
           [
             <ContentBlock

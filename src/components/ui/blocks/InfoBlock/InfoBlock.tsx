@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Box, SxProps, Typography } from '@mui/material';
-import { COLORS } from '@/styles';
+import { BG_COLORS } from '@/styles';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 
@@ -70,7 +70,7 @@ export const InfoBlock: FC<InfoBlockProps> = ({
       pl: 3,
       height: '100%',
       pr: 3,
-      background: COLORS.BG_LIGHT,
+      background: BG_COLORS.GRAY_LIGHT,
       ...sx
     }}>
       {content}

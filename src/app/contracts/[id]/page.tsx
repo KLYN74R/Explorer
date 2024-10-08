@@ -18,25 +18,17 @@ type PageProps = {
 }
 
 export default async function ContractByIdPage({ params }: PageProps) {
-
   const decodedComponent = decodeURIComponent(params.id)
 
   let shardId, contractId;
 
   if(!decodedComponent.includes(':')){
-
     shardId = 'x';
-
     contractId = decodedComponent;
-
   } else {
-
     let [shardID, contractID] = decodedComponent.split(':');
-
     shardId = shardID;
-
     contractId = contractID;
-
   }
 
   const contract = await fetchShardAccountById(shardId, contractId) as Contract;
@@ -45,9 +37,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
   if(contract.type !== 'contract') return <NotFoundPage/>
 
   return (
-    
     <PageContainer sx={{ py: 6 }}>
-      
       <EntityPageLayout
         header={{
           title: 'Account info',
@@ -85,7 +75,7 @@ export default async function ContractByIdPage({ params }: PageProps) {
             )}
           </ContentBlock>,
           <ContentBlock key='language' title='Language:'>
-            <Label variant={contract.lang === 'AssemblyScript' ? 'blue' : (contract.lang === 'Rust' ? 'red' : 'green' )}>{contract.lang}</Label>
+            <Label variant={getColorForLanguage(contract.lang)}>{contract.lang}</Label>
           </ContentBlock>
         ]}
       >
@@ -97,7 +87,15 @@ export default async function ContractByIdPage({ params }: PageProps) {
         <Typography sx={{ mt: 1, mb: 3 }}>Browse through the latest 200 transactions below</Typography>
         <TransactionsTable transactions={transactions.reverse()} />
       </Box>
-
     </PageContainer>
   );
+}
+
+function getColorForLanguage(lang: string): 'blue' | 'red' | 'orange' | 'silver' | 'green' {
+  const langLower = lang.toLowerCase();
+  return langLower === 'assemblyscript' ? 'blue' :
+    langLower === 'rust' ? 'red' :
+      langLower === 'solidity' ? 'orange' :
+        langLower.includes('system') ? 'silver' :
+          'green';
 }

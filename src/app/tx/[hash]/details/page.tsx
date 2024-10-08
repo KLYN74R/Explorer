@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { ContentBlock, PageContainer } from '@/components/ui';
 import { Grid, Typography } from '@mui/material';
+import { ContentBlock, PageContainer } from '@/components/ui';
 import { PrettyJSON } from '@/components';
 import { fetchTransactionByTxHash } from '@/data';
 
@@ -19,11 +19,17 @@ export default async function RawTransactionWithDetailsPage({ params }: RawTrans
   const tx = await fetchTransactionByTxHash(id);
 
   const detailsToVisualize = {
-
-    executionStatus: { isOk: tx.isOk, reason: tx.reason, blockID: tx.blockID, order: tx.order, createdContractAddress: tx.createdContractAddress, extraDataToReceipt: tx.extraDataToReceipt },
-
+    executionStatus: {
+      isOk: tx.isOk,
+      reason:
+      tx.reason,
+      blockID: tx.blockID,
+      order: tx.order,
+      createdContractAddress: tx.createdContractAddress,
+      extraDataToReceipt:
+      tx.extraDataToReceipt
+    },
     txData:{
-
       version: tx.v,
       txid: tx.txHash,
       txType: tx.type,
@@ -34,9 +40,7 @@ export default async function RawTransactionWithDetailsPage({ params }: RawTrans
       sigType: tx.sigType,
       sig: tx.sig,
       payload: tx.payload
-
     }
-
   }
 
   return (

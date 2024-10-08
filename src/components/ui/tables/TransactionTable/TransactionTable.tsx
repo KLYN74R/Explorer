@@ -16,9 +16,9 @@ import {
   Box,
   TextField,
 } from '@mui/material';
+import { BG_COLORS } from '@/styles';
 import LaunchIcon from '@mui/icons-material/Launch';
 import SearchIcon from '@public/icons/ui/search.svg';
-import { COLORS } from '@/styles';
 
 type Props = {
   transactions: TransactionPreview[]
@@ -145,7 +145,7 @@ const TransactionSearchBar = ({
         gap: 2,
         pl: 1.5,
         pr: 0.4,
-        background: COLORS.BG_LIGHT
+        background: BG_COLORS.GRAY_LIGHT
       }}
     >
       <TextField
