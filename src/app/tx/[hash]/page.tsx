@@ -35,6 +35,12 @@ export default async function TransactionByIdPage({ params }: PageProps) {
           
         }}
         items={[
+          <ContentBlock
+            key='shard'
+            title='Shard:'
+            value={tx.shard}
+            
+          />,
           [
             <ContentBlock
               key='creator'
@@ -46,8 +52,25 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             />,
 
             (
+              
+              tx.createdContractAddress && <ContentBlock 
+              
+                key='created_contract_address'
+                title='Created contract:'
+                value={tx.createdContractAddress} 
+                url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
 
-              tx.payload.to && <ContentBlock
+
+              /> || tx.type === 'EVM_CALL' && tx.payload.evmBytecode !== '' && <ContentBlock
+             
+                key='called_contract'
+                title='Called contract:'
+                value={truncateMiddle(tx.payload.to)}
+                comment={describeTransactionCreatorFormat(tx.payload.to)}
+                url={`/contracts/${tx.shard}:${tx.payload.to}`}
+          
+              /> || tx.payload.to && <ContentBlock
+                
                 key='recipient'
                 title='Recipient:'
                 value={truncateMiddle(tx.payload.to)}
@@ -61,14 +84,6 @@ export default async function TransactionByIdPage({ params }: PageProps) {
                 value={truncateMiddle(tx.payload.contractID)}
                 url={`/contracts/${tx.shard}:${tx.payload.contractID}`}
           
-              /> || tx.createdContractAddress && <ContentBlock 
-              
-                key='created_contract_address'
-                title='Created contract:'
-                value={tx.createdContractAddress} 
-                url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
-
-
               />
 
             )
