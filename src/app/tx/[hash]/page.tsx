@@ -38,7 +38,6 @@ export default async function TransactionByIdPage({ params }: PageProps) {
             key='shard'
             title='Shard:'
             value={tx.shard}
-            
           />,
           [
             <ContentBlock
@@ -47,43 +46,39 @@ export default async function TransactionByIdPage({ params }: PageProps) {
               value={truncateMiddle(tx.creator)}
               comment={tx.creatorFormatDescription}
               url={`/users/${tx.shard}:${tx.creator}`}
-              
             />,
             (
-              
-              tx.createdContractAddress && <ContentBlock 
-              
-                key='created_contract_address'
-                title='Created contract:'
-                value={tx.createdContractAddress} 
-                url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
-
-
-              /> || tx.type === 'EVM_CALL' && tx.payload.evmBytecode !== '' && <ContentBlock
-             
-                key='called_contract'
-                title='Called contract:'
-                value={truncateMiddle(tx.payload.to)}
-                comment={describeTransactionCreatorFormat(tx.payload.to)}
-                url={`/contracts/${tx.shard}:${tx.payload.to}`}
-          
-              /> || tx.payload.to && <ContentBlock
-                
-                key='recipient'
-                title='Recipient:'
-                value={truncateMiddle(tx.payload.to)}
-                comment={describeTransactionCreatorFormat(tx.payload.to)}
-                url={`/users/${tx.shard}:${tx.payload.to}`}
-            
-              /> || tx.payload.contractID && <ContentBlock
-                
-                key='called_contract'
-                title='Called contract:'
-                value={truncateMiddle(tx.payload.contractID)}
-                url={`/contracts/${tx.shard}:${tx.payload.contractID}`}
-          
-              />
-
+              tx.createdContractAddress ? (
+                <ContentBlock
+                  key='created_contract_address'
+                  title='Created contract:'
+                  value={tx.createdContractAddress}
+                  url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
+                />
+              ) : tx.type === 'EVM_CALL' && tx.payload.evmBytecode !== '' ? (
+                <ContentBlock
+                  key='called_contract'
+                  title='Called contract:'
+                  value={truncateMiddle(tx.payload.to)}
+                  comment={describeTransactionCreatorFormat(tx.payload.to)}
+                  url={`/contracts/${tx.shard}:${tx.payload.to}`}
+                />
+              ) : tx.payload.to ? (
+                <ContentBlock
+                  key='recipient'
+                  title='Recipient:'
+                  value={truncateMiddle(tx.payload.to)}
+                  comment={describeTransactionCreatorFormat(tx.payload.to)}
+                  url={`/users/${tx.shard}:${tx.payload.to}`}
+                />
+              ) : tx.payload.contractID ? (
+                <ContentBlock
+                  key='called_contract'
+                  title='Called contract:'
+                  value={truncateMiddle(tx.payload.contractID)}
+                  url={`/contracts/${tx.shard}:${tx.payload.contractID}`}
+                />
+              ) : null
             )
           ],
           [

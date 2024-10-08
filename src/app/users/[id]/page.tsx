@@ -8,7 +8,6 @@ import { truncateMiddle } from '@/helpers';
 import { Account} from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
 
-
 export const metadata: Metadata = {
   title: 'Account info',
 };

@@ -1,7 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { Box, Typography, Button } from '@mui/material';
-import { majorMonoDisplay } from '@/styles/theme';
 
 const ComingSoonPage = () => {
   const router = useRouter();
@@ -21,11 +20,10 @@ const ComingSoonPage = () => {
         height: '75vh'
       }}
     >
- 
-      <Typography variant="h6" sx={{ mb: 4 }}>
-      This page will be added later
+      <Typography variant='h6' sx={{ mb: 4 }}>
+        Page coming soon...
       </Typography>
-      <Button variant="contained" onClick={handleGoBack}>
+      <Button variant='contained' onClick={handleGoBack}>
         Go Back
       </Button>
     </Box>
