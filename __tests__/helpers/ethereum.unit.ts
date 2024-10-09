@@ -1,4 +1,4 @@
-import { EVMTransaction, TransactionWithTxHash } from '@/definitions';
+import { EVMTransaction, TransactionWithTxHash, TX_TYPE } from '@/definitions';
 import { parseEvmTransaction } from '@/helpers';
 
 describe('parseEvmTransaction', () => {
@@ -13,7 +13,7 @@ describe('parseEvmTransaction', () => {
       txHash: '0x0416afec24bb8010e39a79663c695fdfdf26576fd1605cfcddec7a7c9611da8d',
       v: 0,
       creator: '0x069bdf66961ce2d38ebe48dd2e095f2c8015ac82',
-      type: 'EVM_CALL',
+      type: TX_TYPE.EVM_CALL,
       nonce: 0,
       fee: 230000000000000,
       payload: {

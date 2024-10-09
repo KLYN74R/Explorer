@@ -1,5 +1,12 @@
 import { BlockExtendedView } from './blocks';
 
+export enum TX_TYPE {
+  TX = 'TX',
+  EVM_CALL = 'EVM_CALL',
+  WVM_CALL = 'WVM_CALL',
+  WVM_CONTRACT_DEPLOY = 'WVM_CONTRACT_DEPLOY'
+}
+
 export interface Transaction {
   v: number;
   creator: string;

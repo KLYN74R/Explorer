@@ -101,6 +101,16 @@ const theme = createTheme({
       lineHeight: '150%',
       textTransform: 'uppercase',
       textDecoration: 'none',
+    },
+    monospace: {
+      fontFamily: 'monospace',
+      fontSize: '16px',
+      fontWeight: 400,
+      letterSpacing: '0%',
+      lineHeight: '200%',
+      textTransform: 'none',
+      textDecoration: 'none',
+      wordBreak: 'break-all'
     }
   },
   components: {

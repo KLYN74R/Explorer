@@ -1,6 +1,12 @@
 import api from '@/helpers/api';
 import { API_ROUTES } from '@/constants/api';
-import { TransactionExtendedView, TransactionReceipt, TransactionWithTxHash, TransactionPreview } from '@/definitions';
+import {
+  TransactionExtendedView,
+  TransactionReceipt,
+  TransactionWithTxHash,
+  TransactionPreview,
+  TX_TYPE
+} from '@/definitions';
 import { fetchBlockById } from './blocks';
 
 export async function fetchTransactionByTxHash(hash: string): Promise<TransactionExtendedView> {
@@ -33,13 +39,13 @@ export async function fetchAccountTransactions(shard: string, accountId: string)
 
 function describeTransactionType(type: string) {
   switch (type) {
-    case 'TX':
+    case TX_TYPE.TX:
       return 'simple address to address tx';
-    case 'WVM_CONTRACT_DEPLOY':
+    case TX_TYPE.WVM_CONTRACT_DEPLOY:
       return 'contract deployment to WASM vm';
-    case 'WVM_CALL':
+    case TX_TYPE.WVM_CALL:
       return 'call smart-contract in WASM vm';
-    case 'EVM_CALL':
+    case TX_TYPE.EVM_CALL:
       return 'interaction with EVM';
     default:
       return '';

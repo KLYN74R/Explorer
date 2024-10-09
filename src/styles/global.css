@@ -5,6 +5,6 @@ div::-webkit-scrollbar {
 }
 
 div::-webkit-scrollbar-thumb {
-  background: #7aeee5;
+  background: #3FF1E690;
   border-radius: 5px;
 }

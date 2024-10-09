@@ -7,7 +7,8 @@ import {
   BlockPreview,
   AggregatedFinalizationProof,
   SyncStats,
-  EVMTransaction
+  EVMTransaction,
+  TX_TYPE
 } from '@/definitions';
 import { BLOCKS_PER_PAGE } from '@/constants';
 import { API_ROUTES } from '@/constants/api';
@@ -70,7 +71,7 @@ export async function fetchBlockById(id: string): Promise<BlockExtendedView> {
 
     const transactions = await Promise.all(
       blockTxs.map(async (tx) =>
-        tx.type === 'EVM_CALL'
+        tx.type === TX_TYPE.EVM_CALL
           ? parseEvmTransaction(tx as EVMTransaction)
           : { ...tx, txHash: await hashData(tx.sig) }
       )
