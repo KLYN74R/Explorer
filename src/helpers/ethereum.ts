@@ -2,6 +2,7 @@ import Web3 from 'web3'
 import { Transaction as EvmTransaction } from '@ethereumjs/tx';
 import { defaultAbiCoder as AbiCoder } from '@ethersproject/abi';
 import { EVMTransaction, TransactionWithTxHash, TX_TYPE } from '@/definitions';
+import { SigHashes } from '@/config/evmMethodsSighashes';
 
 export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
   const serializedEVMTxWithout0x = tx.payload.slice(2); // delete 0x
@@ -25,11 +26,13 @@ export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
 }
 
 export async function decodeCalldata(calldata: string) {
-  const functionSigHash = calldata.slice(0, 10).slice(2);
-  const functionParams = calldata.slice(10);
+
+  const functionSigHash = calldata.slice(0, 8);
+  const functionParams = calldata.slice(8);  
 
   try {
-    const funcProto = await getFunctionPrototype(functionSigHash);
+    const funcProto = await getFunctionPrototype(functionSigHash as SigHashKey);
+
     if (!funcProto) {
       throw new Error('Function prototype not found');
     }
@@ -49,19 +52,20 @@ export async function decodeCalldata(calldata: string) {
   }
 }
 
-async function getFunctionPrototype(fourBytesSigHash: string) {
-  try {
-    const response = await fetch(
-      `https://raw.githubusercontent.com/ethereum-lists/4bytes/master/signatures/${fourBytesSigHash}`
-    );
-    if (!response.ok) {
-      throw new Error('Failed to fetch function prototype');
-    }
-    return await response.text();
-  } catch (error) {
-    console.error('Error fetching function prototype:', error);
-    return null;
+
+type SigHashKey = keyof typeof SigHashes;
+
+
+function getFunctionPrototype(fourBytesSigHash: SigHashKey) {
+
+  const response = SigHashes[fourBytesSigHash];
+
+  if (!response) {
+    throw new Error(`Function signature ${fourBytesSigHash} not found in the mapping.`);
   }
+
+  return response;
+
 }
 
 function parseFunctionPrototype(prototype: string) {
