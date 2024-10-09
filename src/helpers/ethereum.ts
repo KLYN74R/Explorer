@@ -43,9 +43,9 @@ export async function decodeCalldata(calldata: string) {
     }));
 
     return { funcProto, funcId: `0x${functionSigHash}`, parameters };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error decoding calldata:', error);
-    return null;
+    return { error: error.message };
   }
 }
 
