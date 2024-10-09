@@ -26,12 +26,11 @@ export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
 }
 
 export async function decodeCalldata(calldata: string) {
-
   const functionSigHash = calldata.slice(0, 8);
   const functionParams = calldata.slice(8);  
 
   try {
-    const funcProto = await getFunctionPrototype(functionSigHash as SigHashKey);
+    const funcProto = await getFunctionPrototype(functionSigHash);
 
     if (!funcProto) {
       throw new Error('Function prototype not found');
@@ -52,20 +51,14 @@ export async function decodeCalldata(calldata: string) {
   }
 }
 
-
-type SigHashKey = keyof typeof SigHashes;
-
-
-function getFunctionPrototype(fourBytesSigHash: SigHashKey) {
-
-  const response = SigHashes[fourBytesSigHash];
+function getFunctionPrototype(fourBytesSigHash: string) {
+  const response = SigHashes[fourBytesSigHash as keyof typeof SigHashes];
 
   if (!response) {
     throw new Error(`Function signature ${fourBytesSigHash} not found in the mapping.`);
   }
 
   return response;
-
 }
 
 function parseFunctionPrototype(prototype: string) {
