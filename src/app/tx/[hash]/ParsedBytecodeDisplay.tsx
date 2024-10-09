@@ -9,13 +9,15 @@ type Props = {
 };
 
 interface DecodedCalldata {
-  funcProto: string,
-  funcId: string,
-  parameters: Array<{
+  funcProto?: string;
+  funcId?: string;
+  parameters?: Array<{
     index: string,
     value: string
-  }>
+  }>;
+  error?: string;
 }
+
 
 export const ParsedBytecodeDisplay: FC<Props> = ({ bytecode }) => {
   const isEmpty = bytecode === '0x';
@@ -31,21 +33,25 @@ export const ParsedBytecodeDisplay: FC<Props> = ({ bytecode }) => {
   }, [bytecode]);
 
   if (isEmpty) {
-    return <CodeSnippet>No bytecode provided.</CodeSnippet>;
+    return <CodeSnippet>No bytecode provided</CodeSnippet>;
   }
 
   return (
     <CodeSnippet>
       {functionData ? (
-        <>
-          <Typography variant='monospace'>Function: {functionData.funcProto}</Typography><br/>
-          <Typography variant='monospace'>MethodID: {functionData.funcId}</Typography>
-          {functionData.parameters.map(param => (
-            <Box key={param.index}>
-              <Typography variant='monospace'>{param.index}: {param.value}</Typography>
-            </Box>
-          ))}
-        </>
+        functionData.error ? (
+          <Typography variant="monospace">{functionData.error}</Typography>
+        ) : (
+          <>
+            <Typography variant='monospace'>Function: {functionData.funcProto}</Typography><br/>
+            <Typography variant='monospace'>MethodID: {functionData.funcId}</Typography>
+            {functionData.parameters?.map(param => (
+              <Box key={param.index}>
+                <Typography variant='monospace'>{param.index}: {param.value}</Typography>
+              </Box>
+            ))}
+          </>
+        )
       ) : (
         <Box>
           <Typography variant='monospace'>Loading...</Typography>
