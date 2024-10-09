@@ -1,6 +1,6 @@
+import React from 'react';
 import '@mui/material/styles';
 
-// Extending the Palette and PaletteOptions interfaces to include custom properties
 declare module '@mui/material/styles' {
   interface Palette {
     border: {
@@ -28,5 +28,19 @@ declare module '@mui/material/styles' {
     default: string;
     light: string;
     paper: string;
+  }
+
+  interface TypographyVariants {
+    monospace: React.CSSProperties;
+  }
+
+  interface TypographyVariantsOptions {
+    monospace?: React.CSSProperties;
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    monospace: true;
   }
 }

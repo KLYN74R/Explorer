@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 import { PrettyJSON } from '@/components';
+import { ParsedBytecodeDisplay } from './ParsedBytecodeDisplay';
 import { ContentBlock, EntityPageLayout, Label, PageContainer } from '@/components/ui';
 import { describeTransactionCreatorFormat, fetchTransactionByTxHash } from '@/data';
 import { truncateMiddle } from '@/helpers';
+import { TX_TYPE } from '@/definitions';
 
 type PageProps = {
   params: {
@@ -55,7 +57,7 @@ export default async function TransactionByIdPage({ params }: PageProps) {
                   value={tx.createdContractAddress}
                   url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
                 />
-              ) : tx.type === 'EVM_CALL' && tx.payload.evmBytecode !== '' ? (
+              ) : tx.type === TX_TYPE.EVM_CALL && tx.payload.evmBytecode !== '' ? (
                 <ContentBlock
                   key='called_contract'
                   title='Called contract:'
@@ -132,7 +134,14 @@ export default async function TransactionByIdPage({ params }: PageProps) {
           ],
           <ContentBlock key='payload' title='Payload:'>
             <PrettyJSON data={tx.payload} />
-          </ContentBlock>
+          </ContentBlock>,
+          (
+            tx.type === TX_TYPE.EVM_CALL && tx.payload.evmBytecode !== '' && (
+              <ContentBlock key='input_format' title='Input format:'>
+                <ParsedBytecodeDisplay bytecode={tx.payload.evmBytecode} />
+              </ContentBlock>
+            )
+          )
         ]}
       />
     </PageContainer>
