@@ -55,7 +55,7 @@ function describeTransactionType(type: string) {
 export function describeTransactionCreatorFormat(creator: string) {
   const length = creator.length;
 
-  if (length === 44) {
+  if (length === 44 || length === 43) {
     return 'ED25519';
   } else if (length === 98) {
     return 'BLS, multisig';
@@ -63,7 +63,7 @@ export function describeTransactionCreatorFormat(creator: string) {
     return 'TBLS, tsig';
   } else if (length === 64) {
     return 'PQC, post-quantum';
-  } else if (length === 42) {
+  } else if (creator.startsWith('0x') && length === 42) {
     return 'ECDSA, EVM-compatible';
   } else {
     return 'Unknown format';
