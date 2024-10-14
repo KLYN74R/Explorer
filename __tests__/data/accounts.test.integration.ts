@@ -1,5 +1,5 @@
 import { fetchShardAccountById } from '@/data';
-import { Account, Contract } from '@/definitions';
+import { UserAccount, ContractAccount } from '@/definitions';
 
 describe('fetchShardAccountById Integration Tests', () => {
   const shard = 'shard_0';
@@ -9,7 +9,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   const contractAccountId = '0000000000000000000000000000000000000000000000000000000000000000';
 
   it('should fetch Ed25519 account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, ed25519AccountId) as Account;
+    const result = await fetchShardAccountById(shard, ed25519AccountId) as UserAccount;
 
     expect(typeof result).toBe('object');
 
@@ -21,7 +21,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   });
 
   it('should fetch BLS account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, blsAccountId) as Account;
+    const result = await fetchShardAccountById(shard, blsAccountId) as UserAccount;
 
     expect(typeof result).toBe('object');
 
@@ -34,7 +34,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   });
 
   it('should fetch PQC account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, pqcAccountId) as Account;
+    const result = await fetchShardAccountById(shard, pqcAccountId) as UserAccount;
 
     expect(typeof result).toBe('object');
 
@@ -47,7 +47,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   });
 
   it('should fetch Contract account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, contractAccountId) as Contract;
+    const result = await fetchShardAccountById(shard, contractAccountId) as ContractAccount;
 
     expect(typeof result).toBe('object');
 

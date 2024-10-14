@@ -20,6 +20,10 @@ export default async function TransactionByIdPage({ params }: PageProps) {
   const txHash = decodeURIComponent(params.hash);
   const tx = await fetchTransactionByTxHash(txHash);
 
+  // In case it's EVM account - make this request to check the EVM account type (if it's EOA or contract)
+
+  
+
   return (
     <PageContainer sx={{ py: 6 }}>
       <EntityPageLayout

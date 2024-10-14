@@ -1,4 +1,4 @@
-export interface Account {
+export interface UserAccount {
   type: string;
   balance: number;
   uno: number;
@@ -8,7 +8,7 @@ export interface Account {
   rev_t?: number;
 }
 
-export interface Contract {
+export interface ContractAccount {
   type: string;
   lang: string;
   balance: number;

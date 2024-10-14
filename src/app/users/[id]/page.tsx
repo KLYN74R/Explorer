@@ -5,7 +5,7 @@ import { Box, Typography } from '@mui/material';
 import { ContentBlock, EntityPageLayout, Label, PageContainer, TransactionsTable } from '@/components/ui';
 import { fetchShardAccountById, fetchAccountTransactions } from '@/data';
 import { truncateMiddle } from '@/helpers';
-import { Account} from '@/definitions';
+import { UserAccount} from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default async function AccountByIdPage({ params }: PageProps) {
   let [shard, accountId] = decodeURIComponent(params.id).split(':');
   accountId = accountId.startsWith('0x') ? accountId.toLowerCase() : accountId;
 
-  const account = await fetchShardAccountById(shard, accountId) as Account;
+  const account = await fetchShardAccountById(shard, accountId) as UserAccount;
   const transactions  = await fetchAccountTransactions(shard, accountId);
 
   if(account.type !== 'eoa') return <NotFoundPage/>
