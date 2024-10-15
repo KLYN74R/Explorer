@@ -8,6 +8,16 @@ export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
   const serializedEVMTxWithout0x = tx.payload.slice(2); // delete 0x
   const evmTx = EvmTransaction.fromSerializedTx(Buffer.from(serializedEVMTxWithout0x, 'hex'));
 
+  // Try to parse .data field in case it contains extra data (extensions of KLY-EVM as AAv2, parallelization, etc.)
+
+  let parsedData = {};
+
+  try{
+
+    parsedData = JSON.parse(evmTx.data.toString()); 
+
+  } catch {}
+
   return {
     txHash: '0x' + evmTx.hash().toString('hex'),
     v: 0,
@@ -18,7 +28,8 @@ export function parseEvmTransaction(tx: EVMTransaction): TransactionWithTxHash {
     payload: {
       to: evmTx.to?.toString(),
       value: Web3.utils.fromWei(evmTx.value.toString(), 'ether'),
-      evmBytecode: evmTx.data.toString('hex')
+      evmBytecode: evmTx.data.toString('hex'),
+      ...parsedData
     },
     sigType: 'ECDSA',
     sig: 'ECDSA'
