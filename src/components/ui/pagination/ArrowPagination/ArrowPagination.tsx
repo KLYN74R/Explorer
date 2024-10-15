@@ -5,10 +5,10 @@ import { IconButton, SxProps, Typography } from '@mui/material';
 import { ArrowLeft, ArrowRight } from '@mui/icons-material';
 import { FlexCenterBox } from '@/components/ui';
 
-type PaginationProps = {
+interface PaginationProps {
   pageIsEmpty: boolean;
   sx?: SxProps;
-};
+}
 
 export const ArrowPagination = ({ pageIsEmpty, sx }: PaginationProps) => {
   const {

@@ -6,7 +6,7 @@ import { formatNumber, truncateMiddle } from '@/helpers';
 import { StakersTable } from './StakersTable';
 import PoolImage from '@public/icons/pages/pool.svg';
 
-type PageProps = {
+interface Props {
   params: {
     id: string;
   }
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Pool info',
 };
 
-export default async function PoolByIdPage({ params }: PageProps) {
+export default async function PoolByIdPage({ params }: Props) {
   const poolId = decodeURIComponent(params.id);
   const pool = await fetchPoolById(poolId);
 

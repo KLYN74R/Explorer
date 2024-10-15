@@ -6,7 +6,7 @@ import SearchIcon from '@public/icons/ui/search.svg';
 import { Epoch } from '@/definitions';
 import { BG_COLORS } from '@/styles';
 
-type ComboboxItemProps = {
+interface ComboboxItemProps {
   label: string,
   value: string
 }

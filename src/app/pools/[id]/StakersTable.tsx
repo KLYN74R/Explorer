@@ -28,7 +28,7 @@ const getTableData = (poolStakers: Stakers) => {
   );
 }
 
-type StakersTableProps = {
+interface StakersTableProps {
   poolStakers: Stakers,
   poolOriginShard: string,
 }

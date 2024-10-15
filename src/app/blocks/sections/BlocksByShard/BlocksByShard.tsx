@@ -6,7 +6,7 @@ import { LatestBlocksTable } from './LatestBlocksTable';
 import { LatestBlocksTableSkeleton } from './LatestBlocksTableSkeleton';
 import { fetchCurrentShards } from '@/data';
 
-type BlocksByShardProps = {
+interface BlocksByShardProps {
   shard: string;
   currentPage: number
 }

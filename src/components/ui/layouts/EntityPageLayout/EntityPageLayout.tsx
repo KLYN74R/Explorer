@@ -4,7 +4,7 @@ import { Grid, Typography } from '@mui/material';
 import { Label } from '@/components/ui';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-type Props = {
+interface Props {
   children?: ReactNode,
   header: {
     title: string,

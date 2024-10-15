@@ -8,7 +8,7 @@ import ETHIcon from '@public/icons/currencies/ETH.svg';
 import SOLIcon from '@public/icons/currencies/SOL.svg';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-type Checkpoint = {
+interface Checkpoint {
   hostchain: string;
   hash: string;
   isSuccessful: boolean;
@@ -80,7 +80,7 @@ export default function CheckpointsPage() {
   );
 }
 
-type CheckpointsPerEpochProps = {
+interface CheckpointsPerEpochProps {
   epochId: number;
   checkpoints: Checkpoint[];
 }

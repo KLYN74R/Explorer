@@ -4,7 +4,7 @@ import { ContentBlock, PageContainer } from '@/components/ui';
 import { PrettyJSON } from '@/components';
 import { fetchTransactionByTxHash } from '@/data';
 
-type RawTransactionWithDetailsPageProps = {
+interface RawTransactionWithDetailsProps {
   params: {
     hash: string;
   }
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: 'Raw tx details',
 };
 
-export default async function RawTransactionWithDetailsPage({ params }: RawTransactionWithDetailsPageProps) {
+export default async function RawTransactionWithDetailsPage({ params }: RawTransactionWithDetailsProps) {
   const id = decodeURIComponent(params.hash);
   const tx = await fetchTransactionByTxHash(id);
 

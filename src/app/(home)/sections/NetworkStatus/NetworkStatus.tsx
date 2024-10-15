@@ -5,7 +5,7 @@ import { GreenGradientBackground } from '@/components/ui';
 import { BlockchainData } from '@/definitions';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-type Props = {
+interface Props {
   data: BlockchainData
 }
 

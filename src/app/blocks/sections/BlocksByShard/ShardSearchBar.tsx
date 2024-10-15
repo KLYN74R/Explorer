@@ -6,7 +6,7 @@ import { FlexBetweenBox, GeometricButton } from '@/components/ui';
 import SearchIcon from '@public/icons/ui/search.svg';
 import { BG_COLORS } from '@/styles';
 
-type ComboboxItemProps = {
+interface ComboboxItemProps {
   label: string,
   value: string
 }

@@ -17,7 +17,7 @@ import { fetchBlocksByShard } from '@/data';
 import { BLOCKS_PER_PAGE } from '@/constants';
 import { truncateMiddle } from '@/helpers';
 
-type LatestBlocksTableProps = {
+interface LatestBlocksTableProps {
   shard: string;
   currentPage: number;
 }

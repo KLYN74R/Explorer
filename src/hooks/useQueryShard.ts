@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQueryParams } from './useQueryParams';
 
-type ComboboxItemProps = {
+interface ComboboxItemProps {
   label: string,
   value: string
 }

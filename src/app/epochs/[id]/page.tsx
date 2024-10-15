@@ -5,7 +5,7 @@ import { fetchEpochById } from '@/data';
 import { FormattedDate } from '@/helpers';
 import { ShardValidatorsSection } from './ShardValidatorsSection';
 
-type PageProps = {
+interface Props {
   params: {
     id: string;
   }
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'Epoch info',
 };
 
-export default async function PoolByIdPage({ params }: PageProps) {
+export default async function PoolByIdPage({ params }: Props) {
   const id = decodeURIComponent(params.id);
   const epoch = await fetchEpochById(Number(id));
 

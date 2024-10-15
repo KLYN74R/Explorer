@@ -5,7 +5,7 @@ import { ContentBlock } from '@/components/ui';
 import { ExplorerSearchBar } from './ExplorerSearchBar';
 import { BlockchainData } from '@/definitions';
 
-type Props = {
+interface Props {
   data: BlockchainData
 }
 
