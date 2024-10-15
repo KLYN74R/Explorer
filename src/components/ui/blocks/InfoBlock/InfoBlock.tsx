@@ -4,7 +4,7 @@ import { BG_COLORS } from '@/styles';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-type InfoBlockProps = {
+interface InfoBlockProps {
   title: string,
   value?: string | number | Array<string|{text: string; url: string;}>,
   sx?: SxProps

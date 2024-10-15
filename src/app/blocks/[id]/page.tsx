@@ -5,7 +5,7 @@ import { fetchBlockById } from '@/data';
 import { TransactionPreview } from '@/definitions';
 import BlockImage from '@public/icons/pages/block.svg';
 
-type PageProps = {
+interface Props {
   params: {
     id: string
   }
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'Block info',
 };
 
-export default async function BlockByIdPage({ params }: PageProps) {
+export default async function BlockByIdPage({ params }: Props) {
   const id = decodeURIComponent(params.id);
   const block = await fetchBlockById(id);
 

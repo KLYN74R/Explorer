@@ -8,7 +8,7 @@ export interface Epoch {
   leadersSequence: { [shard: string]: string[] };
 }
 
-export type EpochExtendedData = Epoch & {
+export interface EpochExtendedData extends Epoch {
   isFirst: boolean;
   isCurrent: boolean;
   shardsNumber: number;

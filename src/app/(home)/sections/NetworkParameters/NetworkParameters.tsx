@@ -3,7 +3,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { RedGradientBackground } from '@/components/ui';
 import { BlockchainData } from '@/definitions';
 
-type Props = {
+interface Props {
   data: BlockchainData
 }
 

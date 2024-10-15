@@ -20,7 +20,7 @@ import { BG_COLORS } from '@/styles';
 import LaunchIcon from '@mui/icons-material/Launch';
 import SearchIcon from '@public/icons/ui/search.svg';
 
-type Props = {
+interface Props {
   transactions: TransactionPreview[]
 }
 

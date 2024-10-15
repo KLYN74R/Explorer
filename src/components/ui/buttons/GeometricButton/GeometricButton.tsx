@@ -4,7 +4,7 @@ import { Box, Button, SxProps } from '@mui/material';
 import styles from './geometric-button.module.css';
 import clsx from 'clsx';
 
-export type GeometricButtonProps = {
+export interface GeometricButtonProps {
   children: React.ReactNode;
   url?: string;
   variant?: 'white' | 'cyan' | 'black';

@@ -6,7 +6,7 @@ import { describeTransactionCreatorFormat, fetchAccountById, fetchTransactionByT
 import { truncateMiddle } from '@/helpers';
 import { TX_TYPE } from '@/definitions';
 
-type PageProps = {
+interface Props {
   params: {
     hash: string
   }
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Transaction info',
 };
 
-export default async function TransactionByIdPage({ params }: PageProps) {
+export default async function TransactionByIdPage({ params }: Props) {
   const txHash = decodeURIComponent(params.hash);
   const tx = await fetchTransactionByTxHash(txHash);
 

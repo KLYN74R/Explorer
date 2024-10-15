@@ -4,9 +4,9 @@ import { Box, Typography } from '@mui/material';
 import { CodeSnippet } from '@/components/ui';
 import { decodeCalldata } from '@/helpers';
 
-type Props = {
+interface Props {
   bytecode: string;
-};
+}
 
 interface DecodedCalldata {
   funcProto?: string;

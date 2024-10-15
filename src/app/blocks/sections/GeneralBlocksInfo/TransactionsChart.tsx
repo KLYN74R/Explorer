@@ -10,7 +10,7 @@ const ApexCharts = dynamic(() => import('react-apexcharts'), {
   ssr: false
 });
 
-type TxPerEpoch = {
+interface TxPerEpoch {
   epochId: number;
   txNumber: number;
 }

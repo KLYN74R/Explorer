@@ -4,7 +4,7 @@ import { Box, IconButton, SxProps, Typography } from '@mui/material';
 import ArrowLeft from '@public/icons/ui/arrowLeft.svg';
 import ArrowRight from '@public/icons/ui/arrowRight.svg';
 
-type Props = {
+interface Props {
   url: string;
   variant: 'back' | 'forward',
   label?: string;

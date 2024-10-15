@@ -4,7 +4,7 @@ import { Grid, Typography } from '@mui/material';
 import { PrettyJSON } from '@/components';
 import { fetchAggregatedFinalizationProof } from '@/data';
 
-type AggregatedFinalizationProofPageProps = {
+interface AggregatedFinalizationProofProps {
   params: {
     id: string;
   }
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: 'Aggregated Finalization Proof',
 };
 
-export default async function AggregatedFinalizationProofPage({ params }: AggregatedFinalizationProofPageProps) {
+export default async function AggregatedFinalizationProofPage({ params }: AggregatedFinalizationProofProps) {
   const id = decodeURIComponent(params.id);
   const aggregatedFinalizationProof = await fetchAggregatedFinalizationProof(id);
 

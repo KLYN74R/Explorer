@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   title: 'Account info',
 };
 
-type PageProps = {
+interface Props {
   params: {
     id: string
   }
 }
 
-export default async function AccountByIdPage({ params }: PageProps) {
+export default async function AccountByIdPage({ params }: Props) {
   let [shard, accountId] = decodeURIComponent(params.id).split(':');
   accountId = accountId.startsWith('0x') ? accountId.toLowerCase() : accountId;
 

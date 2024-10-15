@@ -4,7 +4,7 @@ import { Button, ButtonProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 
-type OutlinedButtonProps = {
+interface OutlinedButtonProps {
   icon?: React.ReactElement;
   text?: string;
   url?: string;

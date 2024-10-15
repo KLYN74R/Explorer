@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Button, Typography } from '@mui/material';
 import DoubleArrowDown from '@public/icons/ui/doubleArrowDown.svg';
 
-type LoadMoreButtonProps = {
+interface LoadMoreButtonProps {
   onClick: () => void;
 }
 

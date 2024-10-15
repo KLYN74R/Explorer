@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   title: 'Account info',
 };
 
-type PageProps = {
+interface Props {
   params: {
     id: string
   }
 }
 
-export default async function ContractByIdPage({ params }: PageProps) {
+export default async function ContractByIdPage({ params }: Props) {
   const decodedComponent = decodeURIComponent(params.id)
 
   let shardId, contractId;
