@@ -21,6 +21,9 @@ export const Footer = () => {
             <Typography color="text.secondary" sx={{ mt: 2 }}>
               We stand for decentralization, open-source development and community interests.
             </Typography>
+            <Typography sx={{ mt: 4.5 }}>
+              Contact us: hello@klyntar.org
+            </Typography>
           </Box>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={2.2}>

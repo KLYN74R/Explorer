@@ -7,6 +7,7 @@ import Discord from '@public/icons/social/Discord.svg';
 import Facebook from '@public/icons/social/Facebook.svg';
 
 export enum KLY_LINKS {
+  LANDING = 'https://www.klyntar.org',
   GITHUB = 'https://github.com/KLYN74R',
   TWITTER = 'https://twitter.com/KLYN74R',
   TELEGRAM = 'https://t.me/KLYN74R',
@@ -18,10 +19,9 @@ export enum KLY_LINKS {
   HOW_TO_RUN_A_VALIDATOR = 'https://docs.klyntar.org/build-core-and-join-network/networks/your-own-private-testnet/run-your-private-testnet-with-single-validator',
   MULTISTAKING = 'https://docs.klyntar.org/build-core-and-join-network/become-kly-validator/multistaking',
   UNSTAKING = 'https://docs.klyntar.org/build-core-and-join-network/become-kly-validator/default-staking/unstaking',
-  LANDING = 'https://www.klyntar.org',
+  RWX_CONTRACTS = 'https://docs.klyntar.org/rwx-contracts/create-rwx-contract-and-deploy-with-web1337',
   CMC = 'https://coinmarketcap.com/',
   TOKENS = '#',
-  RWX_CONTRACTS = 'https://docs.klyntar.org/rwx-contracts/create-rwx-contract-and-deploy-with-web1337',
   SERVICES = '#'
 }
 
