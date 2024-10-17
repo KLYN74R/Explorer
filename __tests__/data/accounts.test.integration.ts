@@ -1,7 +1,7 @@
-import { fetchShardAccountById } from '@/data';
+import { fetchAccountById } from '@/data';
 import { UserAccount, ContractAccount } from '@/definitions';
 
-describe('fetchShardAccountById Integration Tests', () => {
+describe('fetchAccountById Integration Tests', () => {
   const shard = 'shard_0';
   const ed25519AccountId = 'EGU4u3Anwahbtbx8F1ZZgFQSg2u49EkrkqMERT9r3q1o';
   const blsAccountId = '0x8f079049121d5e2ae885bdc6581df9fb68eab94a7aa3ae54bfe1d1ac35aceefbb202f656b0c1b56d64583630612a9970';
@@ -9,7 +9,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   const contractAccountId = '0000000000000000000000000000000000000000000000000000000000000000';
 
   it('should fetch Ed25519 account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, ed25519AccountId) as UserAccount;
+    const result = await fetchAccountById(shard, ed25519AccountId) as UserAccount;
 
     expect(typeof result).toBe('object');
 
@@ -21,7 +21,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   });
 
   it('should fetch BLS account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, blsAccountId) as UserAccount;
+    const result = await fetchAccountById(shard, blsAccountId) as UserAccount;
 
     expect(typeof result).toBe('object');
 
@@ -34,7 +34,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   });
 
   it('should fetch PQC account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, pqcAccountId) as UserAccount;
+    const result = await fetchAccountById(shard, pqcAccountId) as UserAccount;
 
     expect(typeof result).toBe('object');
 
@@ -47,7 +47,7 @@ describe('fetchShardAccountById Integration Tests', () => {
   });
 
   it('should fetch Contract account details correctly', async () => {
-    const result = await fetchShardAccountById(shard, contractAccountId) as ContractAccount;
+    const result = await fetchAccountById(shard, contractAccountId) as ContractAccount;
 
     expect(typeof result).toBe('object');
 

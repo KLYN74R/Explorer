@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import NotFoundPage from '@/app/not-found';
 import { Box, Typography } from '@mui/material';
 import { ContentBlock, EntityPageLayout, Label, PageContainer, TransactionsTable } from '@/components/ui';
-import { fetchShardAccountById, fetchAccountTransactions } from '@/data';
+import { fetchAccountById, fetchAccountTransactions } from '@/data';
 import { truncateMiddle } from '@/helpers';
 import { UserAccount} from '@/definitions';
 import AccountImage from '@public/icons/pages/account.svg';
@@ -22,7 +22,7 @@ export default async function AccountByIdPage({ params }: Props) {
   let [shard, accountId] = decodeURIComponent(params.id).split(':');
   accountId = accountId.startsWith('0x') ? accountId.toLowerCase() : accountId;
 
-  const account = await fetchShardAccountById(shard, accountId) as UserAccount;
+  const account = await fetchAccountById(shard, accountId) as UserAccount;
   const transactions  = await fetchAccountTransactions(shard, accountId);
 
   if(account.type !== 'eoa') return <NotFoundPage/>
