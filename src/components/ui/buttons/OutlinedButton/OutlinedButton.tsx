@@ -4,13 +4,12 @@ import { Button, ButtonProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 
-interface OutlinedButtonProps {
+interface OutlinedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactElement;
   text?: string;
   url?: string;
-  onClick?: () => void;
-  sx?: ButtonProps['sx']
-};
+  sx?: ButtonProps['sx'];
+}
 
 const StyledButton = styled(Button)(({ theme }) => ({
   borderColor: theme.palette.border.main,
@@ -20,8 +19,8 @@ const StyledButton = styled(Button)(({ theme }) => ({
   padding: 0,
   backgroundColor: 'transparent',
   '&:hover': {
-    backgroundColor: 'transparent'
-  }
+    backgroundColor: 'transparent',
+  },
 }));
 
 export const OutlinedButton: FC<OutlinedButtonProps> = ({
@@ -29,7 +28,7 @@ export const OutlinedButton: FC<OutlinedButtonProps> = ({
   text,
   url = '',
   onClick,
-  sx
+  sx,
 }) => {
   const isLink = !!url;
 
@@ -37,27 +36,30 @@ export const OutlinedButton: FC<OutlinedButtonProps> = ({
     sx: {
       width: {
         xs: '38px',
-        md: '44px'
+        md: '44px',
       },
       height: {
         xs: '38px',
-        md: '44px'
+        md: '44px',
       },
       minWidth: {
         xs: '38px',
-        md: '44px'
+        md: '44px',
       },
-      ...sx
+      ...sx,
     },
     variant: 'outlined',
-    ...(isLink ? {
-      component: Link,
-      href: url,
-    } : {
-      component: 'button',
-      onClick
-    }),
-  }
+    ...(isLink
+      ? {
+          component: Link,
+          href: url,
+        }
+      : {
+          component: 'button',
+          onClick,
+        }
+    ),
+  };
 
   return (
     // @ts-ignore

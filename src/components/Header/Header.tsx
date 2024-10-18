@@ -1,52 +1,121 @@
-import { Container, Box } from '@mui/material';
+'use client';
+import { Fragment, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { GeometricButton, FlexColumnBox, FlexCenterBox, OutlinedButton } from '@/components/ui';
-import { KLY_LINKS, socialIconsWithLinks } from '@/config/social';
+import { MobileNetworksList, DesktopNetworksList } from './NetworksList';
+import { SocialButtons } from './SocialButtons';
+import {
+  Box,
+  Collapse,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
+import { OutlinedButton, PageContainer } from '@/components/ui';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import KlyntarFoundationLogo from '@public/icons/company/KlyntarFoundationLogo.svg';
+import MenuIcon from '@public/icons/ui/menu.svg';
+import Close from '@public/icons/ui/close.svg';
+
+const mobileHeaderElements = [
+  {
+    id: 'networks',
+    label: 'Explore networks',
+    element: MobileNetworksList,
+  },
+  {
+    id: 'socials',
+    label: 'Follow us',
+    element: SocialButtons,
+  },
+];
 
 export const Header = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [openedElement, setOpenedElement] = useState<string | null>(null);
+
+  useEffect(() => {
+    const resizeHandler = () => setIsOpen(false);
+    window.addEventListener('resize', resizeHandler);
+
+    return () => window.removeEventListener('resize', resizeHandler);
+  }, []);
+
   return (
-    <Container sx={{ pt: 2.5, pb: 3.5 }} maxWidth='xl'>
-      <FlexColumnBox sx={{
-        gap: { xs: 2, md: 4 },
-        alignItems: { md: 'center' },
-        justifyContent: { md: 'space-between'},
-        flexDirection: { md: 'row' }
-      }}>
+    <PageContainer
+      sx={{ pt: 2.5, pb: 3.5 }}
+    >
+      <Box
+        sx={{
+          gap: { xs: 2, md: 4 },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
         <Link href='/'>
           <KlyntarFoundationLogo />
         </Link>
-        <FlexCenterBox>
+        {isOpen ? (
+          <OutlinedButton
+            icon={<Close />}
+            onClick={() => setIsOpen(false)}
+            sx={{ display: { md: 'none' } }}
+          />
+        ) : (
+          <OutlinedButton
+            icon={<MenuIcon />}
+            onClick={() => setIsOpen(true)}
+            sx={{ display: { md: 'none' } }}
+          />
+        )}
+        <Box
+          sx={{
+            display: {
+              display: 'none',
+              md: 'flex',
+              gap: 30,
+              alignItems: 'center'
+            },
+          }}
+        >
           <SocialButtons />
-          <GeometricButton
-            url={KLY_LINKS.DISCORD}
-            variant='white'
-            sx={{ py: 0.5, px: 8, minWidth: '200px' }}
-            wrapperSx={{ display: { xs: 'none', md: 'block' } }}
-          >
-            Follow us
-          </GeometricButton>
-        </FlexCenterBox>
-      </FlexColumnBox>
-    </Container>
+          <DesktopNetworksList />
+        </Box>
+      </Box>
+      <Collapse
+        in={isOpen}
+        timeout='auto'
+        unmountOnExit
+        sx={{ display: { md: 'none' } }}
+      >
+        <List
+          sx={{ width: '100%', borderBottom: 1 }}
+          component='div'
+        >
+          {mobileHeaderElements.map(({ id, label, element: Element }) => (
+            <Fragment key={id}>
+              <ListItemButton
+                onClick={() =>
+                  setOpenedElement(openedElement === id ? null : id)
+                }
+              >
+                <ListItemText primary={label} />
+                {openedElement === id ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse
+                in={openedElement === id}
+                timeout='auto'
+                unmountOnExit
+              >
+                <ListItem component='div'>
+                  <Element />
+                </ListItem>
+              </Collapse>
+            </Fragment>
+          ))}
+        </List>
+      </Collapse>
+    </PageContainer>
   );
-}
-
-const SocialButtons = () => {
-  return (
-    <Box sx={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: 1,
-      mr: 1
-    }}>
-      {socialIconsWithLinks.map(({ icon, url }) => (
-        <OutlinedButton
-          key={url}
-          icon={icon()}
-          url={url}
-        />
-      ))}
-    </Box>
-  );
-}
+};

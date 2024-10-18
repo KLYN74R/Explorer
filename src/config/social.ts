@@ -7,6 +7,8 @@ import Discord from '@public/icons/social/Discord.svg';
 import Facebook from '@public/icons/social/Facebook.svg';
 
 export enum KLY_LINKS {
+  EXPLORER_TESTNET = 'https://www.testnet.klyntarscan.org',
+  EXPLORER_MAINNET = 'https://www.klyntarscan.org',
   LANDING = 'https://www.klyntar.org',
   GITHUB = 'https://github.com/KLYN74R',
   TWITTER = 'https://twitter.com/KLYN74R',
@@ -22,7 +24,7 @@ export enum KLY_LINKS {
   RWX_CONTRACTS = 'https://docs.klyntar.org/rwx-contracts/create-rwx-contract-and-deploy-with-web1337',
   CMC = 'https://coinmarketcap.com/',
   TOKENS = '#',
-  SERVICES = '#'
+  SERVICES = '#',
 }
 
 export const socialIconsWithLinks: Array<{
@@ -35,5 +37,5 @@ export const socialIconsWithLinks: Array<{
   { icon: Medium, url: KLY_LINKS.MEDIUM },
   { icon: Discord, url: KLY_LINKS.DISCORD },
   { icon: Reddit, url: KLY_LINKS.REDDIT },
-  { icon: Facebook, url: KLY_LINKS.FACEBOOK }
-]
+  { icon: Facebook, url: KLY_LINKS.FACEBOOK },
+];
