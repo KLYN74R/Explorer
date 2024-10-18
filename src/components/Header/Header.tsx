@@ -1,14 +1,28 @@
 'use client';
-import { Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { SocialButtons } from './SocialButtons';
-import { Box, Collapse, Container, List, ListItem, ListItemButton, ListItemText, Typography, } from '@mui/material';
+import {
+  Box,
+  Collapse,
+  Container,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Menu,
+  MenuItem,
+  SxProps,
+  Typography,
+} from '@mui/material';
 import { FlexColumnBox, OutlinedButton } from '@/components/ui';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import KlyntarFoundationLogo from '@public/icons/company/KlyntarFoundationLogo.svg';
-import Menu from '@public/icons/ui/menu.svg';
+import MenuIcon from '@public/icons/ui/menu.svg';
 import Close from '@public/icons/ui/close.svg';
+import KlyntarIconSm from '@public/icons/company/KlyntarIconSm.svg';
 import { KLY_LINKS } from '@/config';
+import { BG_COLORS } from '@/styles';
 
 const networks = [
   {
@@ -23,12 +37,68 @@ const networks = [
   },
 ];
 
-const MobileNetworksList = () => {
+const isCurrentNetwork = (network: string) => {
   const isTestnet = window.location.hostname.includes('testnet');
-  const isCurrentNetwork = (network: string) => {
-    return (network === 'testnet' && isTestnet) || (network === 'mainnet' && !isTestnet);
-  }
+  return (
+    (network === 'testnet' && isTestnet) ||
+    (network === 'mainnet' && !isTestnet)
+  );
+};
 
+const DesctopNetworksList: FC<{ sx?: SxProps }> = ({ sx }) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => setAnchorEl(null);
+
+  return (
+    <Box sx={{ ...sx }}>
+      <OutlinedButton
+        id='networks-button'
+        aria-controls={open ? 'networks-menu' : undefined}
+        aria-haspopup='true'
+        aria-expanded={open ? 'true' : undefined}
+        icon={<KlyntarIconSm />}
+        sx={{
+          background: open ? BG_COLORS.CYAN : BG_COLORS.SILVER,
+          ':hover': { background: BG_COLORS.CYAN },
+        }}
+        onClick={handleClick}
+      />
+      <Menu
+        id='networks-menu'
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'networks-button',
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        {networks.map(({ base, label, url }) => (
+          <MenuItem
+            key={base}
+            component='a'
+            href={url}
+            onClick={handleClose}
+            sx={{ borderRadius: '0px !important' }}
+          >
+            <Typography
+              color={isCurrentNetwork(base) ? 'primary' : 'text.primary'}
+            >
+              {label}
+            </Typography>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+  );
+};
+
+const MobileNetworksList = () => {
   return (
     <FlexColumnBox sx={{ width: '100%', gap: 1 }}>
       <FlexColumnBox sx={{ width: '100%', gap: 0.5 }}>
@@ -40,7 +110,7 @@ const MobileNetworksList = () => {
               textDecoration: 'none',
               lineHeight: '32px',
               display: 'block',
-              ml: 1
+              ml: 1,
             }}
           >
             <Link
@@ -49,7 +119,7 @@ const MobileNetworksList = () => {
                 color: 'inherit',
                 textDecoration: 'inherit',
                 textDecorationThickness: 'inherit',
-                cursor: isCurrentNetwork(base) ? 'default' : 'pointer'
+                cursor: isCurrentNetwork(base) ? 'default' : 'pointer',
               }}
             >
               {label}
@@ -63,14 +133,14 @@ const MobileNetworksList = () => {
 
 const mobileHeaderElements = [
   {
-    id: 'network',
+    id: 'networks',
     label: 'Explore networks',
     element: MobileNetworksList,
   },
   {
     id: 'socials',
     label: 'Follow us',
-    element: SocialButtons
+    element: SocialButtons,
   },
 ];
 
@@ -109,7 +179,7 @@ export const Header = () => {
           />
         ) : (
           <OutlinedButton
-            icon={<Menu />}
+            icon={<MenuIcon />}
             onClick={() => setIsOpen(true)}
             sx={{ display: { md: 'none' } }}
           />
@@ -120,6 +190,7 @@ export const Header = () => {
           }}
         >
           <SocialButtons />
+          <DesctopNetworksList />
         </Box>
       </Container>
       <Collapse
@@ -135,7 +206,9 @@ export const Header = () => {
           {mobileHeaderElements.map(({ id, label, element: Element }) => (
             <Fragment key={id}>
               <ListItemButton
-                onClick={() => setOpenedElement(openedElement === id ? null : id)}
+                onClick={() =>
+                  setOpenedElement(openedElement === id ? null : id)
+                }
               >
                 <ListItemText primary={label} />
                 {openedElement === id ? <ExpandLess /> : <ExpandMore />}
