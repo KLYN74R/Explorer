@@ -4,12 +4,12 @@ import { Button, ButtonProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 
-type OutlinedButtonProps = {
+interface OutlinedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactElement;
   text?: string;
   url?: string;
   sx?: ButtonProps['sx'];
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+}
 
 const StyledButton = styled(Button)(({ theme }) => ({
   borderColor: theme.palette.border.main,
@@ -57,7 +57,8 @@ export const OutlinedButton: FC<OutlinedButtonProps> = ({
       : {
           component: 'button',
           onClick,
-        }),
+        }
+    ),
   };
 
   return (
