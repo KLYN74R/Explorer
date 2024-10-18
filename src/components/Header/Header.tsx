@@ -1,84 +1,46 @@
 'use client';
-import {
-  Container,
-  Box,
-  List,
-  Collapse,
-  ListItemButton,
-  ListItemText,
-  ListItem,
-  ListSubheader,
-  Typography,
-} from '@mui/material';
-import { FlexColumnBox, OutlinedButton } from '@/components/ui';
-import { socialIconsWithLinks } from '@/config/social';
-import KlyntarFoundationLogo from '@public/icons/company/KlyntarFoundationLogo.svg';
 import { Fragment, useEffect, useState } from 'react';
-import Close from '@public/icons/ui/close.svg';
-import Menu from '@public/icons/ui/menu.svg';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { SocialButtons } from './SocialButtons';
+import { Box, Collapse, Container, List, ListItem, ListItemButton, ListItemText, Typography, } from '@mui/material';
+import { FlexColumnBox, OutlinedButton } from '@/components/ui';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import KlyntarFoundationLogo from '@public/icons/company/KlyntarFoundationLogo.svg';
+import Menu from '@public/icons/ui/menu.svg';
+import Close from '@public/icons/ui/close.svg';
+import { KLY_LINKS } from '@/config';
 
-const SocialButtons = () => {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 1,
-        mr: 1,
-      }}
-    >
-      {socialIconsWithLinks.map(({ icon: Icon, url }) => (
-        <OutlinedButton
-          key={url}
-          icon={<Icon />}
-          url={url}
-        />
-      ))}
-    </Box>
-  );
-};
-
-const TESTNET = 'testnet';
-
-export const networks = [
+const networks = [
   {
-    url: 'klyntarscan.org',
-    base: '',
-    label: 'Mainnet',
+    url: KLY_LINKS.EXPLORER_MAINNET,
+    base: 'mainnet',
+    label: 'Klyntar Mainnet',
   },
   {
-    url: 'testnet.klyntarscan.org',
-    base: TESTNET,
-    label: 'Testnet',
+    url: KLY_LINKS.EXPLORER_TESTNET,
+    base: 'testnet',
+    label: 'Klyntar Testnet',
   },
 ];
 
 const MobileNetworksList = () => {
-  const pathname = usePathname();
-  const isTestnet = pathname.includes(TESTNET);
+  const isTestnet = window.location.hostname.includes('testnet');
+  const isCurrentNetwork = (network: string) => {
+    return (network === 'testnet' && isTestnet) || (network === 'mainnet' && !isTestnet);
+  }
 
   return (
     <FlexColumnBox sx={{ width: '100%', gap: 1 }}>
-      <Typography
-        variant='subtitle2'
-        color='text.secondary'
-      >
-        Networks
-      </Typography>
       <FlexColumnBox sx={{ width: '100%', gap: 0.5 }}>
         {networks.map(({ label, base, url }) => (
           <Typography
             key={url}
-            style={{
-              color:
-                // isTestnet &&
-                base === TESTNET ? 'text.secondary' : 'text.primary',
+            color={isCurrentNetwork(base) ? 'primary' : 'text.primary'}
+            sx={{
               textDecoration: 'none',
               lineHeight: '32px',
               display: 'block',
+              ml: 1
             }}
           >
             <Link
@@ -87,6 +49,7 @@ const MobileNetworksList = () => {
                 color: 'inherit',
                 textDecoration: 'inherit',
                 textDecorationThickness: 'inherit',
+                cursor: isCurrentNetwork(base) ? 'default' : 'pointer'
               }}
             >
               {label}
@@ -101,10 +64,14 @@ const MobileNetworksList = () => {
 const mobileHeaderElements = [
   {
     id: 'network',
-    label: 'Change network',
+    label: 'Explore networks',
     element: MobileNetworksList,
   },
-  { id: 'socials', label: 'Socials', element: SocialButtons },
+  {
+    id: 'socials',
+    label: 'Follow us',
+    element: SocialButtons
+  },
 ];
 
 export const Header = () => {
@@ -114,6 +81,7 @@ export const Header = () => {
   useEffect(() => {
     const resizeHandler = () => setIsOpen(false);
     window.addEventListener('resize', resizeHandler);
+
     return () => window.removeEventListener('resize', resizeHandler);
   }, []);
 
@@ -167,9 +135,7 @@ export const Header = () => {
           {mobileHeaderElements.map(({ id, label, element: Element }) => (
             <Fragment key={id}>
               <ListItemButton
-                onClick={() =>
-                  setOpenedElement(openedElement === id ? null : id)
-                }
+                onClick={() => setOpenedElement(openedElement === id ? null : id)}
               >
                 <ListItemText primary={label} />
                 {openedElement === id ? <ExpandLess /> : <ExpandMore />}
