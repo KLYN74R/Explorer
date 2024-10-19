@@ -29,7 +29,6 @@ export default async function TransactionByIdPage({ params }: Props) {
   let contentBlock = null;
 
   if (tx.createdContractAddress) {
-  
     contentBlock = (
       <ContentBlock
         key='created_contract_address'
@@ -38,9 +37,7 @@ export default async function TransactionByIdPage({ params }: Props) {
         url={`/contracts/${tx.shard}:${tx.createdContractAddress}`}
       />
     );
-  
   } else if (tx.type === TX_TYPE.EVM_CALL && interactedWithAccount.type === 'contract' ) {
-  
     contentBlock = (
       <ContentBlock
         key='called_contract'
@@ -50,9 +47,7 @@ export default async function TransactionByIdPage({ params }: Props) {
         url={`/contracts/${tx.shard}:${tx.payload.to}`}
       />
     );
-  
   } else if (tx.payload.to) {
-  
     contentBlock = (
       <ContentBlock
         key='recipient'
@@ -62,9 +57,7 @@ export default async function TransactionByIdPage({ params }: Props) {
         url={`/users/${tx.shard}:${tx.payload.to}`}
       />
     );
-  
   } else if (tx.payload.contractID) {
-  
     contentBlock = (
       <ContentBlock
         key='called_contract'
@@ -73,7 +66,6 @@ export default async function TransactionByIdPage({ params }: Props) {
         url={`/contracts/${tx.shard}:${tx.payload.contractID}`}
       />
     );
-  
   }
 
   return (

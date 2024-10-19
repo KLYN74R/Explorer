@@ -1,5 +1,6 @@
 export * from './StyledComponents';
 export * from './Label';
+export * from './Indicator';
 export * from './gradients';
 export * from './pagination';
 export * from './buttons';
