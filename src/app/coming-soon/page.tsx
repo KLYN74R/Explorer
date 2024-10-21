@@ -24,7 +24,7 @@ const ComingSoonPage = () => {
       }}
     >
       <Typography variant='h6' sx={{ mb: 4 }}>
-        Page coming soon...
+        Page Coming Soon
       </Typography>
       <Button variant='contained' onClick={handleGoBack}>
         Go Back
