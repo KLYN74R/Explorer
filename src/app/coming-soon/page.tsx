@@ -1,11 +1,14 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import { logUserAction } from '@/helpers';
+import { USER_ACTIONS } from '@/constants';
 
 const ComingSoonPage = () => {
   const router = useRouter();
 
   const handleGoBack = () => {
+    logUserAction(USER_ACTIONS.GO_BACK_FROM_COMING_SOON_PAGE);
     router.back();
   };
 

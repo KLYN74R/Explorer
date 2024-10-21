@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import Link from 'next/link';
 import { FlexCenterBox } from '@/components/ui';
-import KlyntarIcon from '@public/icons/company/KlyntarIcon.svg';
+import { COLORS } from '@/styles';
 import { KLY_LINKS } from '@/config';
+import KlyntarIcon from '@public/icons/company/KlyntarIcon.svg';
 
 export const Footer = () => {
   return (
@@ -22,7 +23,10 @@ export const Footer = () => {
               We stand for decentralization, open-source development and community interests.
             </Typography>
             <Typography sx={{ mt: 4.5 }}>
-              Contact us: hello@klyntar.org
+              Contact us: <Link href='mailto:hello@klyntar.org' style={{
+                color: COLORS.TEXT_PRIMARY,
+              textDecoration: 'underline'
+              }}>hello@klyntar.org</Link>
             </Typography>
           </Box>
         </Grid>

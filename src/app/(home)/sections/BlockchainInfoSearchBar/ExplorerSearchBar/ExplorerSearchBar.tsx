@@ -5,16 +5,18 @@ import { SelectChangeEvent, } from '@mui/material';
 import { FlexBetweenBox, GeometricButton } from '@/components/ui';
 import { FilterDropdown } from './FilterDropdown';
 import { SearchInput } from './SearchInput';
-import { OPTIONS, OPTIONS_URL, OPTIONS_PLACEHOLDER } from './constants';
+import { logUserAction } from '@/helpers';
+import { USER_ACTIONS } from '@/constants';
+import { SEARCH_OPTIONS, SEARCH_OPTIONS_URL, SEARCH_OPTIONS_PLACEHOLDER } from './constants';
 import { BG_COLORS } from '@/styles';
 import SearchIcon from '@public/icons/ui/search.svg';
 
 export const ExplorerSearchBar = () => {
   const { push } = useRouter();
-  const [searchType, setSearchType] = useState(OPTIONS.CHOOSE);
+  const [searchType, setSearchType] = useState(SEARCH_OPTIONS.CHOOSE);
   const [query, setQuery] = useState('');
 
-  const isChoose = searchType === OPTIONS.CHOOSE;
+  const isChoose = searchType === SEARCH_OPTIONS.CHOOSE;
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -34,7 +36,8 @@ export const ExplorerSearchBar = () => {
     if (isChoose || !query) {
       return false;
     }
-    push(`${OPTIONS_URL[searchType]}/${query.trim()}`);
+    logUserAction(USER_ACTIONS.SEARCH_VIA_MAIN_BAR, { value: searchType })
+    push(`${SEARCH_OPTIONS_URL[searchType]}/${query.trim()}`);
   };
 
   return (
@@ -53,7 +56,7 @@ export const ExplorerSearchBar = () => {
         handleSearchTypeChange={handleSearchTypeChange}
       />
       <SearchInput
-        placeholder={OPTIONS_PLACEHOLDER[searchType]}
+        placeholder={SEARCH_OPTIONS_PLACEHOLDER[searchType]}
         isChoose={isChoose}
         query={query}
         handleQueryChange={handleQueryChange}

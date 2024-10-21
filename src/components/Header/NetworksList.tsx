@@ -1,8 +1,10 @@
 'use client';
-import { FC, useState, MouseEvent, useEffect } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FlexColumnBox, Indicator } from '@/components/ui';
 import { Box, Button, Menu, MenuItem, SxProps, Typography } from '@mui/material';
+import { logUserAction } from '@/helpers';
+import { LOCATION, USER_ACTIONS } from '@/constants';
 import { BG_COLORS, COLORS } from '@/styles';
 import { KLY_LINKS } from '@/config';
 import KlyntarIconSm from '@public/icons/company/KlyntarIconSm.svg';
@@ -99,6 +101,7 @@ export const DesktopNetworksList: FC<{ sx?: SxProps }> = ({ sx }) => {
               color={isCurrentNetwork(base) ? 'primary' : 'text.primary'}
               variant='caption'
               sx={{ fontWeight: 'bold', fontSize: '14px' }}
+              onClick={() => logUserAction(USER_ACTIONS.SWITCH_NETWORK, { location: LOCATION.HEADER, value: base })}
             >
               {label}
             </Typography>
@@ -124,6 +127,7 @@ export const MobileNetworksList = () => {
               lineHeight: 2.5,
               ml: 2
             }}
+            onClick={() => logUserAction(USER_ACTIONS.SWITCH_NETWORK, { location: LOCATION.MOBILE_MENU, value: base })}
           >
             <Link
               href={url}
