@@ -1,10 +1,15 @@
 'use client';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { majorMonoDisplay } from '@/styles/theme';
+import { logUserAction } from '@/helpers';
+import { USER_ACTIONS } from '@/constants';
 
 export default function Error() {
   const handleReload = () => {
-    window.location.reload();
+    logUserAction(USER_ACTIONS.RETRY_ON_ERROR);
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
   };
 
   return (

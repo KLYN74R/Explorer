@@ -20,19 +20,19 @@ const checkpointsData: Checkpoint[] = [
     hostchain: 'BTC',
     hash: 'b43cede8cb0cfbe5b4f96cc5a37c0e35f8a153b65844899058681b0a9880015a',
     isSuccessful: true,
-    url: 'https://mempool.space/testnet/tx/b43cede8cb0cfbe5b4f96cc5a37c0e35f8a153b65844899058681b0a9880015a'
+    url: '#'
   },
   {
     hostchain: 'ETH',
     hash: '0xc9e984f8c47a5488042d090e301fcd9bfb3f0a4b2b06c487e1bf6e16b27f9fdb',
     isSuccessful: true,
-    url: 'https://etherscan.io/tx/0xc9e984f8c47a5488042d090e301fcd9bfb3f0a4b2b06c487e1bf6e16b27f9fdb'
+    url: '#'
   },
   {
     hostchain: 'SOL',
     hash: '3GTDR7Etmhw2Y4nxmyTN58TyvRqp8n7pL3dMaUc2C6CcJq6RwxKSb18QCmD1xLB2j9wAkFzoGe1qR8gAWK62GBzv',
     isSuccessful: true,
-    url: 'https://solscan.io/tx/3GTDR7Etmhw2Y4nxmyTN58TyvRqp8n7pL3dMaUc2C6CcJq6RwxKSb18QCmD1xLB2j9wAkFzoGe1qR8gAWK62GBzv'
+    url: '#'
   },
 ];
 
@@ -104,7 +104,7 @@ const EpochCheckpoints: FC<CheckpointsPerEpochProps> = ({
 
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography variant='h2'>Epoch {epochId} <Typography variant='caption' color='secondary.main'>(Mock data)</Typography></Typography>
+      <Typography variant='h2'>Epoch {epochId} <Typography variant='caption' color='secondary.main'>(Simulated data)</Typography></Typography>
       <Typography sx={{ fontWeight: 300, mt: 2}}>Checkpoints:</Typography>
 
       <Typography

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Box, BoxProps, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { OPTIONS } from './constants';
+import { SEARCH_OPTIONS } from './constants';
 import ArrowDownIcon from '@public/icons/ui/arrowDown.svg';
 
 export const FilterDropdown: FC<{
@@ -27,14 +27,14 @@ export const FilterDropdown: FC<{
           }
         }}
       >
-        <MenuItem value={OPTIONS.CHOOSE} sx={{ display: 'none' }}>Filter</MenuItem>
-        <MenuItem value={OPTIONS.TRANSACTION_BY_HASH}>Tx ID</MenuItem>
-        <MenuItem value={OPTIONS.BLOCK_BY_SID}>SID</MenuItem>
-        <MenuItem value={OPTIONS.BLOCK_BY_ID}>Block ID</MenuItem>
-        <MenuItem value={OPTIONS.POOL_BY_ID}>Pool ID</MenuItem>
-        <MenuItem value={OPTIONS.EPOCH_BY_ID}>Epoch ID</MenuItem>
-        <MenuItem value={OPTIONS.ACCOUNT_BY_ID}>Account ID</MenuItem>
-        <MenuItem value={OPTIONS.CONTRACT_BY_ID}>Contract ID</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.CHOOSE} sx={{ display: 'none' }}>Filter</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.TRANSACTION_BY_HASH}>Tx ID</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.BLOCK_BY_SID}>SID</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.BLOCK_BY_ID}>Block ID</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.POOL_BY_ID}>Pool ID</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.EPOCH_BY_ID}>Epoch ID</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.ACCOUNT_BY_ID}>Account ID</MenuItem>
+        <MenuItem value={SEARCH_OPTIONS.CONTRACT_BY_ID}>Contract ID</MenuItem>
       </Select>
     </FormControl>
   );
