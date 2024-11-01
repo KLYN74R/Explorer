@@ -78,6 +78,5 @@ export interface BlockchainData {
     leaderTimeframe: string;
     slotTime: string;
     maxBlockSize: string;
-    limitForOperations: number;
   }
 }

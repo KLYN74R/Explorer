@@ -41,9 +41,6 @@ export const NetworkParameters:FC<Props> = async ({ data }) => {
         <Grid item xs={12} md={6}>
           <ContentItem title='Max block size' value={data.chainInfo.maxBlockSize} />
         </Grid>
-        <Grid item xs={12}>
-          <ContentItem title='Limit For Operations On The Epoch Edge' value={data.chainInfo.limitForOperations} />
-        </Grid>
       </Grid>
     </RedGradientBackground>
   );
