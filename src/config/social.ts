@@ -7,8 +7,8 @@ import Discord from '@public/icons/social/Discord.svg';
 import Facebook from '@public/icons/social/Facebook.svg';
 
 export enum KLY_LINKS {
-  EXPLORER_TESTNET = 'https://www.testnet.klyntarscan.org',
-  EXPLORER_MAINNET = 'https://www.klyntarscan.org',
+  EXPLORER_TESTNET = 'https://testnet.klyntarscan.org',
+  EXPLORER_MAINNET = 'https://klyntarscan.org',
   LANDING = 'https://www.klyntar.org',
   GITHUB = 'https://github.com/KLYN74R',
   TWITTER = 'https://twitter.com/KLYN74R',
