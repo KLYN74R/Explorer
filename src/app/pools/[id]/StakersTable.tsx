@@ -19,11 +19,11 @@ import LaunchIcon from '@mui/icons-material/Launch';
 
 const getTableData = (poolStakers: Stakers) => {
   return Object.entries(poolStakers).map(
-    ([id, { kly, uno }]) => ({
+    ([id, { kly, uno, reward }]) => ({
       id,
       kly,
       uno,
-      total: kly + uno,
+      reward
     })
   );
 }
@@ -65,7 +65,7 @@ export const StakersTable: FC<StakersTableProps> = ({
               <TableCell><Typography variant='h6'>ID</Typography></TableCell>
               <TableCell><Typography variant='h6'>KLY</Typography></TableCell>
               <TableCell><Typography variant='h6'>UNO</Typography></TableCell>
-              <TableCell><Typography variant='h6'>Total</Typography></TableCell>
+              <TableCell><Typography variant='h6'>Reward</Typography></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -90,7 +90,7 @@ export const StakersTable: FC<StakersTableProps> = ({
                   <Typography sx={{ fontSize: '16px' }}>{st.uno}</Typography>
                 </TableCell>
                 <TableCell sx={{ width: '25%' }}>
-                  <Typography color='primary.main' sx={{ fontSize: '16px' }}>{st.total}</Typography>
+                  <Typography sx={{ fontSize: '16px' }}>{st.reward}</Typography>
                 </TableCell>
               </TableRow>
             ))}
