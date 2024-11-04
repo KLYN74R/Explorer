@@ -15,7 +15,6 @@ describe('fetchAccountById Integration Tests', () => {
 
     expect(result.type).toEqual('eoa');
     expect(typeof result.balance).toBe('number');
-    expect(typeof result.uno).toBe('number');
     expect(typeof result.nonce).toBe('number');
     expect(typeof result.gas).toBe('number');
   });
@@ -27,7 +26,6 @@ describe('fetchAccountById Integration Tests', () => {
 
     expect(result.type).toEqual('eoa');
     expect(typeof result.balance).toBe('number');
-    expect(typeof result.uno).toBe('number');
     expect(typeof result.nonce).toBe('number');
     expect(typeof result.gas).toBe('number');
     expect(typeof result.rev_t).toBe('number');
@@ -40,7 +38,6 @@ describe('fetchAccountById Integration Tests', () => {
 
     expect(result.type).toEqual('eoa');
     expect(typeof result.balance).toBe('number');
-    expect(typeof result.uno).toBe('number');
     expect(typeof result.nonce).toBe('number');
     expect(typeof result.gas).toBe('number');
     expect(typeof result.pqcPub).toBe('string');
@@ -54,7 +51,6 @@ describe('fetchAccountById Integration Tests', () => {
     expect(result.type).toEqual('contract');
     expect(typeof result.lang).toBe('string');
     expect(typeof result.balance).toBe('number');
-    expect(typeof result.uno).toBe('number');
     expect(typeof result.gas).toBe('number');
 
     expect(Array.isArray(result.storages)).toBeTruthy();

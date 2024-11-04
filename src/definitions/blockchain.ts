@@ -39,8 +39,6 @@ export interface NetworkParams {
   LEADERSHIP_TIMEFRAME: number;
   BLOCK_TIME: number;
   MAX_BLOCK_SIZE_IN_BYTES: number;
-  EPOCH_EDGE_TRANSACTIONS_LIMIT_PER_BLOCK: number;
-  MAX_NUM_OF_BLOCKS_PER_SHARD_FOR_SYNC_OPS: number;
 }
 
 export interface ShardsData {

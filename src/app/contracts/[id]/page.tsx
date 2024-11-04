@@ -55,7 +55,6 @@ export default async function ContractByIdPage({ params }: Props) {
           <ContentBlock key='shard' title='Shard:' value={shardId}/>,
           [
             <ContentBlock key='balance' title='Balance:' value={contract.balance + ' KLY'}/>,
-            <ContentBlock key='uno' title='UNO:' value={contract.uno}/>
           ],
           [
             <ContentBlock

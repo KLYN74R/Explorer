@@ -46,7 +46,6 @@ export default async function AccountByIdPage({ params }: Props) {
           <ContentBlock key='shard' title='Shard:' value={shard}/>,
           [
             <ContentBlock key='balance' title='Balance:' value={account.balance + ' KLY'}/>,
-            <ContentBlock key='uno' title='UNO:' value={account.uno}/>
           ],
           [
             <ContentBlock key='nonce' title='Nonce:' value={account.nonce}/>,

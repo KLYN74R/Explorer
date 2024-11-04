@@ -30,7 +30,6 @@ describe('fetchBlockchainData Integration Tests', () => {
     expect(typeof result.chainInfo.leaderTimeframe).toBe('string');
     expect(typeof result.chainInfo.slotTime).toBe('string');
     expect(typeof result.chainInfo.maxBlockSize).toBe('string');
-    expect(typeof result.chainInfo.limitForOperations).toBe('number');
   });
 });
 

@@ -11,7 +11,6 @@ export interface Block {
   epoch: string;
   transactions: Transaction[];
   extraData: {
-    epochEdgeOperations: any[];
     rest: object;
   };
   index: number;

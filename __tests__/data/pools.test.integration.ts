@@ -12,7 +12,6 @@ describe('fetchPoolById Integration Test', () => {
     expect(typeof result.poolMetadata.type).toBe('string');
     expect(typeof result.poolMetadata.lang).toBe('string');
     expect(typeof result.poolMetadata.balance).toBe('number');
-    expect(typeof result.poolMetadata.uno).toBe('number');
     expect(typeof result.poolMetadata.gas).toBe('number');
 
     expect(Array.isArray(result.poolMetadata.storages)).toBeTruthy();
@@ -33,6 +32,7 @@ describe('fetchPoolById Integration Test', () => {
       const staker = stakers[stakerKey];
       expect(typeof staker.kly).toBe('number');
       expect(typeof staker.uno).toBe('number');
+      expect(typeof staker.reward).toBe('number');
     });
   });
 });

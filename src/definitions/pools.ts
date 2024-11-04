@@ -8,7 +8,6 @@ export interface Pool {
     type: string;
     lang: string;
     balance: number;
-    uno: number;
     gas: number;
     storages: string[];
     storageAbstractionLastPayment: number;
@@ -27,5 +26,6 @@ export interface Stakers {
   [key: string]: {
     kly: number;
     uno: number;
+    reward: number;
   }
 }

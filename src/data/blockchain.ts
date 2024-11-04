@@ -39,8 +39,7 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
         epochDuration: chainData.approvementThread.params.EPOCH_TIME / 3600000 + ' hours',
         leaderTimeframe: chainData.approvementThread.params.LEADERSHIP_TIMEFRAME / 1000 + ' seconds',
         slotTime: chainData.approvementThread.params.BLOCK_TIME / 1000 + ' second',
-        maxBlockSize: (chainData.approvementThread.params.MAX_BLOCK_SIZE_IN_BYTES / 1000000).toFixed(2) + 'Mb',
-        limitForOperations: chainData.approvementThread.params.EPOCH_EDGE_TRANSACTIONS_LIMIT_PER_BLOCK
+        maxBlockSize: (chainData.approvementThread.params.MAX_BLOCK_SIZE_IN_BYTES / 1000000).toFixed(2) + 'Mb'
       }
     };
   } catch (e: any) {
