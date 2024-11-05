@@ -15,7 +15,8 @@ export interface Pool {
   poolStorage: {
     percentage: number;
     overStake: number;
-    totalPower: number;
+    totalStakedKly: number;
+    totalStakedUno: number;
     stakers: Stakers;
     poolURL: string;
     wssPoolURL: string;
