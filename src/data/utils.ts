@@ -13,5 +13,9 @@ export const getInfoFromEpoch = (epoch: Epoch): Pick<EpochExtendedData, 'shardsN
 }
 
 export const getTxSuccessRate = (stats: BlockStats): string => {
-  return (stats.successfulTxsNumber / stats.totalTxsNumber * 100).toFixed(2) + '%'
+
+  if(stats.totalTxsNumber === 0) return '0%'
+
+  else return (stats.successfulTxsNumber / stats.totalTxsNumber * 100).toFixed(2) + '%'
+
 }

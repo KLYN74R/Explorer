@@ -8,3 +8,19 @@ div::-webkit-scrollbar-thumb {
   background: #3FF1E690;
   border-radius: 5px;
 }
+
+
+::-moz-selection {
+
+  background-color: #14b8a61a;
+  --tw-text-opacity: 1;
+  color: rgb(94 234 212 / var(--tw-text-opacity));
+
+}
+
+
+::selection {
+  background-color: #14b8a61a;
+  --tw-text-opacity: 1;
+  color: rgb(94 234 212 / var(--tw-text-opacity));
+}
