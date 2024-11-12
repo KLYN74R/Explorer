@@ -28,7 +28,7 @@ export default async function PoolByIdPage({ params }: Props) {
           value: truncateMiddle(poolId),
           label: {
             variant: pool.isActiveValidator ? 'green' : 'red',
-            value: `${pool.poolStorage.totalStakedKly} (${pool.isActiveValidator ? 'sufficient to be validator' : 'insufficient to be validator'})`
+            value: `${pool.poolStorage.totalStakedKly+pool.poolStorage.totalStakedUno} (${pool.isActiveValidator ? 'sufficient to be validator' : 'insufficient to be validator'})`
           },
           actionText: {
             value: 'Total staking power'
@@ -36,18 +36,27 @@ export default async function PoolByIdPage({ params }: Props) {
         }}
         items={[
           <ContentBlock key='pool_id' title='Pool Id:' value={poolId}/>,
-          <ContentBlock key='quorum_member_status' title='In current quorum:' value={pool.isCurrentQuorumMember ? 'Yes' : 'No'}/>,
-          <ContentBlock key='contract' title='Contract:' value='system/staking'/>,
           <ContentBlock key='shard' title='Creation shard:' value={pool.poolOriginShard}/>,
           [
+            <ContentBlock key='quorum_member_status' title='In current quorum:' value={pool.isCurrentQuorumMember ? 'Yes' : 'No'}/>,
+            <ContentBlock key='contract' title='Contract:' value='system/staking'/>,
+          
+          ],
             <ContentBlock
               key='percentage'
               title='Percentage:'
               value={pool.poolStorage.percentage + '% (takes the pool)'}
             />,
+          [
+            <ContentBlock
+              key='kly'
+              title='Staked KLY:'
+              value={formatNumber(pool.poolStorage.totalStakedKly)}
+            />
+            ,
             <ContentBlock
               key='uno'
-              title='Multistaking points:'
+              title='Staked UNO (multistaking points):'
               value={formatNumber(pool.poolStorage.totalStakedUno)}
             />
           ],
