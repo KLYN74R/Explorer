@@ -12,15 +12,15 @@ div::-webkit-scrollbar-thumb {
 
 ::-moz-selection {
 
-  background-color: #14b8a61a;
+  background-color: #b814141a;
   --tw-text-opacity: 1;
-  color: rgb(94 234 212 / var(--tw-text-opacity));
+  color: rgb(231 43 43 / var(--tw-text-opacity));
 
 }
 
 
 ::selection {
-  background-color: #14b8a61a;
+  background-color: #b814141a;
   --tw-text-opacity: 1;
-  color: rgb(94 234 212 / var(--tw-text-opacity));
+  color: rgb(231 43 43 / var(--tw-text-opacity));
 }

@@ -46,9 +46,9 @@ export default async function PoolByIdPage({ params }: Props) {
               value={pool.poolStorage.percentage + '% (takes the pool)'}
             />,
             <ContentBlock
-              key='overstake'
-              title='Overstake:'
-              value={formatNumber(pool.poolStorage.overStake)}
+              key='uno'
+              title='Multistaking points:'
+              value={formatNumber(pool.poolStorage.totalStakedUno)}
             />
           ],
           <ContentBlock

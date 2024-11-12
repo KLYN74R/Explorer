@@ -14,7 +14,6 @@ export interface Pool {
   };
   poolStorage: {
     percentage: number;
-    overStake: number;
     totalStakedKly: number;
     totalStakedUno: number;
     stakers: Stakers;
