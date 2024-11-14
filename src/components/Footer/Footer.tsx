@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FlexCenterBox } from '@/components/ui';
 import { COLORS } from '@/styles';
 import { KLY_LINKS } from '@/config';
-import KlyntarIcon from '@public/icons/company/KlyntarIcon.svg';
+import KlyntarIconWhite from '@public/icons/company/KlyntarIconWhite.svg';
 
 export const Footer = () => {
   return (
@@ -16,7 +16,6 @@ export const Footer = () => {
               gap: 0.5,
               justifyContent: 'flex-start'
             }}>
-              <KlyntarIcon />
               <Typography variant='h2'>Built with 🤍</Typography>
             </FlexCenterBox>
             <Typography color="text.secondary" sx={{ mt: 2 }}>
