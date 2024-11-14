@@ -4,8 +4,13 @@ import { Box, Typography } from '@mui/material';
 const KEY_WORDS = [
   'Web2, Web3 & Real World = 1B users',
   'Ecosystem of blockchains',
+  'Shared security model',
   'Post-quantum cryptography',
-  'Fast TPS & TTF',
+  'Parallel virtual machines',
+  'Account abstraction 2.0',
+  'Storage abstraction',
+  'Tons of features',
+  'Amazing TPS & TTF',
   'Mutability',
   'AI (FHE ML & ZKML)',
   'Multistaking',
@@ -17,6 +22,7 @@ const KEY_WORDS = [
   'RWAs',
   'Quantum currency',
 ];
+
 
 export const KeyWordsTicker = () => {
   return (
