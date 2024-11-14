@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { FlexCenterBox } from '@/components/ui';
 import { COLORS } from '@/styles';
 import { KLY_LINKS } from '@/config';
-import KlyntarIconWhite from '@public/icons/company/KlyntarIconWhite.svg';
 
 export const Footer = () => {
   return (
