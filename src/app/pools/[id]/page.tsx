@@ -28,7 +28,7 @@ export default async function PoolByIdPage({ params }: Props) {
           value: truncateMiddle(poolId),
           label: {
             variant: pool.isActiveValidator ? 'green' : 'red',
-            value: `${pool.poolStorage.totalStakedKly+pool.poolStorage.totalStakedUno} (${pool.isActiveValidator ? 'sufficient to be validator' : 'insufficient to be validator'})`
+            value: `${pool.poolStorage.totalStakedKly} (${pool.isActiveValidator ? 'sufficient to be validator' : 'insufficient to be validator'})`
           },
           actionText: {
             value: 'Total staking power'
