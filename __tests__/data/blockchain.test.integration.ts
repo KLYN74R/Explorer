@@ -25,7 +25,6 @@ describe('fetchBlockchainData Integration Tests', () => {
     expect(typeof result.chainInfo.validatorStakeSize).toBe('string');
     expect(typeof result.chainInfo.coreMajorVersion).toBe('number');
     expect(typeof result.chainInfo.quorumSize).toBe('string');
-    expect(typeof result.chainInfo.unstakingPeriod).toBe('string');
     expect(typeof result.chainInfo.epochDuration).toBe('string');
     expect(typeof result.chainInfo.leaderTimeframe).toBe('string');
     expect(typeof result.chainInfo.slotTime).toBe('string');

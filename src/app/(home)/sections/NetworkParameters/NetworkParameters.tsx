@@ -27,7 +27,7 @@ export const NetworkParameters:FC<Props> = async ({ data }) => {
           <ContentItem title='Quorum size' value={data.chainInfo.quorumSize} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentItem title='Unstaking period' value={data.chainInfo.unstakingPeriod} />
+          <ContentItem title='Minimal stake size' value={data.chainInfo.minimalStakePerEntity} />
         </Grid>
         <Grid item xs={12} md={6}>
           <ContentItem title='Epoch duration' value={data.chainInfo.epochDuration} />

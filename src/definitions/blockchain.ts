@@ -33,7 +33,6 @@ export interface ChainInfo {
 export interface NetworkParams {
   VALIDATOR_STAKE: number;
   MINIMAL_STAKE_PER_ENTITY: number;
-  UNSTAKING_PERIOD: number;
   QUORUM_SIZE: number;
   EPOCH_TIME: number;
   LEADERSHIP_TIMEFRAME: number;
@@ -71,7 +70,7 @@ export interface BlockchainData {
     validatorStakeSize: string;
     coreMajorVersion: number;
     quorumSize: string;
-    unstakingPeriod: string;
+    minimalStakePerEntity: number;
     epochDuration: string;
     leaderTimeframe: string;
     slotTime: string;

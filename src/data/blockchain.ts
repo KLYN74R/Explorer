@@ -35,7 +35,7 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
         validatorStakeSize: formatNumber(chainData.approvementThread.params.VALIDATOR_STAKE),
         coreMajorVersion: chainData.approvementThread.version,
         quorumSize: chainData.approvementThread.params.QUORUM_SIZE + ' validators',
-        unstakingPeriod: chainData.approvementThread.params.UNSTAKING_PERIOD + ' epoches',
+        minimalStakePerEntity: chainData.approvementThread.params.MINIMAL_STAKE_PER_ENTITY,
         epochDuration: chainData.approvementThread.params.EPOCH_TIME / 3600000 + ' hours',
         leaderTimeframe: chainData.approvementThread.params.LEADERSHIP_TIMEFRAME / 1000 + ' seconds',
         slotTime: chainData.approvementThread.params.BLOCK_TIME / 1000 + ' second',
