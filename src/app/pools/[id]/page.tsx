@@ -59,17 +59,7 @@ export default async function PoolByIdPage({ params }: Props) {
               title='Staked UNO (multistaking points):'
               value={formatNumber(pool.poolStorage.totalStakedUno)}
             />
-          ],
-          <ContentBlock
-            key='https_url'
-            title='HTTP(S) URL:'
-            value={pool.poolStorage.poolURL}
-          />,
-          <ContentBlock
-            key='wss_url'
-            title='WS(S) URL:'
-            value={pool.poolStorage.wssPoolURL}
-          />
+          ]
         ]}
       >
         <PoolImage width={421} height={426} viewBox='0 0 421 426'  />
