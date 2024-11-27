@@ -1,6 +1,7 @@
 'use client';
 import { FC, MouseEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
+import { FaucetButton } from './FaucetButton';
 import { FlexColumnBox, Indicator } from '@/components/ui';
 import { Box, Button, Menu, MenuItem, SxProps, Typography } from '@mui/material';
 import { logUserAction } from '@/helpers';
@@ -53,6 +54,8 @@ export const DesktopNetworksList: FC<{ sx?: SxProps }> = ({ sx }) => {
 
   return (
     <Box sx={{ ...sx }}>
+      <FaucetButton sx={{ mr: 1 }} />
+
       <Button
         id='networks-button'
         aria-controls={isOpen ? 'networks-menu' : undefined}
@@ -143,6 +146,7 @@ export const MobileNetworksList = () => {
           </Typography>
         ))}
       </FlexColumnBox>
+      <FaucetButton sx={{ pl: 2 }} variant='text' />
     </FlexColumnBox>
   );
 };
