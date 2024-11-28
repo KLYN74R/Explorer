@@ -5,8 +5,6 @@ import { KLY_LINKS } from '@/config';
 import FaucetIcon from '@public/icons/pages/faucet.svg';
 import Link from 'next/link';
 
-const FaucetUrl = KLY_LINKS.LANDING + '/testnet-faucet';
-
 export const FaucetButton: FC<{
   sx?: SxProps,
   variant?: 'icon' | 'text'
@@ -17,7 +15,7 @@ export const FaucetButton: FC<{
     return (
       <OutlinedButton
         icon={<FaucetIcon />}
-        url={FaucetUrl}
+        url={KLY_LINKS.TESTNET_FAUCET}
         sx={{ px: 1, ...sx }}
       />
     );
@@ -34,7 +32,7 @@ export const FaucetButton: FC<{
       }}
     >
       <Link
-        href={FaucetUrl}
+        href={KLY_LINKS.TESTNET_FAUCET}
         style={{
           color: 'inherit',
           textDecoration: 'inherit',

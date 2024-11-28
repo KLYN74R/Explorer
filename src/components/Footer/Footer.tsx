@@ -39,7 +39,7 @@ export const Footer = () => {
         <Grid item xs={12} sm={6} md={4} lg={2.2}>
           <Box>
             <Typography variant='h2' sx={{ mb: 2 }}>Sites</Typography>
-            <FooterLink title="Main Site" url={KLY_LINKS.LANDING} />
+            <FooterLink title="Main Site" url={KLY_LINKS.WEBSITE} />
             <FooterLink title="GitHub" url={KLY_LINKS.GITHUB} />
             <FooterLink title="CoinMarketCap" url={KLY_LINKS.CMC} />
           </Box>
@@ -49,7 +49,7 @@ export const Footer = () => {
             <Typography variant='h2' sx={{ mb: 2 }}>Ecosystem</Typography>
             <FooterLink title="Tokens" url={KLY_LINKS.TOKENS} />
             <FooterLink title="RWX Contracts" url={KLY_LINKS.RWX_CONTRACTS} />
-            <FooterLink title="Services" url={KLY_LINKS.SERVICES} />
+            <FooterLink title="Testnet Faucet" url={KLY_LINKS.TESTNET_FAUCET} />
           </Box>
         </Grid>
       </Grid>

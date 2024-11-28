@@ -9,7 +9,8 @@ import Facebook from '@public/icons/social/Facebook.svg';
 export enum KLY_LINKS {
   EXPLORER_TESTNET = 'https://testnet.klyntarscan.org',
   EXPLORER_MAINNET = 'https://klyntarscan.org',
-  LANDING = 'https://www.klyntar.org',
+  WEBSITE = 'https://www.klyntar.org',
+  TESTNET_FAUCET = 'https://www.klyntar.org/testnet-faucet',
   GITHUB = 'https://github.com/KLYN74R',
   TWITTER = 'https://twitter.com/KLYN74R',
   TELEGRAM = 'https://t.me/KLYN74R',
@@ -23,8 +24,7 @@ export enum KLY_LINKS {
   UNSTAKING = 'https://docs.klyntar.org/build-core-and-join-network/become-kly-validator/default-staking/unstaking',
   RWX_CONTRACTS = 'https://docs.klyntar.org/rwx-contracts/create-rwx-contract-and-deploy-with-web1337',
   CMC = 'https://coinmarketcap.com/',
-  TOKENS = '#',
-  SERVICES = '#',
+  TOKENS = '#'
 }
 
 export const socialIconsWithLinks: Array<{
