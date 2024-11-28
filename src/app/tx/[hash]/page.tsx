@@ -44,7 +44,7 @@ export default async function TransactionByIdPage({ params }: Props) {
         title='Called contract:'
         value={truncateMiddle(tx.payload.to)}
         comment={describeTransactionCreatorFormat(tx.payload.to)}
-        url={`/contracts/${tx.shard}:${tx.payload.to}`}
+        url={ tx.payload.to.includes('system') ? `/contracts/${tx.payload.to.split('/')[1]}` : `/contracts/${tx.shard}:${tx.payload.to}`}
       />
     );
   } else if (tx.payload.to) {
