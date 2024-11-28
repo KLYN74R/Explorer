@@ -22,8 +22,7 @@ export const Footer = () => {
             </Typography>
             <Typography sx={{ mt: 4.5 }}>
               Contact us: <Link href='mailto:hello@klyntar.org' style={{
-                color: COLORS.TEXT_PRIMARY,
-              textDecoration: 'underline'
+                color: COLORS.SILVER
               }}>hello@klyntar.org</Link>
             </Typography>
           </Box>
