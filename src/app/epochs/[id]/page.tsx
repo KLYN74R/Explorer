@@ -3,7 +3,7 @@ import { NavButton, InfoBlock, PageContainer, FlexBetweenBox } from '@/component
 import { Grid, Typography } from '@mui/material';
 import { fetchEpochById } from '@/data';
 import { FormattedDate } from '@/helpers';
-import { ShardValidatorsSection } from './ShardValidatorsSection';
+import { ValidatorsQuorumSection } from './ValidatorsQuorumSection';
 
 interface Props {
   params: {
@@ -100,7 +100,7 @@ export default async function PoolByIdPage({ params }: Props) {
         </Grid>
       </Grid>
 
-      <ShardValidatorsSection epoch={epoch} />
+      <ValidatorsQuorumSection epoch={epoch} />
     </PageContainer>
   );
 }
