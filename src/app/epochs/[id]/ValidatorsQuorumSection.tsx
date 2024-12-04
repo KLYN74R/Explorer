@@ -18,8 +18,8 @@ export const ValidatorsQuorumSection: FC<{ epoch: Epoch }> = ({
 
   return (
     <>
-      <Typography variant='h1' sx={{ mt: 10, mb: 2 }}>Epoch quorum</Typography>
-      <Typography sx={{ mt: 1, mb: 3 }}>Majority of them helps network to be decentralized</Typography>
+      <Typography variant='h1' sx={{ mt: 10, mb: 2 }}>Epoch validators</Typography>
+      <Typography sx={{ mt: 1, mb: 3 }}>List of pools that were ready to protect the decentralization of network</Typography>
 
       <Box sx={{ mt: 4 }}>
         {quorum.length ? (
