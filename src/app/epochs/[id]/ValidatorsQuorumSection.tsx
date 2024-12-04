@@ -3,16 +3,17 @@ import { Box, Typography } from '@mui/material';
 import { InfoBlock } from '@/components/ui';
 import { Epoch } from '@/definitions';
 import React, { FC } from 'react';
+import { VadlidatorsTable } from '@/components/ui/tables/ValidatorsTable';
 
 
 export const ValidatorsQuorumSection: FC<{ epoch: Epoch }> = ({
   epoch
 }) => {
 
-
-  const quorum = epoch.quorum.map(validator => ({
+  const quorum = epoch.poolsRegistry.map(validator => ({
     text: validator,
-    url: `/pools/${validator}(POOL)`
+    url: `/pools/${validator}(POOL)`,
+    inQuorum: epoch.quorum.includes(validator)
   }));
 
   return (
@@ -22,9 +23,9 @@ export const ValidatorsQuorumSection: FC<{ epoch: Epoch }> = ({
 
       <Box sx={{ mt: 4 }}>
         {quorum.length ? (
-          <InfoBlock title='Quorum of validators' value={quorum} />
+          <VadlidatorsTable value={quorum} />
         ) : (
-          <Typography color='primary.main'>No validators found.</Typography>
+          <Typography color='primary.main'>No validators found</Typography>
         )}
       </Box>
     </>
