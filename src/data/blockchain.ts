@@ -7,7 +7,7 @@ import { getInfoFromEpoch, getTxSuccessRate } from './utils';
 
 export async function fetchBlockchainData(): Promise<BlockchainData> {
   try {
-    const blocksAndTxsData = await api.get<BlockStats>(API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS);
+    const blocksAndTxsData = await api.get<BlockStats>(API_ROUTES.STATS.VERIFICATION_THREAD_STATS);
     const epochData = await fetchCurrentEpoch();
     const blocksAndTxsDataByEpoch = await fetchTotalBlocksAndTxsByEpoch(epochData.id);
     const chainData = await api.get<ChainInfo>(API_ROUTES.CHAIN.INFO);
@@ -49,7 +49,7 @@ export async function fetchBlockchainData(): Promise<BlockchainData> {
 
 export async function fetchTotalBlocksAndTxsByEpoch(id: number | string): Promise<BlockStats> {
   try {
-    return await api.get<BlockStats>(API_ROUTES.STATS.TOTAL_BLOCKS_AND_TXS_PER_EPOCH(Number(id)));
+    return await api.get<BlockStats>(API_ROUTES.STATS.VERIFICATION_THREAD_STATS_PER_EPOCH(Number(id)));
   } catch (e: any) {
     throw new Error(`Failed to fetch total blocks and txs by epoch ID "${id}" - ${e.message}`);
   }
@@ -57,7 +57,7 @@ export async function fetchTotalBlocksAndTxsByEpoch(id: number | string): Promis
 
 export async function fetchRecentTotalBlocksAndTxs(limit: number): Promise<RecentBlockStats> {
   try {
-    return await api.get<RecentBlockStats>(API_ROUTES.STATS.RECENT_TOTAL_BLOCKS_AND_TXS_PER_EPOCH(limit));
+    return await api.get<RecentBlockStats>(API_ROUTES.STATS.RECENT_VERIFICATION_THREAD_STATS_PER_EPOCH(limit));
   } catch (e: any) {
     throw new Error(`Failed to fetch recent total blocks and txs - ${e.message}`);
   }
