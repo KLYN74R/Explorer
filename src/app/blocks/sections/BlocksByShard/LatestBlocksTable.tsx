@@ -60,7 +60,7 @@ export const LatestBlocksTable: FC<LatestBlocksTableProps> = async ({
   if (!blocksExist) {
     return (
       <Box sx={{ py: 6, textAlign: 'center' }}>
-        <Typography color='primary.main'>No blocks found.</Typography>
+        <Typography color='primary.main'>No blocks found</Typography>
       </Box>
     );
   }
