@@ -30,10 +30,10 @@ interface InfoBlockProps {
 export const VadlidatorsTable: FC<InfoBlockProps> = ({
   value
 }) => {
-   const [validators, setValidators] = useState(value.slice(0,2));
+   const [validators, setValidators] = useState(value.slice(0,25));
    const [query, setQuery] = useState('');
 
-   const nextPage = Math.floor(value.length / 2) + 1;
+   const nextPage = Math.floor(value.length / 25) + 1;
    const nextPageAvailable = validators.length < value.length;
 
  
@@ -41,7 +41,7 @@ export const VadlidatorsTable: FC<InfoBlockProps> = ({
  
    const handleLoadMore = () => {
      if (nextPageAvailable) {
-       setValidators(value.slice(0, 2 * nextPage));
+       setValidators(value.slice(0, 25 * nextPage));
      }
    }
 
